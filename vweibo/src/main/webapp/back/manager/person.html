@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改个人信息</title>
+</head>
+<body>
+
+	<div style="position:relative;top:50px;left:50px;font-size:20px;">
+		<label >原始密码：</label>
+		<input type="password" name="oldpwd" id="oldpwd"/><br/>
+		
+		<label>新密码：</label>
+		<input type="password" name="newpwd" id="newpwd"/><br/>
+		
+		<input type="button" value="提交" onClick="doSubmit()" />
+	</div>
+	
+<script type="text/javascript">
+	function doSubmit(){
+		var oldpwd=$("#oldpwd").val();
+		var newpwd=$("#newpwd").val();
+		if(oldpwd==""||newpwd==""){
+			alert("不能为空.....");
+			return ;
+		}
+		if(oldpwd==newpwd){
+			alert("两次输入密码相同，请重新输入...");
+			return ;
+		}
+		
+		$.ajax({
+			url:'../../adminServlet',
+			data:{'op':'changepwd','oldpwd':oldpwd,'newpwd':newpwd},
+			type:'POST',
+			dataType:'JSON',
+			success:function(data){
+				if(data==99){
+					alert("输入有空，请填写完整，失败...");
+				}else if(data==100){
+					alert("两次密码相同，失败...");
+				}else if(data==1){
+					alert("修改成功...");
+					location.href="../login.html";
+				}else if (data==0){
+					alert("修改失败...");
+				}else {
+					alert("原密码不匹配...");
+				}
+				$("#oldpwd").val("");
+				$("#newpwd").val("");
+			}
+		});
+	}
+	
+</script>
+	
+	<!-- <label>原始密码：</label>
+	<input type="password" name="oldpwd" id="oldpwd"/> -->
+</body>
+</html>

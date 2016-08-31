@@ -1,0 +1,280 @@
+<table id="users_data"></table>
+
+<div id="add_users" class="easyui-dialog" title="添加会员" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br />
+	<form action="" style="float:left;padding-left:20px;">
+		<label>会员编号：</label><font id="user_usid">待分配</font><br/>
+		<label>会员名：</label><input type="text" id="users_uname" name="uname" required="required" /><br /><br />
+		<label>会员密码：</label><input type="text" id="users_pwd" name="pwd" required="required" /><br /><br />
+		<label>会员邮箱：</label><input type="text" id="users_email" name="email" required="required" /><br /><br />
+		<label>会员照片：</label><input type="file" multiple="multiple" id="users_pics" name="pics" onchange="previewMultipleImage(this,'users_pic_show')" /><br /><br />
+		<label>原图片：</label><img id="user_img" style="width:50px;" src=""/>
+		
+		<a href="javascript:addUsersInfo()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>
+		<a href="javascript:updateUsersInfo()" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+	</form>
+	<div style="float:right;width:300px;margin-right:20px;margin-bottom:20px;">
+		<fieldset id="users_pic_show">
+			<legend>照片预览</legend>
+		</fieldset>
+	</div>
+</div>
+
+
+
+<script>
+
+
+//修改会员信息
+function updateUsersInfo(){
+	var uname=$.trim( $("#users_uname").val());
+	var pwd=$.trim( $("#users_pwd").val());
+	var email=$.trim( $("#users_email").val());
+	var usid=$.trim($("#user_usid").html());
+	//alert(usid);
+	
+	$.ajaxFileUpload({
+		url:"../../usersServlet?op=updateUsers",
+		secureuri:false,
+		fileElementId:"users_pics",
+		dataType:"JSON",
+		data:{'usid':usid,'uname':uname,'pwd':pwd,'email':email},
+		success:function(data,status){
+			if(data>0){
+				$.messager.show({title:'成功提示',msg:"用户信息修改成功...",timeout:2000,showType:'slide'});
+				$("#users_uname").val("");
+				$("#users_pwd").val("");
+				$("#users_email").val("");
+				
+				$("#users_pic_show").html("");
+				$("#user_usid").html("待分配");
+				$('#users_data').datagrid("reload");
+				$('#add_users').dialog('close');  
+			}else{
+				$.messager.alert("错误提示","用户信息添加失败...\n","error");
+			}
+		},
+		error:function(data,status,e){
+			$.messager.alert("错误提示","新闻信息添加失败...\n"+e,"error");
+		}
+	});
+}
+
+//添加会员信息
+function addUsersInfo(){
+	var uname=$.trim( $("#users_uname").val() );
+	var pwd=$.trim( $("#users_pwd").val() );
+	var email=$.trim( $("#users_email").val() );
+	
+	$.ajaxFileUpload({
+		url:"../../usersServlet?op=addUsers",
+		secureuri:false,
+		fileElementId:"users_pics",
+		dataType:"JSON",
+		data:{'uname':uname,'pwd':pwd,'email':email},
+		success:function(data,status){
+			if(data>0){
+				$.messager.show({title:'成功提示',msg:"用户信息添加成功...",timeout:2000,showType:'slide'});
+				$("#users_uname").val("");
+				$("#users_pwd").val("");
+				$("#users_email").val("");
+				
+				$("#users_pic_show").html("");
+				$('#users_data').datagrid("reload");
+				$('#add_users').dialog('close');  
+			}else{
+				$.messager.alert("错误提示","用户信息添加失败...\n","error");
+			}
+		},
+		error:function(data,status,e){
+			$.messager.alert("错误提示","新闻信息添加失败...\n"+e,"error");
+		}
+	});
+}
+
+
+
+
+//实例化编辑器
+//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+//var editor = UE.getEditor('editor');
+var obj;
+var editRow=undefined;//记录当前正在被编辑的行
+var currentOp;
+var flag;
+
+obj=$('#users_data').datagrid({
+	url:'../../usersServlet',
+	queryParams:{op:'findAllUsers'},
+	fitColumns:true,
+	striped:true,
+	loadMsg:"数据加载中...",
+	pagination:true,
+	fit:true,
+	pageNumber:1,
+	pageSize:10,
+	pageList:[10,15,20,25,30],
+	sortName:'usid',
+	remoteSort:false,
+	columns:[[
+		{field:'',title:'',width:100,align:'center',checkbox:true},
+		{field:'usid',title:'会员编号',width:100,align:'center',sortable:true},
+		{field:'uname',title:'会员名',width:100,align:'center'},
+		{field:'photo',title:'会员照片',width:100,align:'center',
+			formatter:function(value,rowData,index){
+				if(value!=null && value!=""){
+					var str="";
+					var photo=value.split(",");
+					for(var i=0;i<photo.length;i++){
+						str+=" <img src='../../"+photo[i]+"' width='60px' height='60px'/>&nbsp;";
+					}
+					return str;
+				}else{
+					return ;
+				}
+			}
+		},
+		{field:'email',title:'会员邮箱',width:100,align:'center'},
+		{field:'pwd',title:'会员密码',width:100,align:'center',
+			formatter:function(val,rec){
+				return "********";
+			}
+		}
+	]],
+	toolbar:[{
+		text:"添加",
+		iconCls:"icon-add",
+		handler:function(){
+			$("#users_uname").val("");
+			$("#users_pics").val("");
+			$("#users_pwd").val("");
+			$("#users_email").val("");
+			$("#users_pic_show").html("");
+			$("#user_img").attr('src','');
+			$("#user_img").css('display','none');
+			$("#user_usid").html("待分配");
+			
+			$("#add_users").dialog('open');
+		}
+	},{
+		text:'修改',
+		iconCls:"icon-edit",
+		handler:function(){
+			currentOp="updateUsers";
+			flag="修改";
+			var rows=obj.datagrid("getChecked")[0];
+			
+			$("#users_uname").val("");
+			$("#users_pwd").val("");
+			$("#users_email").val("");
+			$("#users_pic_show").html("");
+			$("#users_pics").val("");
+			$("#user_img").attr('src','');
+			$("#user_img").css('display','block');
+			
+			$("#add_users").dialog('open');
+			console.info(rows);
+			rows=$(rows);
+			$("#user_usid").html(rows.attr("usid"));
+			$("#users_uname").val(rows.attr("uname"));
+			$("#users_pwd").val(rows.attr("pwd"));
+			$("#users_email").val(rows.attr("email"));
+			$("#user_img").attr('src',"../../"+rows.attr("photo"))
+			
+		}
+	},{
+		text:'删除',
+		iconCls:"icon-remove",
+		handler:function(){
+		//获取选中的行
+			var rows=obj.datagrid("getChecked");
+			if(rows!=undefined){
+				$.messager.confirm('信息确认', '您真的要删除选中的数据吗?', function(rs){
+					if (rs){
+						var usids="";
+						for(var i=0;i<rows.length;i++){
+							usids+=rows[i].usid+",";
+						}
+						
+						//发请求到数据库
+						$.post("../../usersServlet",{op:"delUsers",'usids':usids},function(data){
+							//如果这里用的是JsonArray传递的，就要data[0]
+							//如果这里用的是Gson，就用data就可以   --》这里的data就相当于是jm
+							if(data.code=1){
+								$.messager.show({title:'成功提示',msg:"终于成功啦",timeout:2000,showType:'slide'});
+								rows=null;
+								obj.datagrid("reload");//刷新表格
+							}else{
+								$.messager.show({title:'失败提示',msg:"还是失败啦~~~",timeout:2000,showType:'slide'});
+								rows=null;
+								obj.datagrid("reload");//刷新表格
+							}
+						});
+					}else{
+						return;	
+					}
+				});
+			}else{
+				$.messager.show({title:'温馨提示',msg:'请选中您要删除的数据.....',timeout:2000,showType:'slide'});
+			}
+		}
+	},{
+		text:'保存',
+		iconCls:"icon-save",
+		handler:function(){
+			//先关闭编辑
+			obj.datagrid("endEdit",editRow);
+			//获取正在被编辑的数据
+			var rows=obj.datagrid("getChanges");
+			//alert(rows);
+			if(rows==undefined){//说明没有被保存的数据
+				obj.datagrid("rejectChanges");//回滚所有数据
+				obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+				editRow=undefined;
+			}else if(rows.uname==""){
+				editRow=undefined;
+				obj.datagrid("rejectChanges");
+			}else{
+				//保存到数据库
+				//rows["op"]=currentOp;
+				var usid=$(rows).attr("usid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
+				var uname=$(rows).attr("uname");
+				var pwd=$(rows).attr("pwd");
+				var email=$(rows).attr("email");
+				var photo=$(rows).attr("photo");
+				
+				$.post("../../usersServlet",{"op":currentOp,"usid":aid,"uname":uname,'pwd':pwd,email:'email',photo:'photo'},function(data){
+					if(data>0){
+						$.messager.show({
+							title:'成功提示',
+							msg:'会员'+flag+'添加成功....',
+							timeout:2000,
+							showType:'slide'
+						});
+						
+						rows=null;
+						obj.datagrid("reload");//刷新表格
+						editRow=undefined;
+						obj.datagrid("rejectChanges");//回滚所有数据
+						obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+					}else{
+						$.messager.alert('失败提示','会员'+flag+'添加失败....','error');
+					}
+				});
+			}
+		}
+	},{
+		text:'撤销',
+		iconCls:"icon-redo",
+		handler:function(){
+			obj.datagrid("rejectChanges");//回滚所有数据
+			obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+			editRow=undefined;	
+		}
+	}]
+});
+
+
+
+
+</script>
