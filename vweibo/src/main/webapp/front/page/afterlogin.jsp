@@ -30,9 +30,9 @@
      
      <div id="MsgAndSetting" class="headSon">
         <ul class="headDetails" id="headDetails">
-            <li><a href="MSG"><img src="front/front/image/chat.png"/></a></li>
-            <li><a href="SETTING"><img src="front/front/image/set.png"/></a></li>
-            <li><a href="WRITE"><img src="front/front/image/write.png"/></a></li>
+            <li><a href="MSG"><img src="front/image/chat.png"/></a></li>
+            <li><a href="SETTING"><img src="front/image/set.png"/></a></li>
+            <li><a href="WRITE"><img src="front/image/write.png"/></a></li>
         </ul>
         </div>
     

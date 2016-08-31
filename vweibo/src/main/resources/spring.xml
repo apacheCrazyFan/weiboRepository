@@ -48,6 +48,18 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
 		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.weibo.mapper" />
 
+	<!--邮件发送处理bean  -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.smtp.host}"></property>
+		<property name="username" value="${mail.smtp.username}"></property>
+		<property name="password" value="${mail.smtp.password}"></property>
+		<property name="javaMailProperties" >
+			<props>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+			</props>
+		</property>
+	</bean>
 
 	<!-- 响应处理，视图处理器配置 -->
 	<!-- 请求拦截后，交给对应请求处理操作后，根据返回结果，拼接响应页面路径 -->

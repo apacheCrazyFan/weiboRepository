@@ -57,7 +57,7 @@ function checkPasswordagain() {
 }
 
 //发送验证码
-var time=60;
+var time=120;
 function f1(){
 	$("#YZcode").val(time+" s后重发");
 	time--;
@@ -69,13 +69,19 @@ function f1(){
 }
 function YZcodee(){
 	window.setInterval("f1()", 1000);
-	if($("#YZcode").val()=="验证超时"){
+	if(time<=0){
 		window.clearInterval();
-		   $("#YZcode").val("重新获取验证码");
-		   time=60;
-	   }
+		$("#YZcode").val("重新获取验证码");
+		time=120;
+	}
 }
-
+function checkPro(){
+	if($("#btnbtn-info").prop('checked')){
+		
+	}else{
+		alert("请填写完整信息");
+	}
+}
 
 
 

@@ -26,11 +26,11 @@ $(window).scroll(function(){
 });  
  
 function changecentercolor(id){
-	document.getElementById(id).innerHTML='<img src="image/conter-part_wayimg02.png"/>';
+	document.getElementById(id).innerHTML='<img src="front/image/conter-part_wayimg02.png"/>';
 }
 
 function changecentercolors(id){
-	document.getElementById(id).innerHTML='<img src="image/conter-part_wayimg01.png"/>';
+	document.getElementById(id).innerHTML='<img src="front/image/conter-part_wayimg01.png"/>';
 }
 
 function showcenterhidediv(id){

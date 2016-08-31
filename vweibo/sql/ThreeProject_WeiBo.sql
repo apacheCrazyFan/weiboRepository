@@ -27,6 +27,7 @@ create table UserTag(
 
 
 ----微博用户表
+select * from WeiBoUser;
 create table WeiBoUser(
        Uid int,                       --用户Id
        Uname varchar2(20),            --用户名

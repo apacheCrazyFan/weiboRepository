@@ -76,12 +76,12 @@
                     
 			        <div class="form-group">
 			          <div class="col-md-12">
-			            <label><input type="checkbox">同意以下协议 <a href="javascript:;" data-toggle="modal" data-target="#templatemo_modal">Terms of Service</a></label>
+			            <label><input type="checkbox" id="btnbtn-info" onchange="checkPro()" >同意以下协议 <a href="javascript:;" data-toggle="modal" data-target="#templatemo_modal">Terms of Service</a></label>
 			          </div>
 			        </div>
 			        <div class="form-group">
 			          <div class="col-md-12">
-			            <input type="submit" value="创建帐户" class="btn btn-info">
+			            <input type="submit" value="创建帐户" class="btn btn-info" id="registerUser" >
 			            <a href="front/page/login.jsp" class="pull-right">直接登录</a>
 			          </div>
 			        </div>	

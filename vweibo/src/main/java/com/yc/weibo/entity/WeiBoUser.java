@@ -14,47 +14,10 @@ public class WeiBoUser {
 	private Date UregisterDate; 
 	private String YZcode;
 	private String YZcodeInput;
-	
-	public String getYZcodeInput() {
-		return YZcodeInput;
-	}
-	public void setYZcodeInput(String yZcodeInput) {
-		YZcodeInput = yZcodeInput;
-	}
-	public WeiBoUser(int wUid, String uname, String upassword, String uphone, String uemail, String usex, int uage,
-			String uimgPath, Date uregisterDate) {
-		WUid = wUid;
-		Uname = uname;
-		Upassword = upassword;
-		Uphone = uphone;
-		Uemail = uemail;
-		Usex = usex;
-		Uage = uage;
-		UimgPath = uimgPath;
-		UregisterDate = uregisterDate;
-	}
-	public WeiBoUser(String uname, String upassword) {
-		Uname = uname;
-		Upassword = upassword;
-	}
-	
-	
-	
-	public String getYZcode() {
-		return YZcode;
-	}
-	public void setYZcode(String yZcode) {
-		YZcode = yZcode;
-	}
-	public WeiBoUser() {
-		
-	}
-	
-	
-	public int getWUid() {
+	public Integer getWUid() {
 		return WUid;
 	}
-	public void setWUid(int wUid) {
+	public void setWUid(Integer wUid) {
 		WUid = wUid;
 	}
 	public String getUname() {
@@ -105,14 +68,46 @@ public class WeiBoUser {
 	public void setUregisterDate(Date uregisterDate) {
 		UregisterDate = uregisterDate;
 	}
+	public String getYZcode() {
+		return YZcode;
+	}
+	public void setYZcode(String yZcode) {
+		YZcode = yZcode;
+	}
+	public String getYZcodeInput() {
+		return YZcodeInput;
+	}
+	public void setYZcodeInput(String yZcodeInput) {
+		YZcodeInput = yZcodeInput;
+	}
 	@Override
 	public String toString() {
 		return "WeiBoUser [WUid=" + WUid + ", Uname=" + Uname + ", Upassword=" + Upassword + ", Uphone=" + Uphone
 				+ ", Uemail=" + Uemail + ", Usex=" + Usex + ", Uage=" + Uage + ", UimgPath=" + UimgPath
 				+ ", UregisterDate=" + UregisterDate + ", YZcode=" + YZcode + ", YZcodeInput=" + YZcodeInput + "]";
 	}
-
+	public WeiBoUser(Integer wUid, String uname, String upassword, String uphone, String uemail, String usex, int uage,
+			String uimgPath, Date uregisterDate, String yZcode, String yZcodeInput) {
+		WUid = wUid;
+		Uname = uname;
+		Upassword = upassword;
+		Uphone = uphone;
+		Uemail = uemail;
+		Usex = usex;
+		Uage = uage;
+		UimgPath = uimgPath;
+		UregisterDate = uregisterDate;
+		YZcode = yZcode;
+		YZcodeInput = yZcodeInput;
+	}
+	public WeiBoUser( String uname, String upassword) {
+		Uname = uname;
+		Upassword = upassword;
+	}
 	
+	
+	public WeiBoUser() {
+	}
 	
 	
 	
