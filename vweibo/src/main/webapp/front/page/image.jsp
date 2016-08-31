@@ -74,7 +74,10 @@
 		randomCode.append(strRand);
 	}
 	// 将四位数字的验证码保存到Session中。
-	session.setAttribute("rand", randomCode.toString());
+	String yzm=randomCode.toString();
+	//System.out.println(yzm);
+	session.removeAttribute("rand");
+	session.setAttribute("rand", yzm);
 
 	//图象生效
 	g.dispose();

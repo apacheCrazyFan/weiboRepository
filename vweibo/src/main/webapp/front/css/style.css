@@ -1,4 +1,4 @@
-ï»¿/*
+/*
  *
  * Template Name: Fullscreen Login
  * Description: Login Template with Fullscreen Background Slideshow
@@ -166,7 +166,7 @@ button:active {
     margin: 35px auto 0 auto;
     font-size: 18px;
     font-weight: 700;
-    text-shadow: 0 1px 3px rgba(0,0,0,.2);
+    text-shadow: 0 1px 3px rgba(234,32,0,.2);
 }
 
 .connect a {
@@ -197,7 +197,7 @@ button:active {
 
 .connect a:hover { background-position: center bottom; }
 
-/*ï¼ï¼ï¼å¢åŠ éƒ¨ä»½çš„CSSï¼ï¼ï¼*/
+/*£­£­£­Ôö¼Ó²¿·İµÄCSS£­£­£­*/
 form,input,button{font-family:Microsoft YaHei,Segoe UI,Tahoma,Arial,Verdana,sans-serif; text-decoration:none; width:100%;}
 button.submit_button{ font-size:24px; letter-spacing:15px;}
 input.Captcha{ width:130px; float:left;}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.weibo.mapper.UserMapper">
+	<select id="login" parameterType="WeiBoUser" resultType="WeiBoUser">
+		select * from WeiBoUser where Uname = #{Uname} and Upassword = #{Upassword}
+	</select>
+	
+	<insert id="register" parameterType="WeiBoUser">
+		insert into WeiBoUser(WUid,Uname,Upassword,Uphone,Uemail,Usex) values(seq_WeiBoUser_Wbid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex})
+	</insert>
+</mapper>

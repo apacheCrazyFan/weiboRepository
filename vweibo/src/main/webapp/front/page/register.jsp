@@ -1,8 +1,9 @@
+<%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
-<base href="/vweibo/front/">
+<base href="/vweibo/">
 <head>
 	<title>注册</title>
 	<meta name="keywords" content="" />
@@ -10,31 +11,30 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-	<link href="css/templatemo_style.css" rel="stylesheet" type="text/css">	
+	<link href="front/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="front/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="front/css/templatemo_style.css" rel="stylesheet" type="text/css">	
 </head>
 <body class="templatemo-bg-gray">
 	<h1 class="margin-bottom-15">创建帐户</h1>
 	<div class="container">
 		<div class="col-md-12">			
-			<form class="form-horizontal templatemo-create-account templatemo-container" role="form" action="#" method="post">
-				
+			<form class="form-horizontal templatemo-create-account templatemo-container"  action="user/register" method="post">
 			        <div class="form-group">
-			          <div class="col-md-6">		          	
+			          <div class="col-md-6">	       	
 			            <label for="username" class="control-label">用户名</label>
-			            <input type="text" class="form-control" id="username" placeholder="" onBlur="checkUserName()">		 <br>           		            		  
+			            <input type="text" class="form-control" name="Uname" id="username" placeholder="" onBlur="checkUserName()">		 <br>           		            		  
                           <span id="userName_warn"></span>     
 			          </div>
 			          <div class="col-md-6 templatemo-radio-group">
 			          	<label class="radio-inline">
-		          			<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">帅哥
+		          			<input type="radio"  name="Usex" id="optionsRadios1" value="male">帅哥
 		          		</label>
 		          		<label class="radio-inline">
-		          			<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> 美眉
+		          			<input type="radio"  name="Usex" id="optionsRadios2" value="female"> 美眉
 		          		</label>
 						<label class="radio-inline">
-		          			<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> 不公开
+		          			<input type="radio" name="Usex" id="optionsRadios2" value="secret"> 不公开
 		          		</label>
 			          </div>             
 			        </div>
@@ -42,17 +42,18 @@
 					<div class="form-group">
 			          <div class="col-md-6">		          	
 			            <label for="first_name" class="control-label">邮箱</label>
-			            <input type="text" class="form-control" id="first_name" placeholder="请输入您的邮箱" onBlur="checkEmail()"/> <br/>
+			            <input type="text" class="form-control" name="Uemail" id="first_name" placeholder="请输入您的邮箱" onBlur="checkEmail()"/> <br/>
                          <span id="first_name_warn"></span>  <br/>
                          <input type="button" style="border:ridge 2px #CCCCCC" onClick="YZcodee()" id="YZcode" value="点击发送验证码"/>   
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="请输入验证码"/>  		
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  placeholder="请输入验证码" name="YZcodeInput" id="YZcodeInput"/>
+                       <span style="color: red;margin-left: 150px">${YZcodeErr }</span>
 			          </div> 	        
 			        </div>
                     
 			        <div class="form-group">	
                     	<div class="col-md-6">	          	
 			            	<label for="last_name" class="control-label">手机</label>
-			            	<input style="width:300px" type="text" class="form-control" id="last_name" placeholder="请输入您的手机" onBlur="checkPhone()">	<br/>
+			            	<input style="width:300px" type="text" name="Uphone" class="form-control" id="last_name" placeholder="请输入您的手机" onBlur="checkPhone()">	<br/>
                              <span id="phone_warn"></span>  
                         </div>            		            		            
 			          </div>  	
@@ -60,7 +61,7 @@
 					<div class="form-group">
 			          <div class="col-md-6">
 			            <label for="password" class="control-label">密码</label>
-			            <input type="password" class="form-control" id="password" placeholder="" onBlur="checkPassword()" required="required"> <br/>
+			            <input type="password" class="form-control" name="Upassword" id="password" placeholder="" onBlur="checkPassword()" required="required"> <br/>
                          <span id="password_warn"></span>  
 			          </div>
 			        </div>
@@ -81,7 +82,7 @@
 			        <div class="form-group">
 			          <div class="col-md-12">
 			            <input type="submit" value="创建帐户" class="btn btn-info">
-			            <a href="page/login.jsp" class="pull-right">登录</a>
+			            <a href="front/page/login.jsp" class="pull-right">直接登录</a>
 			          </div>
 			        </div>	
 				</div>				    	
@@ -107,8 +108,8 @@
 	    </div>
 	  </div>
 	</div>
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/register.js"></script>
+	<script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="front/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="front/js/register.js"></script>
 </body>
 </html>

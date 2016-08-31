@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<base href="/vweibo/front/"/>
-<base href="/vweibo/front/">
 <title>登录前的页面</title>
 <link type="text/css" rel="stylesheet" href="css/unlogin_page.css"/>
 <script src="js/jquery-1.11.1.min.js"></script>
@@ -24,8 +20,8 @@
         </div>
         <div id="registerandlogin">
         	<ul>
-            	<li><a href="page/login.jsp" name="login" id="login">登录</a></li>
-                <li><a href="page/register.jsp" name="register" id="register">注册</a></li>
+            	<li><a href="front/page/login.jsp" name="login" id="login">登录</a></li>
+                <li><a href="front/page/register.jsp" name="register" id="register">注册</a></li>
             </ul>
         </div>
         
@@ -52,8 +48,8 @@
                 <a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick='showcenterhidediv("center-partchoose")' onMouseOver="changecentercolor('center-part_way')" onMouseOut="changecentercolors('center-part_way')"><img src="image/conter-part_wayimg01.png"/></a>
                     <div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv('center-partchoose')">
                         <ul>
-                            <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br />
-                           <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br />
+                            <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
+                           <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>
                             <li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>
                            <li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>
                         </ul>
@@ -108,8 +104,8 @@
                 <a href="javascript:void(0)" class="center-part_way" id="center-part_way2" onClick='showcenterhidediv("center-part_choose2")' onMouseOver="changecentercolor('center-part_way2')" onMouseOut="changecentercolors('center-part_way2')"><img src="image/conter-part_wayimg01.png"/></a>
                     <div style="display:none;" class="center-partchoose"  id="center-part_choose2" onMouseUp="hidecenterdiv('center-part_choose2')">
                         <ul>
-                            <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br />
-                           <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br />
+                            <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
+                           <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>
                             <li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>
                            <li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>
                         </ul>
@@ -155,10 +151,6 @@
                     <a href="">还没有微博？立即注册！</a>
                 </div>
         	</div>
-        </div>
-        
-        <div id="right-part-content01">
-        
         </div>
     </div>    
 </div>

@@ -57,19 +57,25 @@ function checkPasswordagain() {
 }
 
 //发送验证码
-var time=10;
+var time=60;
 function f1(){
-	$("#YZcode").val(time+" 秒后重发");
+	$("#YZcode").val(time+" s后重发");
 	time--;
-	if(time<0){
-		clearInterval(setInterval("f1()", 1000));
+	if(time<=0){
+		window.clearInterval();
 		$("#YZcode").val("验证超时");
 		
 	}
 }
 function YZcodee(){
 	window.setInterval("f1()", 1000);
+	if($("#YZcode").val()=="验证超时"){
+		window.clearInterval();
+		   $("#YZcode").val("重新获取验证码");
+		   time=60;
+	   }
 }
+
 
 
 

@@ -8,7 +8,6 @@
 		width:1350px;
 		background:url(../image/unloginbg.jpg);
 		}
-	
 	#unlogin-main-head{
 		background-color:#FFF;
 		position:fixed;
@@ -86,7 +85,6 @@
 		margin-bottom:30px;}
 	a{
 		text-decoration:none;
-		color:#666;
 		}
 
 	#left-part{
@@ -290,8 +288,3 @@
 		top:2px;
 		}
 
-	#right-part-content01{
-		width:230px;
-		height:70px;
-		background:red;
-	}

@@ -11,6 +11,7 @@ import com.yc.weibo.dao.AdminDao;
 
 @Service("adminBiz")
 public class adminBizImpl implements AdminBiz{
+	
 	@Autowired
 	private AdminDao adminDao;
 	@Override

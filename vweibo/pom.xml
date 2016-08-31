@@ -5,7 +5,6 @@
 	<artifactId>vweibo</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
@@ -18,39 +17,47 @@
 		<oracle.version>12.1.0.1</oracle.version>
 		<dbcp2.version>2.1.1</dbcp2.version>
 		<aspectj.version>1.8.9</aspectj.version>
+		<mail.version>1.5.6</mail.version>
+		<gson.version>2.6.2</gson.version>
 	</properties>
-  
+
 	<dependencies>
-		<dependency><!--Junit 单元测试包 -->
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
-		<dependency><!-- springmvc框架包 -->
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency><!-- jdbc 的 jar包 -->
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-		
-		<dependency><!-- spring的测试框架 -->
+		<!-- spring第三方插件支持包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- aspectj框架的jar包 切面，事务管理-->
+		<!-- aspectj框架的jar包 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -65,21 +72,21 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency><!-- 日志管理框架 -->
+		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency><!-- el表达式jar包 -->
+		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency><!-- springmvc校验包 -->
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${validator.version}</version>
@@ -94,7 +101,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency><!-- mybatis和spring的适配整合包 -->
+		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis.spring.version}</version>
@@ -115,14 +122,30 @@
 			</exclusions>
 		</dependency>
 
-		<!-- dbcp2数据源的jar包   类似的好友阿里巴巴数据源等-->
+		<!-- dbcp2数据源的jar包 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>${dbcp2.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>${mail.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
+	
 	<build> 
 		<finalName>vweibo</finalName>
 	</build>
