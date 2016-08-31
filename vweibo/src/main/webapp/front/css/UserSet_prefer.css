@@ -1,0 +1,295 @@
+* {
+	padding: 0px;
+	margin: 0;
+}
+a {
+	text-decoration: none
+}
+body {
+	background: url(../image/UserSet_image/per_imf_bg.jpg) fixed
+}
+#wrap {
+	width: 980px;
+	height: 550px;
+	background: #FAFAFA;
+	margin: 10px auto 20px auto;
+}
+#left {
+	width: 150px;
+	height: 100%;
+	background: url(../image/UserSet_image/per_imf_left_bg.png) repeat-y;
+	float: left
+}
+.idSet {
+	font-size: 12px;
+	font-family: "宋体";
+	color: #AEAEAE;
+	font-weight: 800;
+	position: absolute;
+	top: 25px;
+	left: 205px
+}
+#wrap #left ul {
+	list-style: none;
+	position: absolute;
+	top: 50px
+}
+#wrap #left ul .myInfo, .photo, .privacy, .message, .prefer {
+	width: 130px;
+	height: 30px;
+	padding-left: 20px;
+	line-height: 30px;
+	position: relative
+}
+#wrap #left ul li img {
+	height: 21px;
+	width: 21px;
+	position: absolute;
+	top: 5px;
+}
+#wrap #left ul li a {
+	text-decoration: none;
+	color: #012129;
+	font: 16px "宋体";
+	margin-left: 25px
+}
+.line1, .line2, .line3 {
+	border-bottom: 1px solid #999;
+	width: 150px;
+}
+.myInfo, .privacy {
+	margin-top: 10px;
+}
+.photo, .prefer {
+	margin-bottom: 10px
+}
+#wrap #left ul .photo:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .privacy:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .message:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .myInfo:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+.prefer {
+	background: #FAFAFA
+}
+.prefer a {
+	font-weight: bold
+}
+#right {
+	width: 790px;
+	height: 100%;
+	margin: 0 20px;
+	float: left
+}
+#right ul .head_label {
+	display: inline-block;
+	width: 790px;
+	height: 40px;
+	border-bottom: 2px solid red;
+	line-height: 50px;
+	margin-top: 10px;
+	font-family: "宋体";
+	font-weight: bold;
+}
+#right ul .head_label a {
+	font-size: 12px;
+	color: #39F;
+	float: right;
+	font-weight: 100
+}
+#right ul a {
+	color: #000
+}
+#right ul li {
+	display: inline-block;
+	width: 770px;
+	height: 40px;
+	background: #F4F4F4;
+	margin-top: 10px;
+	border: 1px solid #E6E6E6;
+	font: 14px/40px "黑体";
+	padding-left: 20px
+}
+#right ul li .span1 {
+	color: #999;
+	margin-left: 100px;
+	font-family: "宋体"
+}
+#right ul li a {
+	font-size: 12px;
+	color: #39F;
+	float: right;
+	font-weight: 100;
+	margin-right: 20px;
+	font-family: "宋体"
+}
+#right ul li div{
+	height:100px;
+	line-height:0;
+	position:relative;
+	margin-top:-5px;
+	}
+	
+.emailAttention1 div{
+	font:100 12px "宋体";
+	position:relative;}
+.emailAtt1,.emailAttW1{
+	position:absolute;
+	top:10px;}
+.emailAttW1{
+	top:15px;
+	left:20px;}
+.emailAtt2,.emailAttW2{
+	position:absolute;
+	top:40px;}
+.emailAttW2{
+	top:45px;
+	left:20px;}
+.emailAttBtn,.closeBtn{
+	position:absolute;
+	top:70px;}
+.closeBtn{
+	left:60px;}
+	
+.watermakerSet1 div div span{
+	font:12px "宋体";}
+.waterSet_span1 div{
+	position:relative;}
+.waterSet_span1{
+	color:#999;
+	position:absolute;
+	top:10px;}
+.waterSet_span2{
+	position:absolute;
+	top:40px;}
+.waterWeiName{
+	position:absolute;
+	top:70px;}
+.waterWeiNameW{
+	position:absolute;
+	top:70px;
+	left:20px;}
+.waterWeiLogo{
+	position:absolute;
+	top:90px;}
+.waterWeiLogoW{
+	position:absolute;
+	top:90px;
+	left:20px;}
+.waterWeiAddr{
+	position:absolute;
+	top:110px;}
+.waterWeiAddrW{
+	position:absolute;
+	top:110px;
+	left:20px;}
+.waterSet_span3{
+	position:absolute;
+	top:140px;}
+.bottomRight{
+	position:absolute;
+	top:170px;}
+.bottomRightW{
+	position:absolute;
+	top:170px;
+	left:20px;}
+.bottomCenter{
+	position:absolute;
+	top:170px;
+	left:80px;
+	}
+.bottomCenterW{
+	position:absolute;
+	top:170px;
+	left:100px;
+	}
+.centerCenter{
+	position:absolute;
+	top:170px;
+	left:160px;}
+.centerCenterW{
+	position:absolute;
+	top:170px;
+	left:180px;}
+.waterBtn,.closeBtn1{
+	position:absolute;
+	top:200px;}
+.closeBtn1{
+	left:60px;}
+.water_right{
+	float:right;
+	border-left:1px dashed #999;
+	position:absolute;
+	left:-200px;
+	top:-90px;}
+.waterSet_span4{
+	position:absolute;
+	left:40px;}
+.waterView{
+	position:absolute;
+	top:30px;
+	left:40px;}
+.medalSet1 div{
+	position:relative;}
+.medalSet1 div span{
+	font:12px "宋体";}
+.medal_span1{
+	position:absolute;
+	top:10px;}
+.showMedal{
+	position:absolute;
+	top:40px;}
+.showMedalW{
+	position:absolute;
+	top:40px;
+	left:20px;}
+.noShowMedal{
+	position:absolute;
+	top:70px;}
+.noShowMedalW{
+	position:absolute;
+	top:70px;
+	left:20px;}
+.medalBtn,.closeBtn2{
+	position:absolute;
+	top:100px;}
+.closeBtn2{
+	left:60px;}
+
+.languageSet1 div{
+	position:relative;}
+.languageSet1 div span{
+	font:12px "宋体";}
+.language_span1{
+	position:absolute;
+	top:10px;}
+.simpChinese,.simpChineseW{
+	position:absolute;
+	top:40px;}
+.taiWChinese,.taiWChineseW{
+	position:absolute;
+	top:65px;}
+.hongChinese,.hongChineseW{
+	position:absolute;
+	top:90px;}
+.english,.englishW{
+	position:absolute;
+	top:115px;}
+.simpChineseW,.taiWChineseW,.hongChineseW,.englishW{
+	position:absolute;
+	left:20px;}
+.langBtn,.closeBtn3{
+	position:absolute;
+	top:155px;}
+.closeBtn3{
+	left:60px;}
