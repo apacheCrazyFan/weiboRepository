@@ -23,8 +23,8 @@
         </div>
         <div id="registerandlogin">
         	<ul>
-            	<li><a href="front/page/login.jsp" name="login" id="login">登录</a></li>
-                <li><a href="front/page/register.jsp" name="register" id="register">注册</a></li>
+            	<li><a href="page/login.jsp" name="login" id="login">登录</a></li>
+                <li><a href="page/register.jsp" name="register" id="register">注册</a></li>
             </ul>
         </div>
         
@@ -33,16 +33,16 @@
 <div id="frame">
 	<div id="left-part">
     	<ul>
-            <li class="one"><img src="front/image/left_01.png" class="img"/><a href="javascript:void(0)">推荐</a></li>
-            <li><img src="front/image/left_02.png" class="img"/><a href="javascript:void(0)">明星</a></li>
-            <li><img src="front/image/left_03.png" class="img"/><a href="javascript:void(0)">视频</a></li>
-            <li><img src="front/image/left_04.png" class="img"/><a href="javascript:void(0)">搞笑</a></li>
-            <li><img src="front/image/left_05.png" class="img"/><a href="javascript:void(0)">情感</a></li>
-            <li><img src="front/image/left_06.png" class="img"/><a href="javascript:void(0)">社会</a></li>
-            <li><img src="front/image/left_07.png" class="img"/><a href="javascript:void(0)">综艺</a></li>
-            <li><img src="front/image/left_08.png" class="img"/><a href="javascript:void(0)">美妆</a></li>
-            <li><img src="front/image/left_09.png" class="img"/><a href="javascript:void(0)">美食</a></li>
-            <li><img src="front/image/left_10.png" class="img"/><a href="javascript:void(0)">更多</a></li>
+            <li class="one" style="height:35px;"><img src="front/image/left_01.png" class="img"/><a href="javascript:void(0)" id="two">推荐</a></li>
+            <li style="height:32px;"><img src="front/image/left_02.png" class="img"/><a href="javascript:void(0)" id="two">明星</a></li>
+            <li style="height:32px;"><img src="front/image/left_03.png" class="img"/><a href="javascript:void(0)" id="two">视频</a></li>
+            <li style="height:32px;"><img src="front/image/left_04.png" class="img"/><a href="javascript:void(0)" id="two">搞笑</a></li>
+            <li style="height:32px;"><img src="front/image/left_05.png" class="img"/><a href="javascript:void(0)" id="two">情感</a></li>
+            <li style="height:32px;"><img src="front/image/left_06.png" class="img"/><a href="javascript:void(0)" id="two">社会</a></li>
+            <li style="height:32px;"><img src="front/image/left_07.png" class="img"/><a href="javascript:void(0)" id="two">综艺</a></li>
+            <li style="height:32px;"><img src="front/image/left_08.png" class="img"/><a href="javascript:void(0)" id="two">美妆</a></li>
+            <li style="height:32px;"><img src="front/image/left_09.png" class="img"/><a href="javascript:void(0)" id="two">美食</a></li>
+            <li style="height:32px;"><img src="front/image/left_10.png" class="img"/><a href="javascript:void(0)" id="two">更多</a></li>
 		</ul>
     </div>
     <div id="center-part">
@@ -76,7 +76,7 @@
         
         <div id="center-part-content_01">
             	<a href="javascript:void(0)" id="center-part_img"><img src="front/image/defaultPhoto2.png"/></a>
-                <a href="javascript:void(0)" class="center-part_way" id="center-part_way1" onClick='showcenterhidediv("center-part_choose1")' onMouseOver="changecentercolor('center-part_way1')" onMouseOut="changecentercolors('center-part_way1')"><img src="image/conter-part_wayimg01.png"/></a>
+                <a href="javascript:void(0)" class="center-part_way" id="center-part_way1" onClick='showcenterhidediv("center-part_choose1")' onMouseOver="changecentercolor('center-part_way1')" onMouseOut="changecentercolors('center-part_way1')"><img src="front/image/conter-part_wayimg01.png"/></a>
                     <div style="display:none;" class="center-partchoose" id="center-part_choose1" onMouseUp="hidecenterdiv('center-part_choose1')">
                         <ul>
                             <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
@@ -104,7 +104,7 @@
        
        <div id="center-part-content_01">
             	<a href="javascript:void(0)" id="center-part_img"><img src="front/image/defaultPhoto2.png"/></a>
-                <a href="javascript:void(0)" class="center-part_way" id="center-part_way2" onClick='showcenterhidediv("center-part_choose2")' onMouseOver="changecentercolor('center-part_way2')" onMouseOut="changecentercolors('center-part_way2')"><img src="image/conter-part_wayimg01.png"/></a>
+                <a href="javascript:void(0)" class="center-part_way" id="center-part_way2" onClick='showcenterhidediv("center-part_choose2")' onMouseOver="changecentercolor('center-part_way2')" onMouseOut="changecentercolors('center-part_way2')"><img src="front/image/conter-part_wayimg01.png"/></a>
                     <div style="display:none;" class="center-partchoose"  id="center-part_choose2" onMouseUp="hidecenterdiv('center-part_choose2')">
                         <ul>
                             <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br />
@@ -120,7 +120,7 @@
                 </ul>
                 <p id="center-part_p">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
                 doge]！而且相比<br>之下TheClocks有数字和指针两种形式，还可以设定闹铃中区也有，而且free<br>帮APP菌卖安利#</p>
-               <div id="content_img01"><img src="image/content_img01.jpg" style="width:150px;height:160px;"/></div>
+               <div id="content_img01"><img src="front/image/content_img01.jpg" style="width:150px;height:160px;"/></div>
                
                <div id="center_footnum">
                    <a href="javascript:void(0)" id="center_footnum1"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>
@@ -159,7 +159,12 @@
         <div id="right-part-content01">
         
         </div>
-    </div>    
+    </div> 
+		
+	<div id="buoys">
+    	<img src="front/image/letterchat.png" id="buoysimg1"/><span id="buoyschat">私信聊天</span><img src="front/image/chatmes.png" id="buoysimg2"/>
+    </div>
 </div>
 </body>
 </html>
+
