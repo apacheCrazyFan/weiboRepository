@@ -128,13 +128,12 @@ a {
 }
 
 #left-part-content {
-	width:145px;
 	position: relative;
 	top: 20px;
 }
 
 #one {
-	margin-top: 18px;
+	margin-top: 20px;
 	color: #FFF;
 }
 
@@ -175,129 +174,8 @@ ul li:hover {
 #center-part-content {
 	margin-top: 20px;
 	width: 600px;
-	height: 180px;
-	background-color: #FFF;
-	border-radius: 5px;
-}
-
-p {
-	font-size: 12px;
-}
-
-#s1 {
-	position: relative;
-	left: 13px;
-	top: 10px;
-}
-
-#s2 {
-	position: relative;
-	left: 270px;
-	top: 10px;
-}
-
-textarea {
-	width: 570px;
-	height: 80px;
-	margin: 15px;
-	font-size: 14px;
-	word-wrap: break-word;
-	line-height: 18px;
-	overflow-y: auto;
-	overflow-x: hidden;
-	outline: none;
-}
-
-#wimg {
-	position: relative;
-	top: 7px;
-	right: 1px;
-	margin-left: 4px;
-	margin-top: -10px;
-}
-
-#wword {
-	position: relative;
-	right: 5px;
-	bottom: -2px;
-	margin-left: 5px;
-	font-size: 12px;
-}
-
-#wword:hover {
-	color: #F00;
-}
-
-#aa {
-	width: 5px;
-	position: relative;
-	bottom: -2px;
-	left: 10px;
-	font-size: 12px;
-}
-
-#aa:hover {
-	color: #F00;
-}
-
-.W_input:hover {
-	border-color: #F00;
-}
-
-#choose {
-	width: 110px;
-	height: 125px;
-	font-size: 10px;
-	position: relative;
-	left: 115px;
-	bottom: 4px;
-	z-index: 999;
-	border: 1px solid #CCC;
-	background: #FFF;
-}
-
-.choosea2 {
-	position: relative;
-	top: 4px;
-}
-
-#choosea1:hover {
-	background: #CCC;
-}
-
-#choosea1 {
-	padding: 10px;
-	margin-left: 6px;
-	margin-top: 5px;
-}
-
-.c1 {
-	display: inline-block;
-	margin-bottom: 2px;
-	position: relative;
-	left: 24px;
-	margin: -8px;
-}
-
-.c1:hover {
-	color: #FF75FF;
-}
-
-#limits_img {
-	margin-bottom: 1px;
-	margin: -8px;
-}
-
-#fabu {
-	float: right;
-	padding-right: 10px;
-}
-
-#navigation {
-	background: #FFF;
-	margin-top: 20px;
-	width: 600px;
 	height: 40px;
+	background-color: #FFF;
 	border-radius: 5px;
 }
 
@@ -321,7 +199,7 @@ textarea {
 
 #nav-search {
 	position: relative;
-	right: -30px;
+	right: -55px;
 }
 
 #nav-icon {
@@ -331,31 +209,18 @@ textarea {
 }
 
 #na1 {
-	font-size: 12px;
+	font-size: 14px;
 	position: relative;
 	top: 8px;
 	left: 10px;
-	margin-right: 20px;
+	margin-right: 28px;
 	color: #000;
 }
 
-#na1:hover {
-	color: #F00;
-}
-
-#supersearch {
-	width: 600px;
-	height: 200px;
-	border-radius: 5px;
-	font-size:14px;
-	margin-bottom:20px;
-}
-
-#superdivclose{
-	position:relative;
-	left:560px;
-	bottom:32px;
-}
+.na1{
+	margin:10px;
+	padding:10px;
+	}
 
 #user_img {
 	position: relative;
@@ -456,13 +321,36 @@ textarea {
 
 #content_img01 {
 	position: relative;
-	left: 80px;
+	left: 1px;
 	bottom: 60px;
 }
 
+#center-part_ps{
+	text-align:center;
+	border:#666 solid 1px;
+	width:60px;
+	height:30px;
+	line-height:30px;
+	position:relative;
+	bottom:50px;
+	right:190px;
+	color:#000;
+	font-size:13px;
+	font-weight:700;}
+	
+#collection_date{
+	float:right;
+	position:relative;
+	bottom:75px;
+	right:20px;
+	font-size:13px;
+	color:#666;
+	}
+#center_ps{
+	}
 .center-partchoose {
-	width: 140px;
-	height: 140px;
+	width: 90px;
+	height: 60px;
 	background: #FFF;
 	position: relative;
 	left: -18px;
@@ -475,25 +363,20 @@ textarea {
 #center-parta1 {
 	font-size: 12px;
 	color: #666;
+	padding-left:20px;
 }
 
-#center-parta1:hover {
+#center-parta1:hover,#center-parta2:hover {
 	color: #F00;
 }
+#center-parta2{
+	font-size: 12px;
+	color: #666;
+	padding-left:20px;}
 
 #center-partchoose1 {
 	position: relative;
 	top: 5px;
-}
-
-#center-partchoose2 {
-	position: relative;
-	bottom: 25px;
-}
-
-#center-partchoose3 {
-	position: relative;
-	bottom: 60px;
 }
 
 #center-partchoose4 {
@@ -502,8 +385,9 @@ textarea {
 }
 
 #center_footnum {
+	height:40px;
 	position: relative;
-	bottom: 30px;
+	bottom: 20px;
 	border-top:#000 solid 1px;
 }
 
@@ -516,8 +400,7 @@ textarea {
 	color: #666;
 }
 
-#center_footnum1:hover, #center_footnum2:hover, #center_footnum3:hover,
-	#center_footnum4:hover {
+#center_footnum1:hover, #center_footnum2:hover, #center_footnum3:hover, #center_footnum4:hover {
 	color: #F00;
 }
 
@@ -541,11 +424,34 @@ textarea {
 
 #right-part-content {
 	margin-top: 20px;
-	height: 200px;
+	height: 40px;
 	width: 220px;
 	background-color: #FFF;
 	border-radius: 5px;
 }
+#right-part_tip1{
+	margin-left:10px;
+	position:relative;
+	bottom:5px;
+	color:#F00;}
+#right-part-content01 {
+	margin-top: 20px;
+	height: 240px;
+	width: 220px;
+	background-color: #FFF;
+	border-radius: 5px;
+}
+#right-part_tip2{
+	margin-left:20px;
+	position:relative;
+	bottom:10px;
+	left:15px;
+	font-size:14px;
+}
+#right-part_unline{
+	border-bottom:#999 solid 1px;
+	padding:1px;}
+	
 #buoys{
 	width:316px;
 	height:50px;
