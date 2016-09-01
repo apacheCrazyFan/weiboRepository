@@ -23,8 +23,6 @@
 	<!-- 注解方式，指定bean可能出现的位置      即扫描bean包 -->
 	<context:component-scan base-package="com.yc.weibo" />
 	
-	<bean id="adminBiz" class="com.yc.weibo.bizImpl.adminBizImpl"></bean>
-	<bean id="userTagBiz" class="com.yc.weibo.bizImpl.UserTagBizImpl"></bean>
 	
 	<!-- 引入外部属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
@@ -62,22 +60,22 @@
 	<!-- 请求拦截后，交给对应请求处理操作后，根据返回结果，拼接响应页面路径 -->
 	<!--   prefix  +  返回值    +   suffix -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/front/page/"/>
-		<property name="suffix" value=".jsp"/>
+		<!-- <property name="prefix" value="/front/page/"/>
+		<property name="suffix" value=".jsp"/> -->
 	</bean>	
 	
 	
 	<!-- 	取消所有请求拦截的重定向拦截 -->
 	<!-- 默认静态资源的请求处理 -->
-	<mvc:default-servlet-handler/>
+	<!-- <mvc:default-servlet-handler /> -->
 
 	<!-- 控制器驱动处理 --> <!-- 同时要注意这个可以配置我们自己的数据转换 -->
-	<mvc:annotation-driven />
+	<!-- <mvc:annotation-driven /> -->
 	
 	<!-- 1.配制事务管理器 -->
-	<bean id="transactionManager"
+	<!-- <bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		p:dataSource-ref="dataSource" />
+		p:dataSource-ref="dataSource" /> -->
 		
 	<!-- 2.配制事务关联
 	<tx:annotation-driven transaction-manager="transactionManager" /> -->

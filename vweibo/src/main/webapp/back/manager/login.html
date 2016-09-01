@@ -50,23 +50,23 @@
 			$("body").css("background","url('"+pics[i]+"')");
 		};
 		
-		function adminLogin(){
-			var aname=$.trim($("#aname").val() );
+		//function adminLogin(){
+		/* 	var aname=$.trim($("#aname").val() );
 			var pwd=$.trim($("#apwd").val() );
-			alert("aaa");
+			alert("aaa"); */
 		//	aname="navy";
 		//	pwd="a";
 			
-			$.post("admin/login",{op:"adminLogin",aname:aname,apwd:pwd},function(data){
-				alert(data);
+			/* $.post("admin/login",{function(data){
+		//		alert(data);
 				if(data > 0){
 					location.href="back/manager/index.html";
 				}else{
 					location.href="back/manager/login.html";
 				}
 				
-			});
-		}
+			}); */
+		//}
 		//背景轮换
 /* $(document).ready(function(){
 	  =windows.load();
@@ -96,7 +96,7 @@
             	<div class="panel">
                 	<div class="panel-heading login-top">后台管理员登录</div>
                     <div class="panel-body">
-                    	<form class="form-group col-lg-10 col-md-offset-1" action="" method="post" role="form">
+                    	<form class="form-group col-lg-10 col-md-offset-1" action="admin/login" method="post" role="form">
                             <br />
                             <div class="input-group">
                             	<label for="uname" class="input-group-addon">管理名</label>
@@ -115,7 +115,7 @@
                             </div> --> 
                             <br/>
                             <div class="input-group">
-                            	<input type="button" value="登陆" class="btn btn-success mybtn" onclick="javascript:adminLogin()"/>
+                            	<input type="button" value="登陆" class="btn btn-success mybtn"/>
                                 <input type="reset" value="重置" class="btn btn-warning mybtn"/>
                             </div>
                             <br/>

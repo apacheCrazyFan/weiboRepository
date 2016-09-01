@@ -1,10 +1,10 @@
 create table Admin(
-	Aid int primary key,
 	Aname varchar2(20),
 	Apwd varchar2(30)
 );
+drop table Admin;
 select * from Admin;
-insert into Admin values(1,'admin','sa');
+insert into Admin values('admin','sa');
 
 --Œ¢≤©±Í«©±Ì
 create table WeiBoTag(
