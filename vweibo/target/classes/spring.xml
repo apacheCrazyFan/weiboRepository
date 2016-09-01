@@ -23,8 +23,8 @@
 	<!-- 注解方式，指定bean可能出现的位置      即扫描bean包 -->
 	<context:component-scan base-package="com.yc.weibo" />
 	
-	<bean id="adminBiz" class="com.yc.weibo.bizImpl.adminBizImpl"></bean>
-	<bean id="userTagBiz" class="com.yc.weibo.bizImpl.UserTagBizImpl"></bean>
+	<!-- <bean id="adminBiz" class="com.yc.weibo.bizImpl.adminBizImpl"></bean>
+	<bean id="userTagBiz" class="com.yc.weibo.bizImpl.UserTagBizImpl"></bean> -->
 	
 	<!-- 引入外部属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
@@ -62,8 +62,6 @@
 	<!-- 请求拦截后，交给对应请求处理操作后，根据返回结果，拼接响应页面路径 -->
 	<!--   prefix  +  返回值    +   suffix -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/front/page/"/>
-		<property name="suffix" value=".jsp"/>
 	</bean>	
 	
 	
