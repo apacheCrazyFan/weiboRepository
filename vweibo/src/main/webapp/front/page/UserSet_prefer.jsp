@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="utf-8">
+<base href="/vweibo/">
 <title>无标题文档</title>
-<link rel="stylesheet" href="../css/UserSet_prefer.css">
-<script src="../js/jquery-1.11.1.min.js"></script>
-<script src="../UserSet_prefer.min.js"></script>
+<link rel="stylesheet" href="front/css/UserSet_prefer.css">
+<script src="front/js/jquery-1.11.1.min.js"></script>
+<script src="front/UserSet_prefer.min.js"></script>
 
 </head>
 
@@ -17,12 +18,12 @@
         	<span class="idSet">账号设置</span>
             <ul>
             	<li class="line1"></li>
-                <li class="myInfo"><img src="../image/UserSet_image/icon1_1.png"><a href="UserSet.jsp">我的信息</a></li>
-                <li class="photo"><img src="../image/UserSet_image/icon2_1.png"><a href="UserSet_photo.jsp">头像</a></li>
+                <li class="myInfo"><img src="front/image/UserSet_image/icon1_1.png"><a href="front/page/UserSet.jsp">我的信息</a></li>
+                <li class="photo"><img src="front/image/UserSet_image/icon2_1.png"><a href="front/page/UserSet_photo.jsp">头像</a></li>
                 <li class="line2"></li>
-                <li class="privacy"><img src="../image/UserSet_image/icon3_1.png"><a href="UserSet_privacy.jsp">隐私设置</a></li>
-                <li class="message"><img src="../image/UserSet_image/icon4_1.png"><a href="UserSet_message.jsp">消息设置</a></li>
-                <li class="prefer"><img src="../image/UserSet_image/icon5_2.png"><a href="UserSet_prefer.jsp">偏好设置</a></li>
+                <li class="privacy"><img src="front/image/UserSet_image/icon3_1.png"><a href="front/page/UserSet_privacy.jsp">隐私设置</a></li>
+                <li class="message"><img src="front/image/UserSet_image/icon4_1.png"><a href="front/page/UserSet_message.jsp">消息设置</a></li>
+                <li class="prefer"><img src="front/image/UserSet_image/icon5_2.png"><a href="front/page/UserSet_prefer.jsp">偏好设置</a></li>
                 <li class="line3"></li>
             </ul>
         </div>
@@ -34,8 +35,8 @@
                     <div>
                     	<input class="emailAtt1" type="checkbox" name="emailAtt" value="emailAtt1"/><span class="emailAttW1">接收微博官方推送的离线消息提醒邮件</span><br/>
                         <input class="emailAtt2" type="checkbox" name="emailAtt" value="emailAtt2"/><span class="emailAttW2">接收微博官方推送的精彩热点内容邮件</span><br/>
-                        <input class="emailAttBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="emailAttBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     
                     </div>
                 </li>
@@ -53,12 +54,12 @@
                             <input class="bottomRight" type="radio" name="waterLocation" value="bottomRight"/><span class="bottomRightW">底部居右</span>
                             <input class="bottomCenter" type="radio" name="waterLocation" value="bottomCenter"/><span class="bottomCenterW">底部居中</span>
                             <input class="centerCenter" type="radio" name="waterLocation" value="centerCenter"/><span class="centerCenterW">图片中心</span><br/>
-                            <input class="waterBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        	<input class="closeBtn1" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                            <input class="waterBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        	<input class="closeBtn1" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                         </div>
                         <div class="water_right" style="height:220px;width:300px">
                         	<span class="waterSet_span4">预览</span>
-                        	<div class="waterView"><img src="../image/UserSet_image/test_pic.jpg"></div>
+                        	<div class="waterView"><img src="front/image/UserSet_image/test_pic.jpg"></div>
                         </div>
                     </div>
                 </li>
@@ -70,8 +71,8 @@
                     	<span class="medal_span1">设置是否在个人主页封面右下角显示勋章图标</span><br/>
                         <input class="showMedal" type="radio" name="isShowMedal" value="showMedal"/><span class="showMedalW">显示</span><br/>
                         <input class="noShowMedal" type="radio" name="isShowMedal" value="noShowMedal"/><span class="noShowMedalW">不现实</span><br/>
-                        <input class="medalBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn2" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="medalBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn2" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     </div>
                 </li>
                 
@@ -83,8 +84,8 @@
                         <input class="taiWChinese" type="radio" name="langSet" value="taiWChinese"/><span class="taiWChineseW">中文(台湾)</span><br/>
                         <input class="hongChinese" type="radio" name="langSet" value="hongChinese"/><span class="hongChineseW">中文(香港)</span><br/>
                         <input class="english" type="radio" name="langSet" value="english"/><span class="englishW">English</span><br/>
-                        <input class="langBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn3" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="langBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn3" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     </div>
                 </li>
             </ul>

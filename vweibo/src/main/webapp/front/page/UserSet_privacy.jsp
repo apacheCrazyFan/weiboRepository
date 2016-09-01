@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="utf-8">
+<base href="/vweibo/">
 <title>无标题文档</title>
-<link rel="stylesheet" href="../css/UserSet_privacy.css">
-<script src="../js/jquery-1.11.1.min.js"></script>
-<script src="../js/UserSet_privacy.js"></script>
+<link rel="stylesheet" href="front/css/UserSet_privacy.css">
+<script src="front/js/jquery-1.11.1.min.js"></script>
+<script src="front/js/UserSet_privacy.js"></script>
 
 </head>
 
@@ -17,12 +18,12 @@
         	<span class="idSet">账号设置</span>
             <ul>
             	<li class="line1"></li>
-                <li class="myInfo"><img src="../image/UserSet_image/icon1_1.png"><a href="UserSet.jsp">我的信息</a></li>
-                <li class="photo"><img src="../image/UserSet_image/icon2_1.png"><a href="UserSet_photo.jsp">头像</a></li>
+                <li class="myInfo"><img src="front/image/UserSet_image/icon1_1.png"><a href="front/page/UserSet.jsp">我的信息</a></li>
+                <li class="photo"><img src="front/image/UserSet_image/icon2_1.png"><a href="front/page/UserSet_photo.jsp">头像</a></li>
                 <li class="line2"></li>
-                <li class="privacy"><img src="../image/UserSet_image/icon3_2.png"><a href="UserSet_privacy.jsp">隐私设置</a></li>
-                <li class="message"><img src="../image/UserSet_image/icon4_1.png"><a href="UserSet_message.jsp">消息设置</a></li>
-                <li class="prefer"><img src="../image/UserSet_image/icon5_1.png"><a href="../image/UserSet_image/UserSet_../image/UserSet_image/.jsp">偏好设置</a></li>
+                <li class="privacy"><img src="front/image/UserSet_image/icon3_2.png"><a href="front/page/UserSet_privacy.jsp">隐私设置</a></li>
+                <li class="message"><img src="front/image/UserSet_image/icon4_1.png"><a href="front/page/UserSet_message.jsp">消息设置</a></li>
+                <li class="prefer"><img src="front/image/UserSet_image/icon5_1.png"><a href="front/image/UserSet_image/UserSet_front/image/UserSet_image/.jsp">偏好设置</a></li>
                 <li class="line3"></li>
             </ul>
         </div>
@@ -34,8 +35,8 @@
                     <div>
                     	<input class="findMeByEmail" type="checkbox" name="findMe" value="byEmail"/><span class="findMeByEmailW">电子邮件</span><br/>
                         <input class="findMeByNumber" type="checkbox" name="findMe" value="byNumber"/><span class="findMeByNumberW">手机号码</span><br/>
-                        <input class="saveFindMe" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie" type="image" src="../image/UserSet_image/closebtn1.png" />
+                        <input class="saveFindMe" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
@@ -45,8 +46,8 @@
                         <span class="spanFriend">是否接受微博给我推荐手机通讯录中的好友</span><br/>
                         <input class="yesToReco" type="radio" name="whetherReco" value="yesReco"/><span class="yesToRecoW">是</span><br/>
                         <input class="noToReco" type="radio" name="whetherReco" value="noReco"/><span class="noToRecoW">否</span><br/>
-                        <input class="saveReco" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie" type="image" src="../image/UserSet_image/closebtn1.png" />
+                        <input class="saveReco" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
@@ -57,8 +58,8 @@
                     	<span class="spanLocation">是否允许微博保存并显示你所处的地理位置信息，包括所有的第三方工具，客户端</span><br/>
                         <input class="yesToLoca" type="radio" name="seeLoca" value="yesLoca"/><span class="yesToLocaW">可见</span><br/>
                         <input class="noToLoca" type="radio" name="noSeeloca" value="noLoca"/><span class="noToLocaW">不可见</span><br/>
-                        <input class="saveLoca" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie" type="image" src="../image/UserSet_image/closebtn1.png" />
+                        <input class="saveLoca" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
@@ -69,7 +70,7 @@
                         <span class="howToAddBlack">如何加入黑名单？</span>
                         <span class="addBlack1">1)鼠标点击“更多”菜单，点击“加入黑名单”；</span>
                         <span class="addBlack2">2)确认加入黑名单。</span>
-                        <img src="../image/UserSet_image/privacy_blacklist.jpg" class="pic_blacklist"/>
+                        <img src="front/image/UserSet_image/privacy_blacklist.jpg" class="pic_blacklist"/>
                     </div>
                 </li>
                 
@@ -80,7 +81,7 @@
                         <span class="howToPriLetter">如何屏蔽私信？</span>
                         <span class="addPriLetter1">1)鼠标点击消息右侧“下拉图标”，点击“屏蔽私信”；</span>
                         <span class="addPriLetter2">2)确认屏蔽私信。</span>
-                        <img src="../image/UserSet_image/privacy_shieldPriLetter.jpg" class="pic_priLetter"/>
+                        <img src="front/image/UserSet_image/privacy_shieldPriLetter.jpg" class="pic_priLetter"/>
                     </div>
                 </li>
                 
@@ -91,7 +92,7 @@
                         <span class="howToGroup">如何屏蔽群微博？</span>
                         <span class="addGroup1">1)鼠标点击“下拉图标”弹出层屏蔽菜单，点击“屏蔽来自XX的微博”；</span>
                         <span class="addGroup2">2)确认屏蔽来自该群的微博。</span>
-                        <img src="../image/UserSet_image/privacy_shieldGroupWeibo.jpg" class="pic_Group"/>
+                        <img src="front/image/UserSet_image/privacy_shieldGroupWeibo.jpg" class="pic_Group"/>
                     </div>
                 </li>
                 
@@ -103,7 +104,7 @@
                         <span class="howToId">如何屏蔽帐号？</span>
                         <span class="addId1">1)鼠标点击“下拉图标”弹出层屏蔽菜单，点击“屏蔽XX的微博”；</span>
                         <span class="addId2">2)确认屏蔽帐号。</span>
-                        <img src="../image/UserSet_image/privacy_shieldUserId.jpg" class="pic_Id"/>
+                        <img src="front/image/UserSet_image/privacy_shieldUserId.jpg" class="pic_Id"/>
                     </div>
                 </li>
                 
@@ -115,22 +116,22 @@
                         <span class="howToKeyword">如何屏蔽帐号？</span>
                         <span class="addKeyword1">1)鼠标点击“下拉图标”弹出层屏蔽菜单，点击“屏蔽XX的微博”；</span>
                         <span class="addKeyword2">2)确认屏蔽帐号。</span>
-                        <img src="../image/UserSet_image/privacy_shieldKeyword.jpg" class="pic_Keyword"/>
+                        <img src="front/image/UserSet_image/privacy_shieldKeyword.jpg" class="pic_Keyword"/>
                     </div>
                 </li>
                 
                 <li class="shieldSource">屏蔽来源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: compileAndClose('.shieldSource','.shieldSource1',1,9);">编辑</a></li>
                 <li style="display:none;background:#fff;height:400px" class="shieldSource1">屏蔽来源<a href="javascript: compileAndClose('.shieldSource','.shieldSource1',2,0);">收起</a><br/>
                    <div>
-                   		<span class="whatIsSource" onMouseOver="whatIsSource()" onMouseOut="closeWhatIsSource()">什么是来源？<img src="../image/UserSet_image/icon_sourceQ.jpg"></span><br/>
-                        <div class="pic_whatIsSource"><img src="../image/UserSet_image/whatIsSource.jpg"></div>
+                   		<span class="whatIsSource" onMouseOver="whatIsSource()" onMouseOut="closeWhatIsSource()">什么是来源？<img src="front/image/UserSet_image/icon_sourceQ.jpg"></span><br/>
+                        <div class="pic_whatIsSource"><img src="front/image/UserSet_image/whatIsSource.jpg"></div>
                         <span class="spanSource">你可以屏蔽来自第三方应用或游戏的微博。例如屏蔽来自微城市的微博。<br/> 
 						屏蔽后，系统将在你的首页自动屏蔽来自该来源的新微博。
 						<br/><br/>温馨提示：本功能仅会员可用，请开通微博会员后使用。</span>
                         <span class="howToSource">如何屏蔽来源？</span>
                         <span class="addSource1">1)鼠标点击"下拉图标"弹出层屏蔽菜单，点击"屏蔽XX的微博"；</span>
                         <span class="addSource2">2)确认屏蔽来源。</span>
-                        <img src="../image/UserSet_image/privacy_shieldSource.jpg" class="pic_Source"/>
+                        <img src="front/image/UserSet_image/privacy_shieldSource.jpg" class="pic_Source"/>
                     </div>
                 </li>
                 
@@ -142,7 +143,7 @@
                         <span class="howToWeibo">如何屏蔽微博？</span>
                         <span class="addWeibo1">1)鼠标点击“下拉图标”弹出层屏蔽菜单，点击“屏蔽这条微博”；</span>
                         <span class="addWeibo2">2)确认屏蔽该条微博。</span>
-                        <img src="../image/UserSet_image/privacy_shieldWeibo.jpg" class="pic_Weibo"/>
+                        <img src="front/image/UserSet_image/privacy_shieldWeibo.jpg" class="pic_Weibo"/>
                     </div>
                 </li>
                 

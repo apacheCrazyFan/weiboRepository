@@ -1,4 +1,4 @@
-ï»¿* {
+* {
 	padding: 0px;
 	margin: 0;
 }
@@ -21,7 +21,7 @@ body {
 	float: left
 }
 .idSet {
-	font: 800 12px "å®‹ä½“";
+	font: 800 12px "ËÎÌå";
 	color: #AEAEAE;
 	position: absolute;
 	top: 25px;
@@ -47,7 +47,7 @@ body {
 }
 #wrap #left ul li a {
 	color: #012129;
-	font: 16px "å®‹ä½“";
+	font: 16px "ËÎÌå";
 	margin-left: 25px;
 }
 .line1, .line2, .line3 {
@@ -95,7 +95,7 @@ body {
 	border-bottom: 2px solid red;
 	line-height: 50px;
 	margin-top: 10px;
-	font-family: "å®‹ä½“";
+	font-family: "ËÎÌå";
 	font-weight: bold;
 }
 #right ul .head_label a {
@@ -114,14 +114,14 @@ body {
 	background: #F4F4F4;
 	margin-top: 10px;
 	border: 1px solid #E6E6E6;
-	font: 14px "é»‘ä½“";
+	font: 14px "ºÚÌå";
 	line-height: 40px;
 	padding-left: 20px
 }
 #right ul li .span1 {
 	color: #999;
 	margin-left: 100px;
-	font-family: "å®‹ä½“"
+	font-family: "ËÎÌå"
 }
 #right ul li a {
 	font-size: 12px;
@@ -129,7 +129,7 @@ body {
 	float: right;
 	font-weight: 100;
 	margin-right: 20px;
-	font-family: "å®‹ä½“"
+	font-family: "ËÎÌå"
 }
 #perName, #perImf, #perLabel, #perIntro {
 	display: block
@@ -137,7 +137,7 @@ body {
 #perName1 div {
 	margin-left: 15px;
 	margin-top: 10px;
-	font: 13px "å®‹ä½“";
+	font: 13px "ËÎÌå";
 	color: #222
 }
 .oldUserName, .newUserName {
@@ -153,7 +153,7 @@ body {
 #perImf1 div ul li {
 	border: none;
 	background: #fff;
-	font: 13px "å®‹ä½“";
+	font: 13px "ËÎÌå";
 	color: #222;
 	height: 30px;
 	margin-top: 10px;
@@ -186,7 +186,7 @@ body {
 	margin-left: 15px;
 	width: 200px;
 	height: 55px;
-	font: 13px "å®‹ä½“"
+	font: 13px "ËÎÌå"
 }
 .userEmail {
 	width: 200px;
@@ -198,7 +198,7 @@ body {
 }
 #perLabel1 div {
 	margin-top: 10px;
-	font: 13px "å®‹ä½“";
+	font: 13px "ËÎÌå";
 	color: #222;
 	position: relative;
 }

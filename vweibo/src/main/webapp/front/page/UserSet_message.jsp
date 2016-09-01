@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="utf-8">
+<base href="/vweibo/"/>
 <title>无标题文档</title>
-<link rel="stylesheet" href="../css/UserSet_message.css">
-<script src="../js/jquery-1.11.1.min.js"></script>
-<script src="../js/UserSet_message.js"></script>
+<link rel="stylesheet" href="front/css/UserSet_message.css">
+<script src="front/js/jquery-1.11.1.min.js"></script>
+<script src="front/js/UserSet_message.js"></script>
 
 </head>
 
@@ -17,12 +18,12 @@
         	<span class="idSet">账号设置</span>
             <ul>
             	<li class="line1"></li>
-                <li class="myInfo"><img src="../image/UserSet_image/icon1_1.png"><a href="UserSet.jsp">我的信息</a></li>
-                <li class="photo"><img src="../image/UserSet_image/icon2_1.png"><a href="UserSet_photo.jsp">头像</a></li>
+                <li class="myInfo"><img src="front/image/UserSet_image/icon1_1.png"><a href="front/page/UserSet.jsp">我的信息</a></li>
+                <li class="photo"><img src="front/image/UserSet_image/icon2_1.png"><a href="front/page/UserSet_photo.jsp">头像</a></li>
                 <li class="line2"></li>
-                <li class="privacy"><img src="../image/UserSet_image/icon3_1.png"><a href="UserSet_privacy.jsp">隐私设置</a></li>
-                <li class="message"><img src="../image/UserSet_image/icon4_2.png"><a href="UserSet_message.jsp">消息设置</a></li>
-                <li class="prefer"><img src="../image/UserSet_image/icon5_1.png"><a href="UserSet_prefer.jsp">偏好设置</a></li>
+                <li class="privacy"><img src="front/image/UserSet_image/icon3_1.png"><a href="front/page/UserSet_privacy.jsp">隐私设置</a></li>
+                <li class="message"><img src="front/image/UserSet_image/icon4_2.png"><a href="front/page/UserSet_message.jsp">消息设置</a></li>
+                <li class="prefer"><img src="front/image/UserSet_image/icon5_1.png"><a href="front/page/UserSet_prefer.jsp">偏好设置</a></li>
                 <li class="line3"></li>
             </ul>
         </div>
@@ -39,8 +40,8 @@
                         <input class="getAllRemind" type="radio" name="getWhoRemind" value="getAllRemind"/><span>所有人</span><br/>
                         <input class="getAttRemind" type="radio" name="getWhoRemind" value="getAttRemind"/><span>我关注的人</span><br/>
                         <input class="noRemind" type="radio" name="getWhoRemind" value="noRemind"/><span>不提醒</span><br/>
-                        <input class="aiteMeBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="aiteMeBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     </div>
                 </li>
                 
@@ -61,8 +62,8 @@
                         <span class="comment_span4">我参与的(开启后，若评论了一条微博，我将收到“关注的人”对这条微博的评论)</span><br/>
                         <input class="openParticipant" type="radio" name="participant" value="openParticipant"/><span>开启</span><br/>
                         <input class="closeParticipant" type="radio" name"participant" value="closeParticipant"/><span>不开启<span><br/>
-                        <input class="commentBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="commentBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                         
                     </div>
                 </li>
@@ -77,8 +78,8 @@
                         <span class="praise_span2">我参与的(开启后，若赞了一条微博，我将收到“关注的人”对这条微博的赞)</span><br/>
                         <input class="openParPraise" type="radio" name="parPraise" value="openParPraise"/><span>开启</span><br/>
                         <input class="closeParPraise" type="radio" name"parPraise" value="closeParPraise"/><span>不开启<span><br/>
-                        <input class="praiseBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="praiseBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     </div>
                 </li>
                 
@@ -91,8 +92,8 @@
                         <span class="priLetter_span2">我是否接受收私信提醒</span><br/>
                         <input class="yesPriLetterRem" type="radio" name="getPriLetterRem" value="yesPriLetterRem"/><span>提醒</span><br/>
                         <input class="noPriLetterRem" type="radio" name"getPriLetterRem" value="noPriLetterRem"/><span>不提醒<span><br/>
-                        <input class="priLetterBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="priLetterBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     </div>
                 </li>
                 
@@ -102,8 +103,8 @@
                         <span class="noAttPriLetter_span1">我是否接受收私信提醒</span><br/>
                         <input class="yesNoAttPriLetterRem" type="radio" name="getNoAttPriLetterRem" value="yesNoAttPriLetterRem"/><span>提醒</span><br/>
                         <input class="noNoAttPriLetterRem" type="radio" name"getNoAttPriLetterRem" value="noNoAttPriLetterRem"/><span>不提醒<span><br/>
-                        <input class="noAttPriLetterBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="noAttPriLetterBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     </div>
                 </li>
                 
@@ -114,8 +115,8 @@
                         <input class="getAllNewFanRem" type="radio" name="getWhoNewFanRem" value="getAllNewFanRem"/><span>所有人</span><br/>
                         <input class="getAttNewFanRem" type="radio" name="getWhoNewFanRem" value="getAttNewFanRem"/><span>我关注的人</span><br/>
                         <input class="noNewFanRem" type="radio" name="getWhoNewFanRem" value="noNewFanRem"/><span>不提醒</span><br/>
-                        <input class="newFanseBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="newFanseBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     
                     </div>
                 </li>
@@ -126,12 +127,10 @@
                         <span class="friendCircle_span1">我是否接受好友圈小黄签提醒</span><br/>
                         <input class="yesFriCircleRem" type="radio" name="getFriCircleRem" value="yesFriCircleRem"/><span>提醒</span><br/>
                         <input class="noFriCircleRem" type="radio" name"getFriCircleRem" value="noFriCircleRem"/><span>不提醒<span><br/>
-                        <input class="friendCircleBtn" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="../image/UserSet_image/closebtn1.png"/>
+                        <input class="friendCircleBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
                     </div>
                 </li>
-                
-                
             </ul>
         </div>
     </div>

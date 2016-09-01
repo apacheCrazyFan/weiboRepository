@@ -3,11 +3,12 @@
 <!doctype html>
 <html>
 <head>
+<base href="/vweibo/">
 <meta charset="utf-8">
 <title>无标题文档</title>
-<link rel="stylesheet" href="../css/UserSet.css">
-<script src="../js/jquery-1.11.1.min.js"></script>
-<script src="../js/UserSet.js"></script>
+<link rel="stylesheet" href="front/css/UserSet.css">
+<script src="front/js/jquery-1.11.1.min.js"></script>
+<script src="front/js/UserSet.js"></script>
 </head>
 
 <body>
@@ -16,12 +17,12 @@
         	<span class="idSet">账号设置</span>
             <ul>
             	<li class="line1"></li>
-                <li class="myInfo"><img src="../image/UserSet_image/icon1_2.png"><a href="UserSet.jsp">我的信息</a></li>
-                <li class="photo"><img src="../image/UserSet_image/icon2_1.png"><a href="UserSet_photo.jsp">头像</a></li>
+                <li class="myInfo"><img src="front/image/UserSet_image/icon1_2.png"><a href="front/page/UserSet.jsp">我的信息</a></li>
+                <li class="photo"><img src="front/image/UserSet_image/icon2_1.png"><a href="front/page/UserSet_photo.jsp">头像</a></li>
                 <li class="line2"></li>
-                <li class="privacy"><img src="../image/UserSet_image/icon3_1.png"><a href="UserSet_privacy.jsp">隐私设置</a></li>
-                <li class="message"><img src="../image/UserSet_image/icon4_1.png"><a href="UserSet_message.jsp">消息设置</a></li>
-                <li class="prefer"><img src="../image/UserSet_image/icon5_1.png"><a href="UserSet_prefer.jsp">偏好设置</a></li>
+                <li class="privacy"><img src="front/image/UserSet_image/icon3_1.png"><a href="front/page/UserSet_privacy.jsp">隐私设置</a></li>
+                <li class="message"><img src="front/image/UserSet_image/icon4_1.png"><a href="front/page/UserSet_message.jsp">消息设置</a></li>
+                <li class="prefer"><img src="front/image/UserSet_image/icon5_1.png"><a href="front/page/UserSet_prefer.jsp">偏好设置</a></li>
                 <li class="line3"></li>
             </ul>
         </div>
@@ -38,8 +39,8 @@
                         <span class="oldUserName">****</span><br/><br/>
                         <span class="newName">新昵称</span>
                         <input type="text" style="height:25px" class="newUserName" name="newUserName"/><div class="changeNameWarn"></div>
-                        <input class="saveChangeUserName" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie1" type="image" src="../image/UserSet_image/closebtn1.png" />
+                        <input class="saveChangeUserName" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeComplie1" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
@@ -54,8 +55,8 @@
                             <li><div>个人简介</div><textarea type="text" class="userIntroduce" placeholder="请输入个人简介"></textarea></li>
                             <li>注册邮箱<input type="text" class="userEmail" name="userEmail"/></li>
                         </ul>
-                         <input class="saveChangeUserImf" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie2" type="image" src="../image/UserSet_image/closebtn1.png" />
+                         <input class="saveChangeUserImf" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeComplie2" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
@@ -66,8 +67,8 @@
                         <span class="labelName">标签</span><div class="userLabelList"><div class="userLabel">搞笑幽默</div><div class="userLabel">90后</div></div><br/>
                         <span class="addLabelName">你可能感兴趣的标签:</span><div class="addUserLabelList"><div class="addUserLabel">搞笑幽默</div><div class="addUserLabel">90后</div></div>
                         <a class="changeAddLabel">换一换</a>
-                        <input class="saveAddUserLabel" type="image" src="../image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie3" type="image" src="../image/UserSet_image/closebtn1.png" />
+                        <input class="saveAddUserLabel" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input class="closeComplie3" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
