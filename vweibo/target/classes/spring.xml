@@ -22,12 +22,9 @@
 
 	<!-- 注解方式，指定bean可能出现的位置      即扫描bean包 -->
 	<context:component-scan base-package="com.yc.weibo" />
-	<bean id="adminBiz" class="com.yc.weibo.bizImpl.adminBizImpl">
 	
-	</bean>
-	<bean id="adminDao" class="com.yc.weibo.daoImpl.AdminDaoImpl">
-	</bean>
-	
+	<bean id="adminBiz" class="com.yc.weibo.bizImpl.adminBizImpl"></bean>
+	<bean id="userTagBiz" class="com.yc.weibo.bizImpl.UserTagBizImpl"></bean>
 	
 	<!-- 引入外部属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />

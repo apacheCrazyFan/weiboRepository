@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.yc.weibo.biz.AdminBiz;
 
 
-
 public class AdminServlet extends HttpServlet{
 	private static final long serialVersionUID = -8736402111577844390L;
-	@Autowired
 	private AdminBiz adminBiz;
 
 	private PrintWriter out;
 
+	@SuppressWarnings("resource")
 	public void init(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring.xml");
 		adminBiz = (AdminBiz) app.getBean("adminBiz");
