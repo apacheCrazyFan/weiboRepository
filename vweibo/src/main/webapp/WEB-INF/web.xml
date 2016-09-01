@@ -64,7 +64,15 @@
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/admin/login</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.yc.weibo.servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/user/tags</url-pattern>
+  </servlet-mapping>
   
   <!-- 欢迎页面 -->
 	<welcome-file-list>

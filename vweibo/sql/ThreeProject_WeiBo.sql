@@ -19,13 +19,25 @@ create table WeiBoTag(
 --用户标签表
 create table UserTag(
        UTid int primary key,          --用户标签id
-       UTname varchar2(10),           --用户标签名 
+       UTname varchar2(10)          --用户标签名 
                            --   名人:明星 商界 作家 政府官员..
                            --   专家:医疗 育儿 IT互联网 电台 财经 教育.. 
                            --   其他：..
 );
+create or replace sequence seq_ut_utid start with 1 increment by 1;
 
+insert into UserTag values(1,'明星');
+insert into UserTag values(2,'作家');
+insert into UserTag values(3,'政府官员');
 
+insert into UserTag values(seq_ut_utid.nextval,'明星');
+insert into UserTag values(seq_ut_utid.nextval,'作家');
+insert into UserTag values(seq_ut_utid.nextval,'政府官员');
+
+select * from UserTag;
+select seq_ut_utid.nextval from dual;
+
+delete from UserTag where UTid in(4,5,6);
 ----微博用户表
 create table WeiBoUser(
        Uid int,                       --用户Id

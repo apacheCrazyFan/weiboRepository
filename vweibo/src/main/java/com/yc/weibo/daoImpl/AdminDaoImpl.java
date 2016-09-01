@@ -9,7 +9,7 @@ import com.yc.weibo.bean.Admin;
 import com.yc.weibo.dao.AdminDao;
 import com.yc.weibo.dao.DBHelper;
 
-@Component("adminDao")
+@Component
 public class AdminDaoImpl implements AdminDao {
 	
 	@Autowired
