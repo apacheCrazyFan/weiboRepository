@@ -79,6 +79,6 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource" />
 		
-	<!-- 2.配制事务关联 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 2.配制事务关联
+	<tx:annotation-driven transaction-manager="transactionManager" /> -->
 </beans>
