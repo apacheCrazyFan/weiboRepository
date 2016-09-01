@@ -1,0 +1,264 @@
+﻿* {
+	padding: 0px;
+	margin: 0;
+}
+a {
+	text-decoration: none
+}
+body {
+	background: url(../image/UserSet_image/per_imf_bg.jpg) fixed
+}
+#wrap {
+	width: 980px;
+	height: 550px;
+	background: #FAFAFA;
+	margin: 10px auto 20px auto;
+}
+#left {
+	width: 150px;
+	height: 100%;
+	background: url(../image/UserSet_image/per_imf_left_bg.png) repeat-y;
+	float: left
+}
+.idSet {
+	font: 800 12px "宋体";
+	color: #AEAEAE;
+	position: absolute;
+	top: 25px;
+	left: 205px
+}
+#wrap #left ul {
+	list-style: none;
+	position: absolute;
+	top: 50px
+}
+#wrap #left ul .myInfo, .photo, .privacy, .message, .prefer {
+	width: 130px;
+	height: 30px;
+	padding-left: 20px;
+	line-height: 30px;
+	position: relative
+}
+#wrap #left ul li img {
+	height: 21px;
+	width: 21px;
+	position: absolute;
+	top: 5px;
+}
+#wrap #left ul li a {
+	color: #012129;
+	font: 16px "宋体";
+	margin-left: 25px;
+}
+.line1, .line2, .line3 {
+	border-bottom: 1px solid #999;
+	width: 150px;
+}
+.myInfo, .privacy {
+	margin-top: 10px;
+}
+.photo, .prefer {
+	margin-bottom: 10px
+}
+#wrap #left ul .photo:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .privacy:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .message:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .prefer:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+.myInfo {
+	background: #FAFAFA
+}
+.myInfo a {
+	font-weight: bold
+}
+#right {
+	width: 790px;
+	height: 100%;
+	margin: 0 20px;
+	float: left
+}
+#right ul .head_label {
+	display: inline-block;
+	width: 790px;
+	height: 40px;
+	border-bottom: 2px solid red;
+	line-height: 50px;
+	margin-top: 10px;
+	font-family: "宋体";
+	font-weight: bold;
+}
+#right ul .head_label a {
+	font-size: 12px;
+	color: #39F;
+	float: right;
+	font-weight: 100
+}
+#right ul a {
+	color: #000
+}
+#right ul li {
+	display: inline-block;
+	width: 770px;
+	height: 40px;
+	background: #F4F4F4;
+	margin-top: 10px;
+	border: 1px solid #E6E6E6;
+	font: 14px "黑体";
+	line-height: 40px;
+	padding-left: 20px
+}
+#right ul li .span1 {
+	color: #999;
+	margin-left: 100px;
+	font-family: "宋体"
+}
+#right ul li a {
+	font-size: 12px;
+	color: #39F;
+	float: right;
+	font-weight: 100;
+	margin-right: 20px;
+	font-family: "宋体"
+}
+#perName, #perImf, #perLabel, #perIntro {
+	display: block
+}
+#perName1 div {
+	margin-left: 15px;
+	margin-top: 10px;
+	font: 13px "宋体";
+	color: #222
+}
+.oldUserName, .newUserName {
+	margin-left: 12px;
+}
+.saveChangeUserName {
+	margin-bottom: 10px;
+}
+.closeComplie1 {
+	margin-bottom: 10px;
+	margin-left: 5px;
+}
+#perImf1 div ul li {
+	border: none;
+	background: #fff;
+	font: 13px "宋体";
+	color: #222;
+	height: 30px;
+	margin-top: 10px;
+	padding-left: 0;
+}
+#perImf1 div ul .li_mes1 {
+	color: #999;
+}
+.radio_man {
+	margin-left: 40px
+}
+.radio_woman {
+	margin-left: 20px
+}
+.year {
+	margin-left: 40px;
+	width: 70px
+}
+.month, .date {
+	margin-left: 10px;
+	width: 50px
+}
+#perImf1 div ul li div {
+	float: left;
+}
+.closeComplie2 {
+	margin-left: 5px;
+}
+.userIntroduce {
+	margin-left: 15px;
+	width: 200px;
+	height: 55px;
+	font: 13px "宋体"
+}
+.userEmail {
+	width: 200px;
+	height: 30px;
+	margin-left: 15px
+}
+.saveChangeUserImf, .closeComplie {
+	margin-top: 20px
+}
+#perLabel1 div {
+	margin-top: 10px;
+	font: 13px "宋体";
+	color: #222;
+	position: relative;
+}
+.addLabelSpan, .labelName {
+	color: #999
+}
+.userLabelList {
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 640px;
+	padding-bottom: 10px;
+	border: 1px solid #999;
+	float: right;
+	margin-right: 50px;
+}
+.userLabel {
+	width: 70px;
+	height: 20px;
+	border: 1px solid #999;
+	background: url(../image/UserSet_image/icon_miniClose1.png) no-repeat 60px 8px;
+	text-indent: 5px;
+	padding-top: 5px;
+}
+.labelName {
+	position: absolute;
+	left: 20px;
+	top: 30px;
+}
+.addLabelName {
+	position: absolute;
+	left: 55px;
+	top: 120px;
+}
+.addUserLabelList {
+	width: 540px;
+	height: 70px;
+	position: absolute;
+	top: 75px;
+	left: 180px;
+	padding: 1px 10px 10px 10px;
+}
+.addUserLabel {
+	width: 80px;
+	height: 20px;
+	border: 1px solid #999;
+	background: url(../image/UserSet_image/icon_addLabel1.png) no-repeat 65px 8px;
+	text-indent: 5px;
+	padding-top: 5px;
+	white-space: nowrap;
+}
+.changeAddLabel {
+	margin-top: 50px;
+}
+.saveAddUserLabel {
+	position: absolute;
+	top: 200px;
+	left: 25px
+}
+.closeComplie3 {
+	position: absolute;
+	top: 200px;
+	left: 83px
+}

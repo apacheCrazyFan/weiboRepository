@@ -1,0 +1,230 @@
+* {
+	padding: 0px;
+	margin: 0;
+}
+a {
+	text-decoration: none
+}
+body {
+	background: url(../image/UserSet_image/per_imf_bg.jpg) fixed;
+}
+#wrap {
+	width: 980px;
+	height: 650px;
+	background: #FAFAFA;
+	margin: 10px auto 20px auto;
+}
+#left {
+	width: 150px;
+	height: 100%;
+	background: url(../image/UserSet_image/per_imf_left_bg.png) repeat-y;
+	float: left
+}
+.idSet {
+	font-size: 12px;
+	font-family: "宋体";
+	color: #AEAEAE;
+	font-weight: 800;
+	position: absolute;
+	top: 25px;
+	left: 205px
+}
+#wrap #left ul {
+	list-style: none;
+	position: absolute;
+	top: 50px
+}
+#wrap #left ul .myInfo, .photo, .privacy, .message, .prefer {
+	width: 130px;
+	height: 30px;
+	padding-left: 20px;
+	line-height: 30px;
+	position: relative
+}
+#wrap #left ul li img {
+	height: 21px;
+	width: 21px;
+	position: absolute;
+	top: 5px;
+}
+#wrap #left ul li a {
+	text-decoration: none;
+	color: #012129;
+	font: 16px "宋体";
+	margin-left: 25px
+}
+.line1, .line2, .line3 {
+	border-bottom: 1px solid #999;
+	width: 150px;
+}
+.myInfo, .privacy {
+	margin-top: 10px;
+}
+.photo, .prefer {
+	margin-bottom: 10px
+}
+#wrap #left ul .photo:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .myInfo:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .message:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+#wrap #left ul .prefer:hover {
+	background-color: #E6E6E6;
+	width: 128px;
+}
+.privacy {
+	background: #FAFAFA
+}
+.privacy a {
+	font-weight: bold
+}
+#right {
+	width: 790px;
+	height: 100%;
+	margin: 0 20px;
+	float: left
+}
+#right ul .head_label {
+	display: inline-block;
+	width: 790px;
+	height: 40px;
+	border-bottom: 2px solid red;
+	line-height: 50px;
+	margin-top: 10px;
+	font-family: "宋体";
+	font-weight: bold;
+}
+#right ul .head_label a {
+	font-size: 12px;
+	color: #39F;
+	float: right;
+	font-weight: 100
+}
+#right ul a {
+	color: #000
+}
+#right ul li {
+	display: inline-block;
+	width: 770px;
+	height: 40px;
+	background: #F4F4F4;
+	margin-top: 10px;
+	border: 1px solid #E6E6E6;
+	font: 14px/40px "黑体";
+	padding-left: 20px
+}
+#right ul li .span1 {
+	color: #999;
+	margin-left: 100px;
+	font-family: "宋体"
+}
+#right ul li a {
+	font-size: 12px;
+	color: #39F;
+	float: right;
+	font-weight: 100;
+	margin-right: 20px;
+	font-family: "宋体"
+}
+#right ul li div{
+	height:100px;
+	line-height:0;
+	position:relative;
+	margin-top:-5px;
+	}
+.findMeByEmailW,.findMeByNumberW{
+	font:100 12px "宋体";
+	display:inline-block;
+	margin-left:10px;
+	position:absolute;
+	margin-top:15px;
+	
+}
+.findMeByEmail,.findMeByNumber{
+	margin-top:15px;
+	padding-bottom:5px;	
+}
+.saveFindMe,.closeComplie{
+	margin-top:15px;
+}
+.spanFriend{
+	font:100 12px "宋体";
+	color:#999;
+	margin-top:15px; 
+}
+.yesToReco,.noToReco{
+	margin-top:10px;}
+
+.spanLocation{
+	font:100 12px "宋体";
+	color:#999;
+	margin-top:15px; 
+}
+.yesToLoca,.noToLoca{
+	margin-top:10px;
+}
+.yesToRecoW,.noToRecoW,.yesToLocaW,.noToLocaW{
+	font:100 12px "宋体";
+	margin-left:5px;
+}
+.spanBlacklist,.spanPriLetter,.spanGroup,.spanId,.spanKeyword,.spanSource,.spanWeibo{
+	position:absolute;
+	top:10px;
+	color:#999;
+	font:12px "宋体";}
+.howToAddBlack,.howToPriLetter,.howToGroup,.howToId,.howToKeyword,.howToSource,.howToWeibo{
+	position:absolute;
+	top:60px;}
+.addBlack1,.addPriLetter1,.addGroup1,.addId1,.addKeyword1,.addSource1,.addWeibo1{
+	position:absolute;
+	top:80px;
+	color:#999;
+	font:12px "宋体";}
+.addBlack2,.addPriLetter2,.addGroup2,.addId2,.addKeyword2,.addSource2,.addWeibo2{
+	position:absolute;
+	top:100px;
+	color:#999;
+	font:12px "宋体";}
+.pic_blacklist,.pic_priLetter,.pic_Group,.pic_Id,.pic_Keyword,.pic_Source,.pic_Weibo{
+	position:absolute;
+	top:120px;}
+.howToId,.howToKeyword{
+	top:80px;}
+.addId1,.addKeyword1{
+	top:100px;}
+.addId2,.addKeyword2{
+	top:120px;}
+.pic_Id,.pic_Keyword{
+	top:140px;}
+.whatIsSource{
+	font:12px "宋体";}
+.pic_whatIsSource{
+	position:absolute;
+	top:5px;
+	z-index:99;
+	display:none;}
+.spanSource{
+	top:30px;}
+.howToSource{
+	top:120px;}
+.addSource1{
+	top:140px;}
+.addSource2{
+	top:160px;}
+.pic_Source{
+	top:180px;}
+.howToWeibo{
+	top:90px;}
+.addWeibo1{
+	top:110px;}
+.addWeibo2{
+	top:130px;}
+.pic_Weibo{
+	top:150px;}
