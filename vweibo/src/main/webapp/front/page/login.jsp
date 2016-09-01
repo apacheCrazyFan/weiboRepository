@@ -3,15 +3,16 @@
 <!DOCTYPE html >
 <html >
 <head>
-<meta charset="utf-8">
 <base href="/vweibo/">
 <title>登录(Login)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- CSS -->
+
 <link rel="stylesheet" href="front/css/reset.css">
 <link rel="stylesheet" href="front/css/supersized.css">
 <link rel="stylesheet" href="front/css/style.css">
+
 
 </head>
 <body>

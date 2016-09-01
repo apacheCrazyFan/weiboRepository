@@ -1,9 +1,9 @@
 <!Doctype html>
 <html>
 <head>
+<base href="/vweibo/"/>
 <meta charset="utf-8">
 <title>后台管理员登录</title>
-<base href="/vweibo/"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <style type="text/css">
@@ -96,7 +96,7 @@
             	<div class="panel">
                 	<div class="panel-heading login-top">后台管理员登录</div>
                     <div class="panel-body">
-                    	<form class="form-group col-lg-10 col-md-offset-1" action="admin/login" method="post" role="form">
+                    	<form class="form-group col-lg-10 col-md-offset-1" action="admin/login" method="POST" role="form">
                             <br />
                             <div class="input-group">
                             	<label for="uname" class="input-group-addon">管理名</label>
@@ -115,7 +115,7 @@
                             </div> --> 
                             <br/>
                             <div class="input-group">
-                            	<input type="button" value="登陆" class="btn btn-success mybtn"/>
+                            	<input type="submit" value="登陆" class="btn btn-success mybtn"/>
                                 <input type="reset" value="重置" class="btn btn-warning mybtn"/>
                             </div>
                             <br/>

@@ -67,7 +67,7 @@
 	
 	<!-- 	取消所有请求拦截的重定向拦截 -->
 	<!-- 默认静态资源的请求处理 -->
-	<!-- <mvc:default-servlet-handler /> -->
+	<mvc:default-servlet-handler />
 
 	<!-- 控制器驱动处理 --> <!-- 同时要注意这个可以配置我们自己的数据转换 -->
 	<!-- <mvc:annotation-driven /> -->

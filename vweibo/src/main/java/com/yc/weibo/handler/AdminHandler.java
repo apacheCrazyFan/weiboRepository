@@ -17,6 +17,7 @@ public class AdminHandler {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(Admin admin){
+		System.out.println(admin);
 		if(adminService.login(admin)){
 			return "redirect:/back/manager/index.html";
 		}
