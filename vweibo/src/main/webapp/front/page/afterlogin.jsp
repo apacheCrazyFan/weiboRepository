@@ -12,31 +12,25 @@
 </head>
 
 <body id="bg">
-<div id="login-main-head">
-    <div id="logo"></div>
-    <div id="search">
-        <input type="text" id="search-text" placeholder="大家正在搜：定个小目标，先赚个一亿"/>
-        <a href="javascript:void(0)"><img src="front/image/icon_search.png" id="search-icon"/></a>
-    </div>
-    
-    <div id="something" class="headSon">
-        <ul id="headDetail">      
-            <li class="something_a1" style="height:10px;" ><a href="javascript:void(0)" id="changeheaderpng1" onMouseOver="changeheaderimg1('changeheaderpng1')" onMouseOut="changeheaderimgs1('changeheaderpng1')"><img src="front/image/index.png"/></a></li>
-            <li class="something_a2" style="height:10px;"><a href="javascript:void(0)" id="changeheaderpng2" onMouseOver="changeheaderimg2('changeheaderpng2')" onMouseOut="changeheaderimgs2('changeheaderpng2')"><img src="front/image/found.png"/></a></li>
-            <li class="something_a3" style="height:10px;"><a href="javascript:void(0)" id="changeheaderpng3"  onMouseOver="changeheaderimg3('changeheaderpng3')" onMouseOut="changeheaderimgs3('changeheaderpng3')"><img src="front/image/game.png"/></a></li>
-            <li id="weiboname" style="height:0px;"><a href="javascript:void(0)" id="changeheaderpng4"  onMouseOver="changeheaderimg4('changeheaderpng4')" onMouseOut="changeheaderimgs4('changeheaderpng4')"><img src="front/image/people.png"/><span id="username1">王大大大啊aa</span></a></li>
-        </ul> 
-     </div>
-     
-     <div id="MsgAndSetting" class="headSon">
-        <ul class="headDetails" id="headDetails">
-            <li><a href="javascript:void(0)" id="changeheaderpng5" onMouseOver="changeheaderimg5('changeheaderpng5')" onMouseOut="changeheaderimgs5('changeheaderpng5')"><img src="front/image/chat.png"/></a></li>
-            <li><a href="javascript:void(0)" id="changeheaderpng6" onMouseOver="changeheaderimg6('changeheaderpng6')" onMouseOut="changeheaderimgs6('changeheaderpng6')"><img src="front/image/set.png"/></a></li>
-            <li><a href="javascript:void(0)"><img src="front/image/write.png"/></a></li>
-        </ul>
+	<div id="header">
+    	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
+        <div class="searchTextBorder">
+        	<input type="text" class="searchText" placeholder="微微一笑很倾城" onClick="searchClick()" onBlur="searchBlur()"/>
+            <a href="javascript:void(0)" class="search_pic"></a>
         </div>
-    
-</div>
+        <ul>
+        	<li><a href="javascript:void(0)" class="homePage">首页</a></li>
+            <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
+            <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
+            <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
+            <li><a href="javascript:void(0)" class="personPage">巴拉拉</a></li>
+        </ul>
+        <div class="settingArea">
+        	<a href="javascript:void(0)" class="message_pic"></a>
+            <a href="javascript:void(0)" class="setting_pic"></a>
+            <a href="javascript:void(0)" class="sendMess_pic"></a>
+        </div>
+	</div>
 	
 <div id="frame">
 	<div id="left-part">

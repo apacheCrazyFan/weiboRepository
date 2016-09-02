@@ -10,97 +10,142 @@ body {
 	background: url(../image/unloginbg.jpg);
 }
 
-#login-main-head {
-	background-color: #FFF;
-	position: fixed;
-	top: 0px;
-	z-index: 99;
-	width: 1350px;
-	height: 50px;
+#header{
+	width:100%;
+	height:53px;
+	border-top:2px solid red;
+	background:#FFF;
+	opacity:0.95;
+	position:fixed;
+	z-index:999;}
+.head_logo{
+	margin-left:130px;
+	margin-top:5px;}
+.searchTextBorder{
+	width:240px;
+	height:30px;
+	border:1px solid #999;
+	margin-left:280px;
+	margin-top:-40px;
+	background:#F2F2F2;}
+.searchText{
+	width:200px;
+	border:none;
+	background:#f2f2f2;
+	margin-left:10px;
+	margin-top:8px;}
+.search_pic{
+	display:inline-block;
+	width:18px;
+	height:18px;
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	background:url(../image/icon_head_0.png) no-repeat;
+	}
+.search_pic:hover{
+	background:url(../image/icon_head_0_1.png) no-repeat;
 }
-
-#login-main-head #logo {
-	width: 12%;
-	height: 40px;
-	background: url(../image/header_logo1.jpg) no-repeat;
-	float: left;
-	margin-left: 40px;
-	margin-top: 6px;
-	position: relative;
-	left: 88px;
+#header ul li{
+	float:left;
+	margin-left:20px;
 }
+#header ul{
+	position:absolute;
+	left:530px;
+	top:15px;
+	width:530px;
+	height:25px;
+	border-right:1px solid #CCC;}
 
-#login-main-head #search {
-	width: 34%;
-	height: 30px;
-	float: left;
-	margin-left: 50px;
-	background-color: #F2F2F5;
-	margin-top: 11px;
+#header ul li a{
+	font:500 16px "幼圆";
+	color:#666;
+	}
+.homePage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/icon_head_1.jpg) no-repeat;
+	padding-left:26px;
+	padding-top:3px;}
+#header ul li .homePage:hover{
+	color:#F63;
+	background:url(../image/icon_head_1_1.jpg) no-repeat;}
+.videoPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/icon_head_2.jpg) no-repeat;
+	padding-left:31px;
+	padding-top:3px;}
+#header ul li .videoPage:hover{
+	color:#F63;
+	background:url(../image/icon_head_2_1.jpg) no-repeat;}
+.foundPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/icon_head_3.jpg) no-repeat;
+	padding-left:27px;
+	padding-top:3px;
+	}
+#header ul li .foundPage:hover{
+	color:#F63;
+	background:url(../image/icon_head_3_1.jpg) no-repeat;}
+.gamePage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/icon_head_4.jpg) no-repeat;
+	padding-left:29px;
+	padding-top:3px;}
+#header ul li .gamePage:hover{
+	color:#F63;
+	background:url(../image/icon_head_4_1.jpg) no-repeat;}	
+.personPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/icon_head_5.jpg) no-repeat;
+	padding-left:24px;
+	padding-top:3px;}	
+#header ul li .personPage:hover{
+	color:#F63;
+	background:url(../image/icon_head_5_1.jpg) no-repeat;}
+	
+.settingArea{
+	width:260px;
+	height:35px;
+	float:right;}
+.message_pic{
+	display:inline-block;
+	width:21px;
+	height:17px;
+	background:url(../image/icon_head_6.jpg) no-repeat;
+	position:relative;
+	top:-30px;
 }
-
-#login-main-head #search #search-icon {
-	float: right;
-	margin-top: 4px;
-	margin-right: 1%;
-	width: 4%;
-}
-
-#search-text {
-	width: 94%;
-	float: left;
-	margin-left: 0px;
-	height: 30px;
-	border: none;
-	background-color: #F2F2F5;
-}
-
-#search-text:hover {
-	border: solid 1px #FA7D3C;
-}
-
-.something_a1 {
-	float: left;
-	position: relative;
-	left: 30px;
-	top: 15px;
-}
-
-.something_a2 {
-	float: left;
-	position: relative;
-	left: 55px;
-	top: 15px;
-}
-
-.something_a3 {
-	float: left;
-	position: relative;
-	left: 75px;
-	top: 15px;
-}
-
-#weiboname {
-	float: left;
-	position: relative;
-	left: 95px;
-	top: 12px;
-}
-
-#username1 {
-	position: relative;
-	bottom: 5px;
-}
-
-#headDetails li {
-	float: left;
-	position: relative;
-	left: 160px;
-	top: 16px;
-	margin-right: 30px;
-	height: 10px;
-}
-
+.message_pic:hover{
+	width:21px;
+	height:17px;
+	background:url(../image/icon_head_6_1.jpg) no-repeat;}
+.setting_pic{
+	display:inline-block;
+	width:23px;
+	height:20px;
+	background:url(../image/icon_head_7.jpg) no-repeat;
+	margin-left:20px;
+	position:relative;
+	top:-30px;}
+.setting_pic:hover{
+	width:23px;
+	height:20px;
+	background:url(../image/icon_head_7_1.jpg) no-repeat 2px 0px;}
+.sendMess_pic{
+	display:inline-block;
+	width:28px;
+	height:27px;
+	background:url(../image/icon_head_8.jpg) repeat;
+	margin-left:20px;
+	position:relative;
+	top:-30px;
+	}
 #frame {
 	float: left;
 	margin-top: 50px;
