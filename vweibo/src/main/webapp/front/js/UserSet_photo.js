@@ -19,6 +19,3 @@ function changeUpWay(){
 		right1.style.display="none";
 	}	
 }
-
-
-

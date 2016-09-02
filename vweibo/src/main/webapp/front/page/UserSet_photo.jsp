@@ -35,13 +35,13 @@
             <input type="image" id="myPhotoTake"  src="front/image/UserSet_image/takePhoto1.png" style="width:82px;height:30px"><br/>
             <span id="support">仅支持JPG、GIF、PNG格式，文件小于5M。(使用高质量图片，可生成高清头像)</span>
             <div id="picArea">
-                <div id="upPhoto"><video id="video" width="280px" height="280px" autoplay style="margin-left: 20px"></video>
+                <div id="upPhoto"><video id="video" width="220px" height="220px" autoplay style="margin-left: 20px"></video>
                 		
                 </div>
-                <input type="button" id="snaPhoto" value="确定图片">
+                <input type="button" id="snaPhoto" style="margin-left: 100px" value="确定图片">
                 <div id="showPhoto">
                     <span class="attention">您上传的图片将会生成三种尺寸头像，请注意中小尺寸的头像是否清晰。</span>
-                    <div id="photo1"><canvas  width="280px" height="280px" id="photocanvas"></canvas><blockquote class="bigSize">大尺寸头像，180*180像素</blockquote></div>
+                    <div id="photo1"><canvas  width="280px" height="280px" id="photocanvas"></canvas><blockquote class="bigSize">大尺寸头像，220*220像素</blockquote></div>
                     <div id="photo2"><img src="front/image/UserSet_image/defaultPhoto2.png"><blockquote class="centerSize">中尺寸头像50*50像素(自动生成)</blockquote></div>
                     <div id="photo3"><img src="front/image/UserSet_image/defaultPhoto3.png"><blockquote class="smallSize">小尺寸头像30*30像素(自动生成)</blockquote></div>
                 </div>
@@ -64,40 +64,34 @@
         </div>
     </div>
     <script type="text/javascript">
-  
-    	
-    	
-    	var openVideo=document.getElementById("myPhotoTake");
-    	var snaPhoto=document.getElementById("snaPhoto");
-    	var canvas=document.getElementById("photocanvas");
-    	var context=canvas.getContext("2d");
-    	///getContext方法创建一个在画布上绘图的环境，他里面的参数指定了你要绘制的图形类型
-    	var video=document.getElementById("video");
-    	openVideo.addEventListener("click",function(){
-    		navigator.getMedia=(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||  navigator.msGetUserMedia);
-    		navigator.getMedia(
-    			{
-    				video:true,
-    				audio:false	
-    			},
-    			//回调函数
-    			function(localMediaStream){
-    					video.src=window.URL.createObjectURL(localMediaStream);//视频流给video/标签
-    						//对视频的处理方法	
-    			},
-    			function(err){
-    				console.log(err);	
-    			}
-    		); 
-    	});
-    	snaPhoto.addEventListener("click",function(){
-    		context.drawImage(video,0,0,180,280);	
-    	});
-
+  //调用摄像头自拍
+    var openVideo=document.getElementById("myPhotoTake");
+    var snaPhoto=document.getElementById("snaPhoto");
+    var canvas=document.getElementById("photocanvas");
+    var context=canvas.getContext("2d");
+    ///getContext方法创建一个在画布上绘图的环境，他里面的参数指定了你要绘制的图形类型
+    var video=document.getElementById("video");
+    openVideo.addEventListener("click",function(){
+    	navigator.getMedia=(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||  navigator.msGetUserMedia);
+    	navigator.getMedia(
+    		{
+    			video:true,
+    			audio:false	
+    		},
+    		//回调函数
+    		function(localMediaStream){
+    				video.src=window.URL.createObjectURL(localMediaStream);//视频流给video/标签
+    					//对视频的处理方法	
+    		},
+    		function(err){
+    			console.log(err);	
+    		}
+    	); 
+    });
     
-
-    
-    
+    snaPhoto.addEventListener("click",function(){
+    	context.drawImage(video,0,0,220,220);	
+    });
     </script>
 </body>
 </html>
