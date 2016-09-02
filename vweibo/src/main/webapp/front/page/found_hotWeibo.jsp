@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!doctype html>
 <html>
 <head>
@@ -36,20 +38,20 @@
     <div id="wrap">
     	<div id="left">
         	<ul>
-            	<li><a href="#" style="background:#A7B9D3">热门微博</a></li>
-                <li><a href="#">微话题</a></li>
-                <li><a href="#">找人</a></li>
-                <li><a href="#">听歌</a></li>
-                <li><a href="#">视频</a></li>               
-                <li><a href="#">新闻</a></li>
+            	<li><a href="javascript:openAndClose('.found_hot','#hot_right');" class="found_hot" style="background:#A7B9D3">热门微博</a></li>
+                <li><a href="javascript:openAndClose('.found_topic','#topic_right');" class="found_topic">微话题</a></li>
+                <li><a href="javascript:openAndClose('.found_find','#find_right');" class="found_find">找人</a></li>
+                <li><a href="javascript:openAndClose('.found_music','#music_right');" class="found_music">听歌</a></li>
+                <li><a href="javascript:openAndClose('.found_video','#video_right');" class="found_video">视频</a></li>               
+                <li><a href="javascript:openAndClose('.found_news','#news_right');" class="found_news">新闻</a></li>
             </ul>
         </div>
-       	<div id="hot_right"  style="display:none">
+       	<div id="hot_right">
         	<div class="hot_one">
             	<div class="hot_menu">
-                	<a href="#" class="hot_menu_reco">推荐</a>
-                    <a href="#" class="hot_menu_hot">热门微博榜</a>
-                    <a href="#" class="hot_menu_list">分类</a>
+                	<a href="javascript:hotMenuChange(0)" class="hot_menu_0">推荐</a>
+                    <a href="javascript:hotMenuChange(1)" class="hot_menu_1">热门微博榜</a>
+                    <a href="javascript:hotMenuChange(2)" class="hot_menu_2">分类</a>
                 </div>
                 <div class="hot_content">
                 	<div class="hot_content_list"></div>
@@ -65,11 +67,11 @@
                 <div class="hot_two_content"></div>
             </div>
         </div>
-        <div id="topic_right" style="display:none">
+        <div id="topic_right">
         	<div class="topic_one">
             	<div class="topic_time">
-                	<a href="#" class="topic_time_1hour">1小时</a><!--98+2*30+2-->
-                    <a href="#" class="topic_time_24hour">24小时</a>
+                	<a href="javascript:topicMenuChange(1)" class="topic_time_1">1小时</a><!--98+2*30+2-->
+                    <a href="javascript:topicMenuChange(2)" class="topic_time_2">24小时</a>
                 </div>
             	<div class="topic_content">
                 	<div class="topic_content_detail">a</div><!--124-->
@@ -83,10 +85,10 @@
         <div id="find_right">
         	<div class="find_one">
             	<div class="find_menu">
-                	<a href="#" class="find_menu_home">首页</a>
-                    <a href="#" class="find_menu_24hot">24H热门</a>
-                    <a href="#" class="find_menu_reco">推荐关注</a>
-                    <a href="#" class="find_menu_more">更多</a>
+                	<a href="javascript:findMenuChange(0)" class="find_menu_0">首页</a>
+                    <a href="javascript:findMenuChange(1)" class="find_menu_1">24H热门</a>
+                    <a href="javascript:findMenuChange(2)" class="find_menu_2">推荐关注</a>
+                    <a href="javascript:findMenuChange(3)" class="find_menu_3">更多</a>
                     
                 </div>
                 <div class="find_content">
@@ -94,6 +96,51 @@
                     <div class="find_content_detail">c</div>
                     <div class="find_content_detail">c</div>
                     <div class="find_content_detail">c</div>
+                </div>
+            </div>
+        </div>
+        <div id="music_right"><!--▶＞＜-->
+        	<div class="music_one">
+            	<div class="music_menu"><!--图片滚动 660*185-->
+                	
+                </div>
+                <div class="music_content">
+                	<div class="music_content_detail">a</div>
+                    <div class="music_content_detail">a</div>
+                    <div class="music_content_detail">a</div>
+                </div>
+            </div>
+        </div>
+        <div id="video_right">
+        	<div class="video_one">
+            	<div class="video_menu">
+                	<a href="javascript:videoMenuChange(0)" class="video_menu_0">首页</a>
+                    <a href="javascript:videoMenuChange(1)" class="video_menu_1">明星制造</a>
+                    <a href="javascript:videoMenuChange(2)" class="video_menu_2">女神秀</a>
+                    <a href="javascript:videoMenuChange(3)" class="video_menu_3">搞笑创意</a>
+                    <a href="javascript:videoMenuChange(4)" class="video_menu_4">电视剧</a>
+                    <a href="javascript:videoMenuChange(5)" class="video_menu_5">综艺</a>
+                    <a href="javascript:videoMenuChange(6)" class="video_menu_6">动漫</a>
+                </div>
+                <div class="video_content">
+                	<div class="video_content_detail">a</div>
+                    <div class="video_content_detail">a</div>
+                    <div class="video_content_detail">a</div>
+                    <div class="video_content_detail">a</div>
+                </div>
+            </div>
+        </div>
+        <div id="news_right">
+        	<div class="news_one">
+            	<div class="news_content">
+                	<div class="news_content_detail">b</div>
+                    <div class="news_content_detail">b</div>
+                    <div class="news_content_detail">b</div>
+                    <div class="news_content_detail">b</div>
+                    <div class="news_content_detail">b</div>
+                    <div class="news_content_detail">b</div>
+                </div>
+                <div class="news_page">
                 </div>
             </div>
         </div>
