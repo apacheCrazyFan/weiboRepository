@@ -148,7 +148,8 @@ insert into WeiBoUser values(1001,'巴拉拉','sa','15675471040','1373930633@qq.com
 insert into WeiBoUser values(1002,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 insert into WeiBoUser values(1003,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
 insert into WeiBoUser values(1004,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
-
+insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+delete from WeiBoUser where WBUid in (1003,1004);
 --用户之间联系中间表（n ~ n）
 create table Relationship(
        Rid int primary key,           --用户联系id'
@@ -187,7 +188,7 @@ select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
 select * from 　user_constraints;
 select * from 　user_tab_cols;
 
-
+select 
 insert into FanAndFaned values(1001,1002,'好友圈');
 insert into FanAndFaned values(1001,1003,'好友圈');
 insert into FanAndFaned values(1001,1003,'好友圈');

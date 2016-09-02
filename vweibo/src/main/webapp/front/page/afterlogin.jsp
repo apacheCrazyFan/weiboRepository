@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="com.yc.weibo.entity.WeiBoUser" %>
 <!doctype html>
 <html>
 <head>
@@ -11,6 +12,11 @@
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 </head>
 
+<%
+	HttpSession sessions = request.getSession();
+	WeiBoUser user = (WeiBoUser)sessions.getAttribute("user");
+	
+%>
 <body id="bg">
 	<div id="header">
     	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
@@ -23,7 +29,7 @@
             <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
             <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
             <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
-            <li><a href="javascript:void(0)" class="personPage">巴拉拉</a></li>
+            <li><a href="javascript:void(0)" class="personPage"><%=user.getUname() %></a></li>
         </ul>
         <div class="settingArea">
         	<a href="javascript:void(0)" class="message_pic"></a>
