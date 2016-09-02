@@ -9,30 +9,108 @@ insert into Admin values('admin','sa');
 --微博标签表
 create table WeiBoTag(
        WTid int primary key,          --微博标签id
-       WTname varchar2(10),           --微博标签名（字段）
+       WTname varchar2(10)           --微博标签名（字段）
                           --视频 衡阳 社会 国际 科技 科普 数码 财经 股市 明星 综艺 电视剧 
                           --电影 音乐 汽车 体育 运动健身 健康 瘦身 养生 军事 历史 美女模特 
                           --美图 情感 搞笑 辟谣 正能量 艺术 时尚 美妆 动漫 宗教 萌宠 法律
                           --政务 游戏 旅游 育儿 教育 美食 房产 家居 星座 读书 三农 设计
 );
+select * from WeiboTag;
+select wt.*
+from
+select wt.*,rownum rn from WeiboTag wt
+where rn > #{pageSize}*(#{pageNum}-1) and rn <= #{pageSize}*#{pageNum};
+
+select wt.*
+from
+select wt.*,rownum rn from WeiboTag wt
+where rn > 10*(1-1) and rn <= 10*1;
+
+create sequence seq_wbt_wtid start with 11;
+insert into WeiBoTag values(1,'视频');
+insert into WeiBoTag values(2,'衡阳');
+insert into WeiBoTag values(3,'社会');
+insert into WeiBoTag values(4,'国际');
+insert into WeiBoTag values(5,'科技');
+insert into WeiBoTag values(6,'科普');
+insert into WeiBoTag values(7,'数码');
+insert into WeiBoTag values(8,'财经');
+insert into WeiBoTag values(9,'股市');
+insert into WeiBoTag values(10,'明星');
+insert into WeiBoTag values(11,'综艺');
+insert into WeiBoTag values(12,'电视剧');
+insert into WeiBoTag values(13,'电影');
+insert into WeiBoTag values(14,'音乐');
+insert into WeiBoTag values(15,'汽车');
+insert into WeiBoTag values(16,'体育');
+insert into WeiBoTag values(17,'运功健身');
+insert into WeiBoTag values(18,'健康');
+insert into WeiBoTag values(19,'瘦身');
+insert into WeiBoTag values(20,'养生');
+insert into WeiBoTag values(21,'军事');
+insert into WeiBoTag values(22,'历史');
+insert into WeiBoTag values(23,'美女模特');
+insert into WeiBoTag values(24,'美图');
+insert into WeiBoTag values(25,'情感');
+insert into WeiBoTag values(26,'搞笑');
+insert into WeiBoTag values(27,'辟谣');
+insert into WeiBoTag values(28,'正能量');
+insert into WeiBoTag values(29,'艺术');
+insert into WeiBoTag values(30,'时尚');
+insert into WeiBoTag values(31,'美妆');
+insert into WeiBoTag values(32,'动漫');
+insert into WeiBoTag values(33,'宗教');
+insert into WeiBoTag values(34,'萌宠');
+insert into WeiBoTag values(35,'法律');
+insert into WeiBoTag values(36,'政务');
+insert into WeiBoTag values(37,'游戏');
+insert into WeiBoTag values(38,'旅游');
+insert into WeiBoTag values(39,'育儿');
+insert into WeiBoTag values(40,'教育');
+insert into WeiBoTag values(41,'美食');
+insert into WeiBoTag values(42,'房产');
+insert into WeiBoTag values(43,'家居');
+insert into WeiBoTag values(44,'星座');
+insert into WeiBoTag values(45,'读书');
+insert into WeiBoTag values(46,'三农');
+insert into WeiBoTag values(47,'设计');
+
+create table UserTagFather(
+	UTFid int primary key,    --用户标签父类表
+	UTFname varchar2(20)
+);
+insert into UserTagFather values(1,'名人');
+insert into UserTagFather values(2,'专家');
+insert into UserTagFather values(3,'其他');
 
 --用户标签表
 create table UserTag(
        UTid int primary key,          --用户标签id
-       UTname varchar2(10)          --用户标签名 
-                           --   名人:明星 商界 作家 政府官员..
+       UTname varchar2(20),          --用户标签名 
+       UTFid int references UserTagFather(UTFid)              
+       					   --   名人:明星 商界 作家 政府官员..
                            --   专家:医疗 育儿 IT互联网 电台 财经 教育.. 
                            --   其他：..
 );
 create or replace sequence seq_ut_utid start with 1 increment by 1;
 
-insert into UserTag values(1,'明星');
-insert into UserTag values(2,'作家');
-insert into UserTag values(3,'政府官员');
+insert into UserTag values(1,'明星',1);
+insert into UserTag values(2,'作家',1);
+insert into UserTag values(3,'政府官员',1);
+insert into UserTag values(4,'商界',1);
 
-insert into UserTag values(seq_ut_utid.nextval,'明星');
-insert into UserTag values(seq_ut_utid.nextval,'作家');
-insert into UserTag values(seq_ut_utid.nextval,'政府官员');
+insert into UserTag values(5,'医疗',2);
+insert into UserTag values(6,'育儿',2);
+insert into UserTag values(7,'IT互联网',2);
+insert into UserTag values(8,'电台',2);
+insert into UserTag values(9,'财经',2);
+insert into UserTag values(10,'教育',2);
+
+insert into UserTag values(11,'保姆',3);
+
+--insert into UserTag values(seq_ut_utid.nextval,'明星');
+--insert into UserTag values(seq_ut_utid.nextval,'作家');
+--insert into UserTag values(seq_ut_utid.nextval,'政府官员');
 
 select * from UserTag;
 select seq_ut_utid.nextval from dual;
