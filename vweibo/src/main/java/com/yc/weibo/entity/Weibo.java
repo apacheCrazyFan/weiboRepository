@@ -14,8 +14,14 @@ public class Weibo {
      private String WBvideo; 	//	--可能存在的视频路径
      private String WBmusic;	//可能存在的音乐路径
      
+     private boolean yesOrno;	//是否是话题产生的
      
-     
+	public boolean isYesOrno() {
+		return yesOrno;
+	}
+	public void setYesOrno(boolean yesOrno) {
+		this.yesOrno = yesOrno;
+	}
 	public int getWBid() {
 		return WBid;
 	}
@@ -70,13 +76,14 @@ public class Weibo {
 	public void setWBmusic(String wBmusic) {
 		WBmusic = wBmusic;
 	}
-	
 	@Override
 	public String toString() {
 		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", UId=" + UId + ", WBdate="
 				+ WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic=" + WBmusic
-				+ "]";
+				+ ", yesOrno=" + yesOrno + "]";
 	}
+	
+	
      
      
 }

@@ -123,15 +123,15 @@ delete from UserTag where UTid in(4,5,6);
 ----微博用户表
 select * from WeiBoUser;
 create table WeiBoUser(
-       Uid int,                       --用户Id  √
-       Uname varchar2(20),            --用户名 	√
-       Upassword varchar2(20),        --用户密码	√
-       Uphone varchar2(11),           --用户手机号码	√
-       Uemail varchar2(40),           --用户注册邮箱	√
-       Usex char(2) default 'male',   --用户性别		√
-       Uage int,                      --用户年龄		√
-       UimgPath varchar2(100),        --用户图像路径	√
-       UregisterDate Data,            --注册日期		√
+       WBUid int,                       --用户Id  √
+       Uname varchar2(20),            --用户名   √
+       Upassword varchar2(20),        --用户密码  √
+       Uphone varchar2(11),           --用户手机号码  √
+       Uemail varchar2(40),           --用户注册邮箱  √
+       Usex char(2) default 'm',   --用户性别    √
+       Uage int,                      --用户年龄    √
+       UimgPath varchar2(100),        --用户图像路径  √
+       UregisterDate Date,            --注册日期    √
        
        Uxxxx  varchar2(100),   --预留字段
        Uzzzz  varchar2(100),   --预留字段
@@ -142,6 +142,13 @@ create table WeiBoUser(
        Uscore number(8),              --用户积分（用来计算vip等级）				√
        UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
+alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
+select * from WeiBOUser;
+insert into WeiBoUser values(1001,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
+insert into WeiBoUser values(1002,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1003,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
+insert into WeiBoUser values(1004,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+
 --用户之间联系中间表（n ~ n）
 create table Relationship(
        Rid int primary key,           --用户联系id'
@@ -168,24 +175,73 @@ create table BlackList(
 );
 --粉与被粉（关注与被关注）
 create table FanAndFaned(
-	Fid int primary key,				--粉与被粉id
-	Uid int references WeiBoUser(Uid),	--粉丝者
-	FUid int,							--被粉者
+	FUid int,							--粉丝者 现在是测试 主外键的问题先放一边
+	FUedid int,							--被粉者
 	Fstatus varchar2(16)				--粉与被粉之间的py状态(好友圈,同学,同事,未分组,名人明星,悄悄关注,特别关注,其他自己添加的。。)
 );
+alter table FanAndFaned drop constraint pk_faf_fff;
+alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
+drop table FanAndFaned;
+select * from FanAndFaned;
+select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
+select * from 　user_constraints;
+select * from 　user_tab_cols;
+
+
+insert into FanAndFaned values(1001,1002,'好友圈');
+insert into FanAndFaned values(1001,1003,'好友圈');
+insert into FanAndFaned values(1001,1003,'好友圈');
+insert into FanAndFaned values(1001,1004,'好友圈');
+insert into FanAndFaned values(1001,1005,'好友圈');
+insert into FanAndFaned values(1001,1006,'好友圈');
+
+insert into FanAndFaned values(1002,1001,'好友圈');
+insert into FanAndFaned values(1002,1003,'好友圈');
+insert into FanAndFaned values(1002,1004,'好友圈');
+insert into FanAndFaned values(1002,1005,'好友圈');
+
+insert into FanAndFaned values(1001,1002,'同学');
+insert into FanAndFaned values(1001,1003,'同学');
+insert into FanAndFaned values(1001,1004,'同学');
+insert into FanAndFaned values(1001,1005,'同学');
+insert into FanAndFaned values(1001,1006,'同学');
+insert into FanAndFaned values(1001,1007,'同学');
+insert into FanAndFaned values(1001,1008,'同学');
+insert into FanAndFaned values(1001,1009,'同学');
+insert into FanAndFaned values(1001,1010,'同学');
+
+insert into FanAndFaned values(1001,1007,'未分组');
+insert into FanAndFaned values(1001,1008,'未分组');
+insert into FanAndFaned values(1001,1009,'未分组');
+insert into FanAndFaned values(1001,1010,'未分组');
+
 --首先话题是可以放在微博里发表的
 --所以说话题可以是微博的一个附属
 --话题表
 create table Theme(
 	Tid int primary key,					--话题id
 	Tname varchar2(40),						--话题标题
-	Uid int references WeiBoUser(Uid), 		--话题发起人
+	TUid int, 								--话题发起人
 	Tdate Date,								--话题发起时间
 	Ttxt clob,								--话题的文本内容
 	Tpics varchar2(540),					--话题图片路径
+	Tdeliver int,							--话题被发表的次数
 	Tview int								--话题访问次数
 );	
-
+insert into Theme values(1,'#前任来撩约不约#',1001,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1000,20000);
+insert into Theme values(2,'#反贪风暴2提档914#',1002,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1100,21000);
+insert into Theme values(3,'#李云迪西藏捐音乐教室#',1002,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1200,22000);
+insert into Theme values(4,'#窦靖童七月与安生#',1003,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1300,23000);
+insert into Theme values(5,'#一图读懂#',1003,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1400,24000);
+insert into Theme values(6,'#法医每天#',1003,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1500,25000);
+insert into Theme values(7,'#三叠物种记录#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1600,26000);
+insert into Theme values(8,'#天象预报#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1700,27000);
+insert into Theme values(9,'#倾城夫妇情话满级#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
+insert into Theme values(10,'#超女冠军方圆#',1004,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1400,24000);
+insert into Theme values(11,'#开学第二天吓死人了#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1500,25000);
+insert into Theme values(12,'#杨美娜百万身价#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1600,26000);
+insert into Theme values(13,'#郭俊辰北影报到#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1700,27000);
+insert into Theme values(14,'#故事里的旧时光#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
 
 
 
@@ -194,15 +250,26 @@ create table WeiBo(
        WBid int primary key,          --微博id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
-       UId int
-           constraint RK_WeiBo_Uid references WeiBoUser(Uid),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
+       WBUId int
+           constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
        WBtxt  clob,                   --微博文字内容
        WBpic  varchar2(500),          --微博图片路径
-       WBvideo blob                  --微博视屏(或者给个视屏路径，存本地，存数据库？存服务器？)
-       
+       WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
+       WBmusic varchar2(500),		  --微博音乐路径
+       yesOrno char(2)				  --是否是话题产生的weibo						
        --预留字段      
 );
+
+insert into WeiBo values(101,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N');
+insert into WeiBo values(102,'视频','大鸭子',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');
+insert into WeiBo values(103,'衡阳','湖工',1001,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N');
+insert into WeiBo values(104,'军事','中日战争',1001,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'N');
+
+insert into WeiBo values(105,'视频','大鸭子',1002,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');
+insert into WeiBo values(106,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N');
+insert into WeiBo values(107,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y');
+
 --微博附加表
 create table WeiBoHelp(
        WHid int primary key,          --微博追加表id'            
