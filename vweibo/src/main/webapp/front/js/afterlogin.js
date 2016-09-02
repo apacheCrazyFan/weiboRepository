@@ -58,54 +58,24 @@ $(document).ready(function(){
 });
 
 
-//改变导航栏的图片颜色
-function changeheaderimg1(id){
-	document.getElementById(id).innerHTML='<img src="image/index2.png"/>';
+//改变导航栏的颜色
+function searchClick(){
+	$('.searchTextBorder').css('border-color','red');	
+	$('.searchTextBorder').css('background','#fff');
+	$('.searchText').css('background','#fff');
 }
-function changeheaderimgs1(id){
-	document.getElementById(id).innerHTML='<img src="image/index.png"/>'
+function searchBlur(){
+	$('.searchTextBorder').css('border-color','#999');	
+	$('.searchTextBorder').css('background','#f2f2f2');
+	$('.searchText').css('background','#f2f2f2     ');
 }
-
-function changeheaderimg2(id){
-	document.getElementById(id).innerHTML='<img src="image/found2.png"/>';
-}
-function changeheaderimgs2(id){
-	document.getElementById(id).innerHTML='<img src="image/found.png"/>'
-}
-
-function changeheaderimg3(id){
-	document.getElementById(id).innerHTML='<img src="image/game2.png"/>';
-}
-function changeheaderimgs3(id){
-	document.getElementById(id).innerHTML='<img src="image/game.png"/>'
-}
-
-function changeheaderimg4(id){
-	document.getElementById(id).innerHTML='<img src="image/people2.png"/><span id="username1" style="color:red">王大大大啊aa</span>';
-}
-function changeheaderimgs4(id){
-	document.getElementById(id).innerHTML='<img src="image/people.png"/><span id="username1">王大大大啊aa</span>'
-}
-function changeheaderimg5(id){
-	document.getElementById(id).innerHTML='<img src="image/chat2.png"/>';
-}
-function changeheaderimgs5(id){
-	document.getElementById(id).innerHTML='<img src="image/chat.png"/>'
-}
-function changeheaderimg6(id){
-	document.getElementById(id).innerHTML='<img src="image/set2.png"/>';
-}
-function changeheaderimgs6(id){
-	document.getElementById(id).innerHTML='<img src="image/set.png"/>'
-}
-
 
 //改变颜色 换图片
 function changecolor(){
-	document.getElementById("nav-icon").innerHTML='<img src="image/navigation-iconin.png"/>';
+	document.getElementById("nav-icon").innerHTML='<img src="front/image/navigation-iconin.png"/>';
 }
 function changecolors(){
-	document.getElementById("nav-icon").innerHTML='<img src="image/navigation_icon.png"/>';
+	document.getElementById("nav-icon").innerHTML='<img src="front/image/navigation_icon.png"/>';
 }
 
 //开始隐藏div
@@ -141,11 +111,11 @@ function hidediv(){
 
 
 function changecentercolor(id){
-	document.getElementById(id).innerHTML='<img src="image/conter-part_wayimg02.png"/>';
+	document.getElementById(id).innerHTML='<img src="front/image/conter-part_wayimg02.png"/>';
 }
 
 function changecentercolors(id){
-	document.getElementById(id).innerHTML='<img src="image/conter-part_wayimg01.png"/>';
+	document.getElementById(id).innerHTML='<img src="front/image/conter-part_wayimg01.png"/>';
 }
 
 function showcenterhidediv(id){
@@ -185,8 +155,8 @@ function changesupersearch(num){
 
 
 function superdivcloseimg2(id){
-	document.getElementById(id).innerHTML='<img src="image/superdivclose2.png" id="closepng">';
+	document.getElementById(id).innerHTML='<img src="front/image/superdivclose2.png" id="closepng">';
 }
 function superdivcloseimg(id){
-	document.getElementById(id).innerHTML='<img src="image/superdivclose.png" id="closepng">';
+	document.getElementById(id).innerHTML='<img src="front/image/superdivclose.png" id="closepng">';
 }

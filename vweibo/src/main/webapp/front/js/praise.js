@@ -1,46 +1,16 @@
 // JavaScript Document
 
-//改变导航栏的图片颜色
-function changeheaderimg1(id){
-	document.getElementById(id).innerHTML='<img src="front/image/index2.png"/>';
-	}
-function changeheaderimgs1(id){
-	document.getElementById(id).innerHTML='<img src="front/image/index.png"/>'
-	}
-	
-function changeheaderimg2(id){
-	document.getElementById(id).innerHTML='<img src="front/image/found2.png"/>';
-	}
-function changeheaderimgs2(id){
-	document.getElementById(id).innerHTML='<img src="front/image/found.png"/>'
-	}
-
-function changeheaderimg3(id){
-	document.getElementById(id).innerHTML='<img src="front/image/game2.png"/>';
-	}
-function changeheaderimgs3(id){
-	document.getElementById(id).innerHTML='<img src="front/image/game.png"/>'
-	}
-	
-function changeheaderimg4(id){
-	document.getElementById(id).innerHTML='<img src="front/image/people2.png"/><span id="username1" style="color:red">王大大大啊aa</span>';
-	}
-function changeheaderimgs4(id){
-	document.getElementById(id).innerHTML='<img src="front/image/people.png"/><span id="username1">王大大大啊aa</span>'
-	}
-function changeheaderimg5(id){
-	document.getElementById(id).innerHTML='<img src="front/image/chat2.png"/>';
-	}
-function changeheaderimgs5(id){
-	document.getElementById(id).innerHTML='<img src="front/image/chat.png"/>'
-	}
-function changeheaderimg6(id){
-	document.getElementById(id).innerHTML='<img src="front/image/set2.png"/>';
-	}
-function changeheaderimgs6(id){
-	document.getElementById(id).innerHTML='<img src="front/image/set.png"/>'
-	}
-
+//改变导航栏的颜色
+function searchClick(){
+	$('.searchTextBorder').css('border-color','red');	
+	$('.searchTextBorder').css('background','#fff');
+	$('.searchText').css('background','#fff');
+}
+function searchBlur(){
+	$('.searchTextBorder').css('border-color','#999');	
+	$('.searchTextBorder').css('background','#f2f2f2');
+	$('.searchText').css('background','#f2f2f2     ');
+}
 
 
 function showcenterhidediv(id){
