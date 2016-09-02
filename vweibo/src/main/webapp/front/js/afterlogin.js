@@ -23,8 +23,18 @@ $(document).ready(function(){
 			num++;  
 		}  
 	});  
-});  
+});
+  
+//计算中文字符
+function byteLength(str) {
+	var byteLen = 0, len = str.length;
+	if (!str)
+		return 0;
+	for (var i = 0; i < len; i++)
+		byteLen += str.charCodeAt(i) > 255 ? 1 : 1;
 
+	return byteLen;
+}
 
 //微博输入框
 $(document).ready(function(){   
@@ -32,12 +42,12 @@ $(document).ready(function(){
 	var str;
 
 	//键盘监听事件
-	txt.addEventListener("keypress",function(){
-		str=txt.value;
-		if(str.length>139){
-			document.getElementById("s2").innerHTML='<span style="color:#666">已经超出了'+(str.length-139)+'个字</span>';	
+	txt.addEventListener("keyup",function(){
+		str=byteLength(txt.value);
+		if(str>140){
+			document.getElementById("s2").innerHTML='<span style="color:#666">已经超出了'+(str-140)+'个字</span>';	
 		}else{
-			document.getElementById("s2").innerHTML='<span style="color:#666">您还可以输入'+(139-str.length)+'个字</span>';	
+			document.getElementById("s2").innerHTML='<span style="color:#666">您还可以输入'+(140-str)+'个字</span>';	
 		}
 	});
 
@@ -69,6 +79,14 @@ function searchBlur(){
 	$('.searchTextBorder').css('background','#f2f2f2');
 	$('.searchText').css('background','#f2f2f2     ');
 }
+
+//改变微博输入框下小图标的颜色
+function changemoreimg(){
+	document.getElementById("moreimg").innerHTML='<img src="front/image/write_img6_1.png"/>'
+	}
+function changemoreimgs(){
+	document.getElementById("moreimg").innerHTML='<img src="front/image/write_img6.png"/>'
+	}
 
 //改变颜色 换图片
 function changecolor(){
@@ -104,6 +122,7 @@ function changeword2(){
 function changeword3(){
 	document.getElementById("aa").innerHTML=document.getElementById("choose4").innerHTML;	
 }
+
 //换完权限后隐藏div
 function hidediv(){
 	document.getElementById("choose").style.display='none';
@@ -153,10 +172,124 @@ function changesupersearch(num){
 	}
 }
 
-
+//高级搜索关闭图片变颜色
 function superdivcloseimg2(id){
 	document.getElementById(id).innerHTML='<img src="front/image/superdivclose2.png" id="closepng">';
 }
 function superdivcloseimg(id){
 	document.getElementById(id).innerHTML='<img src="front/image/superdivclose.png" id="closepng">';
+}
+
+//取消键关闭添加标签
+function closecollectiondiv(id){
+	var cancelbtn2=document.getElementById(id);
+	if(cancelbtn2){
+		if(cancelbtn2.style.display=='block'){
+			cancelbtn2.style.display='none';
+		}else{
+			cancelbtn2.style.display='block';
+		}
+	}
+}
+
+//取消键关闭添加标签(jquery)
+/*function closecollectiondiv(id){
+	var cancelbtn2=$('.'+id);
+	if(cancelbtn2.is(":visible")){
+		if(cancelbtn2.is(":visible")){
+			cancelbtn2.hide();
+			}else{
+				cancelbtn2.show();
+			}
+	}
+}*/
+
+
+//控制添加标签栏的可见
+function addcollectiondiv(id){
+	var tips2=document.getElementById(id);
+	if(tips2){
+		if(tips2.style.display=='block'){
+			tips2.style.display='none';
+		}else{
+			tips2.style.display='block';
+		}
+	}
+}
+
+//close图标改变颜色
+function collectiondivcloseimg2(id){
+	document.getElementById(id).innerHTML='<img src="front/image/superdivclose2.png" id="colle_closepng">';
+}
+function collectiondivcloseimg(id){
+	document.getElementById(id).innerHTML='<img src="front/image/superdivclose.png" id="colle_closepng">';
+}
+//colse图标关闭div
+function changecollectionsearch(id){
+	var cancelbtn3=document.getElementById(id);
+	if(cancelbtn3){
+		if(cancelbtn3.style.display=='block'){
+			cancelbtn3.style.display='none';
+		}else{
+			cancelbtn3.style.display='block';
+		}
+	}
+}
+
+//close图标改变颜色
+function transmitdivcloseimg2(id){
+	document.getElementById(id).innerHTML='<img src="front/image/superdivclose2.png" id="colle_closepng">';
+}
+function transmitdivcloseimg(id){
+	document.getElementById(id).innerHTML='<img src="front/image/superdivclose.png" id="colle_closepng">';
+}
+//colse图标关闭div
+function changetransmitsearch(id){
+	var cancelbtn3=document.getElementById(id);
+	if(cancelbtn3){
+		if(cancelbtn3.style.display=='block'){
+			cancelbtn3.style.display='none';
+		}else{
+			cancelbtn3.style.display='block';
+		}
+	}
+}
+
+//转发  选择完权限后隐藏div 
+function hidetransmitdiv(id){
+	document.getElementById(id).style.display='none';
+}
+//转发   点击公开出现隐藏的div
+function showhidetransmitdiv(id){
+	var sbtitle=document.getElementById(id);
+	if(sbtitle){
+		if(sbtitle.style.display=='block'){
+			sbtitle.style.display='none';
+		}else{
+			sbtitle.style.display='block';
+		}
+	}
+}
+//控制添加标签栏的可见
+function addtransmitdiv(id){
+	var tips2=document.getElementById(id);
+	if(tips2){
+		if(tips2.style.display=='block'){
+			tips2.style.display='none';
+		}else{
+			tips2.style.display='block';
+		}
+	}
+}
+
+//控制添加标签栏的可见
+function addcommentdiv(id){
+	var tips2=document.getElementById(id);
+	if(tips2){
+		if(tips2.style.display=='block'){
+			tips2.style.display='none';
+		}else{
+			tips2.style.display='block';
+		}
+	}
 }
