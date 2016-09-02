@@ -1,0 +1,327 @@
+* {
+	padding: 0px;
+	margin: 0 auto;
+}
+a {
+	text-decoration: none
+}
+li{
+	list-style:none;
+	}
+body {
+	background: url(../image/found_image/found_bg.jpg) fixed
+}
+#header{
+	width:100%;
+	height:53px;
+	border-top:2px solid red;
+	background:#FFF;
+	opacity:0.95;
+	position:fixed;
+	z-index:999;}
+.head_logo{
+	margin-left:130px;
+	margin-top:5px;}
+.searchTextBorder{
+	width:240px;
+	height:30px;
+	border:1px solid #999;
+	margin-left:280px;
+	margin-top:-40px;
+	background:#F2F2F2;}
+.searchText{
+	width:200px;
+	border:none;
+	background:#f2f2f2;
+	margin-left:10px;
+	margin-top:8px;}
+.search_pic{
+	display:inline-block;
+	width:18px;
+	height:18px;
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	background:url(../image/found_image/icon_head_0.png) no-repeat;
+	}
+.search_pic:hover{
+	background:url(../image/found_image/icon_head_0_1.png) no-repeat;
+}
+#header ul li{
+	float:left;
+	margin-left:20px;
+}
+#header ul{
+	position:absolute;
+	left:530px;
+	top:15px;
+	width:530px;
+	height:25px;
+	border-right:1px solid #CCC;}
+
+#header ul li a{
+	font:500 16px "幼圆";
+	color:#666;
+	}
+.homePage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_1.jpg) no-repeat;
+	padding-left:26px;
+	padding-top:3px;}
+#header ul li .homePage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_1_1.jpg) no-repeat;}
+.videoPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_2.jpg) no-repeat;
+	padding-left:31px;
+	padding-top:3px;}
+#header ul li .videoPage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_2_1.jpg) no-repeat;}
+.foundPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_3.jpg) no-repeat;
+	padding-left:27px;
+	padding-top:3px;
+	}
+#header ul li .foundPage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_3_1.jpg) no-repeat;}
+.gamePage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_4.jpg) no-repeat;
+	padding-left:29px;
+	padding-top:3px;}
+#header ul li .gamePage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_4_1.jpg) no-repeat;}	
+.personPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_5.jpg) no-repeat;
+	padding-left:24px;
+	padding-top:3px;}	
+#header ul li .personPage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_5_1.jpg) no-repeat;}
+	
+.settingArea{
+	width:260px;
+	height:35px;
+	float:right;}
+.message_pic{
+	display:inline-block;
+	width:21px;
+	height:17px;
+	background:url(../image/found_image/icon_head_6.jpg) no-repeat;
+	position:relative;
+	top:-30px;
+}
+.message_pic:hover{
+	width:21px;
+	height:17px;
+	background:url(../image/found_image/icon_head_6_1.jpg) no-repeat;}
+.setting_pic{
+	display:inline-block;
+	width:23px;
+	height:20px;
+	background:url(../image/found_image/icon_head_7.jpg) no-repeat;
+	margin-left:20px;
+	position:relative;
+	top:-30px;}
+.setting_pic:hover{
+	width:23px;
+	height:20px;
+	background:url(../image/found_image/icon_head_7_1.jpg) no-repeat 2px 0px;}
+.sendMess_pic{
+	display:inline-block;
+	width:28px;
+	height:27px;
+	background:url(../image/found_image/icon_head_8.jpg) repeat;
+	margin-left:20px;
+	position:relative;
+	top:-30px;
+	}
+#logoArea{
+	width:1100px;
+	height:90px;
+	position:relative;
+	top:55px;}
+.logo1{
+	position:absolute;
+	top:0px;}
+.logo2{
+	position:absolute;
+	left:55px;}
+
+#wrap{
+	position:relative;
+	top:55px;
+	width:1100px;
+	background-color:#A7ADBE;
+	opacity:0.8;
+	min-height:600px;
+	height:auto;
+	}
+#left{
+	width:165px;
+	height:300px;
+	float:left;
+	}
+#left ul{
+	margin-top:18px;
+	height:240px;
+	border-bottom:1px solid #A7B9D3;}
+#left ul li a{
+	display:inline-block;
+	padding-left:15px;
+	padding-top:10px;
+	width:150px;
+	height:30px;
+	color:#fff;
+	font:800 16px "黑体";}
+#left ul li a:hover{
+	background:#A7B9D3;}
+	
+#footer{
+	height:318px;
+	width:100%;
+	background:#CCC;
+	position:relative;
+	top:55px;
+	opacity:0.5}
+
+
+.hot_one{
+	position:relative;
+	left:-55px;
+	width:660px;
+	padding-top:17px;
+}
+.hot_two{
+	float:right;
+	width:253px;
+	position:absolute;
+	top:17px;
+	right:12px;
+	background:#FFF;
+	height:300px;
+	border:1px solid #999;
+	border-radius:3px;
+}
+.hot_menu{
+	width:658px;
+	height:42px;
+	background:#FFF;
+	border:1px solid #999;
+	border-radius: 3px;	
+}
+.hot_menu a{
+	color:#000;}
+.hot_menu_reco,.hot_menu_hot,.hot_menu_list{
+	display:inline-block;
+	font-size:14px;
+	height:30px;
+	margin-left:20px;
+	padding-top:10px;
+}
+
+.hot_content_detail{
+	width:659px;
+	height:300px;
+	background:#FFF;
+	border:1px solid #999;
+	border-radius:3px;
+	margin-top:10px;}
+.hot_content_list{
+	width:658px;
+	min-height:200px;
+	height:auto;
+	background:#fff;
+	border-left:1px solid #999;
+	border-right:1px solid #999;
+	border-bottom:1px solid #999;
+	border-radius:3px;}
+	
+.hot_two_head{
+	padding-top:10px;
+	padding-left:15px;
+	height:31px;
+	font: bold 15px "黑体";
+	border-bottom:1px solid #f3f3f3;}
+	
+
+#topic_right{
+	padding-top:17px;}
+.topic_one{
+	position:relative;
+	left:-55px;
+	width:660px;
+	background:#fff;
+	border:1px solid #999;
+	border-radius:3px;
+}
+.topic_time{
+	width:658px;
+	height:50px;
+}
+.topic_time_1hour,.topic_time_24hour{
+	display:inline-block;
+	margin-top:13px;
+	color:#000;
+	width:98px;
+	height:30px;
+	border:1px solid #999;
+	text-align:center;
+	line-height:25px;}
+.topic_time_1hour{
+	margin-left:228px;}
+.topic_time_24hour{
+	margin-left:-6px;}
+.topic_content_detail{
+	width:658px;
+	height:124px;
+	border-bottom:1px solid #999;}
+.topic_page{
+	width:658px;
+	height:36px;}
+
+#find_right{
+	padding-top:17px;}
+.find_one{
+	position:relative;
+	left:-55px;
+	width:660px;
+}
+.find_menu{
+	width:658px;
+	height:40px;
+	line-height:40px;
+	border:1px solid #999;
+	border-radius:3px;
+	background:#FFF;}
+.find_menu a{
+	color:#000;
+	font-size:14px;
+	margin-left:20px;
+	height:38px;}
+.find_menu_list{
+	width:658px;
+	min-height:100px;
+	height:auto;
+	border:1px solid #999;
+	border-radius:3px;
+	background:#FFF;
+	margin-top:-1px;}
+.find_content_detail{
+	width:658px;
+	height:300px;
+	border:1px solid #999;
+	border-radius:3px;
+	background:#FFF;
+	margin-top:10px;}
