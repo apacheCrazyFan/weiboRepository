@@ -36,6 +36,7 @@
 					editRow=undefined;
 				}else{
 					var data = obj.datagrid("getData");
+					console.info(data);
 					var total = data.total;
 					var Jstring = JSON.stringify(data);
 					obj.datagrid('insertRow',{index:total,row:{}});
@@ -73,18 +74,18 @@
 			onClick:function(){
 			//获取选中的行
 				var rows=obj.datagrid("getChecked");
-				
+				alert(typeof rows[0].wtid);
 				if(rows[0]!=undefined){
 					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有微博）?', function(rs){
 						if (rs){
-							var tids="";
+							var wtids = "";
 							for(var i=0;i<rows.length-1;i++){
-								tids += rows[i].UTid+",";
+								wtids += rows[i].wtid+",";
 							}
-							tids += rows[i].UTid;
+							wtids += rows[i].wtid;
 							
 							//发请求到数据库
-							$.post("weibotag/delWeiboTag",{tids:tids},function(data){
+							$.post("weibotag/delWeiboTag",{"wtids":wtids},function(data){
 								alert(data);
 								if(data>0){
 									$.messager.show({title:'成功提示',msg:'微博标签删除成功....',timeout:2000,showType:'slide'});
@@ -121,10 +122,10 @@
 				}else{
 					//保存到数据库
 					//rows["op"]=currentOp;
-					var tid=$(rows).attr("UTid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
+					var wtid=$(rows).attr("wtid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
 					//jquery对象--》js对象    ===》1、$("#div").eq(0);  2、$("#div")[0]    
 					//alert(rows);
-					var tname=$(rows).attr("UTname");
+					var wtname=$(rows).attr("wtname");
 					//   $.post("url","data",function(data));//jquery中封装的post的方法
 						//url：请求的地址，不需要拼接参数，因为是用post提交的
 						//data：可以传一个js对象，但实际上是一个json的数据格式的字符串即可
@@ -132,7 +133,7 @@
 						//function（data)    :  回调的函数
 					//alert(rows);
 					//rows=$(rows);
-					$.post("weibotag/"+currentOp,{"tid":tid,"tname":tname},function(data){
+					$.post("weibotag/"+currentOp,{"wtid":wtid,"wtname":wtname},function(data){
 						alert(data);
 						if(data>0){
 							$.messager.show({

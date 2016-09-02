@@ -1,11 +1,9 @@
 package com.yc.weibo.handler;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +27,10 @@ public class WeiboTagHandler {
 		map.put("pageNum", page);
 		
 		List<WeiboTag> wts  = weiboTagService.findWeiboTagByPage(map);
+		List<WeiboTag> wtss = weiboTagService.findAllWeiboTag();
 		Map<String,Object> mp = new HashMap<String,Object>();
 		mp.put("rows", wts);
-		mp.put("total", wts.size());
+		mp.put("total", wtss.size());
 		
 		return mp;
 	}
@@ -51,28 +50,39 @@ public class WeiboTagHandler {
 	}*/
 	
 	
-	/*@RequestMapping("/delWeiboTag")  ///删除标签
+	@RequestMapping("/delWeiboTag")  ///删除标签
 	@ResponseBody
-	public int delWeiboTag(String tids){
-		if(weiboTagService.delWeiboTag(tids)){
+	public int delWeiboTag(String wtids){
+		System.out.println( wtids);
+		if(weiboTagService.delWeiboTag(wtids)){
 			return 1;
 		}else{
 			return -1;
 		}
 		
-	}*/
+	}
 	
 	@RequestMapping("/updateWeiboTag")  //更新微博标签
-	public void updateWeiboTag(HttpServletRequest request,PrintWriter out){
-		String tids = request.getParameter("tids");
-		if(weiboTagService.delWeiboTag(tids)){
-			out.println(1);
-			out.flush();
-			out.close();
+	@ResponseBody
+	public int updateWeiboTag(String wtid,String wtname){
+		Map<String,String> idAndName = new HashMap<String,String>();
+		idAndName.put("wtid", wtid);
+		idAndName.put("wtname", wtname);
+		if(weiboTagService.updateWeiboTag(idAndName)){
+			return 1;
 		}else{
-			out.println(-1);
-			out.flush();
-			out.close();
+			return -1;
+		}
+		
+	}
+	
+	@RequestMapping("/addWeiboTag")  //更新微博标签
+	@ResponseBody
+	public int addWeiboTag(String wtname){
+		if(weiboTagService.insertWeiboTag(wtname)){
+			return 1;
+		}else{
+			return -1;
 		}
 		
 	}

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.yc.weibo.entity.WeiboTag;
 
 public interface WeiboTagMapper {
-	int del(String tids);
+	int del(Map<String, String> params);
 	
 	int update(Map<String,String> idAndName);
 	

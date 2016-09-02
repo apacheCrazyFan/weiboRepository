@@ -16,6 +16,7 @@ create table WeiBoTag(
                           --政务 游戏 旅游 育儿 教育 美食 房产 家居 星座 读书 三农 设计
 );
 select * from WeiboTag;
+select seq_wbt_wtid.nextval from dual;
 select wt.*
 from
 select wt.*,rownum rn from WeiboTag wt
@@ -26,7 +27,10 @@ from
 select wt.*,rownum rn from WeiboTag wt
 where rn > 10*(1-1) and rn <= 10*1;
 
-create sequence seq_wbt_wtid start with 11;
+delete sequence seq_wbt_wtid from dual;
+create sequence seq_wbt_wtid start with 50;
+delete from WeiboTag where WTid in (1,2);
+
 insert into WeiBoTag values(1,'视频');
 insert into WeiBoTag values(2,'衡阳');
 insert into WeiBoTag values(3,'社会');
@@ -74,7 +78,7 @@ insert into WeiBoTag values(44,'星座');
 insert into WeiBoTag values(45,'读书');
 insert into WeiBoTag values(46,'三农');
 insert into WeiBoTag values(47,'设计');
-
+delete from WeiBoTag where WTname in ('国际','科技');
 create table UserTagFather(
 	UTFid int primary key,    --用户标签父类表
 	UTFname varchar2(20)

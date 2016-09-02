@@ -1,5 +1,6 @@
 package com.yc.weibo.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,9 @@ public class WeiboTagServiceImpl implements WeiboTagService {
 	 */
 	@Override
 	public boolean delWeiboTag(String tids) {
-		return weiboTagMapper.del(tids) > 0 ? true : false;
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("ids", tids);
+		return weiboTagMapper.del(params) > 0 ? true : false;
 	}
 
 	/**
