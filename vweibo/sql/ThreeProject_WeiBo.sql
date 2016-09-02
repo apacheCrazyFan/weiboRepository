@@ -123,24 +123,24 @@ delete from UserTag where UTid in(4,5,6);
 ----微博用户表
 select * from WeiBoUser;
 create table WeiBoUser(
-       Uid int,                       --用户Id
-       Uname varchar2(20),            --用户名
-       Upassword varchar2(20),        --用户密码
-       Uphone varchar2(11),           --用户手机号码
-       Uemail varchar2(40),           --用户注册邮箱
-       Usex char(2) default 'male',   --用户性别
-       Uage int,                      --用户年龄
-       UimgPath varchar2(100),        --用户图像路径
-       UregisterDate Data,            --注册日期
+       Uid int,                       --用户Id  √
+       Uname varchar2(20),            --用户名 	√
+       Upassword varchar2(20),        --用户密码	√
+       Uphone varchar2(11),           --用户手机号码	√
+       Uemail varchar2(40),           --用户注册邮箱	√
+       Usex char(2) default 'male',   --用户性别		√
+       Uage int,                      --用户年龄		√
+       UimgPath varchar2(100),        --用户图像路径	√
+       UregisterDate Data,            --注册日期		√
        
        Uxxxx  varchar2(100),   --预留字段
        Uzzzz  varchar2(100),   --预留字段
        
-       
-       Uintroduce varchar2(100),      --自我介绍（简介）
-       Utag varchar2(100),            --用户标签（如体育，运动达人，手游等等）  自己加
-       Uscore number(8),              --用户积分（用来计算vip等级）
-       UspecialTag varchar2(40),      --特权标签（实名认证，会员，国籍）
+       											--//下面的这一段可以在用户登录后修改个人信息里改（存）
+       Uintroduce varchar2(100),      --自我介绍（简介） 						√
+       Utag varchar2(100),            --用户标签（如体育，运动达人，手游等等）  自己加    	 √
+       Uscore number(8),              --用户积分（用来计算vip等级）				√
+       UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
 --用户之间联系中间表（n ~ n）
 create table Relationship(
@@ -148,12 +148,43 @@ create table Relationship(
        Rname varchar2(20),            --用户之间关系（关注（被关注，粉丝），好友，未分组，黑名单，群？..）
        RidF int,                      --用户idF
        RidE int,                      --用户idE
-       Rdate Date,                    --时间
+       Rdate Date                     --时间
        
        --预留字段 
 );
 
-
+--群
+create table Group(
+	Gid int primary key,				--群id
+	Gname varchar2(40),					--群名
+	Uid int references WeiBoUser(Uid), 	--群里的用户id
+	Gdate Date							--进群时间
+);
+--黑名单
+create table BlackList(
+	Bid int primary key,				--黑名单id
+	Uid int references WeiBoUser(Uid),  --哪个用户下的黑名单
+	BUid int							--黑名单用户id
+);
+--粉与被粉（关注与被关注）
+create table FanAndFaned(
+	Fid int primary key,				--粉与被粉id
+	Uid int references WeiBoUser(Uid),	--粉丝者
+	FUid int,							--被粉者
+	Fstatus varchar2(16)				--粉与被粉之间的py状态(好友圈,同学,同事,未分组,名人明星,悄悄关注,特别关注,其他自己添加的。。)
+);
+--首先话题是可以放在微博里发表的
+--所以说话题可以是微博的一个附属
+--话题表
+create table Theme(
+	Tid int primary key,					--话题id
+	Tname varchar2(40),						--话题标题
+	Uid int references WeiBoUser(Uid), 		--话题发起人
+	Tdate Date,								--话题发起时间
+	Ttxt clob,								--话题的文本内容
+	Tpics varchar2(540),					--话题图片路径
+	Tview int								--话题访问次数
+);	
 
 
 
@@ -167,8 +198,8 @@ create table WeiBo(
            constraint RK_WeiBo_Uid references WeiBoUser(Uid),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
        WBtxt  clob,                   --微博文字内容
-       WBpic  varchar2(500)           --微博图片路径
-       WBvideo blob,                  --微博视屏(或者给个视屏路径，存本地，存数据库？存服务器？)
+       WBpic  varchar2(500),          --微博图片路径
+       WBvideo blob                  --微博视屏(或者给个视屏路径，存本地，存数据库？存服务器？)
        
        --预留字段      
 );
@@ -180,7 +211,7 @@ create table WeiBoHelp(
        WHreprintAccount int,           --微博转载次数
        WHfavoriteAccount int,          --微博收藏次数
        WHcommentAccount int,           --微博评论次数
-       WHgreateAccount int,            --微博点赞次数
+       WHgreateAccount int	           --微博点赞次数
        
        --预留字段  
 );
@@ -195,7 +226,7 @@ create table Operate(
        
        --预留字段  
 );
---评论（回复）微博表
+--评论（回复）微博表  --找爸爸
 create table Comments(
        Cid int primary key,           --评论（回复）id
        CUidF int,                     --评论（回复）人id

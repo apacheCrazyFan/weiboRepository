@@ -3,7 +3,8 @@ package com.yc.weibo.entity;
 public class WeiboUserTag {
 	private int UTid;          //--用户标签id
     private String UTname;         // --用户标签名 
-    private int UTFid;
+    private int UTFid;			//父类标签
+    
 	public int getUTid() {
 		return UTid;
 	}
