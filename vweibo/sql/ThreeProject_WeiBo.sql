@@ -187,10 +187,23 @@ alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatu
 drop table FanAndFaned;
 select * from FanAndFaned;
 select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
-select * from 　user_constraints;
-select * from 　user_tab_cols;
+delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
+delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
+delete from FanAndFaned where FUid=1001 and FUedid=1009 and Fstatus='同学';
+delete from FanAndFaned where FUid=1001 and FUedid=1010 and Fstatus='同学';
+--关注的人数
+select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus != '未分组';
+select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '未分组';
+select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '同学';
+select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '好友圈';
 
-select 
+select (select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '未分组') 未分组,
+		(select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '好友圈') 好友圈,
+		(select count(distinct(FUedid)) from FanAndFaned where FUid = 1001) 关注,
+		(select count(distinct(FUid)) from FanAndFaned where FUedid = 1001) 粉丝,
+		(select count(WBid) from WeiBo where WBUId = 1001) 微博
+from dual;
+		
 insert into FanAndFaned values(1001,1002,'好友圈');
 insert into FanAndFaned values(1001,1003,'好友圈');
 insert into FanAndFaned values(1001,1003,'好友圈');
@@ -230,7 +243,11 @@ create table Theme(
 	Tpics varchar2(540),					--话题图片路径
 	Tdeliver int,							--话题被发表的次数
 	Tview int								--话题访问次数
-);	
+);
+select tname from 
+(select n.*,rownum rn from (select * from Theme) n 
+where 5 * 1 >= rownum) 
+where rn > 5 * (1 - 1);
 insert into Theme values(1,'#前任来撩约不约#',1001,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1000,20000);
 insert into Theme values(2,'#反贪风暴2提档914#',1002,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1100,21000);
 insert into Theme values(3,'#李云迪西藏捐音乐教室#',1002,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1200,22000);
@@ -263,6 +280,7 @@ create table WeiBo(
        yesOrno char(2)				  --是否是话题产生的weibo						
        --预留字段      
 );
+select count(WBid) from WeiBo where WBUId = 1001;
 
 insert into WeiBo values(101,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N');
 insert into WeiBo values(102,'视频','大鸭子',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');

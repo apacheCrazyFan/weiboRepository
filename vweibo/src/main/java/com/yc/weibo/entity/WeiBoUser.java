@@ -3,7 +3,7 @@ package com.yc.weibo.entity;
 import java.util.Date;
 
 public class WeiBoUser {
-	private Integer WUid;
+	private Integer WBUid;
 	private String Uname;
 	private String Upassword;
 	private String Uphone;
@@ -37,9 +37,9 @@ public class WeiBoUser {
 	}
 
 
-	public WeiBoUser(Integer wUid, String uname, String upassword, String uphone, String uemail, String usex, int uage,
+	public WeiBoUser(Integer wBUid, String uname, String upassword, String uphone, String uemail, String usex, int uage,
 			String uimgPath, Date uregisterDate, String yZcode, String yZcodeInput, int wcount, int tcount) {
-		WUid = wUid;
+		WBUid = wBUid;
 		Uname = uname;
 		Upassword = upassword;
 		Uphone = uphone;
@@ -67,11 +67,11 @@ public class WeiBoUser {
 	public void setTcount(int tcount) {
 		Tcount = tcount;
 	}
-	public Integer getWUid() {
-		return WUid;
+	public Integer getWBUid() {
+		return WBUid;
 	}
-	public void setWUid(Integer wUid) {
-		WUid = wUid;
+	public void setWUid(Integer wBUid) {
+		WBUid = wBUid;
 	}
 	public String getUname() {
 		return Uname;
@@ -136,7 +136,7 @@ public class WeiBoUser {
 	
 	@Override
 	public String toString() {
-		return "WeiBoUser [WUid=" + WUid + ", Uname=" + Uname + ", Upassword=" + Upassword + ", Uphone=" + Uphone
+		return "WeiBoUser [WBUid=" + WBUid + ", Uname=" + Uname + ", Upassword=" + Upassword + ", Uphone=" + Uphone
 				+ ", Uemail=" + Uemail + ", Usex=" + Usex + ", Uage=" + Uage + ", UimgPath=" + UimgPath
 				+ ", UregisterDate=" + UregisterDate + ", YZcode=" + YZcode + ", YZcodeInput=" + YZcodeInput
 				+ ", Wcount=" + Wcount + ", Tcount=" + Tcount + "]";

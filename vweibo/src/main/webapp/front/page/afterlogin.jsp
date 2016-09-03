@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="com.yc.weibo.entity.WeiBoUser" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
 <head>
@@ -10,6 +11,15 @@
 <link type="text/css" rel="stylesheet" href="front/css/afterlogin.css"/>
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
+<script type="text/javascript" src="front/js/session.js"></script><!-- js操作session的包 -->
+<script type="text/javascript" >
+	$(document).ready(function () {
+    // $.session.get('user');
+    
+     var msg =  $.session.toString();
+     alert(msg);
+      }); 
+</script>
 </head>
 
 <%
@@ -368,28 +378,31 @@
     <div id="right-part">
     	<div id="right-part-content">
         	<a href="javascript:void(0)" id="user_img"><img src="front/image/userimg.jpg"/></a>
-            <a href="javascript:void(0)" id="user_name">${ sessionScope.user.uname }</a>
+            <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
             <div id="levelimg">
             	<a href="javascript:void(0)" id="level">Lv.10</a>
             </div>
             <div id="usernum">
-                <a href="javascript:void(0)" id="usernumone"><font id="num">209</font>关注</a>
-                <a href="javascript:void(0)" id="usernumone"><font id="num">29</font>粉丝</a>
-                <a href="javascript:void(0)" id="usernumone"><font id="num">129</font>微博</a>
+                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>
+                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>
+                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.WEIBONUM }</font>微博</a>
             </div>
         </div>
         
         <div class="hot_topic"><!--230 297-->
             <span class="hot_topic_head">热门话题<a href="#" class="hot_topic_change">换一换</a></span>
             <div class="hot_topic_content">
-                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+            	<c:forEach items="${Themes}" var="theme">
+            		<a href="#" class="hot_topic_detail">${theme.tname}</a><span class="hot_topic_detail_click">${theme.tview}</span><br/>
+            	</c:forEach>
+               <%--  <a href="#" class="hot_topic_detail">${Themes.Tname}</a><span class="hot_topic_detail_click">172.2万</span><br/>
                 <a href="#" class="hot_topic_detail">#胖子没#</a><span class="hot_topic_detail_click">172.2万</span><br/>
                 <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
                 <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
                 <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
                 <a href="#" class="hot_topic_detail">#胖子爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
-                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/> --%>
             </div>
          </div>
 

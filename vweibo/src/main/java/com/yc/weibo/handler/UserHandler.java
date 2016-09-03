@@ -1,5 +1,9 @@
 package com.yc.weibo.handler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -16,19 +20,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
+import com.yc.weibo.service.ThemeService;
 import com.yc.weibo.service.UserService;
 
 @Controller
 @RequestMapping("/user")
-@SessionAttributes(value={"user"},types={String.class})
+@SessionAttributes(value={"user","Themes","groupnumber"},types={String.class})
 public class UserHandler {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ThemeService themeService;
 
 	@ModelAttribute
 	public void getModel(ModelMap map){ //使用map/modelMap进行数据传参，作用范围是？还是会话
 		map.put("user", new WeiBoUser());
+		map.put("Themes", new ArrayList<Theme>()); //话题信息
+		map.put("groupnumber", new HashMap<String,Integer>()); //关注，粉丝。微博，未分组，好友圈等
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
@@ -48,13 +58,24 @@ public class UserHandler {
 		
 		
 		user=userService.login(user);
-		
+		System.out.println( "=============>"+user);
 		if(user==null){
 			map.put("errorMsg","用户名或密码错误");
 			return "forward:/front/page/login.jsp";
 		}
+		//到这里说明登录成功了。那么我们作为服务器一端     应该要给它准备一些数据 ，还是它自己再做请求去申请数据？？
+		Map<String,Integer> params = new HashMap<String,Integer>();
+		params.put("pageSize", 10);
+		params.put("pageNum", 1);
+		List<Theme> Themes = themeService.findThemeByPage(params);
 		
-		map.put("user", user);
+		List<Map<String, Integer>> groupnumber = themeService.findeGroupNumber(user.getWBUid());
+		System.out.println("==========>"+groupnumber );
+		map.put("user", user);		//用户信息
+		map.put("Themes", Themes); //话题信息
+		map.put("groupnumber", groupnumber.get(0)); //关注，粉丝。微博，未分组，好友圈等
+		
+		System.out.println("===========>"+ Themes);
 		return "forward:/front/page/afterlogin.jsp";	
 
 	}
