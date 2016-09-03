@@ -8,8 +8,7 @@
 	var flag;
 	
 	obj=$('#weiboTags_data').datagrid({
-		url:'Weibo/tags',
-		queryParams:{op:'findAllWeiboTags'},
+		url:'weibotag/findAllWeiboTagByPage',
 		fitColumns:true,
 		striped:true,
 		loadMsg:"数据加载中...",
@@ -17,13 +16,13 @@
 		fit:true,
 		pageNumber:1,
 		pageSize:10,
-		pageList:[10,15,20,25,30],
-		sortName:'UTid',
+		pageList:[10,20,30,40,50],
+		sortName:'wtid',
 		remoteSort:false,
 		columns:[[
 			{field:'tid',title:'',width:100,align:'center',checkbox:true},
-			{field:'UTid',title:'用户标签编号',width:100,align:'center',sortable:true},
-			{field:'UTname',title:'用户标签名称',width:100,align:'center',editor:{type:'text',option:{requires:true}}}
+			{field:'wtid',title:'微博标签编号',width:100,align:'center',sortable:true},
+			{field:'wtname',title:'微博标签名称',width:100,align:'center',editor:{type:'text',option:{requires:true}}}
 		]],
 		toolbar:[{
 			text:"添加",
@@ -37,6 +36,7 @@
 					editRow=undefined;
 				}else{
 					var data = obj.datagrid("getData");
+					console.info(data);
 					var total = data.total;
 					var Jstring = JSON.stringify(data);
 					obj.datagrid('insertRow',{index:total,row:{}});
@@ -74,24 +74,25 @@
 			onClick:function(){
 			//获取选中的行
 				var rows=obj.datagrid("getChecked");
-				
+				alert(typeof rows[0].wtid);
 				if(rows[0]!=undefined){
-					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有新闻）?', function(rs){
+					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有微博）?', function(rs){
 						if (rs){
-							var tids="";
+							var wtids = "";
 							for(var i=0;i<rows.length-1;i++){
-								tids += rows[i].UTid+",";
+								wtids += rows[i].wtid+",";
 							}
-							tids += rows[i].UTid;
+							wtids += rows[i].wtid;
 							
 							//发请求到数据库
-							$.post("Weibo/tags",{op:"delWeiboTag",tids:tids},function(data){
+							$.post("weibotag/delWeiboTag",{"wtids":wtids},function(data){
+								alert(data);
 								if(data>0){
-									$.messager.show({title:'成功提示',msg:'新闻类型删除成功....',timeout:2000,showType:'slide'});
+									$.messager.show({title:'成功提示',msg:'微博标签删除成功....',timeout:2000,showType:'slide'});
 									rows=null;
 									obj.datagrid("reload");//刷新表格
 								}else{
-									$.messager.alert('失败提示','新闻类型删除失败,请确认该类别下无新闻....','error');
+									$.messager.alert('失败提示','微博标签删除失败,请确认该类别下无微博....','error');
 								}
 							});
 						}else{
@@ -121,10 +122,10 @@
 				}else{
 					//保存到数据库
 					//rows["op"]=currentOp;
-					var tid=$(rows).attr("UTid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
+					var wtid=$(rows).attr("wtid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
 					//jquery对象--》js对象    ===》1、$("#div").eq(0);  2、$("#div")[0]    
 					//alert(rows);
-					var tname=$(rows).attr("UTname");
+					var wtname=$(rows).attr("wtname");
 					//   $.post("url","data",function(data));//jquery中封装的post的方法
 						//url：请求的地址，不需要拼接参数，因为是用post提交的
 						//data：可以传一个js对象，但实际上是一个json的数据格式的字符串即可
@@ -132,7 +133,7 @@
 						//function（data)    :  回调的函数
 					//alert(rows);
 					//rows=$(rows);
-					$.post("weibo/tags",{"op":currentOp,"tid":tid,"tname":tname},function(data){
+					$.post("weibotag/"+currentOp,{"wtid":wtid,"wtname":wtname},function(data){
 						alert(data);
 						if(data>0){
 							$.messager.show({
@@ -148,7 +149,7 @@
 							obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
 							obj.datagrid("reload");//刷新表格
 						}else{
-							$.messager.alert('失败提示','新闻类型'+flag+'失败....','error');
+							$.messager.alert('失败提示','微博标签'+flag+'失败....','error');
 						}
 					});
 				}

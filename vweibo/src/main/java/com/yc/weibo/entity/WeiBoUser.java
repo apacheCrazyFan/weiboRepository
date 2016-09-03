@@ -14,6 +14,24 @@ public class WeiBoUser {
 	private Date UregisterDate; 
 	private String YZcode;
 	private String YZcodeInput;
+	
+	//wb添加的
+	private int Wcount;	//发起微博数
+	private int Tcount;	//发起的话题数
+	
+	
+	public int getWcount() {
+		return Wcount;
+	}
+	public void setWcount(int wcount) {
+		Wcount = wcount;
+	}
+	public int getTcount() {
+		return Tcount;
+	}
+	public void setTcount(int tcount) {
+		Tcount = tcount;
+	}
 	public Integer getWUid() {
 		return WUid;
 	}
@@ -80,11 +98,13 @@ public class WeiBoUser {
 	public void setYZcodeInput(String yZcodeInput) {
 		YZcodeInput = yZcodeInput;
 	}
+	
 	@Override
 	public String toString() {
 		return "WeiBoUser [WUid=" + WUid + ", Uname=" + Uname + ", Upassword=" + Upassword + ", Uphone=" + Uphone
 				+ ", Uemail=" + Uemail + ", Usex=" + Usex + ", Uage=" + Uage + ", UimgPath=" + UimgPath
-				+ ", UregisterDate=" + UregisterDate + ", YZcode=" + YZcode + ", YZcodeInput=" + YZcodeInput + "]";
+				+ ", UregisterDate=" + UregisterDate + ", YZcode=" + YZcode + ", YZcodeInput=" + YZcodeInput
+				+ ", Wcount=" + Wcount + ", Tcount=" + Tcount + "]";
 	}
 	public WeiBoUser(Integer wUid, String uname, String upassword, String uphone, String uemail, String usex, int uage,
 			String uimgPath, Date uregisterDate, String yZcode, String yZcodeInput) {

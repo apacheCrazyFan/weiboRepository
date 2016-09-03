@@ -15,7 +15,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public boolean login(Admin admin) {
-		return adminMapper.login(admin) > 0 ? true : false;
+		return adminMapper.login(admin) != null ? true : false;
 	}
 
 }

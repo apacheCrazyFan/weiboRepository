@@ -68,7 +68,7 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 控制器驱动处理 --> <!-- 同时要注意这个可以配置我们自己的数据转换 -->
-	 <mvc:annotation-driven /> 
+	<mvc:annotation-driven />
 	
 	<!-- 1.配制事务管理器 -->
 	<!-- <bean id="transactionManager"

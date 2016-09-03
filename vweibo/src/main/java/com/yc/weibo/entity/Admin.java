@@ -15,6 +15,10 @@ public class Admin {
 	public void setApwd(String apwd) {
 		Apwd = apwd;
 	}
+	@Override
+	public String toString() {
+		return "Admin [Aname=" + Aname + ", Apwd=" + Apwd + "]";
+	}
 	
 	
 }
