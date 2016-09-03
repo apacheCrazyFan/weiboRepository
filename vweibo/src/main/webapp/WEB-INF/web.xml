@@ -26,8 +26,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-
-	<filter><!-- 请求转化处理 -->
+	<filter><!-- 请求转化处理REST -->
 		<filter-name>HiddenHttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
 	</filter>

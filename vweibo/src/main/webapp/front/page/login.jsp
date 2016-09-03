@@ -19,7 +19,7 @@
 	<div class="page-container">
 		<h1>登录(Login)</h1>
 		<form action="user/login" method="post" onsubmit="return checkYZcode()">
-			<input type="text" name="Uname" class="Uname" placeholder="请输入您的用户名！"> 
+			<input type="text" name="UphoneOrUemail" class="UphoneOrUemail" placeholder="请输入手机号/邮箱号">
 			<input type="password" name="Upassword" class="Upassword" onBlur="checkUsername()"   placeholder="请输入您的用户密码！">
 			<input  class="Captcha" name="YZcodeInput" placeholder="请输入验证码！" onkeyup="InputYZcode()" id="YZcodeInput" />
 			<img alt="加载失败" name="randImage" id="randImage" src="front/page/image.jsp" style="margin-left:20px; width:80px; height:40px; margin-top:28px;" border="1">
