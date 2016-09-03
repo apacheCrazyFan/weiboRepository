@@ -150,6 +150,7 @@
 			<version>${json.version}</version>
 			<classifier>jdk15</classifier>
 		</dependency>
+		
 		<dependency><!-- handler中可以返回json格式的数据 -->
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

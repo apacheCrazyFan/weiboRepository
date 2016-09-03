@@ -1,7 +1,5 @@
 package com.yc.weibo.handler;
 
-
-
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -61,6 +59,8 @@ public class UserHandler {
 
 	}
 
+
+
 	@RequestMapping(value="/register")
 	public String register(@ModelAttribute("user")WeiBoUser user,ModelMap map,HttpServletRequest request){
 		System.out.println("===>>"+user);
@@ -84,17 +84,15 @@ public class UserHandler {
 		System.out.println(isSendEmail);
 		if (isSendEmail) {
 			if (randomCode.toString().equalsIgnoreCase(user.getYZcodeInput())) {
-				int result = userService.register(user);
-				System.out.println(result);
-				System.out.println("11111");
-				return "register";
+				userService.register(user);
+				return "front/page/login.jsp";
 			} else {
 				map.put("YZcodeErr", "验证码错误,请重新获取");
-				return "register";
+				return "front/page/register.jsp";
 			} 
 		}else{
 			map.put("YZcodeErr", "发送失败,请重新发送");
-			return "register";
+			return "front/page/register.jsp";
 		}
 
 	}

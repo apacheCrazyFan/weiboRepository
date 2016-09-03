@@ -9,7 +9,9 @@
 <link rel="stylesheet" href="front/css/UserSet_photo.css" />
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script src="front/js/UserSet_photo.js"></script>
-
+<link rel="stylesheet" type="text/css" href="front/upload/css/style.css">
+<link rel="stylesheet" href="front/upload/css/ssi-uploader.css"/>
+<script src="front/upload/js/ssi-uploader.js"></script>
 </head>
 
 <body>
@@ -31,19 +33,33 @@
             <span class="head_label">头像<span>无法上传？尝试</span><a href="javascript: changeUpWay();">普通上传方法</a></span>
             <span class="choose">选择上传方式</span><br/>
             <input type="file" id="myPhotoFile"/>
-            <a href="javascript: openFile();"><img src="front/image/UserSet_image/uploadButton1.png" border="0" /></a> 
-            <input type="image" id="myPhotoTake"  src="front/image/UserSet_image/takePhoto1.png" style="width:82px;height:30px"><br/>
+            
+            
+            <a><img src="front/image/UserSet_image/uploadButton1.png" border="0" onclick="loadLocalPhoto()" /></a> 
+            <input type="image" id="myPhotoTake"  src="front/image/UserSet_image/takePhoto1.png" style="width:82px;height:30px" ><br/>
+            
+            
+            
+            
             <span id="support">仅支持JPG、GIF、PNG格式，文件小于5M。(使用高质量图片，可生成高清头像)</span>
             <div id="picArea">
-                <div id="upPhoto"><video id="video" width="220px" height="220px" autoplay style="margin-left: 20px"></video>
-                		
-                </div>
-                <input type="button" id="snaPhoto" style="margin-left: 100px" value="确定图片">
+            
+           		<div id="upPhoto">
+           			
+           			<video id="video" width="220px" height="220px" autoplay style="margin-left: 20px"></video>
+           		</div>
+           		<div id="snaPhotot">
+           			 <input type="button" id="snaPhoto" style="margin-left: 100px" value="确定图片">
+           		</div>
+           		
+           		
                 <div id="showPhoto">
                     <span class="attention">您上传的图片将会生成三种尺寸头像，请注意中小尺寸的头像是否清晰。</span>
-                    <div id="photo1"><canvas  width="280px" height="280px" id="photocanvas"></canvas><blockquote class="bigSize">大尺寸头像，220*220像素</blockquote></div>
-                    <div id="photo2"><img src="front/image/UserSet_image/defaultPhoto2.png"><blockquote class="centerSize">中尺寸头像50*50像素(自动生成)</blockquote></div>
-                    <div id="photo3"><img src="front/image/UserSet_image/defaultPhoto3.png"><blockquote class="smallSize">小尺寸头像30*30像素(自动生成)</blockquote></div>
+                    <div id="photo1"><canvas  width="280px" height="280px" id="photocanvas"></canvas><blockquote class="bigSize">大尺寸头像，220*220像素</blockquote>
+                    	<input type="button" value="确定上传" style="margin-left: 100px;margin-top: 20px">
+                    </div>
+                    <div id="photo2" ><blockquote class="smallSize" style="font-size: 10px">中尺寸(鼠标移至此自动生成)</blockquote></div>
+                    <div id="photo3"><blockquote class="smallSize" style="font-size: 10px">小尺寸30*30(自动生成)</blockquote></div>
                 </div>
             </div>
             
@@ -56,13 +72,14 @@
             <div id="commonUp">
                 <input type="text" style="width:200px;height:25px"/>
                 <input type="file" id="myCommonFile"/>
-                <a href="javascript: openCommonFile();" class="browseFile"><img src="front/image/UserSet_image/browsePhoto1.png" border="0" /></a> <br/>
+                <a href="javascript: openCommonFile();" class="browseFile">
+                <img src="front/image/UserSet_image/browsePhoto1.png" border="0" onclick="loadLocalPhoto()" /></a> <br/>
                 <span id="support1">请选择jpg、gif格式，小于2M的图片（使用高质量图片，可生成高清头像）</span><br/>
                 <input type="image" src="front/image/UserSet_image/savePhoto1.png" class="saveCommon"/>
             </div>
             
         </div>
-    </div>
+   </div>
     <script type="text/javascript">
   //调用摄像头自拍
     var openVideo=document.getElementById("myPhotoTake");
@@ -92,6 +109,35 @@
     snaPhoto.addEventListener("click",function(){
     	context.drawImage(video,0,0,220,220);	
     });
+   	
+    
+    //自动生成中小像素图片
+    $("#photo2").one('mouseover',function(){
+    	var image1 = new Image();
+    	var image2 = new Image();
+    	var canvas=document.getElementById("photocanvas");
+    	image1.src = canvas.toDataURL("image/png");
+    	image1.height=100;
+    	image1.width=100;
+    	$('#photo2').append(image1);
+    	
+    	image2.src = canvas.toDataURL("image/png");
+    	image2.height=80;
+    	image2.width=80;
+    	$('#photo3').append(image2);
+    });
+    
+    $('#ssi-upload').ssi_uploader({url:'#',maxFileSize:6,allowed:['jpg','gif','txt','png','pdf']});
+    
+    function loadLocalPhoto(){
+    	$("#upPhoto").empty();
+    	$("#snaPhotot").empty();
+	    var photo='<div id="upPhoto"><input type="file" multiple id="ssi-upload"/></div>';
+	    $("#upPhoto").append(photo);
+	    //浏览本地图片
+	    $('#ssi-upload').ssi_uploader({url:'#',maxFileSize:6,allowed:['jpg','gif','txt','png','pdf']});
+	    
+    }
     </script>
 </body>
 </html>

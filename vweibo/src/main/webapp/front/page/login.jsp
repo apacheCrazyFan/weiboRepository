@@ -16,7 +16,6 @@
 
 </head>
 <body>
-
 	<div class="page-container">
 		<h1>登录(Login)</h1>
 		<form action="user/login" method="post" onsubmit="return checkYZcode()">
