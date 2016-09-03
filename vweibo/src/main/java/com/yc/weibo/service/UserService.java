@@ -1,5 +1,6 @@
 package com.yc.weibo.service;
 
+import java.util.List;
 import com.yc.weibo.entity.WeiBoUser;
 
 public interface UserService {
@@ -8,4 +9,5 @@ public interface UserService {
 
 	int register(WeiBoUser user);
 
+	List<Object> findUserSomethingMessag(WeiBoUser user);
 }

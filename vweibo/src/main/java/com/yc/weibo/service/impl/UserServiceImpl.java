@@ -1,5 +1,7 @@
 package com.yc.weibo.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int register(WeiBoUser user) {
 		return userMapper.register(user);
+	}
+
+	@Override
+	public List<Object> findUserSomethingMessag(WeiBoUser user) {
+		return userMapper.findUserSomethingMessage(user);
 	}
 
 

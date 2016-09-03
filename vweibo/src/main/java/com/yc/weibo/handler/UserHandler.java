@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,15 +27,19 @@ public class UserHandler {
 
 
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String login(WeiBoUser user,ModelMap map){
+	public String login(WeiBoUser user,ModelMap map,HttpSession session){
 		System.out.println("===>>"+user);
 
 		user=userService.login(user);
 		if(user==null){
 			map.put("errorMsg","用户名或密码错误");
-			return "/front/page/login.jsp";
-		}
-		return "/front/page/afterlogin.jsp";	
+
+			return "redirect:/front/page/login.jsp";
+	}
+
+		session.setAttribute("user", user);
+		return "redirect:/front/page/afterlogin.jsp";	
+
 
 	}
 
