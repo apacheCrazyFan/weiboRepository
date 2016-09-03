@@ -20,6 +20,41 @@ public class WeiBoUser {
 	private int Tcount;	//发起的话题数
 	
 	
+	public WeiBoUser() {
+	}
+	
+
+	public WeiBoUser(String upassword, String uphone) {
+		Upassword = upassword;
+		Uphone = uphone;
+	}
+
+
+	public WeiBoUser(String upassword,String uemail,int tcount) {
+		Tcount = tcount;
+		Upassword = upassword;
+		Uemail = uemail;
+	}
+
+
+	public WeiBoUser(Integer wUid, String uname, String upassword, String uphone, String uemail, String usex, int uage,
+			String uimgPath, Date uregisterDate, String yZcode, String yZcodeInput, int wcount, int tcount) {
+		WUid = wUid;
+		Uname = uname;
+		Upassword = upassword;
+		Uphone = uphone;
+		Uemail = uemail;
+		Usex = usex;
+		Uage = uage;
+		UimgPath = uimgPath;
+		UregisterDate = uregisterDate;
+		YZcode = yZcode;
+		YZcodeInput = yZcodeInput;
+		Wcount = wcount;
+		Tcount = tcount;
+	}
+
+
 	public int getWcount() {
 		return Wcount;
 	}
@@ -106,29 +141,6 @@ public class WeiBoUser {
 				+ ", UregisterDate=" + UregisterDate + ", YZcode=" + YZcode + ", YZcodeInput=" + YZcodeInput
 				+ ", Wcount=" + Wcount + ", Tcount=" + Tcount + "]";
 	}
-	public WeiBoUser(Integer wUid, String uname, String upassword, String uphone, String uemail, String usex, int uage,
-			String uimgPath, Date uregisterDate, String yZcode, String yZcodeInput) {
-		WUid = wUid;
-		Uname = uname;
-		Upassword = upassword;
-		Uphone = uphone;
-		Uemail = uemail;
-		Usex = usex;
-		Uage = uage;
-		UimgPath = uimgPath;
-		UregisterDate = uregisterDate;
-		YZcode = yZcode;
-		YZcodeInput = yZcodeInput;
-	}
-	public WeiBoUser( String uname, String upassword) {
-		Uname = uname;
-		Upassword = upassword;
-	}
-	
-	
-	public WeiBoUser() {
-	}
-	
 	
 	
 

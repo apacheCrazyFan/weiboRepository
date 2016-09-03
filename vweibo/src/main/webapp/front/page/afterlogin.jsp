@@ -13,8 +13,8 @@
 </head>
 
 <%
-	HttpSession sessions = request.getSession();
-	WeiBoUser user = (WeiBoUser)sessions.getAttribute("user");
+	/* HttpSession sessions = request.getSession();
+	WeiBoUser user = (WeiBoUser)sessions.getAttribute("user"); */
 	
 %>
 <body id="bg">
@@ -29,7 +29,7 @@
             <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
             <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
             <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
-            <li><a href="javascript:void(0)" class="personPage"><%=user.getUname() %></a></li>
+            <li><a href="javascript:void(0)" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>
         <div class="settingArea">
         	<a href="javascript:void(0)" class="message_pic"></a>
@@ -368,7 +368,7 @@
     <div id="right-part">
     	<div id="right-part-content">
         	<a href="javascript:void(0)" id="user_img"><img src="front/image/userimg.jpg"/></a>
-            <a href="javascript:void(0)" id="user_name">巴拉拉</a>
+            <a href="javascript:void(0)" id="user_name">${ sessionScope.user.uname }</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
             <div id="levelimg">
             	<a href="javascript:void(0)" id="level">Lv.10</a>

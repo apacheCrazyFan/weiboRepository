@@ -37,7 +37,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource" 
 		p:typeAliasesPackage="com.yc.weibo.entity"      
-		p:mapperLocations="classpath:mapper/*Mapper.xml" />
+		p:mapperLocations="classpath:mapper/*Mapper.xml"  />
 
 	<!-- 配制映射接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
@@ -71,6 +71,15 @@
 	<!-- 控制器驱动处理 --> <!-- 同时要注意这个可以配置我们自己的数据转换 -->
 	<mvc:annotation-driven />
 	
+	<!-- <mvc:annotation-driven conversion-service="conversionService"/> -->
+	
+	<!-- <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<ref bean="employeeHandler"/> 这个是自定义的数据到对象或者其他的数据转换Handler类
+			</set>
+		</property>
+	</bean> -->
 	<!-- 1.配制事务管理器 -->
 	<!-- <bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"

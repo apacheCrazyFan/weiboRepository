@@ -7,7 +7,6 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,28 +16,48 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.UserService;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes(value={"user"},types={String.class})
 public class UserHandler {
 	@Autowired
 	private UserService userService;
 
-
+	@ModelAttribute
+	public void getModel(ModelMap map){ //使用map/modelMap进行数据传参，作用范围是？还是会话
+		map.put("user", new WeiBoUser());
+	}
+	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String login(WeiBoUser user,ModelMap map,HttpSession session){
-		System.out.println("===>>"+user);
+	public String login(String UphoneOrUemail,String Upassword,ModelMap map){
+		//System.out.println("===>>"+user); //登录时注入的用户
 
+		WeiBoUser user = null;
+		String format = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
+		
+		if(UphoneOrUemail.matches(format)){ //说明是邮箱
+			//System.out.println( "我进了邮箱");
+			user = new WeiBoUser(Upassword,UphoneOrUemail,0);
+		}else{
+			//System.out.println( "我进了手机");
+			user = new WeiBoUser(Upassword,UphoneOrUemail);
+		}
+		
+		
 		user=userService.login(user);
+		
 		if(user==null){
 			map.put("errorMsg","用户名或密码错误");
-			return "redirect:/front/page/login.jsp";
+			return "forward:/front/page/login.jsp";
 		}
-		session.setAttribute("user", user);
-		return "redirect:/front/page/afterlogin.jsp";	
+		
+		map.put("user", user);
+		return "forward:/front/page/afterlogin.jsp";	
 
 	}
 

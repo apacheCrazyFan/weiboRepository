@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.weibo.mapper.UserMapper">
 	<select id="login" parameterType="WeiBoUser" resultType="WeiBoUser">
-		select * from WeiBoUser where Uname = #{Uname} and Upassword = #{Upassword}
+		select * from WeiBoUser where (Uemail = #{Uemail,jdbcType=VARCHAR} and Upassword = #{Upassword,jdbcType=VARCHAR}) or (Uphone = #{Uphone,jdbcType=VARCHAR} and Upassword = #{Upassword,jdbcType=VARCHAR})
 	</select>
 	
 	<insert id="register" parameterType="WeiBoUser">
