@@ -272,7 +272,7 @@
                     $clearBtn.prop("disabled", true);
                     var fileReader = new FileReader();
                     fileReader.onload = function () {
-                        imgContent += getTemplate('<img class="ssi-imgToUpload" src=""/><i class="fa-spin fa fa-spinner fa-pulse"></i>'); // set the files element without the img
+                        imgContent += getTemplate('<img class="ssi-imgToUpload" id="ssi-imgToUploadd" src=""/><i class="fa-spin fa fa-spinner fa-pulse"></i>'); // set the files element without the img
                         imgs[index] = fileReader.result;
                         j++;
                         if (toUploadLength === j) {// if all elements are in place lets load images

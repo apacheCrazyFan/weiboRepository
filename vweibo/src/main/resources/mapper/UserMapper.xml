@@ -10,4 +10,8 @@
 	<insert id="register" parameterType="WeiBoUser">
 		insert into WeiBoUser(WUid,Uname,Upassword,Uphone,Uemail,Usex) values(seq_WeiBoUser_Wbid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex})
 	</insert>
+	
+	<update id="updataUserPhoto" parameterType="map">
+		update WeiBoUser set UimgPath=#{UimgPath,jdbcType=VARCHAR} where WUid=#{WBUid,jdbcType=VARCHAR}
+	</update>
 </mapper>
