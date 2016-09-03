@@ -41,7 +41,7 @@
             
             
             
-            <span id="support">仅支持JPG、GIF、PNG格式，文件小于5M。(使用高质量图片，可生成高清头像)</span>
+            <span id="support">仅支持JPG、GIF、PNG格式，文件小于5M。(使用高质量图片，可生成高清头像，移动鼠标自动生成)</span>
             <div id="picArea">
             
            		<div id="upPhoto">
@@ -56,7 +56,7 @@
                 <div id="showPhoto">
                     <span class="attention">您上传的图片将会生成三种尺寸头像，请注意中小尺寸的头像是否清晰。</span>
                     <div id="photo1"><canvas  width="280px" height="280px" id="photocanvas"></canvas><blockquote class="bigSize">大尺寸头像，220*220像素</blockquote>
-                    	<input type="button" value="确定上传" style="margin-left: 100px;margin-top: 20px">
+                    	<input type="button" value="确定上传" id="savePhoto" onclick="savePhoto()" style="margin-left: 100px;margin-top: 20px">
                     </div>
                     <div id="photo2" ><blockquote class="smallSize" style="font-size: 10px">中尺寸(鼠标移至此自动生成)</blockquote></div>
                     <div id="photo3"><blockquote class="smallSize" style="font-size: 10px">小尺寸30*30(自动生成)</blockquote></div>
@@ -117,18 +117,19 @@
     	var image2 = new Image();
     	var canvas=document.getElementById("photocanvas");
     	image1.src = canvas.toDataURL("image/png");
-    	image1.height=100;
-    	image1.width=100;
+    	image1.height=80;
+    	image1.width=80;
     	$('#photo2').append(image1);
     	
     	image2.src = canvas.toDataURL("image/png");
-    	image2.height=80;
-    	image2.width=80;
+    	image2.height=60;
+    	image2.width=60;
     	$('#photo3').append(image2);
     });
     
     $('#ssi-upload').ssi_uploader({url:'#',maxFileSize:6,allowed:['jpg','gif','txt','png','pdf']});
     
+    //浏览本地图片
     function loadLocalPhoto(){
     	$("#upPhoto").empty();
     	$("#snaPhotot").empty();
@@ -137,6 +138,25 @@
 	    //浏览本地图片
 	    $('#ssi-upload').ssi_uploader({url:'#',maxFileSize:6,allowed:['jpg','gif','txt','png','pdf']});
 	    
+    }
+    
+    //本地上传图片自动生成
+    $("#photocanvas").one("mouseover",function (){
+    	var image=document.getElementById("ssi-imgToUploadd");
+    	var canvas = document.getElementById("photocanvas");
+    	canvas.width = image.width;
+    	canvas.height = image.height;
+    	canvas.getContext("2d").drawImage(image, 0, 0,220,180);
+
+    })
+    
+    //保存头像
+    function savePhoto(){
+    	var imageData=document.getElementById("photocanvas").toDataURL("image/jpg");
+		var base64Data = imageData.substr(22);
+    	$.post("user/setphoto",{"photodata":base64Data},function(data){
+    		alert(data);
+    	})
     }
     </script>
 </body>

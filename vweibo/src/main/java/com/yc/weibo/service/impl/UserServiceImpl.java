@@ -1,6 +1,7 @@
 package com.yc.weibo.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Object> findUserSomethingMessag(WeiBoUser user) {
 		return userMapper.findUserSomethingMessage(user);
+	}
+
+	@Override
+	public int updataUserPhoto(Map<String, String> paramMap) {
+		return userMapper.updataUserPhoto(paramMap);
 	}
 
 

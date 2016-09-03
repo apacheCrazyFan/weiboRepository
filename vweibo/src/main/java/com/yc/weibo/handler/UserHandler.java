@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.catalina.Context;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -18,12 +25,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.ThemeService;
 import com.yc.weibo.service.UserService;
+
+import sun.misc.BASE64Decoder;
+
+
 
 @Controller
 @RequestMapping("/user")
@@ -34,6 +46,8 @@ public class UserHandler {
 	@Autowired
 	private ThemeService themeService;
 
+
+	//登录
 	@ModelAttribute
 	public void getModel(ModelMap map){ //使用map/modelMap进行数据传参，作用范围是？还是会话
 		map.put("user", new WeiBoUser());
@@ -77,11 +91,13 @@ public class UserHandler {
 		
 		System.out.println("===========>"+ Themes);
 		return "forward:/front/page/afterlogin.jsp";	
-
-	}
-
+		}
 
 
+
+
+
+	//注册
 	@RequestMapping(value="/register")
 	public String register(@ModelAttribute("user")WeiBoUser user,ModelMap map,HttpServletRequest request){
 		System.out.println("===>>"+user);
@@ -117,10 +133,9 @@ public class UserHandler {
 		}
 
 	}
-	
+	//邮件发送
 	@Autowired
 	private JavaMailSender mailSender;
-	
 	private boolean activeAccountMail(String subject,String content,String from,String to){
 		try {
 			MimeMessage mm = mailSender.createMimeMessage();
@@ -136,8 +151,32 @@ public class UserHandler {
 			return false;
 		}
 	}
-	
-	
+
+	//上传头像
+	@RequestMapping(value="setphoto",method=RequestMethod.POST)
+	public String setPhoto(@RequestParam("photodata") String file,PrintWriter out){
+		BASE64Decoder decoder = new BASE64Decoder();
+		byte[] bytes;
+		try {
+			bytes = decoder.decodeBuffer(file);
+			for (int i = 0; i < bytes.length; ++i) {
+				if (bytes[i] < 0) {
+					bytes[i] += 256;
+				}
+			}
+			String filename=new Date().getTime()+""+new Random().nextInt(100000)+".jpg";
+			FileOutputStream photopath = new FileOutputStream("D:\\Tomcat-7.0.30\\webapps\\weiboimage\\"+filename);
+			photopath.write(bytes); 
+			
+			out.println("头像上传成功");
+		} catch (IOException e) {
+			e.printStackTrace();
+			out.println("头像上传失败");
+		}
+		
+		return null;
+	}
+
 
 
 }

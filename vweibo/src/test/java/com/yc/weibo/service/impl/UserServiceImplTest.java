@@ -1,5 +1,8 @@
 package com.yc.weibo.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,14 @@ public class UserServiceImplTest {
 	@Test
 	public void testLogin() {
 		System.out.println(userService.login(new WeiBoUser("pqb","a")));
+	}
+	
+	@Test
+	public void testUpdatePhone() {
+		Map<String,String> paramMap=new HashMap<>();
+		paramMap.put("UimgPath", "111.jpg");
+		paramMap.put("WBUid","1001");
+		System.out.println(userService.updataUserPhoto(paramMap));
 	}
 
 }
