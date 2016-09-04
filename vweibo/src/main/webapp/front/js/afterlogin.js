@@ -138,12 +138,12 @@ function changecentercolors(id){
 }
 
 function showcenterhidediv(id){
-	var sbtitle=document.getElementById(id);
-	if(sbtitle){
-		if(sbtitle.style.display=='block'){
-			sbtitle.style.display='none';
+	var sbtitles=document.getElementById(id);
+	if(sbtitles){
+		if(sbtitles.style.display=='block'){
+			sbtitles.style.display='none';
 		}else{
-			sbtitle.style.display='block';
+			sbtitles.style.display='block';
 		}
 	}
 }
@@ -180,7 +180,7 @@ function superdivcloseimg(id){
 	document.getElementById(id).innerHTML='<img src="front/image/superdivclose.png" id="closepng">';
 }
 
-//取消键关闭添加标签
+//取消键关闭收藏标签
 function closecollectiondiv(id){
 	var cancelbtn2=document.getElementById(id);
 	if(cancelbtn2){
@@ -205,7 +205,7 @@ function closecollectiondiv(id){
 }*/
 
 
-//控制添加标签栏的可见
+//控制收藏标签栏的可见
 function addcollectiondiv(id){
 	var tips2=document.getElementById(id);
 	if(tips2){
@@ -245,15 +245,32 @@ function transmitdivcloseimg(id){
 }
 //colse图标关闭div
 function changetransmitsearch(id){
-	var cancelbtn3=document.getElementById(id);
-	if(cancelbtn3){
-		if(cancelbtn3.style.display=='block'){
-			cancelbtn3.style.display='none';
+	var cancelbtn4=document.getElementById(id);
+	if(cancelbtn4){
+		if(cancelbtn4.style.display=='block'){
+			cancelbtn4.style.display='none';
 		}else{
-			cancelbtn3.style.display='block';
+			cancelbtn4.style.display='block';
 		}
 	}
 }
+
+//转发  换权限（公开，朋友圈。。。）
+function changewords(){
+	document.getElementById("transmit_aa").innerHTML=document.getElementById("choose1").innerHTML;		
+}
+function changewords1(){
+	document.getElementById("transmit_aa").innerHTML=document.getElementById("choose2").innerHTML;	
+}
+
+function changewords2(){
+	document.getElementById("transmit_aa").innerHTML=document.getElementById("choose3").innerHTML;	
+}
+function changewords3(){
+	document.getElementById("transmit_aa").innerHTML=document.getElementById("choose4").innerHTML;	
+}
+
+
 
 //转发  选择完权限后隐藏div 
 function hidetransmitdiv(id){
@@ -261,16 +278,16 @@ function hidetransmitdiv(id){
 }
 //转发   点击公开出现隐藏的div
 function showhidetransmitdiv(id){
-	var sbtitle=document.getElementById(id);
-	if(sbtitle){
-		if(sbtitle.style.display=='block'){
-			sbtitle.style.display='none';
+	var sbtitle2=document.getElementById(id);
+	if(sbtitle2){
+		if(sbtitle2.style.display=='block'){
+			sbtitle2.style.display='none';
 		}else{
-			sbtitle.style.display='block';
+			sbtitle2.style.display='block';
 		}
 	}
 }
-//控制添加标签栏的可见
+//控制转发栏的可见
 function addtransmitdiv(id){
 	var tips2=document.getElementById(id);
 	if(tips2){
@@ -282,14 +299,35 @@ function addtransmitdiv(id){
 	}
 }
 
-//控制添加标签栏的可见
+//控制评论标签栏的可见
 function addcommentdiv(id){
-	var tips2=document.getElementById(id);
-	if(tips2){
-		if(tips2.style.display=='block'){
-			tips2.style.display='none';
+	var tips3=document.getElementById(id);
+	if(tips3){
+		if(tips3.style.display=='block'){
+			tips3.style.display='none';
 		}else{
-			tips2.style.display='block';
+			tips3.style.display='block';
+		}
+	}
+}
+
+function addcommentdiv1(id){
+	var tips4=document.getElementById(id);
+	if(tips4){
+		if(tips4.style.display=='block'){
+			tips4.style.display='none';
+		}else{
+			tips4.style.display='block';
+		}
+	}
+}
+function addcommentdiv2(id){
+	var tips5=document.getElementById(id);
+	if(tips5){
+		if(tips5.style.display=='block'){
+			tips5.style.display='none';
+		}else{
+			tips5.style.display='block';
 		}
 	}
 }

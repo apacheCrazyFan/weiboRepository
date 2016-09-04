@@ -29,7 +29,7 @@
             <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
             <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
             <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
-            <li><a href="javascript:void(0)" class="personPage">${sessionScope.user.uname}</a></li>
+            <li><a href="javascript:void(0)" class="personPage">巴拉拉</a></li>
         </ul>
         <div class="settingArea">
         	<a href="javascript:void(0)" class="message_pic"></a>
@@ -178,10 +178,10 @@
                     
                     <div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv('transmit_choose')">
                         <ul>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changeword()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changeword1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changeword2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changeword3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changewords()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changewords1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changewords2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changewords3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
                         </ul>
            			 </div>
               </div>
@@ -199,14 +199,14 @@
         
        <div id="center-part-content_01">
             	<a href="javascript:void(0)" id="center-part_img"><img src="front/image/userphoto001.png"/></a>
-                <a href="javascript:void(0)" class="center-part_way" id="center-part_way1" onClick='showcenterhidediv("center-part_choose1")' onMouseOver="changecentercolor('center-part_way1')" onMouseOut="changecentercolors('center-part_way1')"><img src="front/image/conter-part_wayimg01.png"/></a>
+                <a href="javascript:void(0)" class="center-part_way" id="center-part_way1" onClick="showcenterhidediv('center-part_choose1')"      onMouseOver="changecentercolor('center-part_way1')" onMouseOut="changecentercolors('center-part_way1')"><img src="front/image/conter-part_wayimg01.png"/></a>
                     <div style="display:none;" class="center-partchoose" id="center-part_choose1" onMouseUp="hidecenterdiv('center-part_choose1')">
                         <ul>
-                            <li class="center-partc1" id="center-partchoose1" style="height:40px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
-                           <li class="center-partc1" id="center-partchoose2" style="height:40px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>
-                            <li class="center-partc1" id="center-partchoose3" style="height:40px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>
-                           <li class="center-partc1" id="center-partchoose4" style="height:40px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>
-                        </ul>
+                            <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
+                           <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>
+                            <li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>
+                           <li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>
+                   	  </ul>
                 	</div>
    
                 <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
@@ -214,14 +214,12 @@
                     <li style="height:15px;width:150px;"><a href="javascript:void(0)">3</a>小时前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p" style="width:500px;position:relative;left:29px;">阿里巴巴集团董事局主席马云成功的十大法则！不要抱怨，寻找机会，时刻拥有梦想，尊重文化，取一个好听的名字</p>
-               <div id="content_img01" style="width:"><img src="front/image/weiboimg002.png"/>
-            
-               </div>
+               <div id="content_img01"><img src="front/image/weiboimg002.png"/></div>
                
                <div id="center_footnum">
                    <a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv('center_footnum1_col')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>
                    <a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv('center_footnum2_transmit')"><img src="front/image/center-part_foot02.png" id="foot01_img"/>204</a>
-                   <a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv('comment_div')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>45</a>
+                   <a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv1('comment_div1')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>45</a>
                    <a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>765</a>
                </div>
                
@@ -260,15 +258,15 @@
                     
                     <div id="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv('transmit_choose')">
                         <ul>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changeword()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changeword1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changeword2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changeword3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changewords()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changewords1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changewords2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changewords3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
                         </ul>
            			 </div>
               </div>
               
-              <div id="comment_div" style="display:none;">
+              <div id="comment_div1" class="comment_div" style="display:none;">
               		<img src="front/image/comment_header_img.png" id="comment_img">
                     <input type="text" id="comment_input"/><br>
                     <a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>
@@ -276,8 +274,7 @@
                     <input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>
                     <img src="front/image/comment_btn.png" id="comment_btn"/>
               </div>
-              
-               
+                
         </div>
        
        <div id="center-part-content_01">
@@ -304,7 +301,7 @@
                <div id="center_footnum">
                    <a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv('center_footnum1_col')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>
                    <a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv('center_footnum2_transmit')"><img src="front/image/center-part_foot02.png" id="foot01_img"/>204</a>
-                   <a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv('comment_div')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>45</a>
+                   <a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv2('comment_div2')"><img src="front/image/center-part_foot03.png"  id="foot01_img"/>45</a>
                    <a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>765</a>
                </div>
                
@@ -343,15 +340,15 @@
                     
                     <div id="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv('transmit_choose')">
                         <ul>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changeword()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changeword1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changeword2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
-                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changeword3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changewords()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changewords1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changewords2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
+                            <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changewords3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
                         </ul>
            			 </div>
               </div>
               
-              <div id="comment_div" style="display:none;">
+              <div id="comment_div2" class="comment_div" style="display:none;">
               		<img src="front/image/comment_header_img.png" id="comment_img">
                     <input type="text" id="comment_input"/><br>
                     <a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>
@@ -359,11 +356,11 @@
                     <input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>
                     <img src="front/image/comment_btn.png" id="comment_btn"/>
               </div>
-              
+            </div>
                
         </div>
        
-    </div>  
+    </div> 
     
     <div id="right-part">
     	<div id="right-part-content">
@@ -380,19 +377,34 @@
             </div>
         </div>
         
-        <div class="hot_topic"><!--230 297-->
-            <span class="hot_topic_head">热门话题<a href="#" class="hot_topic_change">换一换</a></span>
+        <div class="hot_topic">
+            <span class="hot_topic_head">热门话题<a href="javascript:void(0)" class="hot_topic_change">换一换</a></span>
             <div class="hot_topic_content">
-                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
-                <a href="#" class="hot_topic_detail">#胖子没#</a><span class="hot_topic_detail_click">172.2万</span><br/>
-                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
-                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
-                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
-                <a href="#" class="hot_topic_detail">#胖子爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
-                <a href="#" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="javascript:void(0)" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="javascript:void(0)" class="hot_topic_detail">#胖子没#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="javascript:void(0)" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="javascript:void(0)" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="javascript:void(0)" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="javascript:void(0)" class="hot_topic_detail">#胖子爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
+                <a href="javascript:void(0)" class="hot_topic_detail">#胖子没人爱#</a><span class="hot_topic_detail_click">172.2万</span><br/>
             </div>
          </div>
 
+
+		<div class="goodfriend_trends">
+			<div id="goodfriend_trends_head">
+            	<span class="goodfriend_trends_head">好友关注动态</span>
+            </div>
+            <span class="goodfriend_trends_detail">你赞过他的微博</span><br/>
+            <div class="goodfriend_trends_content">
+              	 <img src="front/image/goodfriend_trens.png" id="goodfriend_img"/>
+              	 <a href="javascript:void(0)"><span id="goodfriend_word1">文神原</span></a><br>
+              	 <a href="javascript:void(0)"><span id="goodfriend_word2">新兰本《初》编...</span></a>
+              	 <input type="image" src="front/image/attention_friend.png" id="goodfriend_attention"/>
+            </div>
+         </div>
+		
+		
         
     </div> 
     
