@@ -13,9 +13,11 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 	
 	public static final int SINGLEFILESIZE = 500*1024*1024;  //500M
 	
-	public static String PICPATH = "../weibopics";
+	public static String PICPATH = "/weibopics/";
 	
-	public static String VIDEOPATH = "../weibovideoes";
+	public static String VIDEOPATH = "/weibovideoes/";
 	
-	public static String MUSICPATH = "../weibomusics";
+	public static String MUSICPATH = "/weibomusics/";
+	
+	public static String PROJECTNAME = "vweibo";
 }

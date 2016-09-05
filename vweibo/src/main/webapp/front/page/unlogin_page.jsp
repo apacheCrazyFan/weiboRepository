@@ -23,8 +23,8 @@
         </div>
         <div id="registerandlogin">
         	<ul>
-            	<li style="height:0px;"><a href="page/login.jsp" name="login" id="login">登录</a></li>
-                <li style="height:0px;"><a href="page/register.jsp" name="register" id="register">注册</a></li>
+            	<li style="height:0px;"><a href="front/page/login.jsp" name="login" id="login">登录</a></li>
+                <li style="height:0px;"><a href="front/page/register.jsp" name="register" id="register">注册</a></li>
             </ul>
         </div>
         

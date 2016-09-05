@@ -284,6 +284,9 @@ create table WeiBo(
        yesOrno char(2)				  --是否是话题产生的weibo						
        --预留字段      
 );
+create sequence seq_wb_wbid start with 10001;
+
+select * from WeiBo;
 select count(WBid) from WeiBo where WBUId = 1001;
 
 insert into WeiBo values(101,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N');

@@ -125,8 +125,8 @@
                 <span id="s1"><img src="front/image/weibonav.png"/></span>
                 <a href="javascript:void(0)"><span id="s2" style="color:red;">王宝强，马蓉离婚案</span></a>
         	</p>
-        	<form action="publish/weibo" method="POST" target="id_iframe" enctype="multipart/form-data">
-       			<textarea class="W_input" id="txt" title="微博输入框" name="" node-type="textE1" content=""></textarea>
+        	<form action="weibo/publish" method="POST" enctype="multipart/form-data">
+       			<textarea class="W_input" id="txt" title="微博输入框" name="textContent" node-type="textE1" content=""></textarea>
         		<a href="javascript:void(0)" id="wword"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
             	<a href="javascript:showUploadPicsBlock()" onblur="javascript:showUploadPicsNone()" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
            	 	<a href="javascript:showUploadVideosBlock()" onblur="javascript:showUploadVideosNone()" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
@@ -142,7 +142,6 @@
             			<input type="file" name="myVideoFile" multiple="multiple" id="weibo_videoes" />
             		</div>
             </form>
-            <iframe id="id_iframe" name="id_iframe" style="display:none"></iframe>  
             
             <div id="choose" style="display:none;" onMouseUp="hidediv()">
             	<ul>
