@@ -7,6 +7,7 @@
 <head>
 <meta charset="utf-8">
 <base href="/vweibo/">
+
 <style type="text/css">
 	#uploadPics{
 		display: none;
@@ -25,12 +26,26 @@
 </style>
 <title>登录后的页面</title>
 <link type="text/css" rel="stylesheet" href="front/css/afterlogin.css"/>
+<link rel="stylesheet" href="front/css/blueimp-gallery.css">
+<link rel="stylesheet" href="front/css/blueimp-gallery-indicator.css">
+<link rel="stylesheet" href="front/css/blueimp-gallery-video.css">
+<link rel="stylesheet" href="front/css/demo.css">
+
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/session.js"></script><!-- js操作session的包 -->
+<script src="front/js/blueimp-helper.js"></script>
+<script src="front/js/blueimp-gallery.js"></script>
+<script src="front/js/blueimp-gallery-fullscreen.js"></script>
+<script src="front/js/blueimp-gallery-indicator.js"></script>
+<script src="front/js/blueimp-gallery-video.js"></script>
+<script src="front/js/blueimp-gallery-vimeo.js"></script>
+<script src="front/js/blueimp-gallery-youtube.js"></script>
+<script src="front/js/vendor/jquery.js"></script>
+<script src="front/js/jquery.blueimp-gallery.js"></script>
+<script src="front/js/demo.js"></script>
 <script type="text/javascript" >
-	
-	
+
 	function showUploadPicsBlock(){
 		$("#uploadPics").css("display","block");
 		
@@ -197,8 +212,8 @@
                 </div>
    
                 <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
-                	<li id="center-part_li" style="height:15px;position:relative;left:18px;">APP菌</li>
-                    <li style="height:15px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
+                	<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">APP菌</li>
+                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p" style="width:500px;position:relative;left:29px;">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
                 doge]！而且相比之下TheClocks有数字和指针两种形式，还可以设定闹铃中区也有，而且free帮APP菌卖安利#</p>
@@ -281,12 +296,44 @@
                 	</div>
    
                 <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
-                	<li id="center-part_li" style="height:15px;position:relative;left:18px;">百科酱</li>
-                    <li style="height:15px;width:150px;"><a href="javascript:void(0)">3</a>小时前 来自 weibo.com</li>
+                	<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">百科酱</li>
+                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">3</a>小时前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p" style="width:500px;position:relative;left:29px;">阿里巴巴集团董事局主席马云成功的十大法则！不要抱怨，寻找机会，时刻拥有梦想，尊重文化，取一个好听的名字</p>
-               <div id="content_img01"><img src="front/image/weiboimg002.png"/></div>
+                <div id="content_img01"><!-- <img src="front/image/weiboimg002.png"/> -->
+              		
+				   <div id="blueimp-image-carousel"
+						class="blueimp-gallery blueimp-gallery-carousel">
+						<div class="slides"></div>
+						<h3 class="title"></h3>
+						<a class="prev">‹</a> 
+						<a class="next">›</a> 
+						<a class="play-pause"></a>
+					</div>
+					<br>
+					<div id="blueimp-video-carousel"
+						class="blueimp-gallery blueimp-gallery-controls blueimp-gallery-carousel">
+						<div class="slides"></div>
+						<h3 class="title"></h3>
+						<a class="prev">‹</a> 
+						<a class="next">›</a> 
+						<a class="play-pause"></a>
+					</div>
+					<br>
+					<div id="links" class="links"></div>
+					<div id="blueimp-gallery" class="blueimp-gallery">
+						<div class="slides"></div>
+						<h3 class="title"></h3>
+						<a class="prev">‹</a> 
+						<a class="next">›</a> 
+						<a class="close">×</a>
+						<a class="play-pause"></a>
+						<ol class="indicator"></ol>
+					</div>
+					
+             	 </div>
                
+        
                <div id="center_footnum">
                    <a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv('center_footnum1_col')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>
                    <a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv('center_footnum2_transmit')"><img src="front/image/center-part_foot02.png" id="foot01_img"/>204</a>
@@ -361,8 +408,8 @@
                 	</div>
    
                 <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
-                	<li id="center-part_li" style="height:15px;position:relative;left:18px;">网易云音乐</li>
-                    <li style="height:15px;width:150px;"><a href="javascript:void(0)">20</a>分钟前 来自 weibo.com</li>
+                	<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">网易云音乐</li>
+                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">20</a>分钟前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p" style="width:500px;position:relative;left:29px;">音乐一响起，好似曾经的追剧时光回来了！用一首歌的时间去感受中国电视剧20年！一起来看！</p>
                <div id="content_img01">
@@ -479,8 +526,6 @@
             </div>
          </div>
 		
-		
-        
     </div> 
     
     <!-- <div id="foot-part">

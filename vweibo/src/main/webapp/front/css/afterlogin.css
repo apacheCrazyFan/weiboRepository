@@ -491,11 +491,12 @@ textarea {
 	position: relative;
 	top: 30px;
 	right: 50px;
+	font-size:13px;
 }
 
 #center-part_p {
 	position: relative;
-	bottom: 70px;
+	bottom: 60px;
 	left: 80px;
 	font-size: 14px;
 	line-height: 20px;
@@ -736,11 +737,14 @@ textarea {
 #right-part {
 	float: left;
 	width: 230px;
-	height:600px;
+	min-height:500px;
+	height:auto;
 	background: url(../image/bg-9.jpg) repeat-y;
 }
 
 #right-part-content {
+	position:relative;
+	top:50px;
 	margin-top: 20px;
 	height: 200px;
 	width: 220px;
@@ -749,11 +753,11 @@ textarea {
 }
 .hot_topic{
 	position:relative;
-	top:10px;
+	top:60px;
 	width:220px;
 	height:360px;
 	border:1px solid #999;
-	border-radius:3px;
+	border-radius:5px;
 	background:#FFF;}
 .hot_topic_head{
 	display:inline-block;
@@ -794,12 +798,13 @@ textarea {
 	}
 .goodfriend_trends{
 	position:relative;
-	top:20px;
+	top:70px;
 	width:220px;
 	height:360px;
 	border:1px solid #999;
-	border-radius:3px;
+	border-radius:5px;
 	background:#FFF;
+	margin-bottom:20px;
 }
 #goodfriend_trends_head{
 	border-bottom:1px solid #CCC;
@@ -841,7 +846,7 @@ textarea {
 }
 #goodfriend_attention{
 	position:relative;
-	left:40px;
+	left:50px;
 	bottom:20px;
 }
 
