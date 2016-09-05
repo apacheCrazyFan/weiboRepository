@@ -7,18 +7,71 @@
 <head>
 <meta charset="utf-8">
 <base href="/vweibo/">
+<style type="text/css">
+	#uploadPics{
+		display: none;
+		background-color: gray;
+		margin-top:5px;
+		margin-left:50px;
+		width:150px;
+	}
+	#uploadVideo{
+		display: none;
+		background-color: gray;
+		margin-top:5px;
+		margin-left:110px;
+		width:150px;
+	}
+</style>
 <title>登录后的页面</title>
 <link type="text/css" rel="stylesheet" href="front/css/afterlogin.css"/>
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/session.js"></script><!-- js操作session的包 -->
 <script type="text/javascript" >
-	$(document).ready(function () {
-    // $.session.get('user');
-    
-     var msg =  $.session.toString();
-     alert(msg);
-      }); 
+	
+	
+	function showUploadPicsBlock(){
+		$("#uploadPics").css("display","block");
+		
+		var obj = $("#weibo_videoes");
+		if (!window.addEventListener) {   //如果是IE
+			obj.outerHTML+=''; 
+		}else{
+			obj.value = ""; 
+		}
+		
+		$("#uploadVideo").css("display","none");
+	}
+	
+	function showUploadVideosBlock(){
+		$("#uploadVideo").css("display","block");
+		
+		var obj = $("#weibo_pics");
+		if (!window.addEventListener) {   //如果是IE
+			obj.outerHTML+=''; 
+		}else{
+			obj.value = ""; 
+		}
+		
+		$("#uploadPics").css("display","none");
+	}
+	
+	function showUploadPicsNone(){
+			$("#uploadVideo").css("display","none");
+	} 
+	function showUploadVideosNone(){
+		$("#uploadPics").css("display","none");
+	} 
+	
+	/* var booleanPic = false;
+	var booleanVideo = false;
+	function booleanPicsIsClick(){
+		booleanPic = true;
+	}
+	function booleanVideoesIsClick(){
+		booleanVideo = true;
+	} */
 </script>
 </head>
 
@@ -72,16 +125,24 @@
                 <span id="s1"><img src="front/image/weibonav.png"/></span>
                 <a href="javascript:void(0)"><span id="s2" style="color:red;">王宝强，马蓉离婚案</span></a>
         	</p>
-       		<textarea class="W_input" id="txt" title="微博输入框" name="" node-type="textE1" content=""></textarea>
-        	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
-            <a href="javascript:void(0)" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
-            <a href="javascript:void(0)" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
-            <a href="javascript:void(0)" id="wword"><img src="front/image/write_img4.png" id="wimg"/>话题</a>
-            <a href="javascript:void(0)" id="wword"><img src="front/image/write_img5.png" id="wimg"/>头条文章</a>
-            <a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
-            
-            <a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
-            <input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu">	
+        	<form action="publish/weibo" method="POST" target="id_iframe" enctype="multipart/form-data">
+       			<textarea class="W_input" id="txt" title="微博输入框" name="" node-type="textE1" content=""></textarea>
+        		<a href="javascript:void(0)" id="wword"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
+            	<a href="javascript:showUploadPicsBlock()" onblur="javascript:showUploadPicsNone()" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
+           	 	<a href="javascript:showUploadVideosBlock()" onblur="javascript:showUploadVideosNone()" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
+            	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img4.png" id="wimg"/>话题</a>
+            	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img5.png" id="wimg"/>头条文章</a>
+            	<a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
+            	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
+            	<input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu">	
+            		<div id="uploadPics" onclick="javascript:booleanPicsIsClick()">            		
+            			<input type="file" name="myPicFile" multiple="multiple" id="weibo_pics" />
+            		</div>
+            		<div id="uploadVideo" onclick="javascript:booleanVideoesIsClick()">            		
+            			<input type="file" name="myVideoFile" multiple="multiple" id="weibo_videoes" />
+            		</div>
+            </form>
+            <iframe id="id_iframe" name="id_iframe" style="display:none"></iframe>  
             
             <div id="choose" style="display:none;" onMouseUp="hidediv()">
             	<ul>
