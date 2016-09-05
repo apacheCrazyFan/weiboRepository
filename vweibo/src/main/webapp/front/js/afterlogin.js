@@ -2,7 +2,7 @@
 $(document).ready(function(){  
 	var range = 50;             //距下边界长度/单位px  
 	var elemt = 500;           //插入元素高度/单位px  
-	var maxnum = 5;            //设置加载最多次数  
+	var maxnum = 3;            //设置加载最多次数  
 	var num = 1;  
 	var totalheight = 0; 
 	for(var i=0;i<4;i++){
@@ -24,6 +24,7 @@ $(document).ready(function(){
 		}  
 	});  
 });
+
   
 //计算中文字符
 function byteLength(str) {
