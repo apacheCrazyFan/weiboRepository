@@ -169,7 +169,7 @@ a {
 	float: left;
 	position: fixed;
 	left: 0px;
-	background-color: rgba(145, 166, 195, .6);
+	background-color: rgba(145, 166, 195, .8);
 }
 
 #left-part-content {
@@ -306,11 +306,6 @@ textarea {
 	background: #FFF;
 }
 
-.choosea2 {
-	position: relative;
-	top: 4px;
-}
-
 #choosea1:hover {
 	background: #CCC;
 }
@@ -341,6 +336,8 @@ textarea {
 #fabu {
 	float: right;
 	padding-right: 10px;
+	position:relative;
+	bottom:5px;
 }
 
 #navigation {
@@ -479,7 +476,7 @@ textarea {
 
 .center-part_way {
 	position: relative;
-	left: 480px;
+	left: 475px;
 	bottom: 20px;
 }
 
@@ -506,8 +503,9 @@ textarea {
 
 #content_img01 {
 	position: relative;
-	left: 80px;
+	left: 40px;
 	bottom: 60px;
+	width:500px;
 }
 
 .center-partchoose {
@@ -516,7 +514,7 @@ textarea {
 	background: #FFF;
 	position: relative;
 	left: -18px;
-	bottom: -35px;
+	bottom: -40px;
 	z-index: 99;
 	float: right;
 	border: 1px solid #CCC;
@@ -555,7 +553,7 @@ textarea {
 #center_footnum {
 	position: relative;
 	bottom: 30px;
-	border-top:#000 solid 1px;
+	border-top:#CCC solid 1px;
 }
 
 #center_footnum1, #center_footnum2, #center_footnum3, #center_footnum4 {
@@ -701,7 +699,7 @@ textarea {
 	background: #FFF;}
 .c1:hover{
 	color:red;}
-#comment_div{
+.comment_div{
 	height:100px;
 	border-top:#CCC 1px solid;
 	background:#FAFAFA;}
@@ -738,9 +736,8 @@ textarea {
 #right-part {
 	float: left;
 	width: 230px;
-	height:1000px;
+	height:600px;
 	background: url(../image/bg-9.jpg) repeat-y;
-	border-radius:5px;
 }
 
 #right-part-content {
@@ -754,7 +751,7 @@ textarea {
 	position:relative;
 	top:10px;
 	width:220px;
-	height:250px;
+	height:360px;
 	border:1px solid #999;
 	border-radius:3px;
 	background:#FFF;}
@@ -795,7 +792,58 @@ textarea {
 	margin-right:15px;
 	margin-top:11px;
 	}
+.goodfriend_trends{
+	position:relative;
+	top:20px;
+	width:220px;
+	height:360px;
+	border:1px solid #999;
+	border-radius:3px;
+	background:#FFF;
+}
+#goodfriend_trends_head{
+	border-bottom:1px solid #CCC;
+}
+.goodfriend_trends_head{
+	font:bold 13px "宋体";
+	padding-left:18px;
+	padding-top:12px;
+}
+.goodfriend_trends_detail{
+	font-size:13px;
+	position:relative;
+	top:10px;
+	left:15px;
+}
+.goodfriend_trends_content{
+	height:60px;
+	background:#F7F7F7;	
+	position:relative;
+	top:20px;
+	font-size:12px;
+}
+#goodfriend_img{
+	position:relative;
+	top:16px;
+	left:10px;
+}
+#goodfriend_word1{
+	position:relative;
+	bottom:6px;
+	left:10px;
+	color:red;
+}
 
+#goodfriend_word2{
+	position:relative;
+	bottom:16px;
+	left:46px;
+}
+#goodfriend_attention{
+	position:relative;
+	left:40px;
+	bottom:20px;
+}
 
 
 #buoys{
