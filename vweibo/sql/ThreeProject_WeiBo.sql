@@ -277,6 +277,7 @@ create table WeiBo(
        WBUId int
            constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
+      -- WBlocation varchar2(100),
        WBtxt  clob,                   --微博文字内容
        WBpic  varchar2(500),          --微博图片路径
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
@@ -284,6 +285,10 @@ create table WeiBo(
        yesOrno char(2)				  --是否是话题产生的weibo						
        --预留字段      
 );
+create sequence seq_wb_wbid start with 10001;
+
+alter table WeiBo add WBlocation varchar2(100);
+select * from WeiBo;
 select count(WBid) from WeiBo where WBUId = 1001;
 
 insert into WeiBo values(101,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N');

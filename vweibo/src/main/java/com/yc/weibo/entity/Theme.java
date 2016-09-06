@@ -1,8 +1,12 @@
 package com.yc.weibo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Theme {
+public class Theme implements Serializable{
+
+	private static final long serialVersionUID = 8986948767445385393L;
+	
 	private int Tid;					//--话题id
 	private String Tname;				//--话题标题
 	private String TUid; 				//--话题发起人
