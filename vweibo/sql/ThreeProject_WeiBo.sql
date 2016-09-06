@@ -96,7 +96,7 @@ create table UserTag(
                            --   专家:医疗 育儿 IT互联网 电台 财经 教育.. 
                            --   其他：..
 );
-create or replace sequence seq_ut_utid start with 1 increment by 1;
+create sequence seq_ut_utid start with 1 increment by 1;
 
 insert into UserTag values(1,'明星',1);
 insert into UserTag values(2,'作家',1);
@@ -150,12 +150,12 @@ insert into WeiBoUser values(1003,'巴拉拉','sa','15675471040','1373930633@qq.com
 insert into WeiBoUser values(1004,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 delete from WeiBoUser where WBUid in (1003,1004);
-<<<<<<< HEAD
+
 update WeiBoUser set UimgPath='11.jpg' where WUid=1001;
-=======
+
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
+
 --用户之间联系中间表（n ~ n）
 create table Relationship(
        Rid int primary key,           --用户联系id'
