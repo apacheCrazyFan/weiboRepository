@@ -255,6 +255,20 @@ textarea {
 	border:1px #CCC solid;
 }
 
+#uploadPics{
+		background-color: gray;
+		width:150px;
+		position:relative;
+		right:180px;
+		top:5px;
+	}
+#uploadVideo{
+		background-color: gray;
+		margin-top:5px;
+		margin-left:110px;
+		width:150px;
+	}
+
 #wimg {
 	position: relative;
 	top: 7px;

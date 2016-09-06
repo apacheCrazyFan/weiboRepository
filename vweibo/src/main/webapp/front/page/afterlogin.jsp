@@ -9,20 +9,7 @@
 <base href="/vweibo/">
 
 <style type="text/css">
-	#uploadPics{
-		display: none;
-		background-color: gray;
-		margin-top:5px;
-		margin-left:50px;
-		width:150px;
-	}
-	#uploadVideo{
-		display: none;
-		background-color: gray;
-		margin-top:5px;
-		margin-left:110px;
-		width:150px;
-	}
+	
 </style>
 <title>登录后的页面</title>
 <link type="text/css" rel="stylesheet" href="front/css/afterlogin.css"/>
@@ -45,49 +32,6 @@
 <script src="front/js/jquery.blueimp-gallery.js"></script>
 <script src="front/js/demo.js"></script>
 <script type="text/javascript" >
-
-	function showUploadPicsBlock(){
-		$("#uploadPics").css("display","block");
-		
-		var obj = $("#weibo_videoes");
-		if (!window.addEventListener) {   //如果是IE
-			obj.outerHTML+=''; 
-		}else{
-			obj.value = ""; 
-		}
-		
-		$("#uploadVideo").css("display","none");
-	}
-	
-	function showUploadVideosBlock(){
-		$("#uploadVideo").css("display","block");
-		
-		var obj = $("#weibo_pics");
-		if (!window.addEventListener) {   //如果是IE
-			obj.outerHTML+=''; 
-		}else{
-			obj.value = ""; 
-		}
-		
-		$("#uploadPics").css("display","none");
-	}
-	
-	function showUploadPicsNone(){
-			$("#uploadVideo").css("display","none");
-	} 
-	function showUploadVideosNone(){
-		$("#uploadPics").css("display","none");
-	} 
-	
-	/* var booleanPic = false;
-	var booleanVideo = false;
-	function booleanPicsIsClick(){
-		booleanPic = true;
-	}
-	function booleanVideoesIsClick(){
-		booleanVideo = true;
-	} */
-	
 	
 	function publishWeibo(){
 		$.ajax({
@@ -160,18 +104,19 @@
         	<form action="" method="" enctype="multipart/form-data" id="publishForm">
        			<textarea class="W_input" id="txt" title="微博输入框" name="textContent" node-type="textE1" content=""></textarea>
         		<a href="javascript:void(0)" id="wword"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
-            	<a href="javascript:showUploadPicsBlock()" onblur="javascript:showUploadPicsNone()" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
-           	 	<a href="javascript:showUploadVideosBlock()" onblur="javascript:showUploadVideosNone()" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
+        		
+            	<a href="javascript:void(0)" onClick="showUploadPicsNone('weibo_pics')" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
+           	 	<a href="javascript:void(0)" onClick="showUploadVideosNone('weibo_videoes')" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
             	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img4.png" id="wimg"/>话题</a>
             	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img5.png" id="wimg"/>头条文章</a>
             	<a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
             	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
             	<input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()">	
-            		<div id="uploadPics" onclick="javascript:booleanPicsIsClick()">            		
-            			<input type="file" name="myPicFile" multiple="multiple" id="weibo_pics" />
+            		<div id="uploadPics">            		
+            			<input type="file" name="myPicFile" multiple="multiple" id="weibo_pics" style="display:none;"/>
             		</div>
-            		<div id="uploadVideo" onclick="javascript:booleanVideoesIsClick()">            		
-            			<input type="file" name="myVideoFile" multiple="multiple" id="weibo_videoes" />
+            		<div id="uploadVideo">            		
+            			<input type="file" name="myVideoFile" multiple="multiple" id="weibo_videoes" style="display:none;"/>
             		</div>
             </form>
             
@@ -182,8 +127,12 @@
                    	<a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changeword2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
                     <a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:90px;height:2px;position:relative;top:4px;right:5px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changeword3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
                 </ul>
-           
             </div>
+            
+            <div>
+            	
+            </div>
+            
     	</div>
         
         <div id="navigation" style="display:block">
