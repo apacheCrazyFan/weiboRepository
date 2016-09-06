@@ -8,25 +8,27 @@ function searchBlur(){
 	$('.searchTextBorder').css('background','#f2f2f2');
 	$('.searchText').css('background','#f2f2f2');
 }
+
 function listOver(listId){
-	$('.question_list'+listId).css('background','#fff');
-	$('.question_list'+listId).css('border-right','1px solid #fff');
-	$('.question_list'+listId).css('border-top','2px solid #3cf');
-	$('.question_list'+listId).css('border-left','1px solid #3cf');
+	$('.question_list'+listId).css('background','#fff');	
 	$('.question_list'+listId).css('border-bottom','2px solid #3cf');
-	$('.question_list'+listId).css('color','#000');
-	$('.question_list'+listId).css('height','30px');
-	$('.question_list'+listId).css('width','165px');
+	$('.question_list'+listId).css('border-right','1px solid #fff');	
+	$('.question_list'+listId).css('height','30px');	
+	$('.span'+listId).hide();
 	$('.list_detail'+listId).show();
 }
 function listOut(listId){
-	$('.question_list'+listId).css('background','#f5f5f5');
+	$('.question_list'+listId).css('background','#f5f5f5');	
+	$('.question_list'+listId).css('border-bottom','1px solid #ccc');	
 	$('.question_list'+listId).css('border-right','1px solid #ccc');
-	$('.question_list'+listId).css('border-top','3px solid #f5f5f5');
-	$('.question_list'+listId).css('border-left','2px solid #f5f5f5');
-	$('.question_list'+listId).css('border-bottom','1px solid #ccc');
-	$('.question_list'+listId).css('color','#000');
-	$('.question_list'+listId).css('height','30px');
-	$('.question_list'+listId).css('width','163px');
+	$('.question_list'+listId).css('height','31px');
+	$('.span'+listId).show();
 	$('.list_detail'+listId).hide();
+}
+
+function ques_list_click(listId){
+	for(var i=1;i<=7;i++){
+		$('.content'+i).hide();	
+	}	
+	$('.content'+listId).show();
 }
