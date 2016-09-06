@@ -87,6 +87,23 @@
 	function booleanVideoesIsClick(){
 		booleanVideo = true;
 	} */
+	
+	
+	function publishWeibo(){
+		$.ajax({
+            cache: true,
+            type: "POST",
+            url: "weibo/publish",
+            data:$('#publishForm').serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+                $("#commonLayout_appcreshi").parent().html(data);
+            }
+        });		
+	}
 </script>
 </head>
 
@@ -140,7 +157,7 @@
                 <span id="s1"><img src="front/image/weibonav.png"/></span>
                 <a href="javascript:void(0)"><span id="s2" style="color:red;">王宝强，马蓉离婚案</span></a>
         	</p>
-        	<form action="weibo/publish" method="POST" enctype="multipart/form-data">
+        	<form action="" method="" enctype="multipart/form-data" id="publishForm">
        			<textarea class="W_input" id="txt" title="微博输入框" name="textContent" node-type="textE1" content=""></textarea>
         		<a href="javascript:void(0)" id="wword"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
             	<a href="javascript:showUploadPicsBlock()" onblur="javascript:showUploadPicsNone()" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
@@ -149,7 +166,7 @@
             	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img5.png" id="wimg"/>头条文章</a>
             	<a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
             	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
-            	<input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu">	
+            	<input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()">	
             		<div id="uploadPics" onclick="javascript:booleanPicsIsClick()">            		
             			<input type="file" name="myPicFile" multiple="multiple" id="weibo_pics" />
             		</div>

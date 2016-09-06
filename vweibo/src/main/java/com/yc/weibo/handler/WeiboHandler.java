@@ -1,6 +1,8 @@
 package com.yc.weibo.handler;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,10 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.weibo.DataDic.DataDic;
-import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.WeiboService;
+import com.yc.weibo.util.AddressUtil;
 
 
 @Controller
@@ -35,13 +38,13 @@ public class WeiboHandler {
 	private WeiboService weiboService;
 	
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
-	public void publishWeibo(HttpServletRequest request,HttpSession session){
+	@ResponseBody
+	public Map<String,Object> publishWeibo(HttpServletRequest request,HttpSession session){
 		Map<String,Object> map = uploadFile(request);
-		WeiBoUser user = (WeiBoUser)session.getAttribute("user");
-		
-		map.put("userId", user.getWBUid());
 		
 		weiboService.addWeibo(map);
+		
+		return map;
 	}
 	
 	private Map<String, Object> uploadFile(HttpServletRequest request){
@@ -96,11 +99,18 @@ public class WeiboHandler {
 	                    }  
 	                } 
 	                System.out.println( picsMap);
-	                if(txtContent.contains("[[") && txtContent.contains("]]")){
-	                map.put("weiboTitle", txtContent.substring(txtContent.indexOf("[["), txtContent.indexOf("]]")+2)); //截取标题
-	                }
-	                map.put("weiboTag", "");
+	                SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	                Date date=new Date();
+
+	                map.put("userlocation", AddressUtil.getLocation());
+	                map.put("publishDate", dateFormater.format(date));
+	                map.put("weiboTag", null);
 	                map.put("txtContent", txtContent);
+	                if(txtContent.contains("[[") && txtContent.contains("]]")){
+	                	map.put("weiboTitle", txtContent.substring(txtContent.indexOf("[["), txtContent.indexOf("]]")+2)); //截取标题
+	                }else{
+	                	map.put("weiboTitle", null);
+	                }
 	                if(!picsMap.equals("")){
 	                	map.put("picsMap", picsMap.substring(0, picsMap.length()-1));
 	                }else{

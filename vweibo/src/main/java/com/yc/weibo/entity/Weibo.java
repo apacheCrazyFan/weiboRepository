@@ -15,7 +15,16 @@ public class Weibo {
      private String WBmusic;	//可能存在的音乐路径
      
      private boolean yesOrno;	//是否是话题产生的
+     private String WBlocation;
      
+     
+	
+	public String getWBlocation() {
+		return WBlocation;
+	}
+	public void setWBlocation(String wBlocation) {
+		WBlocation = wBlocation;
+	}
 	public boolean isYesOrno() {
 		return yesOrno;
 	}

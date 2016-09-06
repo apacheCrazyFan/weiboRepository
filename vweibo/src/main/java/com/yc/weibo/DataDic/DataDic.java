@@ -20,4 +20,9 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 	public static String MUSICPATH = "/weibomusics/";
 	
 	public static String PROJECTNAME = "vweibo";
+	
+	public static String PROPERTIES = "java.version,java.vendor,java.vendor.url,java.home,java.vm.version,java.vm.vendor,java.vm.name,"
+									+ "java.specification.version,java.specification.vendor,java.specification.name,"
+									+ "java.class.version,java.class.path,java.library.path,java.io.tmpdir,java.compiler,java.ext.dirs,"
+									+ "os.name,os.arch,os.version,file.separator,path.separator,line.separator,user.name,user.home,user.dir";
 }

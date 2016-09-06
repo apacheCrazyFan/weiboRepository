@@ -150,12 +150,12 @@ insert into WeiBoUser values(1003,'巴拉拉','sa','15675471040','1373930633@qq.com
 insert into WeiBoUser values(1004,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 delete from WeiBoUser where WBUid in (1003,1004);
-<<<<<<< HEAD
+
 update WeiBoUser set UimgPath='11.jpg' where WUid=1001;
-=======
+
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
+
 --用户之间联系中间表（n ~ n）
 create table Relationship(
        Rid int primary key,           --用户联系id'
@@ -277,6 +277,7 @@ create table WeiBo(
        WBUId int
            constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
+      -- WBlocation varchar2(100),
        WBtxt  clob,                   --微博文字内容
        WBpic  varchar2(500),          --微博图片路径
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
@@ -286,6 +287,7 @@ create table WeiBo(
 );
 create sequence seq_wb_wbid start with 10001;
 
+alter table WeiBo add WBlocation varchar2(100);
 select * from WeiBo;
 select count(WBid) from WeiBo where WBUId = 1001;
 

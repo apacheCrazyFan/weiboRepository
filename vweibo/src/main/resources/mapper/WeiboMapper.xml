@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.weibo.mapper.WeiboMapper">
 	<insert id="insertWeibo" parameterType="map">
-		insert into WeiBo values (seq_wb_wbid.nextval,#{weiboTag},#{weiboTitle,jdbcType=VARCHAR},#{userId},sysdate,#{txtContent,jdbcType=VARCHAR},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},'n')
+		insert into WeiBo values (seq_wb_wbid.nextval,#{weiboTag},#{weiboTitle,jdbcType=VARCHAR},#{userId},#{publishDate},#{txtContent,jdbcType=VARCHAR},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},'n',#{userlocation,jdbcType=VARCHAR})
 	</insert>
 </mapper>
