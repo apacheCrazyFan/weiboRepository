@@ -16,7 +16,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-         
+
 	<!-- 注解方式，指定bean可能出现的位置 即扫描bean包 -->
 	<context:component-scan base-package="com.yc.weibo" />
 
@@ -67,7 +67,36 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 控制器驱动处理 --> <!-- 同时要注意这个可以配置我们自己的数据转换 -->
-	<mvc:annotation-driven />
+	<!-- <mvc:annotation-driven /> -->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- SpringMVC在超出上传文件限制时,会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->
+<!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的,而且此时还没有进入到Controller方法中 -->
+<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+        <props>
+            <!-- 遇到MaxUploadSizeExceededException异常时,自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->
+            <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>
+        </props>
+    </property>
+</bean>
+	
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxInMemorySize" value="10240" />
+		<property name="maxUploadSize" value="-1" /> 
+	</bean> -->
 	<!-- <mvc:annotation-driven conversion-service="conversionService"/> -->
 
 	<!-- <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"> 

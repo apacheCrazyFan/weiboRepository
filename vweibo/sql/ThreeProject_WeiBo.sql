@@ -288,6 +288,8 @@ create table WeiBo(
 create sequence seq_wb_wbid start with 10001;
 
 alter table WeiBo add WBlocation varchar2(100);
+alter table WeiBo add WBstatue varchar2(20);     --微博的状态  公开 好友圈 群 仅自己可见
+alter table WeiBo modify WBstatue number(1); 
 select * from WeiBo;
 select count(WBid) from WeiBo where WBUId = 1001;
 
