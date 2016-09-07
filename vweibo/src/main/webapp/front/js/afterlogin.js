@@ -1,4 +1,5 @@
 //JavaScript Document
+
 $(document).ready(function(){  
 	var range = 50;             //距下边界长度/单位px  
 	var elemt = 500;           //插入元素高度/单位px  
@@ -110,18 +111,12 @@ function showhidediv(id){
 }
 
 
-function changeword(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose1").innerHTML;		
-}
-function changeword1(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose2").innerHTML;	
-}
-
-function changeword2(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose3").innerHTML;	
-}
-function changeword3(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose4").innerHTML;	
+function changeword(obj){
+	var oo=$(obj);
+	$("#aa").text(oo.html());	//到此是操作屏幕上的内容，    
+	//TODO:现在开始操作隐藏域的内容，  隐藏域中   op的值
+	//alert(oo.attr("data"));
+	$("#form_push_op").attr("value",oo.attr("data"));
 }
 
 //换完权限后隐藏div
@@ -380,14 +375,14 @@ function showtopicinput(id){
 		}
 	}
 }
-//点击表情以后   还需调试
+//点击表情以后   还需调试        
 function clickFace(obj){
 	$("#face_image").hide();
 	//alert($(obj).attr("data"));
 	var face=$(obj).attr("data");
 	
 	var txt=$("#txt");
-	txt.html(txt.html()+face);    
+	txt.val(txt.val()+face);    
 }
 
 //点击话题以后   
@@ -397,5 +392,9 @@ function clicktopic(obj){
 	var topic=$(obj).attr("data");
 	
 	var txt=$("#txt");
-	txt.html(txt.html()+topic);    
+	txt.val(txt.val()+topic);    
 }
+
+
+
+//图片放大镜
