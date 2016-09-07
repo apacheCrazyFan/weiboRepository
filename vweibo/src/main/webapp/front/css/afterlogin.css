@@ -292,12 +292,34 @@ textarea {
 	color: #F00;
 }
 
+#face_image{
+	width:100px;
+	height:94px;
+	position:relative;
+	z-index:99;
+	margin-left:14px;
+	border: 1px solid #999;
+	background: #FFF;
+}
+#topic_input{
+	width:90px;
+	height:36px;
+	line-height:36px;
+	border: 1px solid #999;
+	position:relative;
+	right:36px;
+	z-index:99;
+	background: #FFF;
+}
+
+#topic_input_content:hover{
+	color:red;
+}
+
 #aa {
 	width: 5px;
-	position: relative;
-	bottom: -2px;
-	left: 16px;
 	font-size: 12px;
+	margin-left:130px;
 }
 
 #aa:hover {
@@ -313,7 +335,7 @@ textarea {
 	height: 125px;
 	font-size: 10px;
 	position: relative;
-	left: 75px;
+	left: 115px;
 	bottom: -2px;
 	z-index: 99;
 	border: 1px solid #CCC;
@@ -518,7 +540,7 @@ textarea {
 
 #content_img01 {
 	position: relative;
-	left: 40px;
+	left: 25px;
 	bottom: 60px;
 	width:500px;
 }

@@ -356,3 +356,46 @@ function showUploadVideosNone(id){
 		}
 	}
 }
+//表情的div的控制
+function showfaceimage(id){
+	var tips8=document.getElementById(id);
+	if(tips8){
+		if(tips8.style.display=='block'){
+			tips8.style.display='none';
+		}else{
+			tips8.style.display='block';
+		}
+	}
+}
+
+
+//话题的div的控制
+function showtopicinput(id){
+	var tips9=document.getElementById(id);
+	if(tips9){
+		if(tips9.style.display=='block'){
+			tips9.style.display='none';
+		}else{
+			tips9.style.display='block';
+		}
+	}
+}
+//点击表情以后   还需调试
+function clickFace(obj){
+	$("#face_image").hide();
+	//alert($(obj).attr("data"));
+	var face=$(obj).attr("data");
+	
+	var txt=$("#txt");
+	txt.html(txt.html()+face);    
+}
+
+//点击话题以后   
+function clicktopic(obj){
+	$("#topic_input").hide();
+	//alert($(obj).attr("data"));
+	var topic=$(obj).attr("data");
+	
+	var txt=$("#txt");
+	txt.html(txt.html()+topic);    
+}
