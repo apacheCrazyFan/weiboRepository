@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="front/css/demo.css">
 
 <script src="front/js/jquery-1.11.1.min.js"></script>
+<script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/session.js"></script><!-- js操作session的包 -->
 <script src="front/js/blueimp-helper.js"></script>
@@ -90,19 +91,30 @@
 	
 	
 	function publishWeibo(){
-		$.ajax({
-            cache: true,
-            type: "POST",
-            url: "weibo/publish",
-            data:$('#publishForm').serialize(),// 你的formid
-            async: false,
-            error: function(request) {
-                alert("Connection error");
-            },
-            success: function(data) {
-                $("#commonLayout_appcreshi").parent().html(data);
-            }
-        });		
+		
+		
+		$.ajaxFileUpload({
+                url:'weibo/publish',
+                secureuri:false,
+                fileElementId:'weibo_pics,weibo_videoes',
+                dataType: 'json',
+                type:'post',
+                success: function (data, status)
+                {
+                    alert(data);
+                    if(data.status==1){
+                        alert(data.result);
+                    }else{
+                        alert("【提交失败！】");
+                    }
+                },
+                error: function (data, status, e)
+                {
+                    alert("【服务器异常，请连续管理员！】"+e);
+                }
+            });
+		alert("lai le");
+        return false;		
 	}
 </script>
 </head>
@@ -124,7 +136,7 @@
             <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
             <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
             <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
-            <li><a href="javascript:void(0)" class="personPage">巴拉拉</a></li>
+            <li><a href="javascript:void(0)" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>
         <div class="settingArea">
         	<a href="javascript:void(0)" class="message_pic"></a>
@@ -157,7 +169,7 @@
                 <span id="s1"><img src="front/image/weibonav.png"/></span>
                 <a href="javascript:void(0)"><span id="s2" style="color:red;">王宝强，马蓉离婚案</span></a>
         	</p>
-        	<form action="" method="" enctype="multipart/form-data" id="publishForm">
+        	<form action="weibo/publish" method="POST" enctype="multipart/form-data" id="publishForm">
        			<textarea class="W_input" id="txt" title="微博输入框" name="textContent" node-type="textE1" content=""></textarea>
         		<a href="javascript:void(0)" id="wword"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
             	<a href="javascript:showUploadPicsBlock()" onblur="javascript:showUploadPicsNone()" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
@@ -166,6 +178,7 @@
             	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img5.png" id="wimg"/>头条文章</a>
             	<a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
             	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
+            	<input type="hidden" name="statue" value="1">
             	<input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()">	
             		<div id="uploadPics" onclick="javascript:booleanPicsIsClick()">            		
             			<input type="file" name="myPicFile" multiple="multiple" id="weibo_pics" />

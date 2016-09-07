@@ -22,7 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.service.WeiboService;
@@ -39,12 +42,48 @@ public class WeiboHandler {
 	
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> publishWeibo(HttpServletRequest request,HttpSession session){
+	public Map<String,Object> publishWeibo(@RequestParam("myPicFile") MultipartFile picfile,@RequestParam("myVideoFile") MultipartFile videofile,HttpServletRequest request){
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+        if(picfile.isEmpty() && videofile.isEmpty()){
+            jsonMap.put("status", -1);
+            jsonMap.put("result", "【文件为空！】");
+
+            return jsonMap;
+        }
+        ////得到文件名称 
+        String picfileName=picfile.getOriginalFilename();
+        String videofileName=videofile.getOriginalFilename();
+        
+        System.out.println( picfileName + "   ===  "+videofileName);
+        //
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+       // String uploadPath=request.getSession().getServletContext().getRealPath(Constants.UPLOAD_FILE_DIR+sdf.format(new Date()));
+       // System.out.println(uploadPath);
+      //判断文件夹是否存在 
+       // File uploadDir=new File(uploadPath);
+      //判断是否存在目录 
+       // if(!uploadDir.exists()){
+        //    uploadDir.mkdirs();
+       // }
+        
+        //
 		Map<String,Object> map = uploadFile(request);
+		map.put("weibomap", map);
 		
-		weiboService.addWeibo(map);
+		//
+		//File uploadFile=new File(uploadPath+"/"+fileName);
+       // file.transferTo(uploadFile);//上传
+        System.out.println("上传成功！");
+        jsonMap.put("status", 1);
+        jsonMap.put("result", "【上传成功！】");
+        weiboService.addWeibo(map);
+        
+        
+        return jsonMap;
+        
+		//
 		
-		return map;
 	}
 	
 	private Map<String, Object> uploadFile(HttpServletRequest request){
@@ -141,6 +180,13 @@ public class WeiboHandler {
         LogManager.getLogger().debug("表单域名为：" + name + "值为：" + value);  
     }  
       
+	/**
+	 * 上传文件包括视屏，图片，音乐
+	 * @param item  文件
+	 * @param fileName 文件名
+	 * @param rootPathName  在webapps中的保存文件的文件名
+	 * @param servletContext 主要用来获得当前项目的路径
+	 */
     public void processUploadFile(FileItem item, String fileName,String rootPathName,ServletContext servletContext){  
     	//System.out.println( item);
          
