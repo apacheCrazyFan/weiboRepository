@@ -347,6 +347,12 @@ textarea {
 }
 
 #choosea1 {
+	display:inline-block;
+	width:90px;
+	height:2px;
+	position:relative;
+	top:4px;
+	right:5px;
 	padding: 10px;
 	margin-left: 6px;
 	margin-top: 5px;
