@@ -334,3 +334,27 @@ function addcommentdiv2(id){
 		}
 	}
 }
+
+//视频 图片文件的div的可见与隐藏
+
+function showUploadPicsNone(id){
+	var tips6=document.getElementById(id);
+	if(tips6){
+		if(tips6.style.display=='block'){
+			tips6.style.display='none';
+		}else{
+			tips6.style.display='block';
+		}
+	}
+}
+
+function showUploadVideosNone(id){
+	var tips7=document.getElementById(id);
+	if(tips7){
+		if(tips7.style.display=='block'){
+			tips7.style.display='none';
+		}else{
+			tips7.style.display='block';
+		}
+	}
+}

@@ -96,7 +96,7 @@ create table UserTag(
                            --   专家:医疗 育儿 IT互联网 电台 财经 教育.. 
                            --   其他：..
 );
-create or replace sequence seq_ut_utid start with 1 increment by 1;
+create sequence seq_ut_utid start with 1 increment by 1;
 
 insert into UserTag values(1,'明星',1);
 insert into UserTag values(2,'作家',1);
