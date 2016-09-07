@@ -111,18 +111,12 @@ function showhidediv(id){
 }
 
 
-function changeword(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose1").innerHTML;		
-}
-function changeword1(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose2").innerHTML;	
-}
-
-function changeword2(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose3").innerHTML;	
-}
-function changeword3(){
-	document.getElementById("aa").innerHTML=document.getElementById("choose4").innerHTML;	
+function changeword(obj){
+	var oo=$(obj);
+	$("#aa").text(oo.html());	//到此是操作屏幕上的内容，    
+	//TODO:现在开始操作隐藏域的内容，  隐藏域中   op的值
+	//alert(oo.attr("data"));
+	$("#form_push_op").attr("value",oo.attr("data"));
 }
 
 //换完权限后隐藏div
@@ -357,3 +351,50 @@ function showUploadVideosNone(id){
 		}
 	}
 }
+//表情的div的控制
+function showfaceimage(id){
+	var tips8=document.getElementById(id);
+	if(tips8){
+		if(tips8.style.display=='block'){
+			tips8.style.display='none';
+		}else{
+			tips8.style.display='block';
+		}
+	}
+}
+
+
+//话题的div的控制
+function showtopicinput(id){
+	var tips9=document.getElementById(id);
+	if(tips9){
+		if(tips9.style.display=='block'){
+			tips9.style.display='none';
+		}else{
+			tips9.style.display='block';
+		}
+	}
+}
+//点击表情以后   还需调试        
+function clickFace(obj){
+	$("#face_image").hide();
+	//alert($(obj).attr("data"));
+	var face=$(obj).attr("data");
+	
+	var txt=$("#txt");
+	txt.val(txt.val()+face);    
+}
+
+//点击话题以后   
+function clicktopic(obj){
+	$("#topic_input").hide();
+	//alert($(obj).attr("data"));
+	var topic=$(obj).attr("data");
+	
+	var txt=$("#txt");
+	txt.val(txt.val()+topic);    
+}
+
+
+
+//图片放大镜
