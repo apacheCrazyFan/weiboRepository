@@ -12,6 +12,14 @@
 	</insert>
 	
 	<update id="updataUserPhoto" parameterType="map">
-		update WeiBoUser set UimgPath=#{UimgPath,jdbcType=VARCHAR} where WUid=#{WBUid,jdbcType=VARCHAR}
+		update WeiBoUser set UimgPath=#{UimgPath,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="findInfoByWbuid" parameterType="int" resultType="WeiBoUser">
+		select * from WeiBoUser where WBUid=#{WBUid}
+	</select>
+	
+	<update id="saveChangeUserName" parameterType="map">
+		update WeiBoUser set Uname=#{Uname,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
 	</update>
 </mapper>

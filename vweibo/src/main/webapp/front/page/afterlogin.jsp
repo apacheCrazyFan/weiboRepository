@@ -72,7 +72,7 @@
         </ul>
         <div class="settingArea">
         	<a href="javascript:void(0)" class="message_pic"></a>
-            <a href="javascript:void(0)" class="setting_pic"></a>
+            <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" class="setting_pic"></a>
             <a href="javascript:void(0)" class="sendMess_pic"></a>
         </div>
 	</div>

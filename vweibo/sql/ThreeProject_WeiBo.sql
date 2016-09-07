@@ -1,3 +1,4 @@
+drop table Admin;
 create table Admin(
 	Aname varchar2(20),
 	Apwd varchar2(30)
@@ -121,6 +122,7 @@ select seq_ut_utid.nextval from dual;
 
 delete from UserTag where UTid in(4,5,6);
 ----微博用户表
+drop table WeiBoUser;
 select * from WeiBoUser;
 create table WeiBoUser(
        WBUid int,                       --用户Id  √

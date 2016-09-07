@@ -28,8 +28,8 @@
 			<div class="connect">
                 <p id="errorMsg">${errorMsg }</p>
               </div>
-			<a class="register" href="front/page/register.jsp">马上注册</a>
 		</form>
+		<a class="register" href="front/page/register.jsp">马上注册</a>
 		
 		 <!-- <div class="connect">
                 <p>快捷</p>

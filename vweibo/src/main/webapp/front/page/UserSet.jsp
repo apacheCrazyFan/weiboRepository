@@ -10,15 +10,18 @@
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script src="front/js/UserSet.js"></script>
 </head>
-
+<%
+	String WBUid=request.getParameter("WBUid");
+%>
 <body>
+	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<div id="wrap">
     	<div id="left">
         	<span class="idSet">账号设置</span>
             <ul>
             	<li class="line1"></li>
                 <li class="myInfo"><img src="front/image/UserSet_image/icon1_2.png"><a href="front/page/UserSet.jsp">我的信息</a></li>
-                <li class="photo"><img src="front/image/UserSet_image/icon2_1.png"><a href="front/page/UserSet_photo.jsp">头像</a></li>
+                <li class="photo"><img src="front/image/UserSet_image/icon2_1.png"><a href="front/page/UserSet_photo.jsp?WBUid=<%=WBUid%>">头像</a></li>
                 <li class="line2"></li>
                 <li class="privacy"><img src="front/image/UserSet_image/icon3_1.png"><a href="front/page/UserSet_privacy.jsp">隐私设置</a></li>
                 <li class="message"><img src="front/image/UserSet_image/icon4_1.png"><a href="front/page/UserSet_message.jsp">消息设置</a></li>
@@ -36,10 +39,10 @@
                 <li style="display:none;background:#fff;height:160px" id="perName1">昵称<a href="javascript: compileAndClose('#perName','#perName1',2,0,'#perImf','#perLabel');">收起</a><br/>
                     <div>
                         <span class="oldName">现昵称</span>
-                        <span class="oldUserName">****</span><br/><br/>
+                        <span class="oldUserName">${user.uname }</span><br/><br/>
                         <span class="newName">新昵称</span>
-                        <input type="text" style="height:25px" class="newUserName" name="newUserName"/><div class="changeNameWarn"></div>
-                        <input class="saveChangeUserName" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input type="text" style="height:25px" class="newUserName" name="newUserName" id="newName"/><div class="changeNameWarn"></div>
+                        <input class="saveChangeUserName" type="image" src="front/image/UserSet_image/savePhoto1.png" onclick="saveChangeUserName()"/>
                         <input class="closeComplie1" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
@@ -51,7 +54,7 @@
                         	<li class="li_mes1">以下信息将显示在个人资料页，方便大家了解你。</li>
                             <li class="li_mes2">基本信息</li>
                             <li>性别<input type="radio" name="sex" value="man" class="radio_man"/>男 <input type="radio" name="sex" value="woman" class="radio_woman"/>女</li>
-                            <li>生日<select class="year"></select>年<select class="month"></select>月<select class="date"></select>日</li>
+                            <li>生日<input type="date" id="birthday"></li>
                             <li><div>个人简介</div><textarea type="text" class="userIntroduce" placeholder="请输入个人简介"></textarea></li>
                             <li>注册邮箱<input type="text" class="userEmail" name="userEmail"/></li>
                         </ul>
@@ -75,5 +78,22 @@
             </ul>
         </div>
     </div>
+    
 </body>
+<script type="text/javascript">
+    $(function(){
+    	alert($("#hiddenid").val());
+    	$.post("user/userset?WBUid="+$("#hiddenid").val(),function(data){
+    		
+    	},"json")
+    });
+    
+    function saveChangeUserName(){
+    	alert($("#newName").val());
+    	$.post("user/saveChangeUserName",{"newName":$("#newName").val(),"WBUid":$("#hiddenid").val()},function(data){
+    		alert(data);
+    	})
+    }
+    </script>
+ 
 </html>

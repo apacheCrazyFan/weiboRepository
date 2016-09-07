@@ -14,6 +14,7 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Context;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,14 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.ThemeService;
@@ -153,8 +157,9 @@ public class UserHandler {
 	}
 
 	//上传头像
-	@RequestMapping(value="setphoto",method=RequestMethod.POST)
-	public String setPhoto(@RequestParam("photodata") String file,PrintWriter out){
+	@RequestMapping("/setphoto/{WBUid}")
+	public String setPhoto(@RequestParam("photodata") String file,@PathVariable("WBUid")String WBUid,PrintWriter out){
+		System.out.println(WBUid);
 		BASE64Decoder decoder = new BASE64Decoder();
 		byte[] bytes;
 		try {
@@ -177,6 +182,24 @@ public class UserHandler {
 		return null;
 	}
 
-
-
+	@ResponseBody
+	@RequestMapping("/userset")
+	public String userSet(@RequestParam("WBUid")String WBUid,ModelMap map){
+		WeiBoUser weiboUser=userService.findInfoByWbuid(Integer.parseInt(WBUid));
+		map.addAttribute("user",weiboUser);
+		return "front/page/UserSet.jsp";
+		
+	}
+	
+	@RequestMapping(value="/saveChangeUserName")
+	public String saveChangeUserName(String newName,String WBUid,PrintWriter out){
+		System.out.println(newName+"---"+WBUid);
+		Map<String, String> paramMap=new HashMap<>();
+		paramMap.put("Uname",newName);
+		paramMap.put("WBUid",WBUid);
+		userService.saveChangeUserName(paramMap);
+		out.println("修改成功");
+		return "front/page/UserSet.jsp";
+		
+	}
 }
