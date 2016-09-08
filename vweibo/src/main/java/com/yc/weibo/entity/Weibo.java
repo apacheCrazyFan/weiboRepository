@@ -1,6 +1,7 @@
 package com.yc.weibo.entity;
 
 
+import java.sql.Clob;
 import java.util.Date;
 
 public class Weibo {
@@ -9,16 +10,22 @@ public class Weibo {
      private String WBtitle;    //--微博标题（可以写，也可以不写，但必须有）
      private int UId;			//--用户id（发表者）
      private Date WBdate;       //--微博发表日期
-     private String WBtxt;      //-微博文字内容
+     private Clob WBtxt;      //-微博文字内容
      private String WBpic;   	//--微博图片路径
      private String WBvideo; 	//	--可能存在的视频路径
      private String WBmusic;	//可能存在的音乐路径
      
      private boolean yesOrno;	//是否是话题产生的
-     private String WBlocation;
-     
+     private String WBlocation;	//发表微博 的地理位置
+     private int WBstatue;   //微博状态0：公开    1：朋友圈       2：....
      
 	
+	public int getWBstatue() {
+		return WBstatue;
+	}
+	public void setWBstatue(int wBstatue) {
+		WBstatue = wBstatue;
+	}
 	public String getWBlocation() {
 		return WBlocation;
 	}
@@ -61,10 +68,10 @@ public class Weibo {
 	public void setWBdate(Date wBdate) {
 		WBdate = wBdate;
 	}
-	public String getWBtxt() {
+	public Clob getWBtxt() {
 		return WBtxt;
 	}
-	public void setWBtxt(String wBtxt) {
+	public void setWBtxt(Clob wBtxt) {
 		WBtxt = wBtxt;
 	}
 	public String getWBpic() {
@@ -89,8 +96,11 @@ public class Weibo {
 	public String toString() {
 		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", UId=" + UId + ", WBdate="
 				+ WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic=" + WBmusic
-				+ ", yesOrno=" + yesOrno + "]";
+				+ ", yesOrno=" + yesOrno + ", WBlocation=" + WBlocation + ", WBstatue=" + WBstatue + "]";
 	}
+
+	
+	
 	
 	
      

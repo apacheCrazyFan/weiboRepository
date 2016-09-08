@@ -19,7 +19,6 @@ public class WeiBoUser {
 	private int Wcount;	//发起微博数
 	private int Tcount;	//发起的话题数
 	
-	
 	public WeiBoUser() {
 	}
 	

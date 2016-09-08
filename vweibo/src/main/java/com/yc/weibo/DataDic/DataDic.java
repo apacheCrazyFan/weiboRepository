@@ -25,4 +25,21 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 									+ "java.specification.version,java.specification.vendor,java.specification.name,"
 									+ "java.class.version,java.class.path,java.library.path,java.io.tmpdir,java.compiler,java.ext.dirs,"
 									+ "os.name,os.arch,os.version,file.separator,path.separator,line.separator,user.name,user.home,user.dir";
+
+	public static String DATESTRING = "2088-8-8 8:8:8";
+	
+	
+	//是代码的稳定性更高
+	public static final Integer UPLOADSTATUE_FAILED = -1;
+
+	public static final Integer UPLOADSTATUE_FIRST = 0;
+	
+	public static final Integer UPLOADSTATUE_SECOND = 1;
+	
+	public static final Integer UPLOADSTATUE_THIRD = 2;
+
+	public static final Integer UPLOADSTATUE_SUCCESS = 3;
+
+
+	public static String DATABASE = "DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana";
 }

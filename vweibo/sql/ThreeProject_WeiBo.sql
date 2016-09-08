@@ -282,18 +282,22 @@ create table WeiBo(
        WBpic  varchar2(500),          --微博图片路径
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
        WBmusic varchar2(500),		  --微博音乐路径
-       yesOrno char(2)				  --是否是话题产生的weibo						
+       yesOrno char(2),				  --是否是话题产生的weibo	
+       WBlocation varchar2(120),
+       WBstatue int
        --预留字段      
 );
 create sequence seq_wb_wbid start with 10001;
 
 alter table WeiBo add WBlocation varchar2(100);
 alter table WeiBo add WBstatue varchar2(20);     --微博的状态  公开 好友圈 群 仅自己可见
-alter table WeiBo modify WBstatue number(1); 
+alter table WeiBo modify WBstatue int; 
+drop table WeiBo;
+delete from WeiBo;
 select * from WeiBo;
 select count(WBid) from WeiBo where WBUId = 1001;
 
-insert into WeiBo values(101,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N');
+insert into WeiBo values(seq_wb_wbid.nextval,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N','衡阳,长沙市',0);
 insert into WeiBo values(102,'视频','大鸭子',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');
 insert into WeiBo values(103,'衡阳','湖工',1001,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N');
 insert into WeiBo values(104,'军事','中日战争',1001,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'N');
@@ -314,6 +318,7 @@ create table WeiBoHelp(
        
        --预留字段  
 );
+drop table WeiBoHelp;
 --微博操作表
 create table Operate(
        Oid int primary key,           --微博操作id
