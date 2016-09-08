@@ -29,7 +29,7 @@
         </div>
         <div id="right">
         	<ul>
-            	<span class="head_label">我的信息<a href="#">预览我的主页</a></span>
+            	<span class="head_label">我的信息<a href="front/page/Personal.jsp">预览我的主页</a></span>
                 <li id="perInfo1">登录名&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: panelOpen(1);">修改密码</a></li>
                 <li style="display:none;background:#fff;height:160px" id="perInfo_panel1">登录名<a href="javascript: panelClose(1);">收起</a><br/>
                     <div>

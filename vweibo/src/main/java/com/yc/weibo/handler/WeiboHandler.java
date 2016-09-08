@@ -180,6 +180,11 @@ public class WeiboHandler {
 		}else{	
 			map.put("weiboTitle", null);
 		}
+		if(txtContent.indexOf("#") != txtContent.lastIndexOf("#")){
+			map.put("isThemeWeibo", 'Y');
+		}else{
+			map.put("isThemeWeibo", 'N');
+		}
 		System.out.println( "========================================================"+map);
 		return weiboService.addWeibo(map) == true ? dateFormater.format(date)+","+userlocation : (DataDic.DATESTRING);
 	}

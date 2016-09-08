@@ -153,7 +153,8 @@ insert into WeiBoUser values(1004,'啊大大','sa','15675471040','15675471040@163.c
 insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 delete from WeiBoUser where WBUid in (1003,1004);
 
-update WeiBoUser set UimgPath='11.jpg' where WUid=1001;
+
+update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1005;
 
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
@@ -212,7 +213,6 @@ from dual;
 		
 insert into FanAndFaned values(1001,1002,'好友圈');
 insert into FanAndFaned values(1001,1003,'好友圈');
-insert into FanAndFaned values(1001,1003,'好友圈');
 insert into FanAndFaned values(1001,1004,'好友圈');
 insert into FanAndFaned values(1001,1005,'好友圈');
 insert into FanAndFaned values(1001,1006,'好友圈');
@@ -227,10 +227,7 @@ insert into FanAndFaned values(1001,1003,'同学');
 insert into FanAndFaned values(1001,1004,'同学');
 insert into FanAndFaned values(1001,1005,'同学');
 insert into FanAndFaned values(1001,1006,'同学');
-insert into FanAndFaned values(1001,1007,'同学');
-insert into FanAndFaned values(1001,1008,'同学');
-insert into FanAndFaned values(1001,1009,'同学');
-insert into FanAndFaned values(1001,1010,'同学');
+
 
 insert into FanAndFaned values(1001,1007,'未分组');
 insert into FanAndFaned values(1001,1008,'未分组');
@@ -279,7 +276,6 @@ create table WeiBo(
        WBUId int
            constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
-      -- WBlocation varchar2(100),
        WBtxt  clob,                   --微博文字内容
        WBpic  varchar2(500),          --微博图片路径
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)

@@ -15,7 +15,7 @@ public class Weibo {
      private String WBvideo; 	//	--可能存在的视频路径
      private String WBmusic;	//可能存在的音乐路径
      
-     private boolean yesOrno;	//是否是话题产生的
+     private char yesOrno;	//是否是话题产生的
      private String WBlocation;	//发表微博 的地理位置
      private int WBstatue;   //微博状态0：公开    1：朋友圈       2：....
      
@@ -32,10 +32,10 @@ public class Weibo {
 	public void setWBlocation(String wBlocation) {
 		WBlocation = wBlocation;
 	}
-	public boolean isYesOrno() {
+	public char isYesOrno() {
 		return yesOrno;
 	}
-	public void setYesOrno(boolean yesOrno) {
+	public void setYesOrno(char yesOrno) {
 		this.yesOrno = yesOrno;
 	}
 	public int getWBid() {
