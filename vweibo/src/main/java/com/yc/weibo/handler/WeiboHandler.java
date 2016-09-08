@@ -71,23 +71,19 @@ public class WeiboHandler {
 						videoMap += originalFilename+",";
 						rootDir = DataDic.VIDEOPATH;
 					}
-
 					//Constant.UPLOAD_GOODIMG_URL 是一个配置文件路径  
 					try {  
 						String uploadFileUrl = servletContext.getRealPath(rootDir).
 								substring(0, servletContext.getRealPath(rootDir).lastIndexOf(DataDic.PROJECTNAME)-1)+rootDir; 
-
 						File _apkFile = saveFileFromInputStream(uploadFile.getInputStream(), uploadFileUrl, originalFilename);  
 						if (_apkFile.exists()) {  //说明上传成功了，然后插入数据库？
 							//FileInputStream fis = new FileInputStream(_apkFile);
 
 							jsonMap.put("rate", 1);
-
 						} else {
 							jsonMap.put("rate", 0);  //这一路下来的rate好像没什么屌用啊。。
 							throw new FileNotFoundException("file write failed:" + fileName);  
 						}
-
 
 					} catch (Exception e) {  
 						jsonMap.put("rate", -1);  
