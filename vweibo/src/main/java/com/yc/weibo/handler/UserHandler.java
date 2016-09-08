@@ -204,6 +204,5 @@ public class UserHandler {
 		userService.saveChangeUserName(paramMap);
 		out.println("修改成功");
 		return "front/page/UserSet.jsp";
-		
 	}
 }
