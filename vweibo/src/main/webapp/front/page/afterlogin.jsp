@@ -16,33 +16,35 @@
 <link rel="stylesheet" href="front/css/blueimp-gallery-video.css">
 <link rel="stylesheet" href="front/css/demo.css">
 
+	<!-- js操作session的包 -->
 <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
-<script type="text/javascript" src="front/js/session.js"></script>
-<!-- js操作session的包 -->
-<script src="front/js/blueimp-helper.js"></script>
-<script src="front/js/blueimp-gallery.js"></script>
-<script src="front/js/blueimp-gallery-fullscreen.js"></script>
-<script src="front/js/blueimp-gallery-indicator.js"></script>
-<script src="front/js/blueimp-gallery-video.js"></script>
-<script src="front/js/blueimp-gallery-vimeo.js"></script>
-<script src="front/js/blueimp-gallery-youtube.js"></script>
-<script src="front/js/vendor/jquery.js"></script>
-<script src="front/js/jquery.blueimp-gallery.js"></script>
+<script type="text/javascript" src="front/js/blueimp-helper.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery-fullscreen.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery-indicator.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery-video.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery-vimeo.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery-youtube.js"></script>
+<script type="text/javascript" src="front/js/vendor/jquery.js"></script>
+<script type="text/javascript" src="front/js/jquery.blueimp-gallery.js"></script>
 <script type="text/javascript" src="back/easyui/js/ajaxfileupload.js"></script>
-<script src="front/js/demo.js"></script>
+<script type="text/javascript" src="front/js/demo.js"></script>
+<script type="text/javascript" src="front/js/session.js"></script>
 
-<input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
-
+<script type="text/javascript">
+	
+</script>
 </head>
-
 	<%
 		/* HttpSession sessions = request.getSession();
 		WeiBoUser user = (WeiBoUser)sessions.getAttribute("user"); */
-		
 	%>
 <body id="bg">
+<input type="button" onClick="adc()" value="测试button"/>
+<input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
+
 	<div id="header">
 	    	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
 	        <div class="searchTextBorder">
@@ -88,7 +90,7 @@
                 <span id="s1"><img src="front/image/weibonav.png"/></span>
                 <a href="javascript:void(0)"><span id="s2" style="color:red;">王宝强，马蓉离婚案</span></a>
         	</p>
-        	<form action="" method="" enctype="multipart/form-data" id="publishForm" name="myfrom">
+        	<!-- <form action="" method="" enctype="multipart/form-data" id="publishForm" name="myfrom"> -->
        			<textarea class="W_input" id="txt" title="微博输入框" name="textContent" node-type="textE1" content=""></textarea>
        			
        			<!-- 隐藏域 ：op  用来传   0：公开    1：朋友圈       2：....-->
@@ -102,14 +104,14 @@
             	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
 
             	<!-- <input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()"> -->
-            	<input type="button" value="发表" id="fabu" onclick="publishWeibo()"/>
+            	<input type="button" value="发布" id="publish" onclick="publishWeibo()"/>
             		<div id="uploadPics">            		
             			<input type="file" name="myPicFile" multiple="multiple" id="myPicFile" style="display:none;"/>
             		</div>
             		<div id="uploadVideo">            		
             			<input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile" style="display:none;"/>
             		</div>
-            </form>
+            <!-- </form> -->
             
             <div id="choose" style="display:none;" onMouseUp="hidediv()">
 				<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/>
@@ -500,8 +502,6 @@
               	 <input type="image" src="front/image/attention_friend.png" id="goodfriend_attention"/>
             </div>
          </div>
-
-		
 		
 	<div id="frame">
 		<div id="left-part">
@@ -953,5 +953,140 @@
 	    	<img src="front/image/letterchat.png" id="buoysimg1"/><span id="buoyschat">私信聊天</span><img src="front/image/chatmes.png" id="buoysimg2"/>
 	    </div>
 	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		alert("sddg")
+	});
+	
+	
+	$(function(){
+		
+	});
+	function publishWeibo(){
+		alert("wo lai le");
+	
+		alert($("#user").val());
+		var statue = $("#form_push_op").val();
+		var content = $("#txt").val().trim();
+
+		alert(statue + " <--> " + content);
+		$.ajaxFileUpload({
+					url : 'weibo/publish',
+					secureuri : false,
+					data : {
+						'statue' : statue,
+						'content' : content
+					},
+					fileElementId : [ 'myPicFile', 'myVideoFile' ],
+					dataType : 'json',
+					type : 'post',
+					success : function(data, status) {
+						if (data.rate == -1) {
+							alert("【图片上传失败】");
+						} else if (data.rate == 1) {
+							alert("【图片上传成功】");
+						} else if (date.rate == 2) {
+							alert("【微博发表成功】");
+							var location = data.location; //地理位置/电脑用户名 
+							var picsMap = data.picsMap; //图片路径 
+							var videoMap = data.videowMap; //视频路径
+							var musicMap = data.musicMap; //音乐路径
+							//var date = data.publishDate; //发表日期
+							console.info(location+" - "+picsMap+" - ");
+							var newWeiBoStr = "";
+							var newWeiBoDiv = document.createElement("div");
+							newWeiBoDiv.className = "center-part-content_01";
+							//newWeiBoDiv.style="margin-top:20px;";
+
+							newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="啦啦啦" src="front/image/userphoto003.png"/></a>';
+							newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="'+ 'showcenterhidediv("center-partchoose")'+ 'onMouseOver="'+ 'changecentercolor("center-part_way") onMouseOut="changecentercolors("'+ 'center-part_way")"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(\'center - partchoose\')">';
+							newWeiBoStr += '<ul>';
+							newWeiBoStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
+							newWeiBoStr += '<li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>';
+							newWeiBoStr += '<li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>';
+							newWeiBoStr += '<li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>';
+							newWeiBoStr += '</ul>';
+							newWeiBoStr += '</div>';
+
+							newWeiBoStr += '<ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">';
+							newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">APP菌</li>';
+							newWeiBoStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>';
+							newWeiBoStr += '</ul>';
+							newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'+ content + '</p>';
+							newWeiBoStr += '<div id="content_img01">';
+							newWeiBoStr += '<img src="front/image/weiboimg003.png"/>';
+							newWeiBoStr += '</div>';
+
+							newWeiBoStr += '<div id="center_footnum" class="center_footnum">';
+							newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv("'+ 'center_footnum1_col")"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv("'+ 'center_footnum2_transmit")"><img src="front/image/center-part_foot02.png" id="foot01_img"/>204</a>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(\'comment_div\')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>45</a>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>765</a>';
+							newWeiBoStr += '</div>';
+
+							newWeiBoStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
+							newWeiBoStr += '<div id="collection_div_unline">';
+							newWeiBoStr += '<span id="collection_div_title">收藏</span>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(\'colle_closepng_a\')" onClick="changecollectionsearch(\'center_footnum1_col\')" onMouseOver="collectiondivcloseimg2(\'colle_closepng_a\')"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
+							newWeiBoStr += '</div>';
+							newWeiBoStr += '<div id="collection_div_tishi">';
+							newWeiBoStr += '<img src="front/image/collectionsuccess.png" id="collection_div_img"/>';
+							newWeiBoStr += '<span id="collection_div_su">收藏成功!</span>';
+							newWeiBoStr += '</div>';
+							newWeiBoStr += '<div id="collection_div_word"><img src="front/image/tishi.png" id="tishi_img"/><font id="tishi_word">添加标签来管理你的收藏</font></div>';
+
+							newWeiBoStr += '<div id="keyword" style="width:390px;height:32px;">';
+							newWeiBoStr += '<input type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
+
+							newWeiBoStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png"/>';
+							newWeiBoStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(\'center_footnum1_col\')"/></div>';
+							newWeiBoStr += '</div>';
+							newWeiBoStr += ' </div>';
+
+							newWeiBoStr += '<div id="center_footnum2_transmit" class="center_footnum2_transmit" style="display:none;">';
+							newWeiBoStr += '<div id="transmit_div_unline">';
+							newWeiBoStr += '<span id="transmit_div_title">转发微博</span>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="transmit_closepng_a" class="transmit_closepng_a" onMouseOut="transmitdivcloseimg(\'transmit_closepng_a\')" onClick="changetransmitsearch(\'center_footnum2_transmit\')" onMouseOver="transmitdivcloseimg2(\'transmit_closepng_a\')"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
+							newWeiBoStr += '</div>';
+							newWeiBoStr += '<div id="transmit_header">';
+							newWeiBoStr += '<span id="transmit_header_word">转发到：</span><a href="javascript:void(0)" id="transmit_where">我的微博</a>';
+							newWeiBoStr += '</div>';
+							newWeiBoStr += '<textarea class="transmit_input" id="transmit_txt" title="微博输入框" node-type="textE1" placeholder="请输入转发理由"></textarea>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="transmit_aa" onClick='showhidetransmitdiv("transmit_choose")'>公开<img src="front/image/limits_img5.png"/></a>';
+							newWeiBoStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit">';
+
+							newWeiBoStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(\'transmit_choose\')">';
+							newWeiBoStr += '<ul>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changewords()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changewords1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose3" onClick="changewords2()" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose4" onClick="changewords3()" style="height:12px;position:relative;bottom:8px;">群可见</li></a>';
+							newWeiBoStr += '</ul>';
+							newWeiBoStr += '</div>';
+							newWeiBoStr += '</div>';
+
+							newWeiBoStr += '<div id="comment_div" class="comment_div" style="display:none;">';
+							newWeiBoStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
+							newWeiBoStr += '<input type="text" id="comment_input"/><br>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
+							newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
+							newWeiBoStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
+							newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn"/>';
+							newWeiBoStr += '</div>';
+
+							newWeiBoDiv.innerHTML = newWeiBoStr;
+							$("#xixi").insertBefore(newWeiBoDiv,$("#xixi:first"));
+						}
+					},
+					error : function(data, status, e) {
+						alert("【服务器异常，请连续管理员！】" + e);
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
