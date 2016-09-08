@@ -22,4 +22,8 @@
 	<update id="saveChangeUserName" parameterType="map">
 		update WeiBoUser set Uname=#{Uname,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
 	</update>
+	
+	<update id="changePassWord" parameterType="map">
+		update WeiBoUser set Upassword=#{Upassword,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
+	</update>
 </mapper>

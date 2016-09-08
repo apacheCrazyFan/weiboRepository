@@ -18,5 +18,7 @@ public interface UserMapper {
 	public WeiBoUser findInfoByWbuid(int WBUid);
 	
 	void saveChangeUserName(Map<String, String> paramMap);
+	
+	void changePassWord(Map<String, String> paramMap);
 
 }
