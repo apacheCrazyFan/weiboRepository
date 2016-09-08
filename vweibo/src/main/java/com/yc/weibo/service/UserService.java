@@ -13,5 +13,9 @@ public interface UserService {
 
 	List<Object> findUserSomethingMessag(WeiBoUser user);
 	
-	public int updataUserPhoto(Map<String, String> paramMap);
+	int updataUserPhoto(Map<String, String> paramMap);
+	
+	WeiBoUser findInfoByWbuid(int WBUid);
+	
+	void saveChangeUserName(Map<String, String> paramMap);
 }

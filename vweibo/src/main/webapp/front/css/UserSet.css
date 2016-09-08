@@ -131,10 +131,20 @@ body {
 	margin-right: 20px;
 	font-family: "宋体"
 }
-#perName, #perImf, #perLabel, #perIntro {
-	display: block
+#perInfo_panel1 div{
+	margin-left:20px;
+	position:relative;}
+#perInfo_panel1 div span{
+	font:12px "宋体";
 }
-#perName1 div {
+.saveChangePwd{
+	position:absolute;
+	top:90px;}
+.closeComplie{
+	position:absolute;
+	top:70px;
+	left:60px;}
+#perInfo_panel3 div {
 	margin-left: 15px;
 	margin-top: 10px;
 	font: 13px "宋体";
@@ -150,7 +160,7 @@ body {
 	margin-bottom: 10px;
 	margin-left: 5px;
 }
-#perImf1 div ul li {
+#perInfo_panel4 div ul li {
 	border: none;
 	background: #fff;
 	font: 13px "宋体";
@@ -159,7 +169,7 @@ body {
 	margin-top: 10px;
 	padding-left: 0;
 }
-#perImf1 div ul .li_mes1 {
+#perInfo_panel4 div ul .li_mes1 {
 	color: #999;
 }
 .radio_man {
@@ -176,7 +186,7 @@ body {
 	margin-left: 10px;
 	width: 50px
 }
-#perImf1 div ul li div {
+#perInfo_panel4 div ul li div {
 	float: left;
 }
 .closeComplie2 {
@@ -196,7 +206,7 @@ body {
 .saveChangeUserImf, .closeComplie {
 	margin-top: 20px
 }
-#perLabel1 div {
+#perInfo_panel5 div {
 	margin-top: 10px;
 	font: 13px "宋体";
 	color: #222;
@@ -262,3 +272,4 @@ body {
 	top: 200px;
 	left: 83px
 }
+

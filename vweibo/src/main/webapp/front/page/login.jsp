@@ -21,15 +21,15 @@
 		<form action="user/login" method="post" onsubmit="return checkYZcode()">
 			<input type="text" name="UphoneOrUemail" class="UphoneOrUemail" placeholder="请输入手机号/邮箱号">
 			<input type="password" name="Upassword" class="Upassword" onBlur="checkUsername()"   placeholder="请输入您的用户密码！">
-			<input  class="Captcha" name="YZcodeInput" placeholder="请输入验证码！" onkeyup="InputYZcode()" id="YZcodeInput" />
+			<input  class="Captcha" name="YZcodeInput" placeholder="请输入验证码！" onblur="InputYZcode()" id="YZcodeInput" />
 			<img alt="加载失败" name="randImage" id="randImage" src="front/page/image.jsp" style="margin-left:20px; width:80px; height:40px; margin-top:28px;" border="1">
 			<a href="javascript:loadimage();">点击刷新</a>
 			<button type="submit" class="submit_button">登录</button>
 			<div class="connect">
                 <p id="errorMsg">${errorMsg }</p>
               </div>
-			<a class="register" href="front/page/register.jsp">马上注册</a>
 		</form>
+		<a class="register" href="front/page/register.jsp">马上注册</a>
 		
 		 <!-- <div class="connect">
                 <p>快捷</p>
