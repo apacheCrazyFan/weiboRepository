@@ -157,8 +157,8 @@ public class UserHandler {
 	}
 
 	//上传头像
-	@RequestMapping("/setphoto/{WBUid}")
-	public String setPhoto(@RequestParam("photodata") String file,@PathVariable("WBUid")String WBUid,PrintWriter out){
+	@RequestMapping("/setphoto")
+	public String setPhoto(@RequestParam("photodata") String file,@RequestParam("WBUid")String WBUid,PrintWriter out){
 		System.out.println(WBUid);
 		BASE64Decoder decoder = new BASE64Decoder();
 		byte[] bytes;
@@ -172,7 +172,11 @@ public class UserHandler {
 			String filename=new Date().getTime()+""+new Random().nextInt(100000)+".jpg";
 			FileOutputStream photopath = new FileOutputStream("D:\\Tomcat-7.0.30\\webapps\\weiboimage\\"+filename);
 			photopath.write(bytes); 
-			
+			Map<String,String> paramMap=new HashMap<>();
+			String UimgPath="D:\\Tomcat-7.0.30\\webapps\\weiboimage\\"+filename;
+			paramMap.put("UimgPath", UimgPath);
+			paramMap.put("WBUid", WBUid);
+			userService.updataUserPhoto(paramMap);
 			out.println("头像上传成功");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -182,7 +186,7 @@ public class UserHandler {
 		return null;
 	}
 
-	@ResponseBody
+	
 	@RequestMapping("/userset")
 	public String userSet(@RequestParam("WBUid")String WBUid,ModelMap map){
 		WeiBoUser weiboUser=userService.findInfoByWbuid(Integer.parseInt(WBUid));
@@ -191,9 +195,9 @@ public class UserHandler {
 		
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/saveChangeUserName")
 	public String saveChangeUserName(String newName,String WBUid,PrintWriter out){
-		System.out.println(newName+"---"+WBUid);
 		Map<String, String> paramMap=new HashMap<>();
 		paramMap.put("Uname",newName);
 		paramMap.put("WBUid",WBUid);

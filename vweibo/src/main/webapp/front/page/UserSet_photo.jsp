@@ -17,6 +17,7 @@
 	String WBUid=request.getParameter("WBUid");
 %>
 <body>
+	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<div id="wrap">
     	<div id="left">
         	<span class="idSet">账号设置</span>
@@ -155,7 +156,7 @@
     function savePhoto(){
     	var imageData=document.getElementById("photocanvas").toDataURL("image/jpg");
 		var base64Data = imageData.substr(22);
-    	$.post("user/setphoto/",{"photodata":base64Data},function(data){
+    	$.post("user/setphoto",{"photodata":base64Data,"WBUid":$("#hiddenid").val()},function(data){
     		alert(data);
     	})
     }
