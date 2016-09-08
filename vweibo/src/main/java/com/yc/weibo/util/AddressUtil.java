@@ -10,7 +10,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -222,7 +221,6 @@ public class AddressUtil {
     // 
     public static String getLocation() {  
     	String address = "";  
-    	String ip = "";  
     	try {
 			String ipaddress = getRealIp();
 

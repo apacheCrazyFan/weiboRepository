@@ -7,7 +7,6 @@
 <head>
 <meta charset="utf-8">
 <base href="/vweibo/">
-
 <style type="text/css">
 	
 </style>
@@ -18,7 +17,8 @@
 <link rel="stylesheet" href="front/css/blueimp-gallery-video.css">
 <link rel="stylesheet" href="front/css/demo.css">
 
-<script src="front/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/session.js"></script><!-- js操作session的包 -->
 <script src="front/js/blueimp-helper.js"></script>
@@ -30,23 +30,40 @@
 <script src="front/js/blueimp-gallery-youtube.js"></script>
 <script src="front/js/vendor/jquery.js"></script>
 <script src="front/js/jquery.blueimp-gallery.js"></script>
+<script type="text/javascript" src="back/easyui/js/ajaxfileupload.js"></script>
 <script src="front/js/demo.js"></script>
 <script type="text/javascript" >
 	
 	function publishWeibo(){
-		$.ajax({
-            cache: true,
-            type: "POST",
-            url: "weibo/publish",
-            data:$('#publishForm').serialize(),// 你的formid
-            async: false,
-            error: function(request) {
-                alert("Connection error");
-            },
-            success: function(data) {
-                $("#commonLayout_appcreshi").parent().html(data);
-            }
-        });		
+		var data = $("#publishForm").serialize();
+		
+		alert(data);
+		/**
+		
+		
+		
+		*/
+		
+		$.ajaxFileUpload({
+                url:'weibo/publish',
+                secureuri:false,
+                fileElementId:['myPicFile','myVideoFile'],
+                dataType: 'json',
+                type:'post',
+                success: function (data, status)
+                {
+                    alert(data);
+                    if(data.status==1){
+                        alert(data.result);
+                    }else{
+                        alert("【提交失败！】");
+                    }
+                },
+                error: function (data, status, e)
+                {
+                    alert("【服务器异常，请连续管理员！】"+e);
+                }
+            });
 	}
 </script>
 </head>
@@ -108,18 +125,19 @@
        			<input id="form_push_op" name="op" value="0" type="hidden" />
        			
         		<a href="javascript:void(0)" id="wword" onClick="showfaceimage('face_image')"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
-        		
             	<a href="javascript:void(0)" onClick="showNone('weibo_pics','weibo_videoes')" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
            	 	<a href="javascript:void(0)" onClick="showNone('weibo_videoes','weibo_pics')" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
             	<a href="javascript:void(0)" onClick="showtopicinput('topic_input')" id="wword"><img src="front/image/write_img4.png" id="wimg"/>话题</a>
             	<a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
             	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
-            	<input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()">	
+
+            	<!-- <input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()"> -->
+            	<input type="button" value="发表" id="fabu" onclick="publishWeibo()"/>
             		<div id="uploadPics">            		
-            			<input type="file" name="myPicFile" multiple="multiple" id="weibo_pics" style="display:none;"/>
+            			<input type="file" name="myPicFile" multiple="multiple" id="myPicFile" style="display:none;"/>
             		</div>
             		<div id="uploadVideo">            		
-            			<input type="file" name="myVideoFile" multiple="multiple" id="weibo_videoes" style="display:none;"/>
+            			<input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile" style="display:none;"/>
             		</div>
             </form>
             

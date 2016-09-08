@@ -1,4 +1,5 @@
 //JavaScript Document
+
 $(document).ready(function(){  
 	var range = 50;             //距下边界长度/单位px  
 	var elemt = 500;           //插入元素高度/单位px  

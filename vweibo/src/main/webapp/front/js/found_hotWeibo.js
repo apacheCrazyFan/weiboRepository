@@ -13,48 +13,49 @@ function openAndClose(menuId,contentId){
 	$(menuId).css('background','#A7B9D3');
 	$(contentId).show();	
 	if(menuId==".found_hot"){
-		$('.found_find').css('background','#A7ADBE');$('#find_right').hide();
-		$('.found_music').css('background','#A7ADBE');$('#music_right').hide();
-		$('.found_video').css('background','#A7ADBE');$('#video_right').hide();
-		$('.found_news').css('background','#A7ADBE');$('#news_right').hide();
-		$('.found_topic').css('background','#A7ADBE');$('#topic_right').hide();
+		$('.found_find').css('background','rgba(167,173,190,0)');$('#find_right').hide();
+		$('.found_music').css('background','rgba(167,173,190,0)');$('#music_right').hide();
+		$('.found_video').css('background','rgba(167,173,190,0)');$('#video_right').hide();
+		$('.found_news').css('background','rgba(167,173,190,0)');$('#news_right').hide();
+		$('.found_topic').css('background','rgba(167,173,190,0)');$('#topic_right').hide();
 	}
 	if(menuId==".found_find"){
-		$('.found_hot').css('background','#A7ADBE');$('#hot_right').hide();
-		$('.found_music').css('background','#A7ADBE');$('#music_right').hide();
-		$('.found_video').css('background','#A7ADBE');$('#video_right').hide();
-		$('.found_news').css('background','#A7ADBE');$('#news_right').hide();
-		$('.found_topic').css('background','#A7ADBE');$('#topic_right').hide();
+		$('.found_hot').css('background','rgba(167,173,190,0)');$('#hot_right').hide();
+		$('.found_music').css('background','rgba(167,173,190,0)');$('#music_right').hide();
+		$('.found_video').css('background','rgba(167,173,190,0)');$('#video_right').hide();
+		$('.found_news').css('background','rgba(167,173,190,0)');$('#news_right').hide();
+		$('.found_topic').css('background','rgba(167,173,190,0)');$('#topic_right').hide();
 	}
 	if(menuId==".found_music"){
-		$('.found_find').css('background','#A7ADBE');$('#find_right').hide();
-		$('.found_hot').css('background','#A7ADBE');$('#hot_right').hide();
-		$('.found_video').css('background','#A7ADBE');$('#video_right').hide();
-		$('.found_news').css('background','#A7ADBE');$('#news_right').hide();
-		$('.found_topic').css('background','#A7ADBE');$('#topic_right').hide();	
+		$('.found_find').css('background','rgba(167,173,190,0)');$('#find_right').hide();
+		$('.found_hot').css('background','rgba(167,173,190,0)');$('#hot_right').hide();
+		$('.found_video').css('background','rgba(167,173,190,0)');$('#video_right').hide();
+		$('.found_news').css('background','rgba(167,173,190,0)');$('#news_right').hide();
+		$('.found_topic').css('background','rgba(167,173,190,0)');$('#topic_right').hide();	
 	}
 	if(menuId==".found_video"){
-		$('.found_find').css('background','#A7ADBE');$('#find_right').hide();
-		$('.found_music').css('background','#A7ADBE');$('#music_right').hide();
-		$('.found_hot').css('background','#A7ADBE');$('#hot_right').hide();
-		$('.found_news').css('background','#A7ADBE');$('#news_right').hide();
-		$('.found_topic').css('background','#A7ADBE');$('#topic_right').hide();
+		$('.found_find').css('background','rgba(167,173,190,0)');$('#find_right').hide();
+		$('.found_music').css('background','rgba(167,173,190,0)');$('#music_right').hide();
+		$('.found_hot').css('background','rgba(167,173,190,0)');$('#hot_right').hide();
+		$('.found_news').css('background','rgba(167,173,190,0)');$('#news_right').hide();
+		$('.found_topic').css('background','rgba(167,173,190,0)');$('#topic_right').hide();
 	}
 	if(menuId==".found_news"){
-		$('.found_find').css('background','#A7ADBE');$('#find_right').hide();
-		$('.found_music').css('background','#A7ADBE');$('#music_right').hide();
-		$('.found_video').css('background','#A7ADBE');$('#video_right').hide();
-		$('.found_hot').css('background','#A7ADBE');$('#hot_right').hide();
-		$('.found_topic').css('background','#A7ADBE');	$('#topic_right').hide();
+		$('.found_find').css('background','rgba(167,173,190,0)');$('#find_right').hide();
+		$('.found_music').css('background','rgba(167,173,190,0)');$('#music_right').hide();
+		$('.found_video').css('background','rgba(167,173,190,0)');$('#video_right').hide();
+		$('.found_hot').css('background','rgba(167,173,190,0)');$('#hot_right').hide();
+		$('.found_topic').css('background','rgba(167,173,190,0)');	$('#topic_right').hide();
 	}
 	if(menuId==".found_topic"){
-		$('.found_find').css('background','#A7ADBE');$('#find_right').hide();
-		$('.found_music').css('background','#A7ADBE');$('#music_right').hide();
-		$('.found_video').css('background','#A7ADBE');$('#video_right').hide();
-		$('.found_news').css('background','#A7ADBE');$('#news_right').hide();
-		$('.found_hot').css('background','#A7ADBE');$('#hot_right').hide();	
+		$('.found_find').css('background','rgba(167,173,190,0)');$('#find_right').hide();
+		$('.found_music').css('background','rgba(167,173,190,0)');$('#music_right').hide();
+		$('.found_video').css('background','rgba(167,173,190,0)');$('#video_right').hide();
+		$('.found_news').css('background','rgba(167,173,190,0)');$('#news_right').hide();
+		$('.found_hot').css('background','rgba(167,173,190,0)');$('#hot_right').hide();	
 	}
 }
+
 
 function hotMenuChange(menuId){
 	for(var i=0;i<=2;i++){
