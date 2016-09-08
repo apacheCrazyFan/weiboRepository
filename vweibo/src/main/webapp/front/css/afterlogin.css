@@ -377,8 +377,9 @@ textarea {
 
 #fabu {
 	float: right;
-	padding-right: 10px;
+	padding-right: 20px;
 	position:relative;
+	right:15px;
 	bottom:5px;
 }
 
@@ -564,9 +565,10 @@ textarea {
 }
 
 #center-parta1 {
-	font-size: 12px;
+	font-size: 13px;
 	color: #666;
 	margin-left:20px;
+	font-weight: bold;
 }
 
 #center-parta1:hover {

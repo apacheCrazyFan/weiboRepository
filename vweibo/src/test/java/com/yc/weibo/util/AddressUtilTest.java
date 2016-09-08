@@ -1,7 +1,5 @@
 package com.yc.weibo.util;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class AddressUtilTest {
