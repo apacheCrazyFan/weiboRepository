@@ -35,5 +35,16 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updataUserPhoto(paramMap);
 	}
 
+	@Override
+	public WeiBoUser findInfoByWbuid(int WBUid) {
+		return userMapper.findInfoByWbuid(WBUid);
+	}
+
+	@Override
+	public void saveChangeUserName(Map<String, String> paramMap) {
+		userMapper.saveChangeUserName(paramMap);
+		
+	}
+
 
 }

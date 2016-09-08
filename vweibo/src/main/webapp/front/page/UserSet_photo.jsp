@@ -13,8 +13,11 @@
 <link rel="stylesheet" href="front/upload/css/ssi-uploader.css"/>
 <script src="front/upload/js/ssi-uploader.js"></script>
 </head>
-
+<%
+	String WBUid=request.getParameter("WBUid");
+%>
 <body>
+	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<div id="wrap">
     	<div id="left">
         	<span class="idSet">账号设置</span>
@@ -137,7 +140,6 @@
 	    $("#upPhoto").append(photo);
 	    //浏览本地图片
 	    $('#ssi-upload').ssi_uploader({url:'#',maxFileSize:6,allowed:['jpg','gif','txt','png','pdf']});
-	    
     }
     
     //本地上传图片自动生成
@@ -154,7 +156,7 @@
     function savePhoto(){
     	var imageData=document.getElementById("photocanvas").toDataURL("image/jpg");
 		var base64Data = imageData.substr(22);
-    	$.post("user/setphoto",{"photodata":base64Data},function(data){
+    	$.post("user/setphoto",{"photodata":base64Data,"WBUid":$("#hiddenid").val()},function(data){
     		alert(data);
     	})
     }

@@ -175,23 +175,24 @@ function publishWeibo(){
 <input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
 
 	<div id="header">
-	    	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
-	        <div class="searchTextBorder">
-	        	<input type="text" class="searchText" placeholder="微微一笑很倾城" onClick="searchClick()" onBlur="searchBlur()"/>
-	            <a href="javascript:void(0)" class="search_pic"></a>
-	        </div>
-	        <ul>
-	        	<li><a href="javascript:void(0)" class="homePage">首页</a></li>
-	            <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
-	            <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
-	            <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
-	            <li><a href="javascript:void(0)" class="personPage">${sessionScope.user.uname}</a></li>
-	        </ul>
-	        <div class="settingArea">
-	        	<a href="javascript:void(0)" class="message_pic"></a>
-	            <a href="javascript:void(0)" class="setting_pic"></a>
-	            <a href="javascript:void(0)" class="sendMess_pic"></a>
-	        </div>
+
+    	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
+        <div class="searchTextBorder">
+        	<input type="text" class="searchText" placeholder="iphone7 发布会" onClick="searchClick()" onBlur="searchBlur()"/>
+            <a href="javascript:void(0)" class="search_pic"></a>
+        </div>
+        <ul>
+        	<li><a href="javascript:void(0)" class="homePage">首页</a></li>
+            <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
+            <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
+            <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
+            <li><a href="javascript:void(0)" class="personPage">${sessionScope.user.uname}</a></li>
+        </ul>
+        <div class="settingArea">
+        	<a href="javascript:void(0)" class="message_pic"></a>
+            <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" class="setting_pic"></a>
+            <a href="javascript:void(0)" class="sendMess_pic"></a>
+        </div>
 	</div>
 
 	
@@ -217,7 +218,7 @@ function publishWeibo(){
     	<div id="center-part-content">
         	<p>
                 <span id="s1"><img src="front/image/weibonav.png"/></span>
-                <a href="javascript:void(0)"><span id="s2" style="color:red;">王宝强，马蓉离婚案</span></a>
+                <a href="javascript:void(0)"><span id="s2" style="color:red;">亚洲新歌音乐节</span></a>
         	</p>
         	<!-- <form action="" method="" enctype="multipart/form-data" id="publishForm" name="myfrom"> -->
        			<textarea class="W_input" id="txt" title="微博输入框" name="textContent" node-type="textE1" content=""></textarea>
@@ -226,19 +227,20 @@ function publishWeibo(){
        			<input id="form_push_op" name="op" value="0" type="hidden" />
        			
         		<a href="javascript:void(0)" id="wword" onClick="showfaceimage('face_image')"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
-            	<a href="javascript:void(0)" onClick="showNone('weibo_pics','weibo_videoes')" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
-           	 	<a href="javascript:void(0)" onClick="showNone('weibo_videoes','weibo_pics')" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
+            	<a href="javascript:void(0)" onClick="showNone('uploadPics','uploadVideo')" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
+           	 	<a href="javascript:void(0)" onClick="showNone('uploadVideo','uploadPics')" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
             	<a href="javascript:void(0)" onClick="showtopicinput('topic_input')" id="wword"><img src="front/image/write_img4.png" id="wimg"/>话题</a>
             	<a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
             	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
 
             	<!-- <input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()"> -->
+
             	<input type="button" value="发布" id="publish" onclick="publishWeibo()"/>
-            		<div id="uploadPics">            		
-            			<input type="file" name="myPicFile" multiple="multiple" id="myPicFile" style="display:none;"/>
+            		<div id="uploadPics" style="display:none;">            		
+            			<input type="file" name="myPicFile" multiple="multiple" id="myPicFile" />
             		</div>
-            		<div id="uploadVideo">            		
-            			<input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile" style="display:none;"/>
+            		<div id="uploadVideo" style="display:none;">            		
+            			<input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile"/>
             		</div>
             <!-- </form> -->
             

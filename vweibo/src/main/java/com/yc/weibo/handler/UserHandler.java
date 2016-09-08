@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,11 +21,14 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.ThemeService;
@@ -150,8 +154,9 @@ public class UserHandler {
 	}
 
 	//上传头像
-	@RequestMapping(value="setphoto",method=RequestMethod.POST)
-	public String setPhoto(@RequestParam("photodata") String file,PrintWriter out){
+	@RequestMapping("/setphoto")
+	public String setPhoto(@RequestParam("photodata") String file,@RequestParam("WBUid")String WBUid,PrintWriter out){
+		System.out.println(WBUid);
 		BASE64Decoder decoder = new BASE64Decoder();
 		byte[] bytes;
 		try {
@@ -164,7 +169,11 @@ public class UserHandler {
 			String filename=new Date().getTime()+""+new Random().nextInt(100000)+".jpg";
 			FileOutputStream photopath = new FileOutputStream("D:\\Tomcat-7.0.30\\webapps\\weiboimage\\"+filename);
 			photopath.write(bytes); 
-			
+			Map<String,String> paramMap=new HashMap<>();
+			String UimgPath="D:\\Tomcat-7.0.30\\webapps\\weiboimage\\"+filename;
+			paramMap.put("UimgPath", UimgPath);
+			paramMap.put("WBUid", WBUid);
+			userService.updataUserPhoto(paramMap);
 			out.println("头像上传成功");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -174,6 +183,23 @@ public class UserHandler {
 		return null;
 	}
 
-
-
+	
+	@RequestMapping("/userset")
+	public String userSet(@RequestParam("WBUid")String WBUid,ModelMap map){
+		WeiBoUser weiboUser=userService.findInfoByWbuid(Integer.parseInt(WBUid));
+		map.addAttribute("user",weiboUser);
+		return "front/page/UserSet.jsp";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveChangeUserName")
+	public String saveChangeUserName(String newName,String WBUid,PrintWriter out){
+		Map<String, String> paramMap=new HashMap<>();
+		paramMap.put("Uname",newName);
+		paramMap.put("WBUid",WBUid);
+		userService.saveChangeUserName(paramMap);
+		out.println("修改成功");
+		return "front/page/UserSet.jsp";
+	}
 }

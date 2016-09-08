@@ -56,7 +56,7 @@ $(function () {
   blueimp.Gallery([
     {
       title: 'Sintel',
-      href: 'front/video/testvideo.mp4',
+      href: '../../weibovideoes/testvideo.mp4',
       type: 'video/mp4',
       poster: 'front/image/bg-3.jpg' 
     }
