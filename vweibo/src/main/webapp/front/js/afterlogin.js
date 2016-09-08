@@ -334,15 +334,16 @@ function showNone(id1,id2){//先隐藏两个元素，然后显示第一个，
 	var obj2=$("#"+id2);//传过来的是字符串
 	
 	if(obj1!=undefined&&obj2!=undefined){
-		obj1.hide();
-		obj2.hide();
-		
-		if(obj1.css("display")=='block'){
-			obj1.css("display","none");
-		}else{
+		if(obj2.css("display")=="block"){
+			obj2.hide();
+		}
+		if(obj1.css("display")=="none"){
 			obj1.css("display","block");
+		}else{
+			obj1.css("display","none");
 		}
 	}
+	
 }
 //表情的div的控制
 function showfaceimage(id){
