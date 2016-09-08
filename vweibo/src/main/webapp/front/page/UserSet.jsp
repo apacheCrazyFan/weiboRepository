@@ -13,6 +13,7 @@
 <body>
 	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<input type="hidden" value="${sessionScope.user.uphone}" id="hiddenphone">
+	<input type="hidden" value="${user.upassword }" id="hiddenpwd">
 	<div id="wrap">
     	<div id="left">
         	<span class="idSet">账号设置</span>
@@ -31,19 +32,20 @@
         	<ul>
             	<span class="head_label">我的信息<a href="front/page/Personal.jsp">预览我的主页</a></span>
                 <li id="perInfo1">登录名&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: panelOpen(1);">修改密码</a></li>
+                
                 <li style="display:none;background:#fff;height:160px" id="perInfo_panel1">登录名<a href="javascript: panelClose(1);">收起</a><br/>
                     <div>
                         <span class="oldPwdW">旧密码</span>
-                        <input type="password" class="oldPwd"/><br/>
+                        <input type="password" class="oldPwd" id="oldPwd" /><br/>
                         <span class="newPwdW">新密码</span>
-                        <input type="password" class="newPwd"/><br/>
-                        <input class="saveChangePwd" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
+                        <input type="password" class="newPwd" id="newPwd"/><br/>
+                        <input class="saveChangePwd" type="image" src="front/image/UserSet_image/savePhoto1.png" onclick="changePassWord()"/>
                         <input onClick="panelClose(1);" class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
-                <li>手机号&nbsp;&nbsp;<span class="span1">****</span></li>
+                 <li>手&nbsp;机&nbsp;号&nbsp;&nbsp;&nbsp;<span class="span1" id="telphone">****</span><a href="javascript:checkTelPhone()">查看</a></li>
                 
-                <li id="perInfo3">昵称&nbsp;&nbsp;&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: panelOpen(3);">编辑</a></li>
+                <li id="perInfo3">昵&nbsp;&nbsp;&nbsp;&nbsp;称&nbsp;&nbsp;&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: panelOpen(3);">编辑</a></li>
                 <li style="display:none;background:#fff;height:160px" id="perInfo_panel3">昵称<a href="javascript: panelClose(3);">收起</a><br/>
                     <div>
                         <span class="oldName">现昵称</span>
@@ -51,27 +53,27 @@
                         <span class="newName">新昵称</span>
                        <input type="text" style="height:25px" class="newUserName" name="newUserName" id="newName"/><div class="changeNameWarn"></div>
                         <input class="saveChangeUserName" type="image" src="front/image/UserSet_image/savePhoto1.png" onclick="saveChangeUserName()"/>
-                        <input class="closeComplie1" type="image" src="front/image/UserSet_image/closebtn1.png" />
+                        <input onClick="panelClose(3);" class="closeComplie1" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
-                <li id="perInfo4">个人资料<span class="span1">****</span><a href="javascript: panelOpen(4);">编辑</a></li>
+                <li id="perInfo4">个人资料&nbsp;<span class="span1">****</span><a href="javascript: panelOpen(4);">编辑</a></li>
                 <li style="display:none;background:#fff;height:400px" id="perInfo_panel4">个人资料<a href="javascript: panelClose(4);">收起</a>
                 	<div>
                     	<ul>
                         	<li class="li_mes1">以下信息将显示在个人资料页，方便大家了解你。</li>
                             <li class="li_mes2">基本信息</li>
                             <li>性别<input type="radio" name="sex" value="man" class="radio_man"/>男 <input type="radio" name="sex" value="woman" class="radio_woman"/>女</li>
-                            <li>生日<select class="year"></select>年<select class="month"></select>月<select class="date"></select>日</li>
-                            <li><div>个人简介</div><textarea type="text" class="userIntroduce" placeholder="请输入个人简介"></textarea></li>
-                            <li>注册邮箱<input type="text" class="userEmail" name="userEmail"/></li>
+                            <li>生日&nbsp;&nbsp;&nbsp;<input type="date" id="birthday"></li>
+                            <li><div>个人简介</div><textarea  class="userIntroduce" placeholder="请输入个人简介"style="width: 300px"></textarea></li>
+                            <li>注册邮箱<input type="text" class="userEmail" name="userEmail" style="height: 25px"/></li>
                         </ul>
                          <input class="saveChangeUserImf" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
                         <input onClick="panelClose(4);" class="closeComplie2" type="image" src="front/image/UserSet_image/closebtn1.png" />
                     </div>
                 </li>
                 
-                <li id="perInfo5">个人标签<span class="span1">****</span><a href="javascript: panelOpen(5);">编辑</a></li>
+                <li id="perInfo5">个人标签&nbsp;<span class="span1">****</span><a href="javascript: panelOpen(5);">编辑</a></li>
                 <li style="display:none;background:#fff;height:290px" id="perInfo_panel5">个人标签<a href="javascript: panelClose(5);">收起</a>
                 	<div>
                     	<span class="addLabelSpan">添加描述职业，兴趣爱好等方面的词语，让更多人找到你，让你找到更多同类</span><br/>
@@ -92,14 +94,30 @@
 <script type="text/javascript">
     $(function(){
     	$.post("user/userset?WBUid="+$("#hiddenid").val());
+    	
     });
-    
     function saveChangeUserName(){
     	$.post("user/saveChangeUserName",{"newName":$("#newName").val(),"WBUid":$("#hiddenid").val()},function(data){
     		alert(data);
+    		$("#newName").val("");
     	})
     }
     
+    
+    function changePassWord(){
+    	if($("#newPwd").val()!=""){
+	    	if($("#hiddenpwd").val()==$("#oldPwd").val()){
+	    	$.post("user/changePassWord",{"Upassword":$("#newPwd").val(),"WBUid":$("#hiddenid").val()},function(data){
+	    		alert(data);
+	    		$("#newPwd").val("");
+	    	})
+	    	}else{
+	    		alert("密码错误");
+	    	}
+    	}else{
+    		alert("密码不能为空");
+    	}
+    }
     function checkTelPhone(){
     	var telphone=$("#hiddenphone").val();
     	$("#telphone").html(telphone.substring(0,3)+"****"+telphone.substring(7,11));

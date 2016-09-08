@@ -46,5 +46,10 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public void changePassWord(Map<String, String> paramMap) {
+		userMapper.changePassWord(paramMap);
+	}
+
 
 }

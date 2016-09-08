@@ -34,7 +34,8 @@ import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.ThemeService;
 import com.yc.weibo.service.UserService;
 
-import sun.misc.BASE64Decoder;
+import Decoder.BASE64Decoder;
+
 
 
 
@@ -175,9 +176,13 @@ public class UserHandler {
 			paramMap.put("WBUid", WBUid);
 			userService.updataUserPhoto(paramMap);
 			out.println("头像上传成功");
+			out.flush();
+			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			out.println("头像上传失败");
+			out.flush();
+			out.close();
 		}
 		
 		return null;
@@ -200,6 +205,22 @@ public class UserHandler {
 		paramMap.put("WBUid",WBUid);
 		userService.saveChangeUserName(paramMap);
 		out.println("修改成功");
+		out.flush();
+		out.close();
+		return "front/page/UserSet.jsp";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/changePassWord")
+	public String changePassWord(String Upassword,String WBUid,PrintWriter out){
+		System.out.println(Upassword);
+		Map<String, String> paramMap=new HashMap<>();
+		paramMap.put("Upassword",Upassword);
+		paramMap.put("WBUid",WBUid);
+		userService.changePassWord(paramMap);
+		out.println("密码修改成功");
+		out.flush();
+		out.close();
 		return "front/page/UserSet.jsp";
 	}
 }
