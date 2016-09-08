@@ -157,11 +157,11 @@
 			<version>2.8.1</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>biz.source_code</groupId>
 			<artifactId>base64coder</artifactId>
 			<version>1.2.19</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>commons-fileupload</groupId>
