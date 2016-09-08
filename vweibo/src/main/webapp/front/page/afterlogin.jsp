@@ -7,7 +7,6 @@
 <head>
 <meta charset="utf-8">
 <base href="/vweibo/">
-
 <style type="text/css">
 	
 </style>
@@ -126,11 +125,9 @@
        			<input id="form_push_op" name="op" value="0" type="hidden" />
        			
         		<a href="javascript:void(0)" id="wword" onClick="showfaceimage('face_image')"><img src="front/image/write_img1.png" id="wimg"/>表情</a>
-        		
-            	<a href="javascript:void(0)" onClick="showUploadPicsNone('myPicFile')" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
-           	 	<a href="javascript:void(0)" onClick="showUploadVideosNone('myVideoFile')" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
-            	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img4.png" id="wimg"/>话题</a>
-            	<a href="javascript:void(0)" id="wword"><img src="front/image/write_img5.png" id="wimg"/>头条文章</a>
+            	<a href="javascript:void(0)" onClick="showNone('weibo_pics','weibo_videoes')" id="wword"><img src="front/image/write_img2.png" id="wimg"/>图片</a>
+           	 	<a href="javascript:void(0)" onClick="showNone('weibo_videoes','weibo_pics')" id="wword"><img src="front/image/write_img3.png" id="wimg"/>视频</a>
+            	<a href="javascript:void(0)" onClick="showtopicinput('topic_input')" id="wword"><img src="front/image/write_img4.png" id="wimg"/>话题</a>
             	<a href="javascript:void(0)" class="wword" id="moreimg" onMouseOver="changemoreimg()" onMouseOut="changemoreimgs()" style="position:relative;top:5px;"><img src="front/image/write_img6.png"/></a>
             	<a href="javascript:void(0)" id="aa" onClick='showhidediv("choose")'>公开<img src="front/image/limits_img5.png"/></a>
 

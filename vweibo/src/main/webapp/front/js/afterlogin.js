@@ -329,25 +329,18 @@ function addcommentdiv2(id){
 }
 
 //视频 图片文件的div的可见与隐藏
-
-function showUploadPicsNone(id){
-	var tips6=document.getElementById(id);
-	if(tips6){
-		if(tips6.style.display=='block'){
-			tips6.style.display='none';
+function showNone(id1,id2){//先隐藏两个元素，然后显示第一个，
+	var obj1=$("#"+id1);
+	var obj2=$("#"+id2);//传过来的是字符串
+	
+	if(obj1!=undefined&&obj2!=undefined){
+		obj1.hide();
+		obj2.hide();
+		
+		if(obj1.css("display")=='block'){
+			obj1.css("display","none");
 		}else{
-			tips6.style.display='block';
-		}
-	}
-}
-
-function showUploadVideosNone(id){
-	var tips7=document.getElementById(id);
-	if(tips7){
-		if(tips7.style.display=='block'){
-			tips7.style.display='none';
-		}else{
-			tips7.style.display='block';
+			obj1.css("display","block");
 		}
 	}
 }
@@ -375,7 +368,7 @@ function showtopicinput(id){
 		}
 	}
 }
-//点击表情以后   还需调试        
+//点击表情以后       
 function clickFace(obj){
 	$("#face_image").hide();
 	//alert($(obj).attr("data"));
