@@ -33,13 +33,11 @@
 <script type="text/javascript" src="front/js/demo.js"></script>
 <script type="text/javascript" src="front/js/session.js"></script>
 
-<script type="text/javascript">
-function adc(){
-	alert("meishi,wozhishiceshiyixia!");
-};
 
-</script>
 <script type="text/javascript">
+//全局变量 
+var weibocount = $("#weibocount").val();  //当前用户的微博数
+	
 function publishWeibo(){
  
 	alert($("#user").val());
@@ -66,46 +64,72 @@ function publishWeibo(){
 						alert("【微博发表成功】");
 						var location = data.location; //地理位置/电脑用户名 
 						var picsMap = data.picsMap; //图片路径 
-						var videoMap = data.videowMap; //视频路径
+						var videoMap = data.videoMap; //视频路径
 						var musicMap = data.musicMap; //音乐路径
-						//var date = data.publishDate; //发表日期
+						var date = data.publishDate; //发表日期
+						
 						console.info(location+" - "+picsMap+" - ");
+						
 						var newWeiBoStr = "";
+						var rootXIXI = $("#xixi");
+						var firstChrid = $("#xixi").children().first();
+						
 						var newWeiBoDiv = document.createElement("div");
-						newWeiBoDiv.className = "center-part-content_01";
+						newWeiBoDiv.id = "center-part-content_01";
+						
+						$(newWeiBoDiv).insertBefore($("#xixi div").first());
+
 						//newWeiBoDiv.style="margin-top:20px;";
 
-						newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="'+${sessionScope.user.WBUid}+'" title="啦啦啦" src="/weibouserimages/'+${sessionScope.user.uimgPath}+'"/></a>';
-						newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="'+ 'showcenterhidediv("center-partchoose")'+ 'onMouseOver="'+ 'changecentercolor("center-part_way") onMouseOut="changecentercolors("'+ 'center-part_way")"><img src="front/image/conter-part_wayimg01.png"/></a>';
-						newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(\'center - partchoose\')">';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="'+${sessionScope.user.WBUid}+'" title="${sessionScope.user.uname}" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
+						newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+						newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 						newWeiBoStr += '<ul>';
 						newWeiBoStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
-						newWeiBoStr += '<li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>';
+						newWeiBoStr += '<li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>';
 						newWeiBoStr += '<li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>';
-						newWeiBoStr += '<li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>';
+						newWeiBoStr += '<li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">举报</a></li>';
 						newWeiBoStr += '</ul>';
 						newWeiBoStr += '</div>';
 
 						newWeiBoStr += '<ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">';
-						newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">APP菌</li>';
-						newWeiBoStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>';
+						newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
+						newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
 						newWeiBoStr += '</ul>';
 						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'+ content + '</p>';
-						newWeiBoStr += '<div id="content_img01">';
-						newWeiBoStr += '<img src="front/image/weiboimg003.png"/>';
+						newWeiBoStr += '<div id="content_img01" style="position: relative;left:25px;bottom: 60px;width:500px;">';
+						
+						if(picsMap != ""){
+							var pics = picsMap.split(",");
+							for(var i = 0; i < pics.length; i ++){
+								newWeiBoStr += '<img src="/weibopics/'+pics[i]+'"/>';
+							}
+						}
+						if(videoMap != ""){
+							var video = videoMap.split(",");
+							for(var i = 0; i < video.length; i ++){
+								newWeiBoStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+							}
+						}
+						if(musicMap != ""){
+							var music = musicMap.split(",");
+							for(var i = 0; i < music.length; i ++){
+								newWeiBoStr += '<embed type="audio" autoplay="true" src="/weibomusics/'+music[i]+'"/>';
+							}
+						}
 						newWeiBoStr += '</div>';
 
 						newWeiBoStr += '<div id="center_footnum" class="center_footnum">';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv("'+ 'center_footnum1_col")"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv("'+ 'center_footnum2_transmit")"><img src="front/image/center-part_foot02.png" id="foot01_img"/>204</a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(\'comment_div\')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>45</a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>765</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';
 						newWeiBoStr += '</div>';
 
 						newWeiBoStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
 						newWeiBoStr += '<div id="collection_div_unline">';
 						newWeiBoStr += '<span id="collection_div_title">收藏</span>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(\'colle_closepng_a\')" onClick="changecollectionsearch(\'center_footnum1_col\')" onMouseOver="collectiondivcloseimg2(\'colle_closepng_a\')"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum1_col&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
 						newWeiBoStr += '</div>';
 						newWeiBoStr += '<div id="collection_div_tishi">';
 						newWeiBoStr += '<img src="front/image/collectionsuccess.png" id="collection_div_img"/>';
@@ -117,14 +141,14 @@ function publishWeibo(){
 						newWeiBoStr += '<input type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
 
 						newWeiBoStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png"/>';
-						newWeiBoStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(\'center_footnum1_col\')"/></div>';
+						newWeiBoStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum1_col&quot;)"/></div>';
 						newWeiBoStr += '</div>';
-						newWeiBoStr += ' </div>';
+						newWeiBoStr += '</div>';
 
 						newWeiBoStr += '<div id="center_footnum2_transmit" class="center_footnum2_transmit" style="display:none;">';
 						newWeiBoStr += '<div id="transmit_div_unline">';
 						newWeiBoStr += '<span id="transmit_div_title">转发微博</span>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="transmit_closepng_a" class="transmit_closepng_a" onMouseOut="transmitdivcloseimg(\'transmit_closepng_a\')" onClick="changetransmitsearch(\'center_footnum2_transmit\')" onMouseOver="transmitdivcloseimg2(\'transmit_closepng_a\')"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="transmit_closepng_a" class="transmit_closepng_a" onMouseOut="transmitdivcloseimg(&quot;transmit_closepng_a&quot;)" onClick="changetransmitsearch(&quot;center_footnum2_transmit&quot;)" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
 						newWeiBoStr += '</div>';
 						newWeiBoStr += '<div id="transmit_header">';
 						newWeiBoStr += '<span id="transmit_header_word">转发到：</span><a href="javascript:void(0)" id="transmit_where">我的微博</a>';
@@ -132,10 +156,10 @@ function publishWeibo(){
 						newWeiBoStr += '<textarea class="transmit_input" id="transmit_txt" title="微博输入框" node-type="textE1" placeholder="请输入转发理由"></textarea>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="transmit_aa" onClick=\'showhidetransmitdiv("transmit_choose")'+'">公开<img src="front/image/limits_img5.png"/></a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="transmit_aa" onClick="showhidetransmitdiv(&quot;transmit_choose&quot;)">公开<img src="front/image/limits_img5.png"/></a>';
 						newWeiBoStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit">';
 
-						newWeiBoStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(\'transmit_choose\')">';
+						newWeiBoStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(&quot;transmit_choose&quot;)">';
 						newWeiBoStr += '<ul>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose1" onClick="changewords()" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/><li class="c1" id="choose2" onClick="changewords1()" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>';
@@ -155,7 +179,26 @@ function publishWeibo(){
 						newWeiBoStr += '</div>';
 
 						newWeiBoDiv.innerHTML = newWeiBoStr;
-						$("#xixi").insertBefore(newWeiBoDiv,$("#xixi:first")); 
+						//$(newWeiBoStr).insertBefore($("#xixi:first"));
+						//rootXIXI.insertBefore(newWeiBoDiv,firstChrid);
+						
+						//document.getElementById("xixi").insertBefore(newWeiBoDiv,document.get); 
+						//alert("终于到了这一步了");
+						//alert($("#xixi").innerHTML);
+						//document.getElementById("xixi").innerHTML = newWeiBoStr;
+						
+						//刷新微博数
+						weibocount += 1;
+						countStr = '<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>'
+			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>'
+			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">$'+weibocount+'</font>微博</a>';
+						$("#usernum").innerHTML = countStr;
+						
+						//刷新发布框
+						$("#txt").value = "";
+						
+						//刷新文件框
+						alert("剧终!");
 					}
 				},
 				error : function(data, status, e) {
@@ -163,6 +206,8 @@ function publishWeibo(){
 				}
 			}); 
 		}
+		
+
 </script>
 </head>
 	<%
@@ -171,7 +216,7 @@ function publishWeibo(){
 	%>
 <body id="bg">
 <input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
-
+<input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM } " />
 	<div id="header">
 
     	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
@@ -234,12 +279,21 @@ function publishWeibo(){
             	<!-- <input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()"> -->
 
             	<input type="button" value="发布" id="publish" onclick="publishWeibo()"/>
-            		<div id="uploadPics" style="display:none;">            		
-            			<input type="file" name="myPicFile" multiple="multiple" id="myPicFile" />
+            	
+            	<div id="uploadPics" style="display:none;position:relative;z-index:99;border:1px solid #CCC;">            		
+            		<a href="javascript:void(0)" onclick="createInput('aapic')" style="font-size:14px;">&gt;&gt;添加附件&lt;&lt;</a>
+            		<div id="aapic" style="position:relative;z-index:99;border:1px solid #CCC;">
+            				
             		</div>
-            		<div id="uploadVideo" style="display:none;">            		
-            			<input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile"/>
+            			 <!-- <input type="file" name="myPicFile" multiple="multiple" id="myPicFile" style="width:250px"/>  -->
+            	</div>
+            	<div id="uploadVideo" style="display:none;position:relative;z-index:99;border:1px solid #CCC;">            		
+            		<!-- <input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile"/> -->
+            		<a href="javascript:void(0)" onclick="createInput('bbpic')" style="font-size:14px;">&gt;&gt;添加附件&lt;&lt;</a>
+            		<div id="bbpic" style="position:relative;z-index:99;border:1px solid #CCC;">
+            				
             		</div>
+            	</div>
             </form>
             
             <div id="choose" style="display:none;" onMouseUp="hidediv()">
@@ -253,15 +307,14 @@ function publishWeibo(){
                 <li class="c1" id="choose4" data="3" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
             </div>
             
-            <div id="face_image" style="display:none;"> z-index应该是要和position一起用，
-           		this指针只能放在事件里面用  onClick  onMouseOver等
-           		<a href="javascript:void(0)" onClick="clickFace(this)" data="[大哭]"><img src="front/image/face_image/daku003.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[大笑]"><img src="front/image/face_image/daxiao007.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[可怜]"><img src="front/image/face_image/keling006.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[抠鼻]"><img src="front/image/face_image/koubi005.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[衰]"><img src="front/image/face_image/shuai004.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[微笑]"><img src="front/image/face_image/weixiao001.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[赞]"><img src="front/image/face_image/zan002.png"></a>
+            <div id="face_image" style="display:none;"> <!-- z-index应该是要和position一起用，this指针只能放在事件里面用  onClick  onMouseOver等 -->
+           		<a href="javascript:void(0)" onClick="clickFace(this)" data="[daku]"><img src="front/image/face_image/daku003.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[daxiao]"><img src="front/image/face_image/daxiao007.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[kelian]"><img src="front/image/face_image/keling006.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[koubi]"><img src="front/image/face_image/koubi005.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[shuai]"><img src="front/image/face_image/shuai004.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[weixiao]"><img src="front/image/face_image/weixiao001.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[zan]"><img src="front/image/face_image/zan002.png"></a>
             </div>
             
             <div id="topic_input" style="display:none;">
@@ -314,7 +367,7 @@ function publishWeibo(){
    
                 <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
                 	<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">APP菌</li>
-                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
+                    <li style="height:0px;width:250px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p" style="width:500px;position:relative;left:29px;">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
                 doge]！而且相比之下TheClocks有数字和指针两种形式，还可以设定闹铃中区也有，而且free帮APP菌卖安利#</p>

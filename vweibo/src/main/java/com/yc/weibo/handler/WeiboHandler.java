@@ -95,6 +95,7 @@ public class WeiboHandler {
 
 		}
 
+		//将微博插入数据库
 		String publishDateAndLocation = insertWeiBoIntoDataBase(request, picsMap, videoMap, musicMap);
 		if(!publishDateAndLocation.equals(DataDic.DATESTRING)){
 			jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
@@ -102,6 +103,8 @@ public class WeiboHandler {
 			jsonMap.put("picsMap", picsMap);
 			jsonMap.put("videoMap", videoMap);
 			jsonMap.put("musicMap", musicMap);
+			jsonMap.put("userimg", "what");
+			jsonMap.put("zanwu", "the");
 			jsonMap.put("rate", 2);
 		}
 
@@ -166,12 +169,12 @@ public class WeiboHandler {
 			map.put("picsMap", null);
 		}
 		if(videoesMap != null && !videoesMap.equals("")){
-			map.put("videoesMap", picsMap.substring(0, picsMap.length()-1));
+			map.put("videoesMap", videoesMap.substring(0, videoesMap.length()-1));
 		}else{
 			map.put("videoesMap", null);
 		}
 		if(musicMap != null && !musicMap.equals("")){
-			map.put("musicMap", picsMap.substring(0, picsMap.length()-1));
+			map.put("musicMap", musicMap.substring(0, musicMap.length()-1));
 		}else{
 			map.put("musicMap", null);
 		}
