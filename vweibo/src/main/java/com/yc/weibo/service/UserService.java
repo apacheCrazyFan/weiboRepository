@@ -20,4 +20,8 @@ public interface UserService {
 	void saveChangeUserName(Map<String, String> paramMap);
 	
 	void changePassWord(Map<String, String> paramMap);
+
+	void savePersonInfo(Map<String, String> paramMap);
+	
+	void saveUserTag(Map<String, String> paramMap);
 }

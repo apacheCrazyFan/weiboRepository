@@ -51,5 +51,17 @@ public class UserServiceImpl implements UserService {
 		userMapper.changePassWord(paramMap);
 	}
 
+	@Override
+	public void savePersonInfo(Map<String, String> paramMap) {
+		userMapper.savePersonInfo(paramMap);
+		
+	}
+
+	@Override
+	public void saveUserTag(Map<String, String> paramMap) {
+		userMapper.saveUserTag(paramMap);
+		
+	}
+
 
 }

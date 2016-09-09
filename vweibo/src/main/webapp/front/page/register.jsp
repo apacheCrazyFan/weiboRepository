@@ -111,5 +111,31 @@
 	<script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="front/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="front/js/register.js"></script>
+    <script type="text/javascript">
+  //发送验证码
+    var time=120;
+    function f1(){
+    	$("#YZcode").val(time+" s后重发");
+    	time--;
+    	if(time<=0){
+    		window.clearInterval();
+    		$("#YZcode").val("验证超时");
+    		
+    	}
+    }
+    function YZcodee(){
+    	$.post("user/sendEMail",{"email":$("#first_name").val()},function(data){
+    		alert(data);
+    	})
+    	window.setInterval("f1()", 1000);
+    	if(time<=0){
+    		window.clearInterval();
+    		$("#YZcode").val("重新获取验证码");
+    		time=120;
+    	}
+    	
+    }
+    
+    </script>
 </body>
 </html>
