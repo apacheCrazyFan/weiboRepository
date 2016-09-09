@@ -344,7 +344,7 @@ function showNone(id1,id2){//先隐藏两个元素，然后显示第一个，
 		}
 	}
 	
-	createInput(id1);
+	//createInput(id1);
 	
 }
 
@@ -356,10 +356,10 @@ var countvideo = 0;
 function createInput(picsdiv){
 	alert("wo lai le");
 		countpic++;  
-	    var str = '<div name="div" ><font style="font-size:12px;">附件</font>'+  
+	    var str = '<div name="div">'+  
 	    '   '+ '<input type="file" contentEditable="false" id="uploads' + countpic + '' +  
-	    '" name="uploads'+ countpic +'" value="" style="width: 220px"/><input type="button"  value="删除" onclick="removeInput(event)" />'+'</div>';  
-	    document.getElementById(picsdiv).insertAdjacentHTML("beforeEnd",str);
+	    '" name="uploads'+ countpic +'" value="" style="width:250px"/><a href="javascript:void(0)" onclick="removeInput(event,'+picsdiv+')" style="font-size:12px;height:25px;line-height:25px;width:25px;margin-left:5px;padding-right:5px;float:right;">删除</a>'+'</div>';  
+	    $("#"+picsdiv).append(str);
 }
 /*
 * 删除多附件删除框 
@@ -367,8 +367,8 @@ function createInput(picsdiv){
 function removeInput(evt, parentId){  
    var el = evt.target == null ? evt.srcElement : evt.target;  
    var div = el.parentNode;  
-   var cont = document.getElementById(parentId);         
-   if(cont.removeChild(div) == null){  
+   //var cont = document.getElementById(parentId);         
+   if(parentId.removeChild(div) == null){  
     return false;  
    }  
    return true;  

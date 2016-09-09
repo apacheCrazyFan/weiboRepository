@@ -257,7 +257,7 @@ textarea {
 
 #uploadPics{
 		background-color: white;
-		width:200px;
+		width:300px;
 		position:relative;
 		right:180px;
 		top:5px;
@@ -266,7 +266,7 @@ textarea {
 		background-color:white;
 		margin-top:5px;
 		margin-left:110px;
-		width:200px;
+		width:300px;
 	}
 
 #wimg {
@@ -403,10 +403,10 @@ textarea {
 	border: #CCC solid 1px;
 	width: 200px;
 	height: 23px;
-	float: right;
-	margin-top: 7px;
-	margin-right: 10px;
 	box-shadow: 2px 2px 2px #CCC;
+	position:relative;
+	left:180px;
+	bottom:15px;
 }
 
 #nav-search {

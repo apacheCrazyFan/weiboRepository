@@ -94,10 +94,10 @@ function publishWeibo(){
 
 						newWeiBoStr += '<ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">';
 						newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
-						newWeiBoStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+						newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
 						newWeiBoStr += '</ul>';
 						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'+ content + '</p>';
-						newWeiBoStr += '<div id="content_img01">';
+						newWeiBoStr += '<div id="content_img01" style="position: relative;left:25px;bottom: 60px;width:500px;">';
 						
 						if(picsMap != ""){
 							var pics = picsMap.split(",");
@@ -108,7 +108,7 @@ function publishWeibo(){
 						if(videoMap != ""){
 							var video = videoMap.split(",");
 							for(var i = 0; i < video.length; i ++){
-								newWeiBoStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'"/>';
+								newWeiBoStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 							}
 						}
 						if(musicMap != ""){
@@ -279,12 +279,21 @@ function publishWeibo(){
             	<!-- <input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()"> -->
 
             	<input type="button" value="发布" id="publish" onclick="publishWeibo()"/>
-            		<div id="uploadPics" style="display:none;">            		
-            			<!-- <input type="file" name="myPicFile" multiple="multiple" id="myPicFile" /> -->
+            	
+            	<div id="uploadPics" style="display:none;position:relative;z-index:99;border:1px solid #CCC;">            		
+            		<a href="javascript:void(0)" onclick="createInput('aapic')" style="font-size:14px;">&gt;&gt;添加附件&lt;&lt;</a>
+            		<div id="aapic" style="position:relative;z-index:99;border:1px solid #CCC;">
+            				
             		</div>
-            		<div id="uploadVideo" style="display:none;">            		
-            			<input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile"/>
+            			 <!-- <input type="file" name="myPicFile" multiple="multiple" id="myPicFile" style="width:250px"/>  -->
+            	</div>
+            	<div id="uploadVideo" style="display:none;position:relative;z-index:99;border:1px solid #CCC;">            		
+            		<!-- <input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile"/> -->
+            		<a href="javascript:void(0)" onclick="createInput('bbpic')" style="font-size:14px;">&gt;&gt;添加附件&lt;&lt;</a>
+            		<div id="bbpic" style="position:relative;z-index:99;border:1px solid #CCC;">
+            				
             		</div>
+            	</div>
             </form>
             
             <div id="choose" style="display:none;" onMouseUp="hidediv()">
@@ -299,13 +308,13 @@ function publishWeibo(){
             </div>
             
             <div id="face_image" style="display:none;"> <!-- z-index应该是要和position一起用，this指针只能放在事件里面用  onClick  onMouseOver等 -->
-           		<a href="javascript:void(0)" onClick="clickFace(this)" data="[大哭]"><img src="front/image/face_image/daku003.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[大笑]"><img src="front/image/face_image/daxiao007.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[可怜]"><img src="front/image/face_image/keling006.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[抠鼻]"><img src="front/image/face_image/koubi005.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[衰]"><img src="front/image/face_image/shuai004.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[微笑]"><img src="front/image/face_image/weixiao001.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[赞]"><img src="front/image/face_image/zan002.png"></a>
+           		<a href="javascript:void(0)" onClick="clickFace(this)" data="[daku]"><img src="front/image/face_image/daku003.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[daxiao]"><img src="front/image/face_image/daxiao007.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[kelian]"><img src="front/image/face_image/keling006.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[koubi]"><img src="front/image/face_image/koubi005.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[shuai]"><img src="front/image/face_image/shuai004.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[weixiao]"><img src="front/image/face_image/weixiao001.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[zan]"><img src="front/image/face_image/zan002.png"></a>
             </div>
             
             <div id="topic_input" style="display:none;">
@@ -358,7 +367,7 @@ function publishWeibo(){
    
                 <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
                 	<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">APP菌</li>
-                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
+                    <li style="height:0px;width:250px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p" style="width:500px;position:relative;left:29px;">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
                 doge]！而且相比之下TheClocks有数字和指针两种形式，还可以设定闹铃中区也有，而且free帮APP菌卖安利#</p>
