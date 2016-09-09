@@ -8,7 +8,7 @@
 	</select>
 	
 	<insert id="register" parameterType="WeiBoUser">
-		insert into WeiBoUser(WUid,Uname,Upassword,Uphone,Uemail,Usex) values(seq_WeiBoUser_Wbid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex})
+		insert into WeiBoUser(WBUid,Uname,Upassword,Uphone,Uemail,Usex) values(seq_WeiBoUser_Wbuid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex})
 	</insert>
 	
 	<update id="updataUserPhoto" parameterType="map">
@@ -25,5 +25,13 @@
 	
 	<update id="changePassWord" parameterType="map">
 		update WeiBoUser set Upassword=#{Upassword,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="savePersonInfo" parameterType="map">
+		update WeiBoUser set Usex=#{Usex,jdbcType=VARCHAR}, Uemail=#{Uemail,jdbcType=VARCHAR},Uintroduce=#{Uintroduce,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="saveUserTag" parameterType="map">
+		update WeiBoUser set Utag=#{Utag,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
 	</update>
 </mapper>

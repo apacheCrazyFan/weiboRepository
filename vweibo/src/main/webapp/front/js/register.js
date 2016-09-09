@@ -56,26 +56,12 @@ function checkPasswordagain() {
 	}
 }
 
-//发送验证码
-var time=120;
-function f1(){
-	$("#YZcode").val(time+" s后重发");
-	time--;
-	if(time<=0){
-		window.clearInterval();
-		$("#YZcode").val("验证超时");
-		
-	}
-}
-function YZcodee(){
-	window.setInterval("f1()", 1000);
-	if(time<=0){
-		window.clearInterval();
-		$("#YZcode").val("重新获取验证码");
-		time=120;
-	}
-}
+
 function checkPro(){
+	alert($("#YZcodeInput").val());
+	if($("#YZcodeInput").val()==""){
+		alert("请输入验证码");
+	}
 	if($("#btnbtn-info").prop('checked')){
 		
 	}else{

@@ -225,7 +225,8 @@ body {
 	margin-right: 50px;
 }
 .userLabel {
-	width: 70px;
+	float: left;
+	width: 80px;
 	height: 20px;
 	border: 1px solid #999;
 	background: url(../image/UserSet_image/icon_miniClose1.png) no-repeat 60px 8px;
@@ -246,17 +247,17 @@ body {
 	width: 540px;
 	height: 70px;
 	position: absolute;
-	top: 75px;
 	left: 180px;
-	padding: 1px 10px 10px 10px;
+	top:50px;
+	padding: 30px 10px 10px 10px;
 }
 .addUserLabel {
+	float: left;
 	width: 80px;
 	height: 20px;
 	border: 1px solid #999;
 	background: url(../image/UserSet_image/icon_addLabel1.png) no-repeat 65px 8px;
 	text-indent: 5px;
-	padding-top: 5px;
 	white-space: nowrap;
 }
 .changeAddLabel {

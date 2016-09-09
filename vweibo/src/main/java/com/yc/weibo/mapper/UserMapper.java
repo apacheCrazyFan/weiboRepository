@@ -21,4 +21,8 @@ public interface UserMapper {
 	
 	void changePassWord(Map<String, String> paramMap);
 
+	void savePersonInfo(Map<String, String> paramMap);
+	
+	void saveUserTag(Map<String, String> paramMap);
+
 }

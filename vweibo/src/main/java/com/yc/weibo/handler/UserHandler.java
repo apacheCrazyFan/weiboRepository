@@ -48,6 +48,7 @@ public class UserHandler {
 	@Autowired
 	private ThemeService themeService;
 
+	StringBuffer randomCode = new StringBuffer();
 
 	//登录
 	@ModelAttribute
@@ -56,14 +57,12 @@ public class UserHandler {
 		map.put("Themes", new ArrayList<Theme>()); //话题信息
 		map.put("groupnumber", new HashMap<String,Integer>()); //关注，粉丝。微博，未分组，好友圈等
 	}
-	
+
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(String UphoneOrUemail,String Upassword,ModelMap map){
-		//System.out.println("===>>"+user); //登录时注入的用户
-
 		WeiBoUser user = null;
 		String format = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
-		
+
 		if(UphoneOrUemail.matches(format)){ //说明是邮箱
 			//System.out.println( "我进了邮箱");
 			user = new WeiBoUser(Upassword,UphoneOrUemail,0);
@@ -71,10 +70,9 @@ public class UserHandler {
 			//System.out.println( "我进了手机");
 			user = new WeiBoUser(Upassword,UphoneOrUemail);
 		}
-		
-		
+
+
 		user=userService.login(user);
-		System.out.println( "=============>"+user);
 		if(user==null){
 			map.put("errorMsg","用户名或密码错误");
 			return "forward:/front/page/login.jsp";
@@ -84,16 +82,14 @@ public class UserHandler {
 		params.put("pageSize", 10);
 		params.put("pageNum", 1);
 		List<Theme> Themes = themeService.findThemeByPage(params);
-		
+
 		List<Map<String, Integer>> groupnumber = themeService.findeGroupNumber(user.getWBUid());
-		System.out.println("==========>"+groupnumber );
 		map.put("user", user);		//用户信息
 		map.put("Themes", Themes); //话题信息
 		map.put("groupnumber", groupnumber.get(0)); //关注，粉丝。微博，未分组，好友圈等
-		
-		System.out.println("===========>"+ Themes);
+
 		return "forward:/front/page/afterlogin.jsp";	
-		}
+	}
 
 
 
@@ -102,9 +98,23 @@ public class UserHandler {
 	//注册
 	@RequestMapping(value="/register")
 	public String register(@ModelAttribute("user")WeiBoUser user,ModelMap map,HttpServletRequest request){
-		System.out.println("===>>"+user);
+		WeiBoUser wuser=new WeiBoUser(user.getWBUid(),user.getUname(),user.getUpassword(),user.getUphone(),user.getUemail(),
+				user.getUsex().substring(0,1),user.getUage(),user.getUimgPath(),user.getUregisterDate(),user.getYZcode(),
+				user.getYZcodeInput(),user.getWcount(),user.getTcount());
+		System.out.println(wuser);
+		if (randomCode.toString().equalsIgnoreCase(user.getYZcodeInput())) {
+			userService.register(wuser);
+			return "/front/page/login.jsp";
+		} else {
+			map.put("YZcodeErr", "验证码错误,请重新获取");
+			return "/front/page/register.jsp";
+		} 
+
+	}
+
+	@RequestMapping("/sendEMail")
+	private void sendEMail(String email,PrintWriter out){
 		Random random=new Random();
-		StringBuffer randomCode = new StringBuffer();
 		// 设置默认生成4个验证码
 		int length = 4;
 		// 设置备选验证码:包括"a-z"和数字"0-9"
@@ -115,24 +125,19 @@ public class UserHandler {
 			// 得到随机产生的验证码数字。
 			int start = random.nextInt(size);
 			String strRand = base.substring(start, start + 1);
-			// 将产生的四个随机数组合在一起。
+			// 将产生的四个随机数组合在一起
 			randomCode.append(strRand);
 		}
 		boolean isSendEmail=activeAccountMail("用户验证","您的验证码为:"+randomCode.toString(),
-				"13237344042@163.com",user.getUemail());
-		System.out.println(isSendEmail);
-		if (isSendEmail) {
-			if (randomCode.toString().equalsIgnoreCase(user.getYZcodeInput())) {
-				userService.register(user);
-				return "front/page/login.jsp";
-			} else {
-				map.put("YZcodeErr", "验证码错误,请重新获取");
-				return "front/page/register.jsp";
-			} 
+				"13237344042@163.com",email);
+		if(isSendEmail){
+			out.println("验证码发送成功");
 		}else{
-			map.put("YZcodeErr", "发送失败,请重新发送");
-			return "front/page/register.jsp";
+			out.print("验证码发送失败,请重新获取");
 		}
+		out.flush();
+		out.close();
+
 
 	}
 	//邮件发送
@@ -184,19 +189,20 @@ public class UserHandler {
 			out.flush();
 			out.close();
 		}
-		
+
 		return null;
 	}
 
-	
+
 	@RequestMapping("/userset")
 	public String userSet(@RequestParam("WBUid")String WBUid,ModelMap map){
 		WeiBoUser weiboUser=userService.findInfoByWbuid(Integer.parseInt(WBUid));
 		map.addAttribute("user",weiboUser);
 		return "front/page/UserSet.jsp";
-		
+
 	}
-	
+
+	//修改昵称
 	@ResponseBody
 	@RequestMapping(value="/saveChangeUserName")
 	public String saveChangeUserName(String newName,String WBUid,PrintWriter out){
@@ -209,7 +215,8 @@ public class UserHandler {
 		out.close();
 		return "front/page/UserSet.jsp";
 	}
-	
+
+	//修改密码
 	@ResponseBody
 	@RequestMapping(value="/changePassWord")
 	public String changePassWord(String Upassword,String WBUid,PrintWriter out){
@@ -222,5 +229,35 @@ public class UserHandler {
 		out.flush();
 		out.close();
 		return "front/page/UserSet.jsp";
+	}
+
+	//修改个人信息
+	@ResponseBody
+	@RequestMapping(value="/savePersonInfo")
+	public void savePersonInfo(String sex,String userIntroduce,String userEmail,String WBUid,PrintWriter out){
+		Map<String, String> paramMap=new HashMap<>();
+		paramMap.put("userIntroduce",userIntroduce);
+		paramMap.put("userEmail",userEmail);
+		paramMap.put("sex",sex);
+		paramMap.put("WBUid",WBUid);
+		System.out.println(paramMap);
+		userService.savePersonInfo(paramMap);
+		out.print("个人信息修改成功");
+		out.flush();
+		out.close();
+	}
+	
+	//添加个人标签
+	@ResponseBody
+	@RequestMapping(value="/saveUserTag")
+	public void saveUserTag(String Utag,String WBUid,PrintWriter out){
+		Map<String, String> paramMap=new HashMap<>();
+		paramMap.put("Utag",Utag);
+		paramMap.put("WBUid",WBUid);
+		System.out.println(Utag+"---"+WBUid);
+		userService.saveUserTag(paramMap);
+		out.println("标签添加成功");
+		out.flush();
+		out.close();
 	}
 }
