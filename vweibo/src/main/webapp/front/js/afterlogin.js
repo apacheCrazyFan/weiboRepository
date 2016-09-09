@@ -344,7 +344,35 @@ function showNone(id1,id2){//先隐藏两个元素，然后显示第一个，
 		}
 	}
 	
+	createInput(id1);
+	
 }
+
+var countpic = 0;
+var countvideo = 0;
+/*
+* 生成多附件上传框 
+*/ 
+function createInput(picsdiv){
+	alert("wo lai le");
+		countpic++;  
+	    var str = '<div name="div" ><font style="font-size:12px;">附件</font>'+  
+	    '   '+ '<input type="file" contentEditable="false" id="uploads' + countpic + '' +  
+	    '" name="uploads'+ countpic +'" value="" style="width: 220px"/><input type="button"  value="删除" onclick="removeInput(event)" />'+'</div>';  
+	    document.getElementById(picsdiv).insertAdjacentHTML("beforeEnd",str);
+}
+/*
+* 删除多附件删除框 
+*/  
+function removeInput(evt, parentId){  
+   var el = evt.target == null ? evt.srcElement : evt.target;  
+   var div = el.parentNode;  
+   var cont = document.getElementById(parentId);         
+   if(cont.removeChild(div) == null){  
+    return false;  
+   }  
+   return true;  
+} 
 //表情的div的控制
 function showfaceimage(id){
 	var tips8=document.getElementById(id);
@@ -392,3 +420,4 @@ function clicktopic(obj){
 
 
 //图片放大镜
+

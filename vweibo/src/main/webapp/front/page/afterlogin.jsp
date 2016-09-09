@@ -33,13 +33,11 @@
 <script type="text/javascript" src="front/js/demo.js"></script>
 <script type="text/javascript" src="front/js/session.js"></script>
 
-<script type="text/javascript">
-function adc(){
-	alert("meishi,wozhishiceshiyixia!");
-};
 
-</script>
 <script type="text/javascript">
+//全局变量 
+var weibocount = $("#weibocount").val();  //当前用户的微博数
+	
 function publishWeibo(){
  
 	alert($("#user").val());
@@ -188,6 +186,18 @@ function publishWeibo(){
 						//alert("终于到了这一步了");
 						//alert($("#xixi").innerHTML);
 						//document.getElementById("xixi").innerHTML = newWeiBoStr;
+						
+						//刷新微博数
+						weibocount += 1;
+						countStr = '<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>'
+			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>'
+			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">$'+weibocount+'</font>微博</a>';
+						$("#usernum").innerHTML = countStr;
+						
+						//刷新发布框
+						$("#txt").value = "";
+						
+						//刷新文件框
 						alert("剧终!");
 					}
 				},
@@ -196,6 +206,8 @@ function publishWeibo(){
 				}
 			}); 
 		}
+		
+
 </script>
 </head>
 	<%
@@ -204,7 +216,7 @@ function publishWeibo(){
 	%>
 <body id="bg">
 <input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
-
+<input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM } " />
 	<div id="header">
 
     	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
@@ -268,7 +280,7 @@ function publishWeibo(){
 
             	<input type="button" value="发布" id="publish" onclick="publishWeibo()"/>
             		<div id="uploadPics" style="display:none;">            		
-            			<input type="file" name="myPicFile" multiple="multiple" id="myPicFile" />
+            			<!-- <input type="file" name="myPicFile" multiple="multiple" id="myPicFile" /> -->
             		</div>
             		<div id="uploadVideo" style="display:none;">            		
             			<input type="file" name="myVideoFile" multiple="multiple" id="myVideoFile"/>

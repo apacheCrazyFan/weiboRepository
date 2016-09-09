@@ -256,17 +256,17 @@ textarea {
 }
 
 #uploadPics{
-		background-color: gray;
-		width:150px;
+		background-color: white;
+		width:200px;
 		position:relative;
 		right:180px;
 		top:5px;
 	}
 #uploadVideo{
-		background-color: gray;
+		background-color:white;
 		margin-top:5px;
 		margin-left:110px;
-		width:150px;
+		width:200px;
 	}
 
 #wimg {
