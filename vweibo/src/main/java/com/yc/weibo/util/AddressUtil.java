@@ -226,7 +226,7 @@ public class AddressUtil {
 
 			if(null != ipaddress && !ipaddress.equals("")){
 				address = AddressUtil.getAddresses("ip="+ipaddress, "utf-8");
-				if(address.contains("IP")){
+				if(null != address && address.contains("IP")){
 					address = getSystemProperties().get("username");
 				}
 				

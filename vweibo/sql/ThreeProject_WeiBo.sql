@@ -328,6 +328,7 @@ create table Operate(
        
        --Ô¤Áô×Ö¶Î  
 );
+create sequence seq_op_oid start with 1001;
 --ÆÀÂÛ£¨»Ø¸´£©Î¢²©±í  --ÕÒ°Ö°Ö
 create table Comments(
        Cid int primary key,           --ÆÀÂÛ£¨»Ø¸´£©id

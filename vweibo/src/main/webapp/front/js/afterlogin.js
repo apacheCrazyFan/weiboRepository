@@ -354,12 +354,13 @@ var countvideo = 0;
 * 生成多附件上传框 
 */ 
 function createInput(picsdiv){
-	alert("wo lai le");
 		countpic++;  
 	    var str = '<div name="div">'+  
 	    '   '+ '<input type="file" contentEditable="false" id="uploads' + countpic + '' +  
 	    '" name="uploads'+ countpic +'" value="" style="width:250px"/><a href="javascript:void(0)" onclick="removeInput(event,'+picsdiv+')" style="font-size:12px;height:25px;line-height:25px;width:25px;margin-left:5px;padding-right:5px;float:right;">删除</a>'+'</div>';  
 	    $("#"+picsdiv).append(str);
+	    
+	    media[countpic] = "uploads"+countpic;
 }
 /*
 * 删除多附件删除框 

@@ -4,6 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.weibo.mapper.WeiboMapper">
 	<insert id="insertWeibo" parameterType="map">
+		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE">
+			select seq_wb_wbid.nextval currval from dual
+		</selectKey>
 		insert into WeiBo values (seq_wb_wbid.nextval,#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
+	</insert>
+	
+	<update id="updateWeiboLike" parameterType="int">
+		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1 where WBid = #{wbid}
+	</update>
+	
+	<insert id="insertWhoLike">
+		insert into Operate values(seq_op_oid.nextval,#{uid},#{wbid},'点赞')
 	</insert>
 </mapper>

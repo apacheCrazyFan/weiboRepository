@@ -38,6 +38,8 @@
 //全局变量 
 var weibocount = $("#weibocount").val();  //当前用户的微博数
 	
+var media = new Array();
+
 function publishWeibo(){
  
 	alert($("#user").val());
@@ -52,7 +54,7 @@ function publishWeibo(){
 					'statue' : statue,
 					'content' : content
 				},
-				fileElementId : [ 'myPicFile', 'myVideoFile' ],
+				fileElementId : media,
 				dataType : 'json',
 				type : 'post',
 				success : function(data, status) {
@@ -111,6 +113,8 @@ function publishWeibo(){
 								newWeiBoStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 							}
 						}
+						
+							
 						if(musicMap != ""){
 							var music = musicMap.split(",");
 							for(var i = 0; i < music.length; i ++){
@@ -121,9 +125,9 @@ function publishWeibo(){
 
 						newWeiBoStr += '<div id="center_footnum" class="center_footnum">';
 						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>转发</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>评论</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img" onclick="return clicklike('+${sessionScope.user.WBUid}+','+${sessionScope.user.WBUid}+')"/>赞</a>';
 						newWeiBoStr += '</div>';
 
 						newWeiBoStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
@@ -216,7 +220,9 @@ function publishWeibo(){
 	%>
 <body id="bg">
 <input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
-<input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM } " />
+<!-- <form>
+		<input type="submit">
+	</form> --><input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM } " />
 	<div id="header">
 
     	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
