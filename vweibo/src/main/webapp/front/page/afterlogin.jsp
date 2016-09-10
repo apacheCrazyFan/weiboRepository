@@ -136,15 +136,30 @@ function publishWeibo() {
 						newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
 						newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+ date + '</a> 来自 ' + location + '</li>';
 						newWeiBoStr += '</ul>';
-						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">';
 						
-						var faceRegx = //[/]/gm;
-						faceArr = content.match(faceRegx);
-						console.info(content);
+
+						var newContent ='';
+						var newContent1 = '';
+						faceArr = content.split("[");
+						for(var k = 0; k < faceArr.length; k ++){
+							if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
+								faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+								newContent += faceArr[k];
+							}
+							if(faceArr[k].split("]]").length > 1){
+								newContent = '[['+faceArr[k]+newContent;
+							}
+						}
+						
+						/* console.info(content);
 						console.info(faceArr);
-						
-						
-						newWeiBoStr += '</p>';
+						console.info(newContent); */
+						var faceRegx1 = new RegExp('\\n','gi');
+						faceArr1 = newContent.split(faceRegx1);
+						for(var j = 0; j < faceArr1.length; j ++){
+							newContent1 += faceArr1[j]+'<br />';
+						}
+						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'+newContent1+'</p>';
 
 						if (picsMap != "") {
 							var pics = picsMap.split(",");
