@@ -34,4 +34,8 @@
 	<update id="saveUserTag" parameterType="map">
 		update WeiBoUser set Utag=#{Utag,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
 	</update>
+	
+	<update id="saveFindMe" parameterType="map">
+		update WeiBoUser set phoneStatus=#{phoneStatus,jdbcType=VARCHAR},emailStatus=#{emailStatus,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
+	</update>
 </mapper>

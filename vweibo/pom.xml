@@ -162,11 +162,12 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>biz.source_code</groupId>
 			<artifactId>base64coder</artifactId>
-			<version>1.2.19</version>
-		</dependency>
+			<version>2010-12-19</version>
+		</dependency> 
 	</dependencies>
 
 	<build>

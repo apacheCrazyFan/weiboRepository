@@ -15,6 +15,11 @@ public class WeiBoUser {
 	private String YZcode;
 	private String YZcodeInput;
 	
+	//图片水印
+	private String waterContent;
+	private String waterLocation;
+	
+	
 	//wb添加的
 	private int Wcount;	//发起微博数
 	private int Tcount;	//发起的话题数
@@ -51,6 +56,27 @@ public class WeiBoUser {
 		YZcodeInput = yZcodeInput;
 		Wcount = wcount;
 		Tcount = tcount;
+	}
+
+
+	
+	public String getWaterContent() {
+		return waterContent;
+	}
+
+
+	public void setWaterContent(String waterContent) {
+		this.waterContent = waterContent;
+	}
+
+
+	public String getWaterLocation() {
+		return waterLocation;
+	}
+
+
+	public void setWaterLocation(String waterLocation) {
+		this.waterLocation = waterLocation;
 	}
 
 

@@ -13,6 +13,7 @@
 </head>
 
 <body>
+	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<div id="wrap">
     	<div id="left">
         	<span class="idSet">账号设置</span>
@@ -33,10 +34,10 @@
                 <li class="howToFindMe">何种方式找到我&nbsp;&nbsp;&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: compileAndClose('.howToFindMe','.howToFindMe1',1,1);">编辑</a></li>
                 <li style="display:none;background:#fff;height:140px" class="howToFindMe1">何种方式找到我<a href="javascript: compileAndClose('.howToFindMe','.howToFindMe1',2,0);">收起</a><br/>
                     <div>
-                    	<input class="findMeByEmail" type="checkbox" name="findMe" value="byEmail"/><span class="findMeByEmailW">电子邮件</span><br/>
-                        <input class="findMeByNumber" type="checkbox" name="findMe" value="byNumber"/><span class="findMeByNumberW">手机号码</span><br/>
-                        <input class="saveFindMe" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" />
+                    	<input class="findMeByEmail" type="checkbox" name="findMe" value="byEmail" id="findMeByEmail"/><span class="findMeByEmailW" >电子邮件</span><br/>
+                        <input class="findMeByNumber" type="checkbox" name="findMe" value="byNumber" id="findMeByNumber"/><span class="findMeByNumberW">手机号码</span><br/>
+                        <input class="saveFindMe" type="image" src="front/image/UserSet_image/savePhoto1.png" onclick="saveFindMe()"/>
+                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.howToFindMe','.howToFindMe1',2,0)"/>
                     </div>
                 </li>
                 
@@ -47,7 +48,7 @@
                         <input class="yesToReco" type="radio" name="whetherReco" value="yesReco"/><span class="yesToRecoW">是</span><br/>
                         <input class="noToReco" type="radio" name="whetherReco" value="noReco"/><span class="noToRecoW">否</span><br/>
                         <input class="saveReco" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" />
+                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.whetherRecoFriend','.whetherRecoFriend1',2,0)" />
                     </div>
                 </li>
                 
@@ -59,7 +60,7 @@
                         <input class="yesToLoca" type="radio" name="seeLoca" value="yesLoca"/><span class="yesToLocaW">可见</span><br/>
                         <input class="noToLoca" type="radio" name="noSeeloca" value="noLoca"/><span class="noToLocaW">不可见</span><br/>
                         <input class="saveLoca" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" />
+                        <input class="closeComplie" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.myLocation','.myLocation1',2,0)" />
                     </div>
                 </li>
                 
@@ -151,5 +152,25 @@
             </ul>
         </div>
     </div>
+    
+    <script type="text/javascript">
+    	function saveFindMe(){
+    		if(document.getElementById("findMeByEmail").checked){
+    			var phoneStatus=1;
+    		}else{
+    			var phoneStatus=0;
+    		}
+    		if(document.getElementById("findMeByNumber").checked){
+    			var emailStatus=1;
+    		}else{
+    			var emailStatus=0;
+    		}
+    		
+    		//何种方式找到好友
+    		$.post("user/saveFindMe",{"phoneStatus":phoneStatus,"emailStatus":emailStatus,"WBUid":$("#hiddenid").val()},function(data){
+    			alert(data);
+    		})
+    	}
+    </script>
 </body>
 </html>
