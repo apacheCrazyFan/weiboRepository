@@ -35,18 +35,49 @@
 
 
 <script type="text/javascript">
+
+
+function shining(){
+	var obj=$("#txt");
+	var str=obj.attr("style");
+	if(count>0){
+		if(str){
+			if(str.indexOf("rgba(255, 100, 100, 0.3)")>=0){
+				obj.css("background","white");
+			}else{
+				obj.css("background","rgba(255,100,100,.3)");
+			}
+		}else{
+			obj.css("background","rgba(255,100,100,.3)");
+		}
+		
+	}else if(timeout){
+		clearInterval(timeout);
+	}
+	count--;
+}
+
 //全局变量 
-var weibocount = $("#weibocount").val();  //当前用户的微博数
-	
+var weibocount = $("#weibocount").val();  //当前用户的微博数	
 var media = new Array();
 
-function publishWeibo(){
- 
+var count=4;
+
+function publishWeibo() {
+	count = 4;
+	var obj = $("#txt");
+	var str2 = obj.val().length;
+	alert(str2);
+	if (obj.val() == "" || str2 > 140) {
+		timeout = setInterval("shining()", 200);
+		return;
+	}
 	alert($("#user").val());
 	var statue = $("#form_push_op").val();
 	var content = $("#txt").val().trim();
 
 	alert(statue + " <--> " + content);
+
 	$.ajaxFileUpload({
 				url : 'weibo/publish',
 				secureuri : false,
@@ -69,21 +100,21 @@ function publishWeibo(){
 						var videoMap = data.videoMap; //视频路径
 						var musicMap = data.musicMap; //音乐路径
 						var date = data.publishDate; //发表日期
-						
-						console.info(location+" - "+picsMap+" - ");
-						
+
+						console.info(location + " - " + picsMap + " - ");
+
 						var newWeiBoStr = "";
 						var rootXIXI = $("#xixi");
 						var firstChrid = $("#xixi").children().first();
-						
+
 						var newWeiBoDiv = document.createElement("div");
 						newWeiBoDiv.id = "center-part-content_01";
-						
+
 						$(newWeiBoDiv).insertBefore($("#xixi div").first());
 
 						//newWeiBoDiv.style="margin-top:20px;";
 
-						newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="'+${sessionScope.user.WBUid}+'" title="${sessionScope.user.uname}" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="${sessionScope.user.WBUid}" title="${sessionScope.user.uname}" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
 						newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 						newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 						newWeiBoStr += '<ul>';
@@ -96,28 +127,29 @@ function publishWeibo(){
 
 						newWeiBoStr += '<ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">';
 						newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
-						newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+						newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'
+								+ date + '</a> 来自 ' + location + '</li>';
 						newWeiBoStr += '</ul>';
-						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'+ content + '</p>';
+						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'
+								+ content + '</p>';
 						newWeiBoStr += '<div id="content_img01" style="position: relative;left:25px;bottom: 60px;width:500px;">';
-						
-						if(picsMap != ""){
+
+						if (picsMap != "") {
 							var pics = picsMap.split(",");
-							for(var i = 0; i < pics.length; i ++){
+							for (var i = 0; i < pics.length; i++) {
 								newWeiBoStr += '<img src="/weibopics/'+pics[i]+'"/>';
 							}
 						}
-						if(videoMap != ""){
+						if (videoMap != "") {
 							var video = videoMap.split(",");
-							for(var i = 0; i < video.length; i ++){
+							for (var i = 0; i < video.length; i++) {
 								newWeiBoStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 							}
 						}
-						
-							
-						if(musicMap != ""){
+
+						if (musicMap != "") {
 							var music = musicMap.split(",");
-							for(var i = 0; i < music.length; i ++){
+							for (var i = 0; i < music.length; i++) {
 								newWeiBoStr += '<embed type="audio" autoplay="true" src="/weibomusics/'+music[i]+'"/>';
 							}
 						}
@@ -127,7 +159,8 @@ function publishWeibo(){
 						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>转发</a>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>评论</a>';
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img" onclick="return clicklike('+${sessionScope.user.WBUid}+','+${sessionScope.user.WBUid}+')"/>赞</a>';
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img" onclick="return clicklike('
+								+ ${sessionScope.user.WBUid}+',' + ${sessionScope.user.WBUid}+')"/>赞</a>';
 						newWeiBoStr += '</div>';
 
 						newWeiBoStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
@@ -185,22 +218,23 @@ function publishWeibo(){
 						newWeiBoDiv.innerHTML = newWeiBoStr;
 						//$(newWeiBoStr).insertBefore($("#xixi:first"));
 						//rootXIXI.insertBefore(newWeiBoDiv,firstChrid);
-						
+
 						//document.getElementById("xixi").insertBefore(newWeiBoDiv,document.get); 
 						//alert("终于到了这一步了");
 						//alert($("#xixi").innerHTML);
 						//document.getElementById("xixi").innerHTML = newWeiBoStr;
-						
+
 						//刷新微博数
 						weibocount += 1;
 						countStr = '<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>'
-			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>'
-			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">$'+weibocount+'</font>微博</a>';
+								+ '<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>'
+								+ '<a href="javascript:void(0)" id="usernumone"><font id="num">$'
+								+ weibocount + '</font>微博</a>';
 						$("#usernum").innerHTML = countStr;
-						
+
 						//刷新发布框
 						$("#txt").value = "";
-						
+
 						//刷新文件框
 						alert("剧终!");
 					}
@@ -208,10 +242,8 @@ function publishWeibo(){
 				error : function(data, status, e) {
 					alert("【服务器异常，请连续管理员！】" + e);
 				}
-			}); 
-		}
-		
-
+			});
+}
 </script>
 </head>
 	<%
@@ -219,10 +251,10 @@ function publishWeibo(){
 		WeiBoUser user = (WeiBoUser)sessions.getAttribute("user"); */
 	%>
 <body id="bg">
-<input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
+<input type="hidden" id="user" value="${sessionScope.user.WBUid}" />
 <!-- <form>
 		<input type="submit">
-	</form> --><input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM } " />
+	</form> --><input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM}" />
 	<div id="header">
 
     	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
@@ -284,7 +316,7 @@ function publishWeibo(){
 
             	<!-- <input name="imgbtn" type="image" src="front/image/write_img7.png" id="fabu" onclick="publishWeibo()"> -->
 
-            	<input type="button" value="发布" id="publish" onclick="publishWeibo()"/>
+            	<input type="button" value="发布" id="publish" onClick="publishWeibo()"/>
             	
             	<div id="uploadPics" style="display:none;position:relative;z-index:99;border:1px solid #CCC;">            		
             		<a href="javascript:void(0)" onclick="createInput('aapic')" style="font-size:14px;">&gt;&gt;添加附件&lt;&lt;</a>
@@ -373,7 +405,7 @@ function publishWeibo(){
    
                 <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
                 	<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">APP菌</li>
-                    <li style="height:0px;width:250px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
+                    <li style="height:0px;width:250px;position:relative;left:14px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p" style="width:500px;position:relative;left:29px;">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
                 doge]！而且相比之下TheClocks有数字和指针两种形式，还可以设定闹铃中区也有，而且free帮APP菌卖安利#</p>
