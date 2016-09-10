@@ -149,6 +149,10 @@ create table WeiBoUser(
        UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
+alter table WeiBoUser drop column phoneStatus;
+alter table WeiBoUser drop column emailStatus;
+alter table WeiBoUser add phoneStatus int default 1;	--增加两列，用来处理通过何种方式找到好友,1为可以，0为否
+alter table WeiBoUser add emailStatus int default 1;
 select * from WeiBOUser;
 create sequence seq_WeiBoUser_Wbuid start with 1006;
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');

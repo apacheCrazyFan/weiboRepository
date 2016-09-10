@@ -1,5 +1,6 @@
 package com.yc.weibo.handler;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +13,9 @@ import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +32,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
+import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.ThemeService;
 import com.yc.weibo.service.UserService;
+import com.yc.weibo.util.ImageMarkLogoByIcon;
 
 import Decoder.BASE64Decoder;
 
@@ -43,6 +48,8 @@ import Decoder.BASE64Decoder;
 @RequestMapping("/user")
 @SessionAttributes(value={"user","Themes","groupnumber"},types={String.class})
 public class UserHandler {
+	@Autowired
+	private ServletContext servletContext;
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -75,7 +82,7 @@ public class UserHandler {
 		user=userService.login(user);
 		if(user==null){
 			map.put("errorMsg","用户名或密码错误");
-			return "forward:/front/page/login.jsp";
+			return "front/page/login.jsp";
 		}
 		//到这里说明登录成功了。那么我们作为服务器一端     应该要给它准备一些数据 ，还是它自己再做请求去申请数据？？
 		Map<String,Integer> params = new HashMap<String,Integer>();
@@ -111,7 +118,7 @@ public class UserHandler {
 		} 
 
 	}
-
+	//邮件发送
 	@RequestMapping("/sendEMail")
 	private void sendEMail(String email,PrintWriter out){
 		Random random=new Random();
@@ -137,10 +144,7 @@ public class UserHandler {
 		}
 		out.flush();
 		out.close();
-
-
 	}
-	//邮件发送
 	@Autowired
 	private JavaMailSender mailSender;
 	private boolean activeAccountMail(String subject,String content,String from,String to){
@@ -162,7 +166,6 @@ public class UserHandler {
 	//上传头像
 	@RequestMapping("/setphoto")
 	public String setPhoto(@RequestParam("photodata") String file,@RequestParam("WBUid")String WBUid,PrintWriter out){
-		System.out.println(WBUid);
 		BASE64Decoder decoder = new BASE64Decoder();
 		byte[] bytes;
 		try {
@@ -173,11 +176,14 @@ public class UserHandler {
 				}
 			}
 			String filename=new Date().getTime()+""+new Random().nextInt(100000)+".jpg";
-			FileOutputStream photopath = new FileOutputStream("D:\\Tomcat-7.0.30\\webapps\\weiboimage\\"+filename);
+			String rootDir = DataDic.PICPATH;
+			String uploadPicPath = servletContext.getRealPath(rootDir).
+					substring(0, servletContext.getRealPath(rootDir).lastIndexOf(DataDic.PROJECTNAME)-1)+rootDir; 
+			
+			FileOutputStream photopath = new FileOutputStream(uploadPicPath+filename);
 			photopath.write(bytes); 
 			Map<String,String> paramMap=new HashMap<>();
-			String UimgPath="D:\\Tomcat-7.0.30\\webapps\\weiboimage\\"+filename;
-			paramMap.put("UimgPath", UimgPath);
+			paramMap.put("UimgPath", uploadPicPath+filename);
 			paramMap.put("WBUid", WBUid);
 			userService.updataUserPhoto(paramMap);
 			out.println("头像上传成功");
@@ -246,7 +252,7 @@ public class UserHandler {
 		out.flush();
 		out.close();
 	}
-	
+
 	//添加个人标签
 	@ResponseBody
 	@RequestMapping(value="/saveUserTag")
@@ -257,6 +263,73 @@ public class UserHandler {
 		System.out.println(Utag+"---"+WBUid);
 		userService.saveUserTag(paramMap);
 		out.println("标签添加成功");
+		out.flush();
+		out.close();
+	}
+
+	//何种方式找到我
+	@ResponseBody
+	@RequestMapping(value="/saveFindMe")
+	public void saveFindMe(String phoneStatus,String emailStatus,String WBUid,PrintWriter out){
+		Map<String, String> paramMap=new HashMap<>();
+		paramMap.put("phoneStatus", phoneStatus);
+		paramMap.put("emailStatus",emailStatus);
+		paramMap.put("WBUid",WBUid);
+		System.out.println(paramMap);
+		userService.saveFindMe(paramMap);
+		out.println("修改成功");
+		out.flush();
+		out.close();
+	}
+
+	//图片水印
+	@ResponseBody
+	@RequestMapping(value="/addWaterMark")
+	public void addWaterMark(String waterContent,String waterLocation,String WBUid,PrintWriter out,HttpServletResponse response){
+		System.out.println(waterContent+"---"+waterLocation+"----"+WBUid);
+		response.setHeader("Cache-Control", "no-cache");
+		File file=new File("G:\\GitWork\\WeiBo\\weiboRepository\\vweibo\\src\\main\\webapp\\front\\image\\UserSet_image\\test_pic.jpg");
+		String txt=waterContent;
+		String realPath="G:\\GitWork\\WeiBo\\weiboRepository\\vweibo\\src\\main\\webapp\\front\\image\\UserSet_image\\test_pic1.jpg";
+		double x,y;
+		if(waterContent!=null || waterContent!=""){
+			if(!waterContent.contains("Logo")){//文字水印
+				if(waterLocation.equals("bottomRight")){//底部居右
+					x=1.7;
+					y=1.1;
+					ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
+				}else if(waterLocation.equals("centerCenter")){//图片中心
+					x=2.8;
+					y=2.0;
+					ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
+				}else{//底部居中
+					x=2.8;
+					y=1.1;
+					ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
+				}
+				System.out.println("------------转换成功");
+			}else{//logo水印
+				String iconPath="G:\\GitWork\\WeiBo\\weiboRepository\\vweibo\\src\\main\\webapp\\front\\image\\head_logo_sh_mini.png";
+				if(waterLocation.equals("bottomRight")){//底部居右
+					x=1.4;
+					y=1.8;
+					ImageMarkLogoByIcon.markImageByIcon(iconPath, file.toString(), realPath, x, y);
+				}else if(waterLocation.equals("centerCenter")){//图片中心
+					x=2.8;
+					y=2.0;
+					ImageMarkLogoByIcon.markImageByIcon(iconPath, file.toString(), realPath, x, y);
+				}else{//底部居中
+					x=2.8;
+					y=1.1;
+					ImageMarkLogoByIcon.markImageByIcon(iconPath, file.toString(), realPath, x, y);
+				}
+				
+				System.out.println("------------转换成功");
+			}
+			ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
+			out.println("设置成功");
+			
+		}
 		out.flush();
 		out.close();
 	}

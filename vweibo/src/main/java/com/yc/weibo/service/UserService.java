@@ -24,4 +24,6 @@ public interface UserService {
 	void savePersonInfo(Map<String, String> paramMap);
 	
 	void saveUserTag(Map<String, String> paramMap);
+
+	void saveFindMe(Map<String, String> paramMap);
 }
