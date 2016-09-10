@@ -290,6 +290,7 @@ create table WeiBo(
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
        WBmusic varchar2(500),		  --微博音乐路径
        yesOrno char(2),				  --是否是话题产生的weibo	
+       yon char(2),					  --是否是转发微博
        WBlocation varchar2(120),
        WBstatue int
        --预留字段      
@@ -337,6 +338,7 @@ create table Operate(
        
        --预留字段  
 );
+create sequence seq_op_oid start with 1001;
 --评论（回复）微博表  --找爸爸
 create table Comments(
        Cid int primary key,           --评论（回复）id
