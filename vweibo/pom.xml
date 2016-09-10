@@ -165,7 +165,7 @@
 		<dependency>
 			<groupId>biz.source_code</groupId>
 			<artifactId>base64coder</artifactId>
-			<version>1.2.19</version>
+			<version>2010-12-19</version>
 		</dependency>
 	</dependencies>
 
