@@ -49,4 +49,6 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 	public static Integer SHARE = 5;  //分享，转发
 	public static Integer COLLECT = 6;//收藏
 
+	//表情路径
+	public static String FACES = "front/image/face_image/";
 }

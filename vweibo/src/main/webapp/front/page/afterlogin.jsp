@@ -36,12 +36,14 @@
 
 <script type="text/javascript">
 //全局变量 
-var weibocount = $("#weibocount").val();  //当前用户的微博数
-	
+
 var media = new Array();
 
+	var weibocount;  //当前用户的微博数
+	
 function publishWeibo(){
- 
+	weibocount =  Number($("#weibocount").val());
+	
 	alert($("#user").val());
 	var statue = $("#form_push_op").val();
 	var content = $("#txt").val().trim();
@@ -70,6 +72,7 @@ function publishWeibo(){
 						var musicMap = data.musicMap; //音乐路径
 						var date = data.publishDate; //发表日期
 						
+						var faceArr;
 						console.info(location+" - "+picsMap+" - ");
 						
 						var newWeiBoStr = "";
@@ -98,7 +101,15 @@ function publishWeibo(){
 						newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
 						newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
 						newWeiBoStr += '</ul>';
-						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'+ content + '</p>';
+						newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">';
+						
+						var faceRegx = //[/]/gm;
+						faceArr = content.match(faceRegx);
+						console.info(content);
+						console.info(faceArr);
+						
+						
+						newWeiBoStr += '</p>';
 						newWeiBoStr += '<div id="content_img01" style="position: relative;left:25px;bottom: 60px;width:500px;">';
 						
 						if(picsMap != ""){
@@ -118,7 +129,7 @@ function publishWeibo(){
 						if(musicMap != ""){
 							var music = musicMap.split(",");
 							for(var i = 0; i < music.length; i ++){
-								newWeiBoStr += '<embed type="audio" autoplay="true" src="/weibomusics/'+music[i]+'"/>';
+								newWeiBoStr += '<audio autoplay="true" style="width:100px;height:100px;display:block;" src="/weibomusics/'+music[i]+'"/>';
 							}
 						}
 						newWeiBoStr += '</div>';
@@ -181,25 +192,32 @@ function publishWeibo(){
 						newWeiBoStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
 						newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn"/>';
 						newWeiBoStr += '</div>';
-
 						newWeiBoDiv.innerHTML = newWeiBoStr;
-						//$(newWeiBoStr).insertBefore($("#xixi:first"));
-						//rootXIXI.insertBefore(newWeiBoDiv,firstChrid);
 						
-						//document.getElementById("xixi").insertBefore(newWeiBoDiv,document.get); 
-						//alert("终于到了这一步了");
-						//alert($("#xixi").innerHTML);
-						//document.getElementById("xixi").innerHTML = newWeiBoStr;
 						
 						//刷新微博数
 						weibocount += 1;
-						countStr = '<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>'
-			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>'
-			                		+'<a href="javascript:void(0)" id="usernumone"><font id="num">$'+weibocount+'</font>微博</a>';
-						$("#usernum").innerHTML = countStr;
+						MsgStr = '';
+						MsgStr += '<a href="javascript:void(0)" id="user_img"><img src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
+						MsgStr += '<a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>';
+						MsgStr += '<a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>';
+						MsgStr += '<div id="levelimg">';
+			            MsgStr += '<a href="javascript:void(0)" id="level">Lv.10</a>';
+			            MsgStr += '</div>';
+			            MsgStr += '<div id="usernum">';
+			            MsgStr += ' <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>';
+			            MsgStr += '<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>';
+			            MsgStr += '<a href="javascript:void(0)" id="usernumone"><font id="num">'+weibocount+'</font>微博</a>';
+			            MsgStr += '</div>';
+						var MsgDiv = document.getElementById("right-part-content");
+						if(undefined != MsgDiv){
+							MsgDiv.innerHTML = MsgStr;
+						}
 						
+						document.getElementById("weibocount").value =weibocount;
+						//$("#weibcount").attr("","");
 						//刷新发布框
-						$("#txt").value = "";
+						$("#txt").val('');
 						
 						//刷新文件框
 						alert("剧终!");
@@ -219,10 +237,10 @@ function publishWeibo(){
 		WeiBoUser user = (WeiBoUser)sessions.getAttribute("user"); */
 	%>
 <body id="bg">
-<input type="hidden" id="user" value="${sessionScope.user.WBUid} " />
+<input type="hidden" id="user" value="${sessionScope.user.WBUid}" />
 <!-- <form>
 		<input type="submit">
-	</form> --><input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM } " />
+	</form> --><input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM}" />
 	<div id="header">
 
     	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
@@ -314,13 +332,13 @@ function publishWeibo(){
             </div>
             
             <div id="face_image" style="display:none;"> <!-- z-index应该是要和position一起用，this指针只能放在事件里面用  onClick  onMouseOver等 -->
-           		<a href="javascript:void(0)" onClick="clickFace(this)" data="[daku]"><img src="front/image/face_image/daku003.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[daxiao]"><img src="front/image/face_image/daxiao007.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[kelian]"><img src="front/image/face_image/keling006.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[koubi]"><img src="front/image/face_image/koubi005.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[shuai]"><img src="front/image/face_image/shuai004.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[weixiao]"><img src="front/image/face_image/weixiao001.png"></a>
-	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[zan]"><img src="front/image/face_image/zan002.png"></a>
+           		<a href="javascript:void(0)" onClick="clickFace(this)" data="[daku]"><img src="front/image/face_image/daku.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[daxiao]"><img src="front/image/face_image/daxiao.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[kelian]"><img src="front/image/face_image/keling.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[koubi]"><img src="front/image/face_image/koubi.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[shuai]"><img src="front/image/face_image/shuai.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[weixiao]"><img src="front/image/face_image/weixiao.png"></a>
+	            <a href="javascript:void(0)" onClick="clickFace(this)" data="[zan]"><img src="front/image/face_image/zan.png"></a>
             </div>
             
             <div id="topic_input" style="display:none;">
