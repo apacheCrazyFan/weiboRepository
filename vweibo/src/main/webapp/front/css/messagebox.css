@@ -276,3 +276,91 @@ body {
 .linkmanList div span{
 	margin-left:20px;
 	font:12px "宋体"}
+	
+.center_content2 div{
+	text-align:left;
+	min-height:100px;
+	height:auto;
+	background:#fff;
+	border-radius:3px;
+	padding:20px;
+	position:relative;
+	margin-bottom:15px;}
+.center_content2 div img{
+	border-radius:25px;
+	float:left;
+	margin-top:0;}
+.center_content2 div b{
+	font-size:14px;
+	position:absolute;
+	top:25px;
+	left:85px;}
+.center_content2 div span{
+	display:inline-block;
+	font-size:14px;
+	margin-left:65px;
+	margin-right:20px;}
+.center_content2 div p{
+	background:#F0F0F0;
+	font-size:14px;
+	margin-left:65px;
+	margin-top:20px;
+	margin-right:20px;
+	padding:10px;}
+.center_content2 div p a{
+	color:#009;}
+.center_content2 div p a:hover{
+	color:#F93;}
+.center_content2 div font{
+	display:inline-block;
+	font-size:12px;
+	color:#999;
+	margin-left:65px;
+	margin-top:20px;}
+	
+.center_content3 div{
+	text-align:left;
+	width:560px;
+	min-height:100px;
+	height:auto;
+	background:#fff;
+	border-radius:3px;
+	padding:20px;
+	position:relative;}
+.center_content3 div img{
+	margin-top:0;
+	float:left;
+	border-radius:25px;}
+.center_content3 div b{
+	font-size:14px;
+	position:absolute;
+	top:25px;
+	left:85px;}
+.center_content3 div span{
+	display:inline-block;
+	font-size:14px;
+	color:#999;
+	margin-left:45px;
+	margin-top:4px;}
+.center_content3 div p{
+	background:#f0f0f0;
+	padding:10px;
+	margin-right:20px;
+	margin-top:20px;
+	margin-left:65px;}
+.center_content3 div p a{
+	color:#F33;}
+.center_content3 div p a:hover{
+	text-decoration:underline;}
+.center_content3 div font{
+	display:inline-block;
+	font-size:12px;
+	color:#999;
+	margin-left:65px;
+	margin-top:20px;}
+.center_head1{
+	border-bottom:1px solid #f0f0f0;}
+.center_content4{
+	background:#fff;
+	min-height:200px;
+	height:auto;}

@@ -41,7 +41,7 @@
             <a href="javascript:messListClick(4)" class="mess_list4">私信</a>
         </div>
        
-       	<div id="right1">
+       	       	<div id="right1">
             <div class="center1">
                 <div class="center_head1">
                     <a href="" class="aiteWeib">@我的微博</a>
@@ -50,6 +50,7 @@
                 <div class="center_content1">
                     <img src="../image/messagebox_image/icon_atten.jpg"/><br/>
                     <span>还没有人@到你，要加油哦！</span>
+                    
                 </div>
             </div>
             <div class="tips">
@@ -70,6 +71,20 @@
                 <div class="center_content2">
                     <img src="../image/messagebox_image/icon_atten.jpg"/><br/>
                     <span>还没有评论！</span>
+                    <div>
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <b>名字</b>
+                        <span>评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</span>
+                        <p><a href="">评论我的微博：</a>原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容</p>
+                        <font>年月日时间</font>
+                    </div>
+                    <div>
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <b>名字</b>
+                        <span>评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</span>
+                        <p><a href="">回复我的评论：</a>原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容</p>
+                        <font>年月日时间</font>
+                    </div>
                 </div>
             </div>
             <div class="tips">
@@ -91,6 +106,14 @@
                 <div class="center_content3">
                     <img src="../image/messagebox_image/icon_atten.jpg"/><br/>
                     <span>还没有赞！</span>
+                    
+                    <div>
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <b>名字</b>
+                        <span>赞了我的微博</span>
+                        <p><a href="">@我的名字:</a>原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容原文内容</p>
+                        <font>年月日时间</font>
+                    </div>
                 </div>
             </div>
             <div class="tips">
@@ -108,8 +131,10 @@
                     <a class="priLetter">私信</a>
                 </div>
                 <div class="center_content4">
-                    <img src="../image/messagebox_image/icon_atten.jpg"/><br/>
+                    <img src="../image/messagebox_image/icon_atten1.jpg"/><br/>
                     <span>还没有私信！</span>
+					
+                    
                 </div>
             </div>
             <div class="linkman">
@@ -134,7 +159,7 @@
                 </ul>
             </div>
 		</div>
-        
+
     </div>
 </body>
 </html>
