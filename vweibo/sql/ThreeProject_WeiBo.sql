@@ -327,6 +327,17 @@ create table WeiBoHelp(
        --预留字段  
 );
 drop table WeiBoHelp;
+
+select * from WeiBo;
+select * from WeiBoHelp;
+--找到id(浏览次数优先，点赞次数其次)
+select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHviewAccount,WHgreateAccount desc;  --降序查询 前十五条
+--找到id(点赞次数优先，浏览次数其次)
+select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount,WHviewAccount desc;  --降序查询 前十五条
+
+--找到微博
+select * from WeiBo;
+
 --微博操作表
 create table Operate(
        Oid int primary key,           --微博操作id
