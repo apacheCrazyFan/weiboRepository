@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"> 
 <base href="/vweibo/">
 <style type="text/css">
 </style>
@@ -67,7 +67,7 @@ function publishWeibo() {
 	count = 4;
 	var obj = $("#txt");
 	var str2 = obj.val().length;
-	alert(str2);
+	//alert(str2);
 	if (obj.val() == "" || str2 > 140) {
 		timeout = setInterval("shining()", 200);
 		return;
