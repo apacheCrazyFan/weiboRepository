@@ -14,7 +14,13 @@
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1 where WBid = #{wbid}
 	</update>
 	
-	<insert id="insertWhoLike">
+	<insert id="insertWhoLike" >
 		insert into Operate values(seq_op_oid.nextval,#{uid},#{wbid},'点赞')
 	</insert>
+	
+	
+	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="WeiBo">
+		select WBid,rownum rn from WeiBoHelp where 15 > rownum  order by WHviewAccount,WHgreateAccount desc
+		
+	</select>
 </mapper>

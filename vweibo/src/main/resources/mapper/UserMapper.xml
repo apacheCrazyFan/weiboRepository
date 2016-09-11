@@ -8,7 +8,7 @@
 	</select>
 	
 	<insert id="register" parameterType="WeiBoUser">
-		insert into WeiBoUser(WBUid,Uname,Upassword,Uphone,Uemail,Usex) values(seq_WeiBoUser_Wbuid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex})
+		insert into WeiBoUser(WBUid,Uname,Upassword,Uphone,Uemail,Usex,UimgPath) values(seq_WeiBoUser_Wbuid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex},'zanwu.jpg')
 	</insert>
 	
 	<update id="updataUserPhoto" parameterType="map">

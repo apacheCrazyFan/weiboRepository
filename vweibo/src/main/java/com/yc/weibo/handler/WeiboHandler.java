@@ -103,8 +103,6 @@ public class WeiboHandler {
 			jsonMap.put("picsMap", picsMap);
 			jsonMap.put("videoMap", videoMap);
 			jsonMap.put("musicMap", musicMap);
-			jsonMap.put("userimg", "what");
-			jsonMap.put("zanwu", "the");
 			jsonMap.put("rate", 2);
 		}
 
@@ -190,6 +188,18 @@ public class WeiboHandler {
 		}
 		System.out.println( "========================================================"+map);
 		return weiboService.addWeibo(map) == true ? dateFormater.format(date)+","+userlocation : (DataDic.DATESTRING);
+	}
+	
+	/**
+	 * 欢迎页面数据准备
+	 */
+	@RequestMapping(value="/indexDataPrarery",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> getIndexDataPrarery(){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		
+		
+		return jsonMap;
 	}
 
 } 
