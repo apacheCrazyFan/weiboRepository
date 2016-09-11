@@ -1,7 +1,6 @@
 package com.yc.weibo.entity;
 
 
-import java.sql.Clob;
 import java.util.Date;
 
 public class Weibo {
@@ -16,10 +15,17 @@ public class Weibo {
      private String WBmusic;	//可能存在的音乐路径
      
      private char yesOrno;	//是否是话题产生的
+     private char yon;  	//是否是转发的
      private String WBlocation;	//发表微博 的地理位置
      private int WBstatue;   //微博状态0：公开    1：朋友圈       2：....
      
 	
+	public char getYon() {
+		return yon;
+	}
+	public void setYon(char yon) {
+		this.yon = yon;
+	}
 	public int getWBstatue() {
 		return WBstatue;
 	}
@@ -94,15 +100,11 @@ public class Weibo {
 	}
 	@Override
 	public String toString() {
-		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUId=" + WBUid + ", WBdate="
+		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUid=" + WBUid + ", WBdate="
 				+ WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic=" + WBmusic
-				+ ", yesOrno=" + yesOrno + ", WBlocation=" + WBlocation + ", WBstatue=" + WBstatue + "]";
+				+ ", yesOrno=" + yesOrno + ", yon=" + yon + ", WBlocation=" + WBlocation + ", WBstatue=" + WBstatue
+				+ "]";
 	}
-
 	
 	
-	
-	
-     
-     
 }

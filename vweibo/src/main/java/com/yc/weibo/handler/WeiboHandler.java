@@ -215,8 +215,8 @@ public class WeiboHandler {
 		params.put("pageSize", pageSize);
 		params.put("pageNum", pageNum);
 		
-		//List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWHviewAccountFirst(params);
-		List<Weibo> weiboList = weiboService.findtWeiboOrderByWHgreateAccount(params);
+		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWHviewAccountFirst(params);
+		//List<Weibo> weiboList = weiboService.findtWeiboOrderByWHgreateAccount(params);
 		System.out.println( weiboList);
 		jsonMap.put("weiboList", weiboList);
 		jsonMap.put("total", weiboList.size());
