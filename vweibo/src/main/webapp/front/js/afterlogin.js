@@ -26,6 +26,37 @@ $(document).ready(function(){
 	});  
 });
 
+function letRandom(){
+	$.ajax({
+		url:'theme/random',
+		dataType:'JSON',
+		type:'POST',
+		success:function(data){
+			console.info(data);
+			$("#hot_topic_content").html("");
+			var str="";
+			for(var i=0;i<data.length;i++){//data就是一个theme的List（java中） ，用json传过来以后，在js中，就是数组
+				var item=data[i];//这里就是数组的元素了  就是一个theme
+				//alert(item.tname);
+				str+='<li style="margin-bottom:0px;"><a href="javascript:showthemedetails('+item.tid+')" class="hot_topic_detail">'+item.tname+'</a><span class="hot_topic_detail_click">'+item.tview+'</span></li>';
+				$("#hot_topic_content").html(str);
+			}//要想到，之后如果要在这个上面做点击事件的话，所以先预留一下，只要有id传过来了，这个事件就好做了，
+			
+			
+			/*后端用session，，request，等来保存参数，而且最后还跳了页面，那肯定是到页面上用el表达式取值
+			后端用json传值，前端一般用ajax请求，这个时候不会跳页面，而且，json字符串直接作为ajax的success的回调的data
+			直接返回了，那就直接用这个json字符串，进行json对象的处理，*/
+			
+			
+			
+			
+			$("#hot_topic_content").html(str);
+			//html(str+$("#hot_topic_content").html(str));
+			//在最前面就是： str+原本的内容        在最后面： 原本  +str
+		}
+	});
+}
+
   
 //计算中文字符
 function byteLength(str) {

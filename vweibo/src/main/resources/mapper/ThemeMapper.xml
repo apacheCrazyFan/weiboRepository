@@ -3,19 +3,183 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.weibo.mapper.ThemeMapper">
+	<resultMap id="BaseResultMap" type="com.yc.weibo.entity.Theme">
+		<id column="TID" jdbcType="DECIMAL" property="tid" />
+		<result column="TNAME" jdbcType="VARCHAR" property="tname" />
+		<result column="TUID" jdbcType="DECIMAL" property="tuid" />
+		<result column="TDATE" jdbcType="DATE" property="tdate" />
+		<result column="TPICS" jdbcType="VARCHAR" property="tpics" />
+		<result column="TDELIVER" jdbcType="DECIMAL" property="tdeliver" />
+		<result column="TVIEW" jdbcType="DECIMAL" property="tview" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.yc.weibo.entity.Theme">
+		<result column="TTXT" jdbcType="CLOB" property="ttxt" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TID, TNAME, TUID, TDATE, TPICS, TDELIVER, TVIEW
+	</sql>
+	<sql id="Blob_Column_List">
+		TTXT
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.math.BigDecimal"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from THEME
+		where TID = #{tid,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from THEME
+		where TID = #{tid,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.yc.weibo.entity.Theme">
+		insert into THEME (TID, TNAME, TUID,
+		TDATE, TPICS, TDELIVER,
+		TVIEW, TTXT)
+		values (#{tid,jdbcType=DECIMAL}, #{tname,jdbcType=VARCHAR},
+		#{tuid,jdbcType=DECIMAL},
+		#{tdate,jdbcType=DATE}, #{tpics,jdbcType=VARCHAR}, #{tdeliver,jdbcType=DECIMAL},
+		#{tview,jdbcType=DECIMAL}, #{ttxt,jdbcType=CLOB})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yc.weibo.entity.Theme">
+		insert into THEME
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="tname != null">
+				TNAME,
+			</if>
+			<if test="tuid != null">
+				TUID,
+			</if>
+			<if test="tdate != null">
+				TDATE,
+			</if>
+			<if test="tpics != null">
+				TPICS,
+			</if>
+			<if test="tdeliver != null">
+				TDELIVER,
+			</if>
+			<if test="tview != null">
+				TVIEW,
+			</if>
+			<if test="ttxt != null">
+				TTXT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="tname != null">
+				#{tname,jdbcType=VARCHAR},
+			</if>
+			<if test="tuid != null">
+				#{tuid,jdbcType=DECIMAL},
+			</if>
+			<if test="tdate != null">
+				#{tdate,jdbcType=DATE},
+			</if>
+			<if test="tpics != null">
+				#{tpics,jdbcType=VARCHAR},
+			</if>
+			<if test="tdeliver != null">
+				#{tdeliver,jdbcType=DECIMAL},
+			</if>
+			<if test="tview != null">
+				#{tview,jdbcType=DECIMAL},
+			</if>
+			<if test="ttxt != null">
+				#{ttxt,jdbcType=CLOB},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yc.weibo.entity.Theme">
+		update THEME
+		<set>
+			<if test="tname != null">
+				TNAME = #{tname,jdbcType=VARCHAR},
+			</if>
+			<if test="tuid != null">
+				TUID = #{tuid,jdbcType=DECIMAL},
+			</if>
+			<if test="tdate != null">
+				TDATE = #{tdate,jdbcType=DATE},
+			</if>
+			<if test="tpics != null">
+				TPICS = #{tpics,jdbcType=VARCHAR},
+			</if>
+			<if test="tdeliver != null">
+				TDELIVER = #{tdeliver,jdbcType=DECIMAL},
+			</if>
+			<if test="tview != null">
+				TVIEW = #{tview,jdbcType=DECIMAL},
+			</if>
+			<if test="ttxt != null">
+				TTXT = #{ttxt,jdbcType=CLOB},
+			</if>
+		</set>
+		where TID = #{tid,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yc.weibo.entity.Theme">
+		update THEME
+		set TNAME = #{tname,jdbcType=VARCHAR},
+		TUID = #{tuid,jdbcType=DECIMAL},
+		TDATE = #{tdate,jdbcType=DATE},
+		TPICS = #{tpics,jdbcType=VARCHAR},
+		TDELIVER = #{tdeliver,jdbcType=DECIMAL},
+		TVIEW = #{tview,jdbcType=DECIMAL},
+		TTXT = #{ttxt,jdbcType=CLOB}
+		where TID = #{tid,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yc.weibo.entity.Theme">
+		update THEME
+		set TNAME = #{tname,jdbcType=VARCHAR},
+		TUID = #{tuid,jdbcType=DECIMAL},
+		TDATE = #{tdate,jdbcType=DATE},
+		TPICS = #{tpics,jdbcType=VARCHAR},
+		TDELIVER = #{tdeliver,jdbcType=DECIMAL},
+		TVIEW = #{tview,jdbcType=DECIMAL}
+		where TID = #{tid,jdbcType=DECIMAL}
+	</update>
+
+
+
+
+
+
+
 	<select id="findThemeByPage" parameterType="Map" resultType="Theme">
-		select * from 
-		(select n.*,rownum rn from (select * from Theme) n 
+		select * from
+		(select n.*,rownum rn from (select * from Theme) n
 		where #{pageSize} * #{pageNum} >= rownum)
-		where rn > #{pageSize} * (#{pageNum} - 1)
+		where rn > #{pageSize} *
+		(#{pageNum} - 1)
+	</select>
+
+	<select id="findeGroupNumber" parameterType="int" resultType="map">
+		select (select count(distinct(FUedid)) from FanAndFaned where FUid =
+		#{WBUid} and Fstatus = '未分组') 未分组,
+		(select count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid} and
+		Fstatus = '好友圈') 好友圈,
+		(select count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid})
+		focusNum,
+		(select count(distinct(FUid)) from FanAndFaned where FUedid = #{WBUid})
+		fansNum,
+		(select count(WBid) from WeiBo where WBUId = #{WBUid}) weiboNum
+		from dual
 	</select>
 	
-	<select id="findeGroupNumber" parameterType="int" resultType="map">
-		select (select count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid} and Fstatus = '未分组') 未分组,
-			(select count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid} and Fstatus = '好友圈') 好友圈,
-			(select count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid}) focusNum,
-			(select count(distinct(FUid)) from FanAndFaned where FUedid = #{WBUid}) fansNum,
-			(select count(WBid) from WeiBo where WBUId = #{WBUid}) weiboNum
-		from dual
+	<select id="findCount" resultType="int">
+		select count(*) from theme
+	</select>
+	
+	<select id="findRandom" parameterType="Map" resultType="Theme">
+		select * from (select a.* ,rownum rn from (select * from theme)a) where rn in (${str})
 	</select>
 </mapper>
