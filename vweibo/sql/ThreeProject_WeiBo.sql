@@ -316,7 +316,6 @@ insert into WeiBo values(107,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddd
 
 --微博附加表
 create table WeiBoHelp(
-       WHid int primary key,          --微博追加表id'            
        WBid int references WeiBo(WBid),--微博id
        WHviewAccount int,              --微博浏览次数
        WHreprintAccount int,           --微博转载次数
@@ -328,12 +327,65 @@ create table WeiBoHelp(
 );
 drop table WeiBoHelp;
 
+insert into WeiBoHelp values(10326,1550,900,800,1020,1120);
+insert into WeiBoHelp values(10327,7550,3200,600,120,620);
+insert into WeiBoHelp values(10328,1550,900,800,1020,720);
+insert into WeiBoHelp values(10329,2550,900,800,1020,140);
+insert into WeiBoHelp values(10330,1550,1100,600,1020,119);
+insert into WeiBoHelp values(10331,1950,400,800,1020,1220);
+insert into WeiBoHelp values(10332,1550,900,850,1020,2120);
+insert into WeiBoHelp values(10333,2150,880,800,1020,1120);
+insert into WeiBoHelp values(10334,2150,880,650,1020,1120);
+insert into WeiBoHelp values(10335,1560,900,800,1020,1120);
+insert into WeiBoHelp values(10336,3050,2010,650,1020,1120);
+
+insert into WeiBoHelp values(10337,1550,950,800,1020,1120);
+insert into WeiBoHelp values(10338,7520,300,600,120,620);
+insert into WeiBoHelp values(10339,1530,940,370,867,720);
+insert into WeiBoHelp values(10340,2540,920,840,437,140);
+insert into WeiBoHelp values(10341,1250,668,660,670,119);
+insert into WeiBoHelp values(10342,1450,420,838,857,1220);
+insert into WeiBoHelp values(10343,1550,900,880,285,2120);
+insert into WeiBoHelp values(10344,8150,810,120,673,1120);
+insert into WeiBoHelp values(10345,2850,840,682,438,1120);
+insert into WeiBoHelp values(10346,1460,990,756,785,1120);
+insert into WeiBoHelp values(10347,3090,2470,676,738,1120);
+insert into WeiBoHelp values(10348,1553,935,730,820,1120);
+insert into WeiBoHelp values(10349,7520,3560,678,150,620);
+insert into WeiBoHelp values(10350,1550,240,570,120,720);
+insert into WeiBoHelp values(10351,2556,935,560,1240,140);
+
+insert into WeiBoHelp values(10352,1553,1040,600,1077,119);
+insert into WeiBoHelp values(10353,4350,450,400,7220,220);
+insert into WeiBoHelp values(10354,1578,960,850,1077,820);
+insert into WeiBoHelp values(10355,2870,870,400,8760,880);
+insert into WeiBoHelp values(10356,2450,430,600,1780,732);
+insert into WeiBoHelp values(10357,4380,943,845,1480,520);
+insert into WeiBoHelp values(10358,5450,2530,650,1053,565);
+
 select * from WeiBo;
 select * from WeiBoHelp;
 --找到id(浏览次数优先，点赞次数其次)
-select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHviewAccount,WHgreateAccount desc;  --降序查询 前十五条
+
+select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
+
+(select * from 
+(select n.*,rownum rn from 
+(select * from WeiBoHelp order by WHviewAccount desc) n where 15 * 1 >= rownum)
+ where rn > 15 * (1-1)) b
+
+ where w.wbid = b.wbid
+ order by WHviewAccount desc;
+ 
+ 
 --找到id(点赞次数优先，浏览次数其次)
-select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount,WHviewAccount desc;  --降序查询 前十五条
+select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount desc;  --降序查询 前十五条
+
+
+
+select n.*,rownum rn from (select * from WeiBoHelp order by WHviewAccount,WHgreateAccount asc) n
+	where 2*1 > rownum)
+	where 2*0 < rn;
 
 --找到微博
 select * from WeiBo;

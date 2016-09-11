@@ -19,8 +19,13 @@
 	</insert>
 	
 	
-	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="WeiBo">
-		select WBid,rownum rn from WeiBoHelp where 15 > rownum  order by WHviewAccount,WHgreateAccount desc
-		
+	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">
+		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBoHelp order by WHviewAccount desc) n where 15 * 1 >= rownum)
+ 			where rn > 15 * (1-1)) b
+ 			where w.wbid = b.wbid
+ 			order by WHviewAccount desc
 	</select>
 </mapper>
