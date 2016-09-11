@@ -41,7 +41,7 @@
             <a href="javascript:messListClick(4)" class="mess_list4">私信</a>
         </div>
        
-       	       	<div id="right1">
+       	<div id="right1">
             <div class="center1">
                 <div class="center_head1">
                     <a href="" class="aiteWeib">@我的微博</a>
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="tips">
-            	<span class="tips_head">赞使用小帮助</span>
+            	<span class="tips_head">赞使用小帮助</span> 
                 <span class="tips_ques">：什么是赞？</span>
                 <p class="tips_answ">A：通过点亮图标的方式，来表达对一条微博信息的喜爱情感。</p>
                 <span class="tips_ques">:怎样赞一条微博？</span>
@@ -126,15 +126,48 @@
 		</div>
         
         <div id="right4" style="display:none">
-            <div class="center1">
+            <div class="center0"  >
                 <div class="center_head1">
                     <a class="priLetter">私信</a>
                 </div>
                 <div class="center_content4">
+                	<a href="javascript:showLittleWin('#ifAllReaded')" class="allRead">全部置为已读</a>
+                    <a href="javascript:showLittleWin('#ifCleanAll')" class="cleanAll">清空所有私信</a>
                     <img src="../image/messagebox_image/icon_atten1.jpg"/><br/>
                     <span>还没有私信！</span>
-					
+					<div>
+                    	<a href="javascript:startChat()">
+                            <img src="../image/messagebox_image/head_image.png"/>
+                            <b>某某</b>
+                            <span>嘿，你好吗？</span>
+                            <font>2016-9-10 10:31</font>
+                        </a>
+                        <span onClick="showLittleWin('#ifDelete')"></span>
+                    </div>
                     
+                    <div>
+                    	<a href="javascript:startChat()">
+                            <img src="../image/messagebox_image/head_image.png"/>
+                            <b>某某</b>
+                            <span>嘿，你好吗？</span>
+                            <font>2016-9-10 10:31</font>
+                        </a>
+                        <span onClick="showLittleWin('#ifDelete')"></span>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="center2" style="display:none">
+            	<div class="center_head2">
+                	<a href="javascript:returnChatList()"></a>
+                    <span>与<b>某某</b>对话中</span>
+                </div>
+                <div class="chatContent">
+                	
+                </div>
+                <div class="chatConfirm">
+                	<textarea class="chatText"></textarea>
+                    <input type="image" class="sendChatBtn" src="../image/messagebox_image/sendChatBtn1.jpg"/>
                 </div>
             </div>
             <div class="linkman">
@@ -142,24 +175,53 @@
                 <ul class="linkmanList">
                 	<li class="linkList1"><a href="javascript:linkListClick(1)">特别关心（0）</a></li>
                     <div class="linkMan1">
-                    	<span>偶的说的话</span>
+                    	<a href="javascript:startChat()">偶的说的话</a>
                     </div>
                     <li class="linkList2"><a href="javascript:linkListClick(2)">同事（0）</a></li>
                      <div class="linkMan2">
-                    	<span>偶的说的话</span>
+                    	<a href="javascript:startChat()">偶的说的话</a>
                     </div>
                     <li class="linkList3"><a href="javascript:linkListClick(3)">同学（0）</a></li>
                      <div class="linkMan3">
-                    	<span>偶的说的话</span>
+                    	<a href="javascript:startChat()">偶的说的话</a>
                     </div>                    
                     <li class="linkList4"><a href="javascript:linkListClick(4)">明星（0）</a></li>
                     <div class="linkMan4">
-                    	<span>偶的说的话</span>
+                    	<a href="javascript:startChat()">偶的说的话</a>
                     </div>
                 </ul>
             </div>
 		</div>
-
+        
+        <div id="ifAllReaded" style="display:none">
+        	<b>设置已读<a class="closeBtn" href="javascript:closeWindow('#ifAllReaded')"></a></b>
+            <img src="../image/messagebox_image/icon_if.jpg"/>
+            <span>您确定要将所有消息的状态置为已读吗？</span>
+            <p>
+            	<a href="" style="background:#F60;color:#fff">确定</a>
+                <a href="javascript:closeWindow('#ifAllReaded')">取消</a>
+            </p>
+        </div>
+        <div id="ifCleanAll" style="display:none">
+        	<b>提示<a class="closeBtn" href="javascript:closeWindow('#ifCleanAll')"></a></b>
+            <img src="../image/messagebox_image/icon_if.jpg"/>
+            <span>清空所有私信将不可恢复,是否继续？</span>
+            <p>
+            	<a href="" style="background:#F60;color:#fff">确定</a>
+                <a href="javascript:closeWindow('#ifCleanAll')">取消</a>
+            </p>
+        </div>
+        
+         <div id="ifDelete" style="display:none">
+        	<b>提示<a class="closeBtn" href="javascript:closeWindow('#ifDelete')"></a></b>
+            <img src="../image/messagebox_image/icon_if.jpg"/>
+            <span>是否确认删除与该联系人的消息记录？</span>
+            <p>
+            	<a href="" style="background:#F60;color:#fff">确定</a>
+                <a href="javascript:closeWindow('#ifDelete')">取消</a>
+            </p>
+        </div>
     </div>
 </body>
 </html>
+    
