@@ -36,9 +36,15 @@ function linkListClick(messId){
 	}
 }
 
+
 function startChat(){
 	$('.center0').hide();
 	$('.center2').show();	
+	for(var i=1;i<=2;i++){
+		var w=$('.meC'+i).width();	
+		var left=490-w;
+		$('.meC'+i).css("margin-left",left+"px");
+	}
 }
 
 function returnChatList(){

@@ -50,7 +50,19 @@
                 <div class="center_content1">
                     <img src="../image/messagebox_image/icon_atten.jpg"/><br/>
                     <span>还没有人@到你，要加油哦！</span>
-                    
+                     <div>
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <b>名字</b>
+                        <span><a href="">@享悦小助手</a>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容</span>
+                        <p>转发的内容转发的内容转发的内容转发的内容转发的内容转发的内容转发的内容转发的内容转发的内容转发的内容</p>
+                        <font>年月日</font>
+                    </div>
+                     <div>
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <b>名字</b>
+                        <span><a href="">@享悦小助手</a>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容>自己说的内容</span>
+                        <font>年月日</font>
+                    </div>
                 </div>
             </div>
             <div class="tips">
@@ -162,8 +174,27 @@
                 	<a href="javascript:returnChatList()"></a>
                     <span>与<b>某某</b>对话中</span>
                 </div>
-                <div class="chatContent">
-                	
+                <div class="chatContent" style="overflow:scroll;overflow-x:hidden">
+                	<div class="meSpeak">
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <span class="meC1">你好啊？</span>
+                    </div>
+                    <div class="heSpeak">
+	                    <img src="../image/messagebox_image/head_image.png"/>
+                        <span class="heC1">我不认识你啊!我不认识你啊!我不认识你啊!我不认识你啊!我不认识你啊!</span>
+                    </div>
+                    <div class="meSpeak">
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <span class="meC2">你居然不认识我？我可是享悦小助手啊！</span>
+                    </div>
+                    <div class="meSpeak">
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <span class="meC2">你居然不认识我？我可是享悦小助手啊！</span>
+                    </div>
+                    <div class="meSpeak">
+                    	<img src="../image/messagebox_image/head_image.png"/>
+                        <span class="meC2">你居然不认识我？我可是享悦小助手啊！</span>
+                    </div>
                 </div>
                 <div class="chatConfirm">
                 	<textarea class="chatText"></textarea>
