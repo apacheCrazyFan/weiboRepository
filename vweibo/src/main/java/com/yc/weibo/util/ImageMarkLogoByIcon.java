@@ -33,7 +33,7 @@ public class ImageMarkLogoByIcon {
      * @param degree 水印图片旋转角度  
      */  
     public static boolean markImageByIcon(String iconPath, String srcImgPath,String targerPath,double x,double y) {   
-        OutputStream os = null;   
+    	OutputStream os = null;   
         try { 
             Image srcImg = ImageIO.read(new File(srcImgPath));  
             BufferedImage buffImg = new BufferedImage(srcImg.getWidth(null),   
@@ -64,7 +64,7 @@ public class ImageMarkLogoByIcon {
             Image img = imgIcon.getImage();
             
   
-            float alpha = 0.2f; // 透明度
+            float alpha = 0.4f; // 透明度
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));   
   
             // 表示水印图片的位置              
@@ -104,7 +104,8 @@ public class ImageMarkLogoByIcon {
      * @param 添加水印后存储的路径
      */
     public   static   boolean  pressText(File pic,String txt,String realPath,double x,double y) {  
-    	   FileOutputStream fos=null;
+    	System.out.println("文字水印");   
+    	FileOutputStream fos=null;
        	try  {  
            	Image image=ImageIO.read(pic);//读取要添加水印的图片
            	
@@ -124,8 +125,8 @@ public class ImageMarkLogoByIcon {
                  
                
                //4.添加水印
-               g.setColor(Color.RED);  
-               g.setFont(new  Font("微软雅黑",Font.BOLD,10));  
+               g.setColor(Color.BLUE);  
+               g.setFont(new  Font("微软雅黑",Font.BOLD,15));  
                
                g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,0.3f));
                

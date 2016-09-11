@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="front/css/UserSet.css">
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script src="front/js/UserSet.js"></script>
+<script src="front/js/jquery.localize.js"></script>
+
 </head>
 <body>
 	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
@@ -27,16 +29,19 @@
 					src="front/image/UserSet_image/icon2_1.png"><a
 					href="front/page/UserSet_photo.jsp?WBUid=${sessionScope.user.WBUid}">头像</a></li>
 				<li class="line2"></li>
-				<li class="privacy"><img
-					src="front/image/UserSet_image/icon3_1.png"><a
-					href="front/page/UserSet_privacy.jsp">隐私设置</a></li>
+				<li class="privacy">
+				<img src="front/image/UserSet_image/icon3_1.png">
+				<a href="front/page/UserSet_privacy.jsp">隐私设置</a></li>
 				<li class="message"><img
 					src="front/image/UserSet_image/icon4_1.png"><a
 					href="front/page/UserSet_message.jsp">消息设置</a></li>
-				<li class="prefer"><img
-					src="front/image/UserSet_image/icon5_1.png"><a
-					href="front/page/UserSet_prefer.jsp">偏好设置</a></li>
-				<li class="line3"></li>
+				<li class="prefer">
+					<img src="front/image/UserSet_image/icon5_1.png">
+					<a href="front/page/UserSet_prefer.jsp">偏好设置</a>
+				</li>
+				<li class="line3">
+				
+				</li>
 			</ul>
 		</div>
 		<div id="right">
@@ -59,7 +64,7 @@
 							src="front/image/UserSet_image/closebtn1.png" />
 					</div>
 				</li>
-				<li>手&nbsp;机&nbsp;号&nbsp;&nbsp;&nbsp;<span class="span1"
+				<li >手&nbsp;机&nbsp;号&nbsp;&nbsp;&nbsp;<span class="span1"
 					id="telphone">****</span><a href="javascript:checkTelPhone()">查看</a></li>
 
 				<li id="perInfo3">昵&nbsp;&nbsp;&nbsp;&nbsp;称&nbsp;&nbsp;&nbsp;&nbsp;<span
@@ -67,7 +72,7 @@
 				<li style="display: none; background: #fff; height: 160px"
 					id="perInfo_panel3">昵称<a href="javascript: panelClose(3);">收起</a><br />
 					<div>
-						<span class="oldName">现昵称</span> <span class="oldUserName">${user.uname }</span><br />
+						<span class="oldName" >现昵称</span> <span class="oldUserName">${user.uname }</span><br />
 						<br /> <span class="newName">新昵称</span> <input type="text"
 							style="height: 25px" class="newUserName" name="newUserName"
 							id="newName" />
