@@ -165,11 +165,23 @@
 		<dependency>
 			<groupId>biz.source_code</groupId>
 			<artifactId>base64coder</artifactId>
-			<version>2010-12-19</version>
+			<version>1.2.19</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
 		<finalName>vweibo</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
