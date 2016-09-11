@@ -23,9 +23,15 @@
 		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
 		(select * from 
 			(select n.*,rownum rn from 
-			(select * from WeiBoHelp order by WHviewAccount desc) n where 15 * 1 >= rownum)
- 			where rn > 15 * (1-1)) b
+			(select * from WeiBoHelp order by WHviewAccount desc) n where #{pageSize} * #{pageNum} >= rownum)
+ 			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid
  			order by WHviewAccount desc
+	</select>
+	<select id="selectWeiboOrderByWHgreateAccount" resultType="Weibo" parameterType="map">
+		select * from WeiBo where WBid in(
+			select WBid from
+			(select n.*,rownum rn from (select * from WeiBoHelp order by WHgreateAccount desc) n where #{pageSize} * #{pageNum} >= rownum)
+			where rn > #{pageSize} * (#{pageNum}-1))
 	</select>
 </mapper>

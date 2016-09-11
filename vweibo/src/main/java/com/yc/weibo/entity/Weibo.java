@@ -8,9 +8,9 @@ public class Weibo {
 	 private int WBid;          //--微博id
      private String WBtag;      //--微博标签（）
      private String WBtitle;    //--微博标题（可以写，也可以不写，但必须有）
-     private int UId;			//--用户id（发表者）
+     private int WBUid;			//--用户id（发表者）
      private Date WBdate;       //--微博发表日期
-     private Clob WBtxt;      //-微博文字内容
+     private String WBtxt;      //-微博文字内容
      private String WBpic;   	//--微博图片路径
      private String WBvideo; 	//	--可能存在的视频路径
      private String WBmusic;	//可能存在的音乐路径
@@ -56,11 +56,11 @@ public class Weibo {
 	public void setWBtitle(String wBtitle) {
 		WBtitle = wBtitle;
 	}
-	public int getUId() {
-		return UId;
+	public int getWBUId() {
+		return WBUid;
 	}
-	public void setUId(int uId) {
-		UId = uId;
+	public void setWBUId(int uId) {
+		WBUid = uId;
 	}
 	public Date getWBdate() {
 		return WBdate;
@@ -68,10 +68,10 @@ public class Weibo {
 	public void setWBdate(Date wBdate) {
 		WBdate = wBdate;
 	}
-	public Clob getWBtxt() {
+	public String getWBtxt() {
 		return WBtxt;
 	}
-	public void setWBtxt(Clob wBtxt) {
+	public void setWBtxt(String wBtxt) {
 		WBtxt = wBtxt;
 	}
 	public String getWBpic() {
@@ -94,7 +94,7 @@ public class Weibo {
 	}
 	@Override
 	public String toString() {
-		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", UId=" + UId + ", WBdate="
+		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUId=" + WBUid + ", WBdate="
 				+ WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic=" + WBmusic
 				+ ", yesOrno=" + yesOrno + ", WBlocation=" + WBlocation + ", WBstatue=" + WBstatue + "]";
 	}

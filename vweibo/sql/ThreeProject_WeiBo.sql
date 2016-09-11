@@ -285,7 +285,7 @@ create table WeiBo(
        WBUId int
            constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
-       WBtxt  clob,                   --微博文字内容
+       WBtxt varchar2(2000),          --微博文字内容
        WBpic  varchar2(500),          --微博图片路径
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
        WBmusic varchar2(500),		  --微博音乐路径
@@ -305,14 +305,14 @@ delete from WeiBo;
 select * from WeiBo;
 select count(WBid) from WeiBo where WBUId = 1001;
 
-insert into WeiBo values(seq_wb_wbid.nextval,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N','衡阳,长沙市',0);
-insert into WeiBo values(102,'视频','大鸭子',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');
-insert into WeiBo values(103,'衡阳','湖工',1001,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N');
-insert into WeiBo values(104,'军事','中日战争',1001,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'N');
+insert into WeiBo values(seq_wb_wbid.nextval,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N','N','衡阳,长沙市',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N','N','衡阳,长沙市',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'衡阳','湖工',1001,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','衡阳,长沙市',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'军事','中日战争',1001,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'N','N','衡阳,长沙市',0);
 
-insert into WeiBo values(105,'视频','大鸭子',1002,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');
-insert into WeiBo values(106,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N');
-insert into WeiBo values(107,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y');
+insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1002,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N','N','衡阳,长沙市',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','衡阳,长沙市',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y','N','衡阳,长沙市',0);
 
 --微博附加表
 create table WeiBoHelp(
@@ -327,12 +327,16 @@ create table WeiBoHelp(
 );
 drop table WeiBoHelp;
 
-insert into WeiBoHelp values(10326,1550,900,800,1020,1120);
-insert into WeiBoHelp values(10327,7550,3200,600,120,620);
-insert into WeiBoHelp values(10328,1550,900,800,1020,720);
-insert into WeiBoHelp values(10329,2550,900,800,1020,140);
-insert into WeiBoHelp values(10330,1550,1100,600,1020,119);
-insert into WeiBoHelp values(10331,1950,400,800,1020,1220);
+update WeiBoHelp set WHgreateAccount = 2210 where WBid in(10337);
+insert into WeiBoHelp values(10424,9854,4562,1333,2555,1345);
+insert into WeiBoHelp values(10425,1550,900,800,1020,1120);
+insert into WeiBoHelp values(10426,7550,3200,600,120,620);
+insert into WeiBoHelp values(10427,1550,900,800,1020,720);
+insert into WeiBoHelp values(10428,2550,900,800,1020,140);
+insert into WeiBoHelp values(10429,1550,1100,600,1020,119);
+insert into WeiBoHelp values(10430,1950,400,800,1020,1220);
+
+
 insert into WeiBoHelp values(10332,1550,900,850,1020,2120);
 insert into WeiBoHelp values(10333,2150,880,800,1020,1120);
 insert into WeiBoHelp values(10334,2150,880,650,1020,1120);
@@ -383,10 +387,12 @@ select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount 
 
 
 
-select n.*,rownum rn from (select * from WeiBoHelp order by WHviewAccount,WHgreateAccount asc) n
-	where 2*1 > rownum)
-	where 2*0 < rn;
+select * from (select w.*,rownum rn from WeiBoHelp w order by WHgreateAccount desc where 2*1 >= rownum) n
+where 2*0 < rn;
 
+select * from
+		(select n.WBid,rownum rn from (select * from WeiBoHelp order by WHgreateAccount desc) n where 4 * 1 >= rownum)
+		where rn > 4 * (1-1);
 --找到微博
 select * from WeiBo;
 
