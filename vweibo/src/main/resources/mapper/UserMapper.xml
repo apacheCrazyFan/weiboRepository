@@ -8,7 +8,7 @@
 	</select>
 	
 	<insert id="register" parameterType="WeiBoUser">
-		insert into WeiBoUser(WBUid,Uname,Upassword,Uphone,Uemail,Usex) values(seq_WeiBoUser_Wbuid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex})
+		insert into WeiBoUser(WBUid,Uname,Upassword,Uphone,Uemail,Usex,UimgPath) values(seq_WeiBoUser_Wbuid.nextval,#{Uname},#{Upassword},#{Uphone},#{Uemail},#{Usex},'zanwu.jpg')
 	</insert>
 	
 	<update id="updataUserPhoto" parameterType="map">
@@ -33,5 +33,9 @@
 	
 	<update id="saveUserTag" parameterType="map">
 		update WeiBoUser set Utag=#{Utag,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="saveFindMe" parameterType="map">
+		update WeiBoUser set phoneStatus=#{phoneStatus,jdbcType=VARCHAR},emailStatus=#{emailStatus,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
 	</update>
 </mapper>

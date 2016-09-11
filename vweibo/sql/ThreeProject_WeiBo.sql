@@ -149,6 +149,10 @@ create table WeiBoUser(
        UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
+alter table WeiBoUser drop column phoneStatus;
+alter table WeiBoUser drop column emailStatus;
+alter table WeiBoUser add phoneStatus int default 1;	--增加两列，用来处理通过何种方式找到好友,1为可以，0为否
+alter table WeiBoUser add emailStatus int default 1;
 select * from WeiBOUser;
 create sequence seq_WeiBoUser_Wbuid start with 1006;
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
@@ -288,6 +292,7 @@ create table WeiBo(
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
        WBmusic varchar2(500),		  --微博音乐路径
        yesOrno char(2),				  --是否是话题产生的weibo	
+       yon char(2),					  --是否是转发微博
        WBlocation varchar2(120),
        WBstatue int
        --预留字段      
@@ -324,6 +329,17 @@ create table WeiBoHelp(
        --预留字段  
 );
 drop table WeiBoHelp;
+
+select * from WeiBo;
+select * from WeiBoHelp;
+--找到id(浏览次数优先，点赞次数其次)
+select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHviewAccount,WHgreateAccount desc;  --降序查询 前十五条
+--找到id(点赞次数优先，浏览次数其次)
+select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount,WHviewAccount desc;  --降序查询 前十五条
+
+--找到微博
+select * from WeiBo;
+
 --微博操作表
 create table Operate(
        Oid int primary key,           --微博操作id

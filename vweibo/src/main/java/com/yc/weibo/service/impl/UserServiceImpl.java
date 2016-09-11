@@ -63,5 +63,11 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public void saveFindMe(Map<String, String> paramMap) {
+		userMapper.saveFindMe(paramMap);
+		
+	}
+
 
 }

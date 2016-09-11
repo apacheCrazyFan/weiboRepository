@@ -7,14 +7,20 @@
 		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE">
 			select seq_wb_wbid.nextval currval from dual
 		</selectKey>
-		insert into WeiBo values (seq_wb_wbid.nextval,#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
+		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
 	</insert>
 	
 	<update id="updateWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1 where WBid = #{wbid}
 	</update>
 	
-	<insert id="insertWhoLike">
+	<insert id="insertWhoLike" >
 		insert into Operate values(seq_op_oid.nextval,#{uid},#{wbid},'点赞')
 	</insert>
+	
+	
+	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="WeiBo">
+		select WBid,rownum rn from WeiBoHelp where 15 > rownum  order by WHviewAccount,WHgreateAccount desc
+		
+	</select>
 </mapper>

@@ -8,11 +8,12 @@
 <title>无标题文档</title>
 <link rel="stylesheet" href="front/css/UserSet_prefer.css">
 <script src="front/js/jquery-1.11.1.min.js"></script>
-<script src="front/UserSet_prefer.min.js"></script>
+<script type="text/javascript"src="front/js/UserSet_prefer.js"></script>
 
 </head>
 
 <body>
+	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<div id="wrap">
     	<div id="left">
         	<span class="idSet">账号设置</span>
@@ -36,7 +37,7 @@
                     	<input class="emailAtt1" type="checkbox" name="emailAtt" value="emailAtt1"/><span class="emailAttW1">接收微博官方推送的离线消息提醒邮件</span><br/>
                         <input class="emailAtt2" type="checkbox" name="emailAtt" value="emailAtt2"/><span class="emailAttW2">接收微博官方推送的精彩热点内容邮件</span><br/>
                         <input class="emailAttBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.emailAttention','.emailAttention1',2,0)"/>
                     
                     </div>
                 </li>
@@ -47,23 +48,24 @@
                         <div class="water_left">
                         	<span class="waterSet_span1">设置在图片微博中增加独具个性的微博水印</span><br/>
                             <span class="waterSet_span2">水印内容</span><br/>
-                            <input class="waterWeiName" type="checkbox" name="waterContent" value="waterWeiName"/><span class="waterWeiNameW">微博昵称</span><br/>
-                            <input class="waterWeiLogo" type="checkbox" name="waterContent" value="waterWeiLogo"/><span class="waterWeiLogoW">微博图标</span><br/>
-                            <input class="waterWeiAddr" type="checkbox" name="waterContent" value="waterWeiAddr"/><span class="waterWeiAddrW">微博地址</span><br/>
+                            <input class="waterWeiName" type="radio" name="waterContent" value="${user.uname }"  id="waterWeiName"/><span class="waterWeiNameW">微博昵称</span><br/>
+                            <input class="waterWeiLogo" type="radio" name="waterContent" value="waterWeiLogo"/><span class="waterWeiLogoW" id="waterWeiLogo">微博图标</span><br/>
+                            <input class="waterWeiAddr" type="radio" name="waterContent" value="weibo.com"/><span class="waterWeiAddrW" id="waterWeiAddr">微博地址</span><br/>
                             <span class="waterSet_span3">水印位置</span><br/>
-                            <input class="bottomRight" type="radio" name="waterLocation" value="bottomRight"/><span class="bottomRightW">底部居右</span>
+                            <input class="bottomRight" type="radio" name="waterLocation" value="bottomRight"/><span class="bottomRightW" >底部居右</span>
                             <input class="bottomCenter" type="radio" name="waterLocation" value="bottomCenter"/><span class="bottomCenterW">底部居中</span>
                             <input class="centerCenter" type="radio" name="waterLocation" value="centerCenter"/><span class="centerCenterW">图片中心</span><br/>
-                            <input class="waterBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        	<input class="closeBtn1" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                            <input class="waterBtn" type="image" src="front/image/UserSet_image/savePhoto1.png" onclick="saveWaterMark()"/>
+                        	<input class="closeBtn1" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.watermakerSet','.watermakerSet1',2,0)"/>
                         </div>
                         <div class="water_right" style="height:220px;width:300px">
                         	<span class="waterSet_span4">预览</span>
-                        	<div class="waterView"><img src="front/image/UserSet_image/test_pic.jpg"></div>
+                        	<div class="waterView"><img src="front/image/UserSet_image/test_pic.jpg" id="waterView"></div>
                         </div>
                     </div>
+                    
                 </li>
-                
+               
                 
                 <li class="medalSet">勋章设置&nbsp;&nbsp;&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: compileAndClose('.medalSet','.medalSet1',1,3);">编辑</a></li>
                 <li style="display:none;background:#fff;height:180px" class="medalSet1">勋章设置<a href="javascript: compileAndClose('.medalSet','.medalSet1',2,0);">收起</a><br/>
@@ -72,24 +74,53 @@
                         <input class="showMedal" type="radio" name="isShowMedal" value="showMedal"/><span class="showMedalW">显示</span><br/>
                         <input class="noShowMedal" type="radio" name="isShowMedal" value="noShowMedal"/><span class="noShowMedalW">不现实</span><br/>
                         <input class="medalBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn2" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn2" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.medalSet','.medalSet1',2,0)"/>
                     </div>
                 </li>
                 
                 <li class="languageSet">语言设置&nbsp;&nbsp;&nbsp;&nbsp;<span class="span1">****</span><a href="javascript: compileAndClose('.languageSet','.languageSet1',1,4);">编辑</a></li>
                 <li style="display:none;background:#fff;height:240px" class="languageSet1">语言设置<a href="javascript: compileAndClose('.languageSet','.languageSet1',2,0);">收起</a><br/>
                     <div>
-                   		<span class="language_span1">设置是否在个人主页封面右下角显示勋章图标</span><br/>                        
                         <input class="simpChinese" type="radio" name="langSet" value="simpChinese"/><span class="simpChineseW">中文(简体)</span><br/>
                         <input class="taiWChinese" type="radio" name="langSet" value="taiWChinese"/><span class="taiWChineseW">中文(台湾)</span><br/>
                         <input class="hongChinese" type="radio" name="langSet" value="hongChinese"/><span class="hongChineseW">中文(香港)</span><br/>
                         <input class="english" type="radio" name="langSet" value="english"/><span class="englishW">English</span><br/>
                         <input class="langBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn3" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn3" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.languageSet','.languageSet1',2,0)"/>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
+    <script type="text/javascript">
+function saveWaterMark(){
+    	var waterContent="";
+    	var radio=document.getElementsByName("waterContent");
+    	 for(var i=0;i<radio.length;i++){
+     		  if(radio[i].checked==true){
+     			 waterContent=radio[i].value;
+     		    break;
+     		}
+    	 }
+    	var waterLocation="";
+    	var waterLocationRadio=document.getElementsByName("waterLocation");
+    	 for(var i=0;i<waterLocationRadio.length;i++){
+    		  if(waterLocationRadio[i].checked==true){
+    			  waterLocation=waterLocationRadio[i].value;
+    		    break;
+    		}
+   	 }
+    	 $.post("user/addWaterMark",{"waterContent":waterContent,"waterLocation":waterLocation,"WBUid":$("#hiddenid").val()},function(data){
+    		 alert(data);
+    		/*  $("#waterView").attr("src","front/image/UserSet_image/test_pic1.jpg"); */
+    		 var str = '<img src="front/image/UserSet_image/test_pic1.jpg" id="waterView">';
+    		 $(".waterView").html("").append($(str));
+    		 
+    	 });
+    	
+}
+
+    
+    </script>
 </body>
 </html>

@@ -25,4 +25,6 @@ public interface UserMapper {
 	
 	void saveUserTag(Map<String, String> paramMap);
 
+	void saveFindMe(Map<String, String> paramMap);
+
 }

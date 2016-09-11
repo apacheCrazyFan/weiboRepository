@@ -60,6 +60,18 @@ $(function () {
       type: 'video/mp4',
       poster: 'front/image/bg-3.jpg' 
     },
+    {
+        title: 'Sintel',
+        href: '/weibovideoes/spring_hd.mp4',
+        type: 'video/mp4',
+        poster: 'front/image/bg-3.jpg' 
+      },
+      {
+          title: 'Sintel',
+          href: '/weibomusics/yzw_ycjh.mp3',
+          type: 'video/mp4',
+          poster: 'front/image/bg-3.jpg' 
+        }
   ], {
     container: '#blueimp-video-carousel',
     carousel: true

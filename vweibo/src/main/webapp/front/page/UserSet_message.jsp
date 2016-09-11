@@ -41,7 +41,7 @@
                         <input class="getAttRemind" type="radio" name="getWhoRemind" value="getAttRemind"/><span>我关注的人</span><br/>
                         <input class="noRemind" type="radio" name="getWhoRemind" value="noRemind"/><span>不提醒</span><br/>
                         <input class="aiteMeBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.aiteMe','.aiteMe1',2,0)"/>
                     </div>
                 </li>
                 
@@ -61,9 +61,9 @@
                         <input class="noCommRemind" type="radio" name="getWhoCommRemind" value="noCommRemind"/><span>不提醒</span><br/>
                         <span class="comment_span4">我参与的(开启后，若评论了一条微博，我将收到“关注的人”对这条微博的评论)</span><br/>
                         <input class="openParticipant" type="radio" name="participant" value="openParticipant"/><span>开启</span><br/>
-                        <input class="closeParticipant" type="radio" name"participant" value="closeParticipant"/><span>不开启<span><br/>
+                        <input class="closeParticipant" type="radio" name="participant" value="closeParticipant"/><span>不开启<span><br/>
                         <input class="commentBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.comment','.comment1',2,0)"/>
                         
                     </div>
                 </li>
@@ -79,7 +79,7 @@
                         <input class="openParPraise" type="radio" name="parPraise" value="openParPraise"/><span>开启</span><br/>
                         <input class="closeParPraise" type="radio" name"parPraise" value="closeParPraise"/><span>不开启<span><br/>
                         <input class="praiseBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.praise','.praise1',2,0)"/>
                     </div>
                 </li>
                 
@@ -91,9 +91,9 @@
                  		<input class="getAttPriLetter" type="radio" name="getWhoPriLetter" value="getAttPriLetter"/><span>我关注的人(非我关注人的私信请进入未关注人私信查看)</span><br/>
                         <span class="priLetter_span2">我是否接受收私信提醒</span><br/>
                         <input class="yesPriLetterRem" type="radio" name="getPriLetterRem" value="yesPriLetterRem"/><span>提醒</span><br/>
-                        <input class="noPriLetterRem" type="radio" name"getPriLetterRem" value="noPriLetterRem"/><span>不提醒<span><br/>
+                        <input class="noPriLetterRem" type="radio" name="getPriLetterRem" value="noPriLetterRem"/><span>不提醒<span><br/>
                         <input class="priLetterBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.privacyLetter','.privacyLetter1',2,0)"/>
                     </div>
                 </li>
                 
@@ -102,9 +102,9 @@
                     <div>
                         <span class="noAttPriLetter_span1">我是否接受收私信提醒</span><br/>
                         <input class="yesNoAttPriLetterRem" type="radio" name="getNoAttPriLetterRem" value="yesNoAttPriLetterRem"/><span>提醒</span><br/>
-                        <input class="noNoAttPriLetterRem" type="radio" name"getNoAttPriLetterRem" value="noNoAttPriLetterRem"/><span>不提醒<span><br/>
+                        <input class="noNoAttPriLetterRem" type="radio" name="getNoAttPriLetterRem" value="noNoAttPriLetterRem"/><span>不提醒<span><br/>
                         <input class="noAttPriLetterBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.noAttPriLetter','.noAttPriLetter1',2,0)"/>
                     </div>
                 </li>
                 
@@ -116,7 +116,7 @@
                         <input class="getAttNewFanRem" type="radio" name="getWhoNewFanRem" value="getAttNewFanRem"/><span>我关注的人</span><br/>
                         <input class="noNewFanRem" type="radio" name="getWhoNewFanRem" value="noNewFanRem"/><span>不提醒</span><br/>
                         <input class="newFanseBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.newFanse','.newFanse1',2,0)"/>
                     
                     </div>
                 </li>
@@ -126,9 +126,9 @@
                     <div>
                         <span class="friendCircle_span1">我是否接受好友圈小黄签提醒</span><br/>
                         <input class="yesFriCircleRem" type="radio" name="getFriCircleRem" value="yesFriCircleRem"/><span>提醒</span><br/>
-                        <input class="noFriCircleRem" type="radio" name"getFriCircleRem" value="noFriCircleRem"/><span>不提醒<span><br/>
+                        <input class="noFriCircleRem" type="radio" name="getFriCircleRem" value="noFriCircleRem"/><span>不提醒<span><br/>
                         <input class="friendCircleBtn" type="image" src="front/image/UserSet_image/savePhoto1.png"/>
-                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png"/>
+                        <input class="closeBtn" type="image" src="front/image/UserSet_image/closebtn1.png" onclick="compileAndClose('.friendCircle','.friendCircle1',2,0)"/>
                     </div>
                 </li>
             </ul>

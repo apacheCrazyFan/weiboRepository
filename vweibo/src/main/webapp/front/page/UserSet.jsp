@@ -211,7 +211,7 @@
 	    		strTag+=alldiv[i].innerHTML+",";
 	    	}
 	    	if(strTag.indexOf(obj.innerHTML) > 0){
-	    		alert("已经存在了");
+	    		alert("请勿重复添加");
     		}else{
     			$(".userLabelList").append(str);
     		}
@@ -243,7 +243,7 @@
     		str+='<div class="addUserLabel" style="float: left"';
     		str+='onclick="addUserLabel(this)">菜的抠脚</div>';
     		str+='<div class="addUserLabel" style="float: left; margin-left: 20px"';
-    		str+='onclick="addUserLabel(this)">帅</div>';
+    		str+='onclick="addUserLabel(this)">丑逼</div>';
     		str+='<div class="addUserLabel" style="float: left; margin-left: 20px"';
     		str+='onclick="addUserLabel(this)">很帅</div>';
     	}
