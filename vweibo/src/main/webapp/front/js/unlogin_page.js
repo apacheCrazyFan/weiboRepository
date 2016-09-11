@@ -24,30 +24,8 @@ $(window).scroll(function(){
 	}  
 });  
 });  
- 
-function changecentercolor(id){
-	document.getElementById(id).innerHTML='<img src="front/image/conter-part_wayimg02.png" id="conter-part_wayimg01"/>';
-}
 
-function changecentercolors(id){
-	document.getElementById(id).innerHTML='<img src="front/image/conter-part_wayimg01.png" id="conter-part_wayimg01"/>';
-}
 
-function showcenterhidediv(id){
-var sbtitle=document.getElementById(id);
-//alert(sbtitle.style.display);
-if(sbtitle){
-   if(sbtitle.style.display=='block'){
-   sbtitle.style.display='none';
-   }else{
-   sbtitle.style.display='block';
-   }
-}
-}
-
-function hidecenterdiv(id){
-	document.getElementById(id).style.display='none';
-	}
 
 //取消键关闭收藏标签
 function closecollectiondiv(id){
@@ -200,3 +178,9 @@ function addcommentdiv2(id){
 		}
 	}
 }
+
+function clickunlogin(id1,id2){
+	$("#"+id1).css("border-bottom","2px solid red");
+	$("#"+id2).css("border-bottom","2px solid #eee");
+}
+

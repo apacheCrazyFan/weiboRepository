@@ -32,7 +32,7 @@ function letRandom(){
 		dataType:'JSON',
 		type:'POST',
 		success:function(data){
-			console.info(data);
+			//console.info(data);
 			$("#hot_topic_content").html("");
 			var str="";
 			for(var i=0;i<data.length;i++){//data就是一个theme的List（java中） ，用json传过来以后，在js中，就是数组

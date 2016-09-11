@@ -226,6 +226,7 @@ ul li:hover {
 }
 
 p {
+	
 	font-size: 12px;
 }
 
@@ -520,6 +521,7 @@ textarea {
 }
 
 #center-part_ul {
+	width:180px;
 	position: relative;
 	left: -140px;
 	bottom: 50px;
@@ -527,24 +529,26 @@ textarea {
 }
 
 #center-part_li {
+	height:0px;
 	position: relative;
-	top: 30px;
-	right: 50px;
+	top: 10px;
+	right: -18px;
 	font-size:13px;
 }
 
 #center-part_p {
+	width:500px;
 	position: relative;
 	bottom: 60px;
-	left: 80px;
+	left: 35px;
 	font-size: 14px;
 	line-height: 20px;
 }
 
 #content_img01 {
 	position: relative;
-	left: 25px;
-	bottom: 60px;
+	left: 35px;
+	bottom: 45px;
 	width:500px;
 }
 

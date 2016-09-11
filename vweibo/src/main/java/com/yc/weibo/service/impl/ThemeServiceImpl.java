@@ -57,7 +57,7 @@ public class ThemeServiceImpl implements ThemeService {
 			String value = (String) map.get(key);
 			str_num.append(value + ",");
 		}
-		System.out.println(str_num.subSequence(0, str_num.lastIndexOf(",")));// 随机数组已经维护好了
+		//System.out.println(str_num.subSequence(0, str_num.lastIndexOf(",")));// 随机数组已经维护好了
 		
 		Map<String,String> param=new HashMap<String,String>();
 		param.put("str", str_num.subSequence(0, str_num.lastIndexOf(",")).toString());
