@@ -63,7 +63,7 @@ public class WeiboHandler {
 					String rootDir = "";
 
 					if(DataDic.PICTURESUFFIX.toLowerCase().contains(originalFilename.substring(originalFilename.lastIndexOf(".")+1).toLowerCase())){ //如果是图片文件
-						picsMap += originalFilename+",";
+						picsMap += originalFilename+",";//总是多一个逗号，
 						rootDir = DataDic.PICPATH;
 					}
 					if(DataDic.MUSICSUFFIX.toLowerCase().contains(originalFilename.substring(originalFilename.lastIndexOf(".")+1).toLowerCase())){  //如果是视频文件
@@ -103,14 +103,22 @@ public class WeiboHandler {
 		if(!publishDateAndLocation.equals(DataDic.DATESTRING)){
 			jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
 			jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
-			jsonMap.put("picsMap", picsMap);
-			jsonMap.put("videoMap", videoMap);
-			jsonMap.put("musicMap", musicMap);
+			//增加了最后的逗号删除操作
+			jsonMap.put("picsMap", operateString(picsMap));
+			jsonMap.put("videoMap", operateString(videoMap));
+			jsonMap.put("musicMap", operateString(musicMap));
 			jsonMap.put("rate", 2);
 		}
 
 		return jsonMap;
 
+	}
+	
+	private String operateString(String str){
+		if(!str.equals("")&&str.contains(",")){
+			return str.substring(0,str.lastIndexOf(","));
+		}
+		return str;
 	}
 
 

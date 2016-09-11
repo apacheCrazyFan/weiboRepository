@@ -246,6 +246,7 @@ insert into FanAndFaned values(1001,1010,'未分组');
 --首先话题是可以放在微博里发表的
 --所以说话题可以是微博的一个附属
 --话题表
+drop table Theme;
 create table Theme(
 	Tid int primary key,					--话题id
 	Tname varchar2(40),						--话题标题
@@ -256,24 +257,25 @@ create table Theme(
 	Tdeliver int,							--话题被发表的次数
 	Tview int								--话题访问次数
 );
+create sequence seq_Theme_Tid start with 1;
 select tname from 
 (select n.*,rownum rn from (select * from Theme) n 
 where 5 * 1 >= rownum) 
 where rn > 5 * (1 - 1);
-insert into Theme values(1,'#前任来撩约不约#',1001,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1000,20000);
-insert into Theme values(2,'#反贪风暴2提档914#',1002,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1100,21000);
-insert into Theme values(3,'#李云迪西藏捐音乐教室#',1002,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1200,22000);
-insert into Theme values(4,'#窦靖童七月与安生#',1003,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1300,23000);
-insert into Theme values(5,'#一图读懂#',1003,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1400,24000);
-insert into Theme values(6,'#法医每天#',1003,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1500,25000);
-insert into Theme values(7,'#三叠物种记录#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1600,26000);
-insert into Theme values(8,'#天象预报#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1700,27000);
-insert into Theme values(9,'#倾城夫妇情话满级#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
-insert into Theme values(10,'#超女冠军方圆#',1004,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1400,24000);
-insert into Theme values(11,'#开学第二天吓死人了#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1500,25000);
-insert into Theme values(12,'#杨美娜百万身价#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1600,26000);
-insert into Theme values(13,'#郭俊辰北影报到#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1700,27000);
-insert into Theme values(14,'#故事里的旧时光#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
+insert into Theme values(seq_Theme_Tid.nextval,'#前任来撩约不约#',1001,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1000,20000);
+insert into Theme values(seq_Theme_Tid.nextval,'#反贪风暴2提档914#',1002,to_date('2016-8-30','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1100,21000);
+insert into Theme values(seq_Theme_Tid.nextval,'#李云迪西藏捐音乐教室#',1002,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1200,22000);
+insert into Theme values(seq_Theme_Tid.nextval,'#窦靖童七月与安生#',1003,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1300,23000);
+insert into Theme values(seq_Theme_Tid.nextval,'#一图读懂#',1003,to_date('2016-8-31','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1400,24000);
+insert into Theme values(seq_Theme_Tid.nextval,'#法医每天#',1003,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1500,25000);
+insert into Theme values(seq_Theme_Tid.nextval,'#三叠物种记录#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1600,26000);
+insert into Theme values(seq_Theme_Tid.nextval,'#天象预报#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1700,27000);
+insert into Theme values(seq_Theme_Tid.nextval,'#倾城夫妇情话满级#',1004,to_date('2016-9-1','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
+insert into Theme values(seq_Theme_Tid.nextval,'#超女冠军方圆#',1004,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1400,24000);
+insert into Theme values(seq_Theme_Tid.nextval,'#开学第二天吓死人了#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1500,25000);
+insert into Theme values(seq_Theme_Tid.nextval,'#杨美娜百万身价#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1600,26000);
+insert into Theme values(seq_Theme_Tid.nextval,'#郭俊辰北影报到#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1700,27000);
+insert into Theme values(seq_Theme_Tid.nextval,'#故事里的旧时光#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
 
 
 

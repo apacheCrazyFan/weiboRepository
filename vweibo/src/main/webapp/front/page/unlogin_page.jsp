@@ -8,7 +8,7 @@
 <title>登录前的页面</title>
 <link type="text/css" rel="stylesheet" href="front/css/unlogin_page.css"/>
 <script src="front/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="front/js/unlogin.js"></script>
+<script type="text/javascript" src="front/js/unlogin_page.js"></script>
 </head>
 
 
@@ -48,20 +48,11 @@
     <div id="center-part">
     	<div id="center-part-content_01" style="margin-top:20px;">
             <a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="啦啦啦" src="front/image/userphoto003.png"/></a>
-            <a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick='showcenterhidediv("center-partchoose")' onMouseOver="changecentercolor('center-part_way')" onMouseOut="changecentercolors('center-part_way')"><img src="front/image/conter-part_wayimg01.png"/></a>
-                <div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv('center-partchoose')">
-                    <ul>
-                        <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
-                       <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>
-                        <li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>
-                       <li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>
-                    </ul>
-                </div>
-                <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
-                	<li id="center-part_li" style="height:15px;position:relative;left:18px;">APP菌</li>
-                    <li style="height:15px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
+                <ul id="center-part_ul">
+                	<li id="center-part_li">APP菌</li>
+                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
                 </ul>
-                <p id="center-part_p" style="width:500px;position:relative;left:29px;">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
+                <p id="center-part_p">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
                 doge]！而且相比之下TheClocks有数字和指针两种形式，还可以设定闹铃中区也有，而且free帮APP菌卖安利#</p>
                <div id="content_img01">
                		<img src="front/image/weiboimg003.png"/>
@@ -131,21 +122,12 @@
         
       <div id="center-part-content_01">
             	<a href="javascript:void(0)" id="center-part_img"><img src="front/image/userphoto001.png"/></a>
-                <a href="javascript:void(0)" class="center-part_way" id="center-part_way1" onClick='showcenterhidediv("center-part_choose1")' onMouseOver="changecentercolor('center-part_way1')" onMouseOut="changecentercolors('center-part_way1')"><img src="front/image/conter-part_wayimg01.png" id="conter-part_wayimg01"/></a>
-                    <div style="display:none;" class="center-partchoose" id="center-part_choose1" onMouseUp="hidecenterdiv('center-part_choose1')">
-                        <ul>
-                            <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
-                           <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>
-                            <li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>
-                           <li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>
-                        </ul>
-                	</div>
    
-                <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
-                	<li id="center-part_li" style="height:15px;position:relative;left:18px;">百科酱</li>
-                    <li style="height:15px;width:150px;"><a href="javascript:void(0)">3</a>小时前 来自 weibo.com</li>
+                <ul id="center-part_ul">
+                	<li id="center-part_li">百科酱</li>
+                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">3</a>小时前 来自 weibo.com</li>
                 </ul>
-                <p id="center-part_p" style="width:500px;position:relative;left:29px;">阿里巴巴集团董事局主席马云成功的十大法则！不要抱怨，寻找机会，时刻拥有梦想，尊重文化，取一个好听的名字</p>
+                <p id="center-part_p">阿里巴巴集团董事局主席马云成功的十大法则！不要抱怨，寻找机会，时刻拥有梦想，尊重文化，取一个好听的名字</p>
                <div id="content_img01" style="width:"><img src="front/image/weiboimg002.png"/>
             
                </div>
@@ -214,21 +196,12 @@
        
        <div id="center-part-content_01">
             	<a href="javascript:void(0)" id="center-part_img"><img src="front/image/userphoto004.png"/></a>
-                <a href="javascript:void(0)" class="center-part_way" id="center-part_way2" onClick='showcenterhidediv("center-part_choose2")' onMouseOver="changecentercolor('center-part_way2')" onMouseOut="changecentercolors('center-part_way2')"><img src="front/image/conter-part_wayimg01.png" id="conter-part_wayimg01"/></a>
-                    <div style="display:none;" class="center-partchoose"  id="center-part_choose2" onMouseUp="hidecenterdiv('center-part_choose2')">
-                        <ul>
-                            <li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>
-                           <li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>
-                            <li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>
-                           <li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"> <a href="javascript:void(0)" id="center-parta1">举报</a></li>
-                        </ul>
-                	</div>
    
-                <ul id="center-part_ul" style="width:180px;position:relative;left:-140px;">
-                	<li id="center-part_li" style="height:15px;position:relative;left:18px;">网易云音乐</li>
-                    <li style="height:15px;width:150px;"><a href="javascript:void(0)">20</a>分钟前 来自 weibo.com</li>
+                <ul id="center-part_ul">
+                	<li id="center-part_li">网易云音乐</li>
+                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">20</a>分钟前 来自 weibo.com</li>
                 </ul>
-                <p id="center-part_p" style="width:500px;position:relative;left:29px;">音乐一响起，好似曾经的追剧时光回来了！用一首歌的时间去感受中国电视剧20年！一起来看！</p>
+                <p id="center-part_p">音乐一响起，好似曾经的追剧时光回来了！用一首歌的时间去感受中国电视剧20年！一起来看！</p>
                <div id="content_img01">
                		<img src="front/image/weibonewimg001.png"/>
                </div>
@@ -300,8 +273,8 @@
     <div id="right-part">
     	<div id="right-part-content">
         	<div class="nav">
-                <span>快速登录</span>
-                <span class="span2">账号密码登录</span>
+                <a href="javascript:void(0)"><span id="loginsoon" onclick="clickunlogin('loginsoon','loginslow')">快速登录</span></a>
+                <a href="javascript:void(0)"><span class="span2" id="loginslow" onclick="clickunlogin('loginslow','loginsoon')">账号密码登录</span></a>
         	</div>
         	<div class="content" style="position:relative;top:35px;">
         		<div class="content_top">

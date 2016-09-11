@@ -15,8 +15,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -161,7 +159,7 @@ public class UserHandler {
 
 	//上传头像
 	@RequestMapping("/setphoto")
-	public String setPhoto(@RequestParam("photodata") String file,@RequestParam("WBUid")String WBUid,PrintWriter out){
+	public void setPhoto(@RequestParam("photodata") String file,@RequestParam("WBUid")String WBUid,PrintWriter out){
 		BASE64Decoder decoder = new BASE64Decoder();
 		byte[] bytes;
 		try {
@@ -179,7 +177,7 @@ public class UserHandler {
 			FileOutputStream photopath = new FileOutputStream(uploadPicPath+filename);
 			photopath.write(bytes); 
 			Map<String,String> paramMap=new HashMap<>();
-			paramMap.put("UimgPath", uploadPicPath+filename);
+			paramMap.put("UimgPath", filename);
 			paramMap.put("WBUid", WBUid);
 			userService.updataUserPhoto(paramMap);
 			out.println("头像上传成功");
@@ -191,8 +189,6 @@ public class UserHandler {
 			out.flush();
 			out.close();
 		}
-
-		return null;
 	}
 
 
@@ -281,48 +277,44 @@ public class UserHandler {
 	//图片水印
 	@ResponseBody
 	@RequestMapping(value="/addWaterMark")
-	public void addWaterMark(String waterContent,String waterLocation,String WBUid,PrintWriter out,HttpServletResponse response){
+	public void addWaterMark(String waterContent,String waterLocation,String WBUid,PrintWriter out){
 		System.out.println(waterContent+"---"+waterLocation+"----"+WBUid);
-		response.setHeader("Cache-Control", "no-cache");
-		File file=new File("G:\\GitWork\\WeiBo\\weiboRepository\\vweibo\\src\\main\\webapp\\front\\image\\UserSet_image\\test_pic.jpg");
+		String rootDir = DataDic.PICPATH;
+		String waterMarkPicPath = servletContext.getRealPath(rootDir).
+				substring(0, servletContext.getRealPath(rootDir).lastIndexOf(DataDic.PROJECTNAME)-1)+rootDir; 
+		File file=new File(waterMarkPicPath+"test_pic.jpg");
 		String txt=waterContent;
-		String realPath="G:\\GitWork\\WeiBo\\weiboRepository\\vweibo\\src\\main\\webapp\\front\\image\\UserSet_image\\test_pic1.jpg";
+		String realPath=waterMarkPicPath+"test_pic1.jpg";
 		double x,y;
 		if(waterContent!=null || waterContent!=""){
 			if(!waterContent.contains("Logo")){//文字水印
 				if(waterLocation.equals("bottomRight")){//底部居右
 					x=1.7;
 					y=1.1;
-					ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
 				}else if(waterLocation.equals("centerCenter")){//图片中心
 					x=2.8;
 					y=2.0;
-					ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
 				}else{//底部居中
 					x=2.8;
 					y=1.1;
-					ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
 				}
+				ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
 				System.out.println("------------转换成功");
 			}else{//logo水印
-				String iconPath="G:\\GitWork\\WeiBo\\weiboRepository\\vweibo\\src\\main\\webapp\\front\\image\\head_logo_sh_mini.png";
+				String iconPath=waterMarkPicPath+"head_logo_sh_mini.png";
 				if(waterLocation.equals("bottomRight")){//底部居右
-					x=1.4;
-					y=1.8;
-					ImageMarkLogoByIcon.markImageByIcon(iconPath, file.toString(), realPath, x, y);
+					x=1.3;
+					y=1.4;
 				}else if(waterLocation.equals("centerCenter")){//图片中心
-					x=2.8;
-					y=2.0;
-					ImageMarkLogoByIcon.markImageByIcon(iconPath, file.toString(), realPath, x, y);
+					x=2.2;
+					y=3.7;
 				}else{//底部居中
-					x=2.8;
-					y=1.1;
-					ImageMarkLogoByIcon.markImageByIcon(iconPath, file.toString(), realPath, x, y);
+					x=2.2;
+					y=1.4;
 				}
-				
+				ImageMarkLogoByIcon.markImageByIcon(iconPath, waterMarkPicPath+"test_pic.jpg", realPath, x, y);
 				System.out.println("------------转换成功");
 			}
-			ImageMarkLogoByIcon.pressText(file, txt, realPath, x, y);
 			out.println("设置成功");
 			
 		}
