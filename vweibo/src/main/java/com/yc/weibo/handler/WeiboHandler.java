@@ -172,6 +172,7 @@ public class WeiboHandler {
 		map.put("userId", user.getWBUid());
 		map.put("weiboTag", null);
 		map.put("txtContent", txtContent);
+		map.put("isForwarded", 'N');
 		if(picsMap != null && !picsMap.equals("")){
 			map.put("picsMap", picsMap.substring(0, picsMap.length()-1));
 		}else{

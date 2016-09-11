@@ -7,7 +7,7 @@
 		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE">
 			select seq_wb_wbid.nextval currval from dual
 		</selectKey>
-		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
+		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
 	</insert>
 	
 	<update id="updateWeiboLike" parameterType="int">
