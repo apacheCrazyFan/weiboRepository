@@ -29,5 +29,5 @@ public class UserServiceImplTest {
 		paramMap.put("WBUid","1001");
 		System.out.println(userService.updataUserPhoto(paramMap));
 	}
-
+	
 }

@@ -27,4 +27,8 @@ public interface UserMapper {
 
 	void saveFindMe(Map<String, String> paramMap);
 
+	public WeiBoUser quickLoginByEmail(String Uemail);
+
+	public WeiBoUser quickLoginByPhone(String Uphone);
+
 }

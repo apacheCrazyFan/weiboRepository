@@ -69,5 +69,19 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public WeiBoUser quickLoginByEmail(String Uemail) {
+		return userMapper.quickLoginByEmail(Uemail);
+	}
+
+	@Override
+	public WeiBoUser quickLoginByPhone(String Uphone) {
+		// TODO Auto-generated method stub
+		return userMapper.quickLoginByPhone(Uphone);
+	}
+
+
+	
+
 
 }
