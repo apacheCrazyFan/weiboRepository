@@ -20,8 +20,12 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.insertWeibo(map) > 0 ? true : false;
 	}
 	@Override
-	public boolean initWeibohelp() {
-		return weiboMapper.initWeibohelp() > 0 ? true : false;
+	public int selectCurrMaxWBid() {
+		return weiboMapper.selectCurrMaxWBid();
+	}
+	@Override
+	public boolean initWeibohelp(int currWBid) {
+		return weiboMapper.initWeibohelp(currWBid) > 0 ? true : false;
 	}
 	@Override
 	public List<Map<String, Object>> findWeiboOrderByWHviewAccountFirst(Map<String, Integer> map) {

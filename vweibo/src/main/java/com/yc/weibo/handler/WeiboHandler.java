@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +42,7 @@ public class WeiboHandler {
 	@Autowired
 	private WeiboService weiboService;
 
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> publishWeibo(MultipartHttpServletRequest multipartRequest,HttpServletRequest request,HttpServletResponse response){
@@ -102,8 +103,9 @@ public class WeiboHandler {
 
 		//将微博插入数据库weibo表
 		String publishDateAndLocation = insertWeiBoIntoDataBase(request, picsMap, videoMap, musicMap);
+		int currWBid = weiboService.selectCurrMaxWBid();
 		//将微博插入数据库weibohelp表
-		boolean initWeibohelp = weiboService.initWeibohelp();
+		boolean initWeibohelp = weiboService.initWeibohelp(currWBid);
 		
 		if(!publishDateAndLocation.equals(DataDic.DATESTRING) && initWeibohelp){
 			jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));

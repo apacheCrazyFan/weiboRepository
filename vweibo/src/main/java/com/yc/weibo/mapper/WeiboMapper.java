@@ -7,7 +7,8 @@ import com.yc.weibo.entity.Weibo;
 
 public interface WeiboMapper {
 	int insertWeibo(Map<String, Object> map);
-	int initWeibohelp();
+	int selectCurrMaxWBid();
+	int initWeibohelp(int currWBid);
 	
 	int updateWeiboLike(int wbid);
 	int insertWhoLike(int uid,int wbid);

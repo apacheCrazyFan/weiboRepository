@@ -7,7 +7,8 @@ import com.yc.weibo.entity.Weibo;
 
 public interface WeiboService {
 	boolean addWeibo(Map<String, Object> map);
-	boolean initWeibohelp();
+	int selectCurrMaxWBid();
+	boolean initWeibohelp(int currWBid);
 	
 	List<Map<String,Object>> findWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);
 	

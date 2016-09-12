@@ -153,7 +153,7 @@ alter table WeiBoUser drop column phoneStatus;
 alter table WeiBoUser drop column emailStatus;
 alter table WeiBoUser add phoneStatus int default 1;	--增加两列，用来处理通过何种方式找到好友,1为可以，0为否
 alter table WeiBoUser add emailStatus int default 1;
-select * from WeiBOUser where Uphone=null or Uemail='1373930633@qq.com';
+select * from WeiBOUser;
 create sequence seq_WeiBoUser_Wbuid start with 1006;
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
 insert into WeiBoUser values(1002,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
@@ -385,7 +385,7 @@ select k.*,wbu.Uname,wbu.UimgPath from  --找出了为什么刚发出的微博送不到的原因：
 select * from WeiBo;
 select * from WeiBoHelp;
 
-
+select max(WBid) from WeiBo;
 select k.*,wbu.Uname,wbu.UimgPath from  --应该也没有问题√
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 

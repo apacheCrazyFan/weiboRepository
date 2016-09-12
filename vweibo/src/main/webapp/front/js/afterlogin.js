@@ -458,7 +458,7 @@ $(document).ready(function(){
 	//键盘监听事件
 	txt.addEventListener("keyup",function(){
 		str=byteLength(txt.value);
-		if(str>140){
+		if(str>340){
 			document.getElementById("s2").innerHTML='<span style="color:#666">已经超出了'+(str-140)+'个字</span>';	
 		}else{
 			document.getElementById("s2").innerHTML='<span style="color:#666">您还可以输入'+(140-str)+'个字</span>';	
