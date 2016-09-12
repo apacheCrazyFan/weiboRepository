@@ -321,4 +321,33 @@ public class UserHandler {
 		out.flush();
 		out.close();
 	}
+	
+	@RequestMapping(value="/quickLogin",method=RequestMethod.POST)
+	public String quickLogin(String userName,ModelMap map){
+		map.get("user");
+		System.out.println(map);
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/quickLoginYes")
+	public String quickLoginYes(String userName,ModelMap map){
+		System.out.println("手机连接了....");
+		System.out.println("用户名为:"+userName);
+		WeiBoUser user;
+		if(userName.contains("@")){
+			user=userService.quickLoginByEmail(userName);
+		}else{
+			user=userService.quickLoginByPhone(userName);
+		}
+		map.put("user",user);
+		System.out.println(user);
+		if(user!=null){
+			return "登录成功";
+		}else{
+			return "请核对用户名";
+		}
+		
+	}
+	
 }
