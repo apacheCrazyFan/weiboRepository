@@ -269,8 +269,8 @@
        
     </div>  
     <div id="changePage" style="float:left;background:#fff;margin-top:3px;margin-left:50px;">
-        	<div style="float:left;background:#fff;width:240px;border-right:1px gray solid;"><a href="#">上一页</a></div>
-        	<div style="float:left;background:#fff;width:240px;"><a href="#">下一页</a></div>
+        	<div style="float:left;background:#fff;width:240px;border-right:1px gray solid;"><a href="javascript:void(0)" onclick="void(0)">上一页</a></div>
+        	<div style="float:left;background:#fff;width:240px;"><a href="javascript:void(0)" onclick="void(0)">下一页</a></div>
     </div>
     
     <!-- <div id="right-part-content01">
