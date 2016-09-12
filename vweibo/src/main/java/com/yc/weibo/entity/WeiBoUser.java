@@ -1,6 +1,7 @@
 package com.yc.weibo.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class WeiBoUser {
 	private Integer WBUid;
@@ -32,6 +33,10 @@ public class WeiBoUser {
 	//wb添加的
 	private int Wcount;	//发起微博数
 	private int Tcount;	//发起的话题数
+	
+	//
+	private List<Weibo> myWeibos;
+	
 	
 	public WeiBoUser() {
 	}
@@ -68,6 +73,16 @@ public class WeiBoUser {
 
 
 	
+	public List<Weibo> getMyWeibos() {
+		return myWeibos;
+	}
+
+
+	public void setMyWeibos(List<Weibo> myWeibos) {
+		this.myWeibos = myWeibos;
+	}
+
+
 	public String getWaterContent() {
 		return waterContent;
 	}
@@ -166,15 +181,18 @@ public class WeiBoUser {
 	public void setYZcodeInput(String yZcodeInput) {
 		YZcodeInput = yZcodeInput;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "WeiBoUser [WBUid=" + WBUid + ", Uname=" + Uname + ", Upassword=" + Upassword + ", Uphone=" + Uphone
 				+ ", Uemail=" + Uemail + ", Usex=" + Usex + ", Uage=" + Uage + ", UimgPath=" + UimgPath
 				+ ", UregisterDate=" + UregisterDate + ", YZcode=" + YZcode + ", YZcodeInput=" + YZcodeInput
-				+ ", Wcount=" + Wcount + ", Tcount=" + Tcount + "]";
+				+ ", waterContent=" + waterContent + ", waterLocation=" + waterLocation + ", Wcount=" + Wcount
+				+ ", Tcount=" + Tcount + ", myWeibos=" + myWeibos + "]";
 	}
 	
+
 	
 
 }

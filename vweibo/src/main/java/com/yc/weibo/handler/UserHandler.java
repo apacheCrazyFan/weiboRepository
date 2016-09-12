@@ -79,9 +79,9 @@ public class UserHandler {
 			return "front/page/login.jsp";
 		}
 		//到这里说明登录成功了。那么我们作为服务器一端     应该要给它准备一些数据 ，还是它自己再做请求去申请数据？？
-		Map<String,Integer> params = new HashMap<String,Integer>();
-		params.put("pageSize", 10);
-		params.put("pageNum", 1);
+		Theme params=new Theme();
+		params.setPage(1);
+		params.setRows(10);
 		List<Theme> Themes = themeService.findThemeByPage(params);
 
 		List<Map<String, Integer>> groupnumber = themeService.findeGroupNumber(user.getWBUid());

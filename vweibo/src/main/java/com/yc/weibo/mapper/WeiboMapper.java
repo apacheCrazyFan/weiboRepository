@@ -11,6 +11,6 @@ public interface WeiboMapper {
 	int updateWeiboLike(int wbid);
 	int insertWhoLike(int uid,int wbid);
 	
-	List<Weibo> seleteWeiboOrderByWHviewAccountFirst();  //浏览次数优先
-	List<Weibo> selectWeiboOrderByWHgreateAccount();	//点赞次数优先
+	List<Map<String,Object>> seleteWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);  //浏览次数优先mybatis里面是sql非嵌套查询也非嵌套结果
+	List<Weibo> selectWeiboOrderByWHgreateAccount(Map<String,Integer> map);	//点赞次数优先嵌套查询或者嵌套结果
 }

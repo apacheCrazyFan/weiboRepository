@@ -3,7 +3,7 @@ package com.yc.weibo.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Theme {
+public class Theme extends BaseEntity{
     private BigDecimal tid;
 
     private String tname;

@@ -64,7 +64,7 @@ insert into WeiBoTag values(29,'ÒÕÊõ');
 insert into WeiBoTag values(30,'Ê±ÉĞ');
 insert into WeiBoTag values(31,'ÃÀ×±');
 insert into WeiBoTag values(32,'¶¯Âş');
-insert into WeiBoTag values(33,'×Ú½Ì');
+insert into WeiBoTag values(43,'×Ú½Ì');
 insert into WeiBoTag values(34,'ÃÈ³è');
 insert into WeiBoTag values(35,'·¨ÂÉ');
 insert into WeiBoTag values(36,'ÕşÎñ');
@@ -75,7 +75,7 @@ insert into WeiBoTag values(40,'½ÌÓı');
 insert into WeiBoTag values(41,'ÃÀÊ³');
 insert into WeiBoTag values(42,'·¿²ú');
 insert into WeiBoTag values(43,'¼Ò¾Ó');
-insert into WeiBoTag values(44,'ĞÇ×ù');
+insert into WeiBoTag values(43,'ĞÇ×ù');
 insert into WeiBoTag values(45,'¶ÁÊé');
 insert into WeiBoTag values(46,'ÈıÅ©');
 insert into WeiBoTag values(47,'Éè¼Æ');
@@ -155,9 +155,9 @@ alter table WeiBoUser add phoneStatus int default 1;	--Ôö¼ÓÁ½ÁĞ£¬ÓÃÀ´´¦ÀíÍ¨¹ıºÎÖ
 alter table WeiBoUser add emailStatus int default 1;
 select * from WeiBOUser where Uphone=null or Uemail='1373930633@qq.com';
 create sequence seq_WeiBoUser_Wbuid start with 1006;
-insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'°ÍÀ­À­','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'°®¹úµÄ´óºÃÇàÄê','java¹¤³ÌÊ¦,Ñ§Éú',10000,'CN');
+insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'°ÍÀ­À­','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'°®¹úµÄ´óºÃÇàÄê','java¹¤³ÌÊ¦,Ñ§Éú',10000,'CN');
 insert into WeiBoUser values(1002,'°¡´ó´ó','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'Å®ºº×Ó','java¹¤³ÌÊ¦,Ñ§Éú,ÃÀÈİ',10000,'CN');
-insert into WeiBoUser values(1003,'°ÍÀ­À­','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'°®¹úµÄ´óºÃÇàÄê','java¹¤³ÌÊ¦,Ñ§Éú',10000,'CN');
+insert into WeiBoUser values(1003,'°ÍÀ­À­','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'°®¹úµÄ´óºÃÇàÄê','java¹¤³ÌÊ¦,Ñ§Éú',10000,'CN');
 insert into WeiBoUser values(1004,'°¡´ó´ó','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'Å®ºº×Ó','java¹¤³ÌÊ¦,Ñ§Éú,ÃÀÈİ',10000,'CN');
 insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'Å®ºº×Ó','java¹¤³ÌÊ¦,Ñ§Éú,ÃÀÈİ',10000,'CN');
 delete from WeiBoUser where WBUid in (1001,1002);
@@ -287,7 +287,7 @@ create table WeiBo(
        WBUId int
            constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--ÓÃ»§Id( ÄÄ¼¸ÖÖ±êÇ©µÄÓÃ»§·¢±íÁËÄÄ¼¸ÖÖÀàĞÍµÄÎ¢²©)
        WBdate Date,                   --Î¢²©·¢±íÈÕÆÚ
-       WBtxt  clob,                   --Î¢²©ÎÄ×ÖÄÚÈİ
+       WBtxt varchar2(2000),          --Î¢²©ÎÄ×ÖÄÚÈİ
        WBpic  varchar2(500),          --Î¢²©Í¼Æ¬Â·¾¶
        WBvideo varchar2(500),         --Î¢²©ÊÓÆÁÂ·¾¶(»òÕß¸ø¸öÊÓÆÁÂ·¾¶£¬´æ±¾µØ£¬´æÊı¾İ¿â£¿´æ·şÎñÆ÷£¿)
        WBmusic varchar2(500),		  --Î¢²©ÒôÀÖÂ·¾¶
@@ -307,18 +307,17 @@ delete from WeiBo;
 select * from WeiBo;
 select count(WBid) from WeiBo where WBUId = 1001;
 
-insert into WeiBo values(seq_wb_wbid.nextval,'ÊÓÆµ','Ğ¡Ñ¼×Ó',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N','ºâÑô,³¤É³ÊĞ',0);
-insert into WeiBo values(102,'ÊÓÆµ','´óÑ¼×Ó',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');
-insert into WeiBo values(103,'ºâÑô','ºş¹¤',1001,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N');
-insert into WeiBo values(104,'¾üÊÂ','ÖĞÈÕÕ½Õù',1001,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'N');
+insert into WeiBo values(seq_wb_wbid.nextval,'ÊÓÆµ','Ğ¡Ñ¼×Ó',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N','N','ºâÑô,³¤É³ÊĞ',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'ÊÓÆµ','´óÑ¼×Ó',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N','N','ºâÑô,³¤É³ÊĞ',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'ºâÑô','ºş¹¤',1001,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','ºâÑô,³¤É³ÊĞ',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'¾üÊÂ','ÖĞÈÕÕ½Õù',1001,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'N','N','ºâÑô,³¤É³ÊĞ',0);
 
-insert into WeiBo values(105,'ÊÓÆµ','´óÑ¼×Ó',1002,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N');
-insert into WeiBo values(106,'ºâÑô','ºş¹¤',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N');
-insert into WeiBo values(107,'Ê±ÉĞ','ÂéÒÂ´çÉÀ',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y');
+insert into WeiBo values(seq_wb_wbid.nextval,'ÊÓÆµ','´óÑ¼×Ó',1002,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N','N','ºâÑô,³¤É³ÊĞ',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'ºâÑô','ºş¹¤',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','ºâÑô,³¤É³ÊĞ',0);
+insert into WeiBo values(seq_wb_wbid.nextval,'Ê±ÉĞ','ÂéÒÂ´çÉÀ',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y','N','ºâÑô,³¤É³ÊĞ',0);
 
 --Î¢²©¸½¼Ó±í
 create table WeiBoHelp(
-       WHid int primary key,          --Î¢²©×·¼Ó±íid'            
        WBid int references WeiBo(WBid),--Î¢²©id
        WHviewAccount int,              --Î¢²©ä¯ÀÀ´ÎÊı
        WHreprintAccount int,           --Î¢²©×ªÔØ´ÎÊı
@@ -330,13 +329,73 @@ create table WeiBoHelp(
 );
 drop table WeiBoHelp;
 
+update WeiBoHelp set WHgreateAccount = 2210 where WBid in(10437);
+insert into WeiBoHelp values(10424,9854,4562,1433,2555,1345);
+insert into WeiBoHelp values(10425,1550,900,800,1020,1120);
+insert into WeiBoHelp values(10426,7550,3200,600,120,620);
+insert into WeiBoHelp values(10427,1550,900,800,1020,720);
+insert into WeiBoHelp values(10428,2550,900,800,1020,140);
+insert into WeiBoHelp values(10429,1550,1100,600,1020,119);
+insert into WeiBoHelp values(10430,1950,400,800,1020,1220);
+
+
+insert into WeiBoHelp values(10432,1550,900,850,1020,2120);
+insert into WeiBoHelp values(10433,2150,880,800,1020,1120);
+insert into WeiBoHelp values(10434,2150,880,650,1020,1120);
+insert into WeiBoHelp values(10435,1560,900,800,1020,1120);
+insert into WeiBoHelp values(10436,3050,2010,650,1020,1120);
+
+insert into WeiBoHelp values(10437,1550,950,800,1020,1120);
+insert into WeiBoHelp values(10438,7520,300,600,120,620);
+insert into WeiBoHelp values(10439,1530,940,370,867,720);
+insert into WeiBoHelp values(10440,2540,920,840,437,140);
+insert into WeiBoHelp values(10441,1250,668,660,670,119);
+insert into WeiBoHelp values(10442,1450,420,838,857,1220);
+insert into WeiBoHelp values(10443,1550,900,880,285,2120);
+insert into WeiBoHelp values(10444,8150,810,120,673,1120);
+insert into WeiBoHelp values(10445,2850,840,682,438,1120);
+
+insert into WeiBoHelp values(10446,1460,990,756,785,1120);
+insert into WeiBoHelp values(10447,3090,2470,676,738,1120);
+insert into WeiBoHelp values(10348,1553,935,730,820,1120);
+insert into WeiBoHelp values(10349,7520,3560,678,150,620);
+insert into WeiBoHelp values(10350,1550,240,570,120,720);
+insert into WeiBoHelp values(10351,2556,935,560,1240,140);
+
+insert into WeiBoHelp values(10352,1553,1040,600,1077,119);
+insert into WeiBoHelp values(10353,4350,450,400,7220,220);
+insert into WeiBoHelp values(10354,1578,960,850,1077,820);
+insert into WeiBoHelp values(10355,2870,870,400,8760,880);
+insert into WeiBoHelp values(10356,2450,430,600,1780,732);
+insert into WeiBoHelp values(10357,4380,943,845,1480,520);
+insert into WeiBoHelp values(10358,5450,2530,650,1053,565);
+
 select * from WeiBo;
 select * from WeiBoHelp;
 --ÕÒµ½id(ä¯ÀÀ´ÎÊıÓÅÏÈ£¬µãÔŞ´ÎÊıÆä´Î)
-select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHviewAccount,WHgreateAccount desc;  --½µĞò²éÑ¯ Ç°Ê®ÎåÌõ
---ÕÒµ½id(µãÔŞ´ÎÊıÓÅÏÈ£¬ä¯ÀÀ´ÎÊıÆä´Î)
-select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount,WHviewAccount desc;  --½µĞò²éÑ¯ Ç°Ê®ÎåÌõ
 
+select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
+
+(select * from 
+(select n.*,rownum rn from 
+(select * from WeiBoHelp order by WHviewAccount desc) n where 15 * 1 >= rownum)
+ where rn > 15 * (1-1)) b
+
+ where w.wbid = b.wbid
+ order by WHviewAccount desc;
+ 
+ 
+--ÕÒµ½id(µãÔŞ´ÎÊıÓÅÏÈ£¬ä¯ÀÀ´ÎÊıÆä´Î)
+select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount desc;  --½µĞò²éÑ¯ Ç°Ê®ÎåÌõ
+
+
+
+select * from (select w.*,rownum rn from WeiBoHelp w order by WHgreateAccount desc where 2*1 >= rownum) n
+where 2*0 < rn;
+
+select * from
+		(select n.WBid,rownum rn from (select * from WeiBoHelp order by WHgreateAccount desc) n where 4 * 1 >= rownum)
+		where rn > 4 * (1-1);
 --ÕÒµ½Î¢²©
 select * from WeiBo;
 

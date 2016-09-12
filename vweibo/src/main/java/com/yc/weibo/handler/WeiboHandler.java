@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -19,12 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.WeiBoUser;
+import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.service.WeiboService;
 import com.yc.weibo.util.AddressUtil;
 
@@ -60,7 +63,7 @@ public class WeiboHandler {
 					String rootDir = "";
 
 					if(DataDic.PICTURESUFFIX.toLowerCase().contains(originalFilename.substring(originalFilename.lastIndexOf(".")+1).toLowerCase())){ //如果是图片文件
-						picsMap += originalFilename+",";
+						picsMap += originalFilename+",";//总是多一个逗号，
 						rootDir = DataDic.PICPATH;
 					}
 					if(DataDic.MUSICSUFFIX.toLowerCase().contains(originalFilename.substring(originalFilename.lastIndexOf(".")+1).toLowerCase())){  //如果是视频文件
@@ -100,14 +103,22 @@ public class WeiboHandler {
 		if(!publishDateAndLocation.equals(DataDic.DATESTRING)){
 			jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
 			jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
-			jsonMap.put("picsMap", picsMap);
-			jsonMap.put("videoMap", videoMap);
-			jsonMap.put("musicMap", musicMap);
+			//增加了最后的逗号删除操作
+			jsonMap.put("picsMap", operateString(picsMap));
+			jsonMap.put("videoMap", operateString(videoMap));
+			jsonMap.put("musicMap", operateString(musicMap));
 			jsonMap.put("rate", 2);
 		}
 
 		return jsonMap;
 
+	}
+	
+	private String operateString(String str){
+		if(!str.equals("")&&str.contains(",")){
+			return str.substring(0,str.lastIndexOf(","));
+		}
+		return str;
 	}
 
 
@@ -161,6 +172,7 @@ public class WeiboHandler {
 		map.put("userId", user.getWBUid());
 		map.put("weiboTag", null);
 		map.put("txtContent", txtContent);
+		map.put("isForwarded", 'N');
 		if(picsMap != null && !picsMap.equals("")){
 			map.put("picsMap", picsMap.substring(0, picsMap.length()-1));
 		}else{
@@ -193,12 +205,21 @@ public class WeiboHandler {
 	/**
 	 * 欢迎页面数据准备
 	 */
-	@RequestMapping(value="/indexDataPrarery",method=RequestMethod.POST)
+	@RequestMapping(value="/indexDataPrarery",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> getIndexDataPrarery(){
+	public Map<String,Object> getIndexDataPrarery(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Integer> params = new HashMap<String,Integer>();
 		
+		System.out.println( pageSize+"  =============  "+pageNum);
+		params.put("pageSize", pageSize);
+		params.put("pageNum", pageNum);
 		
+		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWHviewAccountFirst(params);
+		//List<Weibo> weiboList = weiboService.findtWeiboOrderByWHgreateAccount(params);
+		System.out.println( weiboList);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
 		return jsonMap;
 	}
 

@@ -5,6 +5,28 @@ var elemt = 500;           //插入元素高度/单位px
 var maxnum = 50;            //设置加载最多次数  
 var num = 1;  
 var totalheight = 0; 
+
+var pageSize = 4;
+var pageNum = 1;
+$.ajax({
+	  url: "weibo/indexDataPrarery",
+	  cache: true,
+	  data:{"pageSize":pageSize,"pageNum":pageNum},
+	  dataType:"json",
+	  Type:"GET",
+	  success: function(data,textStatus){
+	    if(data){
+	    	console.info(data);
+	    	alert(data);
+	    }
+	  },
+	  error:function(textStatus,error){
+		  alert("数据加载有误:"+error);
+	  }
+	
+});
+
+
 for(var i=0;i<4;i++){
 	$("#center-part").append('<div id="center-part-content"></div>');  
 }  
