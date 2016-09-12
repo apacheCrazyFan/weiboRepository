@@ -46,6 +46,7 @@
 		</ul>
     </div>
     <div id="center-part">
+    	<div id="xinxin">
     	<div id="center-part-content_01" style="margin-top:20px;">
             <a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="啦啦啦" src="front/image/userphoto003.png"/></a>
                 <ul id="center-part_ul">
@@ -264,13 +265,24 @@
                     <input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>
                     <img src="front/image/comment_btn.png" id="comment_btn"/>
               </div>
-              
-               
         </div>
        
     </div>  
+    <div id="changePage" style="float:left;background:#fff;margin-top:3px;margin-left:50px;">
+        	<div style="float:left;background:#fff;width:240px;border-right:1px gray solid;"><a href="#">上一页</a></div>
+        	<div style="float:left;background:#fff;width:240px;"><a href="#">下一页</a></div>
+    </div>
     
-    <div id="right-part">
+    <!-- <div id="right-part-content01">
+        
+    </div> -->
+    </div> 
+		
+	<div id="buoys">
+    	<img src="front/image/letterchat.png" id="buoysimg1"/><span id="buoyschat">私信聊天</span><img src="front/image/chatmes.png" id="buoysimg2"/>
+    </div>
+   	</div>
+   	<div id="right-part">
     	<div id="right-part-content">
         	<div class="nav">
                 <a href="javascript:void(0)"><span id="loginsoon" onclick="clickunlogin('loginsoon','loginslow')">快速登录</span></a>
@@ -297,10 +309,6 @@
         <div id="right-part-content01">
         
         </div>
-    </div> 
-		
-	<div id="buoys">
-    	<img src="front/image/letterchat.png" id="buoysimg1"/><span id="buoyschat">私信聊天</span><img src="front/image/chatmes.png" id="buoysimg2"/>
     </div>
 </div>
 </body>

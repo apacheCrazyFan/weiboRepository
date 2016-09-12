@@ -134,7 +134,6 @@ var count=4;
 					newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
 					newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+ date + '</a> 来自 ' + location + '</li>';
 					newWeiBoStr += '</ul>';
-					newWeiBoStr += '<div id="content_img01">';
 
 					var newContent ='';
 					var newContent1 = '';
@@ -158,13 +157,41 @@ var count=4;
 						newContent1 += faceArr1[j]+'<br />';
 					}
 					newWeiBoStr += '<p id="center-part_p" style="width:500px;position:relative;left:29px;">'+newContent1+'</p>';
-
+				
+					newWeiBoStr += '<div id="content_img01">';
+					
+					//图片处理 
 					if (picsMap != "") {
 						var pics = picsMap.split(",");
-						for (var i = 0; i < pics.length; i++) {
-							newWeiBoStr += '<img src="/weibopics/'+pics[i]+'"/>';
+						//console.info(pics);
+						if(pics.length == 1){
+							newWeiBoStr += '<img width="500px;" height="250px;" src="/weibopics/'+pics[0]+'"/>';
+						}else if(pics.length == 2){
+							for(var l = 0; l < pics.length; l ++){
+								newWeiBoStr += '<img width="245px;" height="250px;" src="/weibopics/'+pics[l]+'"/>';
+							}
+						}else if(pics.length == 3){
+							for(var m = 0; m < pics.length; m ++){
+								newWeiBoStr += '<img width="160px;" height="250px;" src="/weibopics/'+pics[m]+'"/>';
+							}
+						}else if(pics.length == 4){
+							newWeiBoStr += '<img style="width:500px;height:330px;" src="/weibopics/'+pics[0]+'"/>';
+							for(var n = 1; n < pics.length; n ++){
+								newWeiBoStr += '<img style="width:160px;height:80px;padding-right:3px;padding-left:3px;padding-top:3px;" src="/weibopics/'+pics[n]+'"/>';
+							}
+						}else if(pics.length == 9){
+							for(var r = 0; r <pics.length; r ++){
+								newWeiBoStr += '<img width="160px;" height="160px;" src="/weibopics/'+pics[r]+'"/>';
+							}
+						}else{
+							//图片轮换
+							
+							
 						}
 					}
+					
+					
+					//视频处理 
 					if (videoMap != "") {
 						var video = videoMap.split(",");
 						for (var i = 0; i < video.length; i++) {
@@ -172,6 +199,7 @@ var count=4;
 						}
 					}
 
+					//音乐处理
 					if (musicMap != "") {
 						var music = musicMap.split(",");
 						for(var i = 0; i < music.length; i ++){

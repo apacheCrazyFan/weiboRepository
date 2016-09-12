@@ -441,6 +441,7 @@ ul li:hover {
 }	
 
 #right-part {
+	margin-top:50px;
 	float: left;
 	width: 230px;
 	background: url(../image/bg-9.jpg);
@@ -544,6 +545,10 @@ span {
 #right-part-content01 {
 	width: 230px;
 	height: 70px;
+}
+#changePage div a{
+	text-align: center;
+	color:black;
 }
 #buoys{
 	width:316px;
