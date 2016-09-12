@@ -20,12 +20,20 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.insertWeibo(map) > 0 ? true : false;
 	}
 	@Override
+	public boolean initWeibohelp() {
+		return weiboMapper.initWeibohelp() > 0 ? true : false;
+	}
+	@Override
 	public List<Map<String, Object>> findWeiboOrderByWHviewAccountFirst(Map<String, Integer> map) {
 		return weiboMapper.seleteWeiboOrderByWHviewAccountFirst(map);
 	}
 	@Override
-	public List<Weibo> findtWeiboOrderByWHgreateAccount(Map<String, Integer> map) {
+	public List<Map<String,Object>> findtWeiboOrderByWHgreateAccountFirst(Map<String, Integer> map) {
 		return weiboMapper.selectWeiboOrderByWHgreateAccount(map);
+	}
+	@Override
+	public List<Map<String, Object>> findWeiboOrderByWBdate(Map<String, Integer> map) {
+		return weiboMapper.selectWeiboOrderByWBdate(map);
 	}
 
 }

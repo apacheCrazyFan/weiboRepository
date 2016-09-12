@@ -232,7 +232,10 @@ $(window).scroll(function(){
 		if(num == newDataArr.length){
 			dataMsgPre = '{'+newDataArr[num-1].substring(0,newDataArr[num-1].length-1);
 		}
-		console.info(dataMsgPre);
+		
+		if(dataMsgPre == '{' || dataMsgPre == '}' || dataMsgPre == '{undefined}'){
+			return;
+		}
 		var dataMsg = JSON.parse(dataMsgPre);
 		
 		var dataStrJson =  JSON.parse(dataStrArr)   //将json字符串转换为JSON对象

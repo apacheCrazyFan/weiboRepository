@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +41,7 @@ public class WeiboHandler {
 	@Autowired
 	private WeiboService weiboService;
 
+	@Transactional
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> publishWeibo(MultipartHttpServletRequest multipartRequest,HttpServletRequest request,HttpServletResponse response){
@@ -98,9 +100,12 @@ public class WeiboHandler {
 
 		}
 
-		//将微博插入数据库
+		//将微博插入数据库weibo表
 		String publishDateAndLocation = insertWeiBoIntoDataBase(request, picsMap, videoMap, musicMap);
-		if(!publishDateAndLocation.equals(DataDic.DATESTRING)){
+		//将微博插入数据库weibohelp表
+		boolean initWeibohelp = weiboService.initWeibohelp();
+		
+		if(!publishDateAndLocation.equals(DataDic.DATESTRING) && initWeibohelp){
 			jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
 			jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
 			//增加了最后的逗号删除操作
@@ -203,7 +208,7 @@ public class WeiboHandler {
 	}
 	
 	/**
-	 * 欢迎页面数据准备
+	 * 欢迎页面数据准备 按浏览次数最多的降序
 	 */
 	@RequestMapping(value="/indexDataPrarery",method=RequestMethod.GET)
 	@ResponseBody
@@ -223,4 +228,27 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 
+	/**
+	 * 登录成功后的微博  安最新更新日期排降序
+	 * @param pageSize
+	 * @param pageNum
+	 * @return
+	 */
+	@RequestMapping(value="/afterLoginDataPrarery",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> getAfterLoginDataPrarery(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Integer> params = new HashMap<String,Integer>();
+		
+		System.out.println( pageSize+"  =============  "+pageNum);
+		params.put("pageSize", pageSize);
+		params.put("pageNum", pageNum);
+		params.put("uid",userid);
+		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWBdate(params);
+
+		System.out.println( weiboList);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		return jsonMap;
+	}
 } 
