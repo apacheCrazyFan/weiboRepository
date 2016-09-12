@@ -147,7 +147,18 @@ body {
 	position:relative;
 	top:-30px;
 	}
-	
+.help_pic{
+	display:inline-block;
+	width:17px;
+	height:28px;
+	background:url(../image/found_image/icon_head9.jpg) no-repeat;
+	margin-left:20px;
+	position:relative;
+	top:-30px;
+}
+.help_pic:hover{
+	background:url(../image/found_image/icon_head9_1.jpg) no-repeat;
+}	
 
 #wrap{
 	position:relative;
