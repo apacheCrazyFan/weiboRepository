@@ -1,0 +1,172 @@
+<table id="theme_data"></table>
+
+<!-- <script type="text/javascript" src="back/js/jquery-1.9.1.js"></script> -->
+<script>
+	var obj;
+	var editRow=undefined;//记录当前正在被编辑的行
+	var currentOp;
+	var flag;
+	
+	obj=$('#theme_data').datagrid({
+		url:'theme/findAllThemeByPage',
+		fitColumns:true,
+		striped:true,
+		loadMsg:"数据加载中...",
+		pagination:true,
+		fit:true,
+		pageNumber:1,
+		pageSize:10,
+		pageList:[10,20,30,40,50],
+		sortName:'tid',
+		remoteSort:false,
+		columns:[[
+			{field:'tuid',title:'',width:100,align:'center',checkbox:true},
+			{field:'tid',title:'话题编号',width:100,align:'center',sortable:true},
+			{field:'tname',title:'话题名称',width:100,align:'center',editor:{type:'text',option:{requires:true}}},
+			{field:'tdate',title:'话题日期',width:100,align:'center'},
+			{field:'ttxt',title:'话题内容',width:100,align:'center',editor:{type:'text',option:{requires:true}}},
+			{field:'tpics',title:'话题图片',width:100,align:'center',editor:{type:'text',option:{requires:true}}},
+			{field:'tdeliver',title:'话题发表次数',width:100,align:'center'},
+			{field:'tview',title:'话题访问次数',width:100,align:'center'}
+		]],
+		toolbar:[{
+			text:"添加",
+			iconCls:"icon-add",
+			handler:function(){
+				currentOp="addTheme";
+				flag="添加";
+				if(editRow!=undefined){//说明有行正在被编辑
+					obj.datagrid("rejectChanges");//回滚所有数据
+					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+					editRow=undefined;
+				}else{
+					var data = obj.datagrid("getData");
+					console.info(data);
+					var total = data.total;
+					var Jstring = JSON.stringify(data);
+					obj.datagrid('insertRow',{index:total,row:{}});
+					obj.datagrid("beginEdit",total);
+					editRow=total;//记录当前被编辑的行的索引
+				}
+			}
+		},{
+			text:'修改',
+			iconCls:"icon-edit",
+			handler:function(){
+				currentOp="updateTheme";
+				flag="修改";
+				var rows=obj.datagrid("getChecked")[0];
+				if(rows!=undefined){
+					if(editRow!=undefined){//说明有行正在被编辑
+						obj.datagrid("rejectChanges");//回滚所有数据
+						obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+						editRow=undefined;
+					}else{
+						//获取用户选中的行的索引
+						var index=obj.datagrid("getRowIndex",rows);
+						//console.info(rows);
+						obj.datagrid("updateRow",{index:index,row:rows});
+						obj.datagrid("beginEdit",index);
+						editRow=index;//记录当前被编辑的行的索引
+					}
+				}else{
+					$.messager.show({title:'温馨提示',msg:'请选中您要修改的数据.....',timeout:2000,showType:'slide'});
+				}
+			}
+		},{
+			text:'删除',
+			iconCls:"icon-remove",
+			onClick:function(){
+			//获取选中的行
+				var rows=obj.datagrid("getChecked");
+				alert(typeof rows[0].tid);
+				if(rows[0]!=undefined){
+					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有微博）?', function(rs){
+						if (rs){
+							var tids = "";
+							for(var i=0;i<rows.length-1;i++){
+								tids += rows[i].tid+",";
+							}
+							tids += rows[i].tid;
+							
+							//发请求到数据库
+							$.post("theme/delTheme",{"tids":tids},function(data){
+								alert(data);
+								if(data>0){
+									$.messager.show({title:'成功提示',msg:'微博标签删除成功....',timeout:2000,showType:'slide'});
+									rows=null;
+									obj.datagrid("reload");//刷新表格
+								}else{
+									$.messager.alert('失败提示','微博标签删除失败,请确认该类别下无微博....','error');
+								}
+							});
+						}else{
+							return;	
+						}
+					});
+				}else{
+					$.messager.show({title:'温馨提示',msg:'请选中您要删除的数据.....',timeout:2000,showType:'slide'});
+				}
+			}
+		},{
+			text:'保存',
+			iconCls:"icon-save",
+			handler:function(){
+				//先关闭编辑
+				obj.datagrid("endEdit",editRow);
+				//获取正在被编辑的数据
+				var rows=obj.datagrid("getChanges");
+				//alert(rows);
+				if(rows==undefined){//说明没有被保存的数据
+					obj.datagrid("rejectChanges");//回滚所有数据
+					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+					editRow=undefined;
+				}else if(rows.UTname==""){
+					editRow=undefined;
+					obj.datagrid("rejectChanges");
+				}else{
+					//保存到数据库
+					//rows["op"]=currentOp;
+					var wtid=$(rows).attr("tid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
+					//jquery对象--》js对象    ===》1、$("#div").eq(0);  2、$("#div")[0]    
+					//alert(rows);
+					var wtname=$(rows).attr("tname");
+					//   $.post("url","data",function(data));//jquery中封装的post的方法
+						//url：请求的地址，不需要拼接参数，因为是用post提交的
+						//data：可以传一个js对象，但实际上是一个json的数据格式的字符串即可
+						//如：{'name':'yhj','sex':'undifine'}
+						//function（data)    :  回调的函数
+					//alert(rows);
+					//rows=$(rows);
+					$.post("theme/"+currentOp,{"tid":tid,"tname":tname},function(data){
+						alert(data);
+						if(data>0){
+							$.messager.show({
+								title:'成功提示',
+								msg:'新闻类型'+flag+'成功....',
+								timeout:2000,
+								showType:'slide'
+							});
+							
+							obj.datagrid("rejectChanges");//回滚所有数据
+							rows=null;
+							editRow=undefined;
+							obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+							obj.datagrid("reload");//刷新表格
+						}else{
+							$.messager.alert('失败提示','微博标签'+flag+'失败....','error');
+						}
+					});
+				}
+			}
+		},{
+			text:'撤销',
+			iconCls:"icon-redo",
+			handler:function(){
+				obj.datagrid("rejectChanges");//回滚所有数据
+				obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+				editRow=undefined;	
+			}
+		}]
+	});
+</script>
