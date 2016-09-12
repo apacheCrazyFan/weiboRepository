@@ -21,8 +21,7 @@ public interface ThemeMapper {
 
     int updateByPrimaryKey(Theme record);
     
-	List<Theme> findThemeByPage(Map<String, Integer> map);
-
+    
 	List<Map<String,Integer>> findeGroupNumber(int uid);
 	
 	/**
@@ -31,6 +30,18 @@ public interface ThemeMapper {
 	 */
 	int findCount();//写一个对应的sql的方法
 	
+	/**
+	 * 根据给定的数字字符串，随机的抽取一定数量的Theme
+	 * @param map
+	 * @return
+	 */
 	List<Theme> findRandom(Map<String,String> map);
+	
+	/**
+	 * 查询所有的theme ，传入参数主要使用来接收start和end两个分页的参数，封装在baseEntity中，并由theme继承
+	 * @param theme  看好这里的参数，要传进来的是一个   THeme
+	 * @return
+	 */
+	List<Theme> findAllTheme(Theme theme);
     
 }

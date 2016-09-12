@@ -36,12 +36,15 @@
 		where TID = #{tid,jdbcType=DECIMAL}
 	</delete>
 	<insert id="insert" parameterType="com.yc.weibo.entity.Theme">
-		insert into THEME (TID, TNAME, TUID,
+		insert into THEME (TID, TNAME,
+		TUID,
 		TDATE, TPICS, TDELIVER,
 		TVIEW, TTXT)
-		values (#{tid,jdbcType=DECIMAL}, #{tname,jdbcType=VARCHAR},
+		values
+		(#{tid,jdbcType=DECIMAL}, #{tname,jdbcType=VARCHAR},
 		#{tuid,jdbcType=DECIMAL},
-		#{tdate,jdbcType=DATE}, #{tpics,jdbcType=VARCHAR}, #{tdeliver,jdbcType=DECIMAL},
+		#{tdate,jdbcType=DATE},
+		#{tpics,jdbcType=VARCHAR}, #{tdeliver,jdbcType=DECIMAL},
 		#{tview,jdbcType=DECIMAL}, #{ttxt,jdbcType=CLOB})
 	</insert>
 	<insert id="insertSelective" parameterType="com.yc.weibo.entity.Theme">
@@ -127,59 +130,66 @@
 		where TID = #{tid,jdbcType=DECIMAL}
 	</update>
 	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yc.weibo.entity.Theme">
-		update THEME
+		update
+		THEME
 		set TNAME = #{tname,jdbcType=VARCHAR},
-		TUID = #{tuid,jdbcType=DECIMAL},
+		TUID =
+		#{tuid,jdbcType=DECIMAL},
 		TDATE = #{tdate,jdbcType=DATE},
-		TPICS = #{tpics,jdbcType=VARCHAR},
+		TPICS =
+		#{tpics,jdbcType=VARCHAR},
 		TDELIVER = #{tdeliver,jdbcType=DECIMAL},
 		TVIEW = #{tview,jdbcType=DECIMAL},
 		TTXT = #{ttxt,jdbcType=CLOB}
-		where TID = #{tid,jdbcType=DECIMAL}
+		where
+		TID = #{tid,jdbcType=DECIMAL}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.yc.weibo.entity.Theme">
 		update THEME
-		set TNAME = #{tname,jdbcType=VARCHAR},
+		set
+		TNAME = #{tname,jdbcType=VARCHAR},
 		TUID = #{tuid,jdbcType=DECIMAL},
 		TDATE = #{tdate,jdbcType=DATE},
 		TPICS = #{tpics,jdbcType=VARCHAR},
 		TDELIVER = #{tdeliver,jdbcType=DECIMAL},
-		TVIEW = #{tview,jdbcType=DECIMAL}
+		TVIEW =
+		#{tview,jdbcType=DECIMAL}
 		where TID = #{tid,jdbcType=DECIMAL}
 	</update>
 
-
-
-
-
-
-
-	<select id="findThemeByPage" parameterType="Map" resultType="Theme">
+	<select id="findAllTheme" resultType="com.yc.weibo.entity.Theme"
+		parameterType="com.yc.weibo.entity.Theme">
 		select * from
 		(select n.*,rownum rn from (select * from Theme) n
-		where #{pageSize} * #{pageNum} >= rownum)
-		where rn > #{pageSize} *
-		(#{pageNum} - 1)
-	</select>
+		where
+		#{end} >= rownum)
+		where rn >=#{start} 
+	</select><!-- 这里面的参数都是封装在baseEntity中的   order by #{sort} #{order} -->
 
 	<select id="findeGroupNumber" parameterType="int" resultType="map">
 		select (select count(distinct(FUedid)) from FanAndFaned where FUid =
 		#{WBUid} and Fstatus = '未分组') 未分组,
-		(select count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid} and
+		(select count(distinct(FUedid)) from
+		FanAndFaned where FUid = #{WBUid} and
 		Fstatus = '好友圈') 好友圈,
-		(select count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid})
+		(select
+		count(distinct(FUedid)) from FanAndFaned where FUid = #{WBUid})
 		focusNum,
-		(select count(distinct(FUid)) from FanAndFaned where FUedid = #{WBUid})
+		(select count(distinct(FUid)) from FanAndFaned where FUedid =
+		#{WBUid})
 		fansNum,
-		(select count(WBid) from WeiBo where WBUId = #{WBUid}) weiboNum
+		(select count(WBid) from WeiBo where WBUId =
+		#{WBUid}) weiboNum
 		from dual
 	</select>
-	
+
 	<select id="findCount" resultType="int">
 		select count(*) from theme
 	</select>
-	
+
 	<select id="findRandom" parameterType="Map" resultType="Theme">
-		select * from (select a.* ,rownum rn from (select * from theme)a) where rn in (${str})
+		select *
+		from (select a.* ,rownum rn from (select * from theme)a) where rn in
+		(${str})
 	</select>
 </mapper>

@@ -6,7 +6,12 @@ import java.util.Map;
 import com.yc.weibo.entity.Theme;
 
 public interface ThemeService {
-	List<Theme> findThemeByPage(Map<String,Integer> map);
+	/**
+	 * 用来查找  所有的Theme
+	 * @param map
+	 * @return
+	 */
+	List<Theme> findThemeByPage(Theme theme);
 	
 	List<Map<String,Integer>> findeGroupNumber(int uid);
 	

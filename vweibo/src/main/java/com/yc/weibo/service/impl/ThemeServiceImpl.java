@@ -18,14 +18,6 @@ public class ThemeServiceImpl implements ThemeService {
 	@Autowired
 	private ThemeMapper themeMapper;
 
-	/**
-	 * 纯粹找话题名
-	 */
-	@Override
-	public List<Theme> findThemeByPage(Map<String, Integer> map) {
-		return themeMapper.findThemeByPage(map);
-	}
-
 	@Override
 	public List<Map<String, Integer>> findeGroupNumber(int uid) {
 		return themeMapper.findeGroupNumber(uid);
@@ -62,6 +54,11 @@ public class ThemeServiceImpl implements ThemeService {
 		Map<String,String> param=new HashMap<String,String>();
 		param.put("str", str_num.subSequence(0, str_num.lastIndexOf(",")).toString());
 		return  themeMapper.findRandom(param);
+	}
+
+	@Override
+	public List<Theme> findThemeByPage(Theme theme) {
+		return themeMapper.findAllTheme(theme);//可以了，
 	}
 
 }
