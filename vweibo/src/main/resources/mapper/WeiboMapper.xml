@@ -20,13 +20,14 @@
 	
 	
 	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">
-		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
 		(select * from 
 			(select n.*,rownum rn from 
 			(select * from WeiBoHelp order by WHviewAccount desc) n where #{pageSize} * #{pageNum} >= rownum)
  			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid
- 			order by WHviewAccount desc
+ 			order by WHviewAccount desc) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
 	<select id="selectWeiboOrderByWHgreateAccount" resultType="Weibo" parameterType="map">
 		select * from WeiBo where WBid in(
