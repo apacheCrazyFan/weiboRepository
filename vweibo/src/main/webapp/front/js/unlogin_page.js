@@ -227,9 +227,17 @@ $(window).scroll(function(){
 	totalheight = parseFloat($(window).height()) + parseFloat(srollPos);  
 	
 	if(($(document).height()-range) <= totalheight  && num<=maxnum) { 
+		var newDataArr = dataStrArr.split("},{");
+		var dataMsgPre = '{'+newDataArr[num-1]+'}';
+		if(num == newDataArr.length){
+			dataMsgPre = '{'+newDataArr[num-1].substring(0,newDataArr[num-1].length-1);
+		}
+		console.info(dataMsgPre);
+		var dataMsg = JSON.parse(dataMsgPre);
+		
 		var dataStrJson =  JSON.parse(dataStrArr)   //将json字符串转换为JSON对象
 		
-		console.info(dataStrJson);
+		//console.info(dataStrJson);
 
 		//var dataMsg = data.weiboList[i];
 		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
@@ -398,7 +406,6 @@ $(window).scroll(function(){
 		
 		$("#xinxin").append('<div id="center-part-content_01">'+newStr+'</div>');  
 	
-		$("#xinxin").append('<div id="center-part-content"></div>');  
  		num++;  
 	}  
 });
