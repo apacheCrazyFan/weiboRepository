@@ -29,6 +29,7 @@
         	<a href="#" class="message_pic"></a>
             <a href="#" class="setting_pic"></a>
             <a href="#" class="sendMess_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp" class="help_pic"></a>
         </div>
     </div>
     <div id="logoArea">
