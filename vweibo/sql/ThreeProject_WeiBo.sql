@@ -153,7 +153,7 @@ alter table WeiBoUser drop column phoneStatus;
 alter table WeiBoUser drop column emailStatus;
 alter table WeiBoUser add phoneStatus int default 1;	--增加两列，用来处理通过何种方式找到好友,1为可以，0为否
 alter table WeiBoUser add emailStatus int default 1;
-select * from WeiBOUser where Uphone=null or Uemail='1373930633@qq.com';
+select * from WeiBOUser;
 create sequence seq_WeiBoUser_Wbuid start with 1006;
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
 insert into WeiBoUser values(1002,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
@@ -198,6 +198,7 @@ create table FanAndFaned(
 	FUedid int,							--被粉者
 	Fstatus varchar2(16)				--粉与被粉之间的py状态(好友圈,同学,同事,未分组,名人明星,悄悄关注,特别关注,其他自己添加的。。)
 );
+alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 drop table FanAndFaned;
@@ -215,6 +216,8 @@ select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = 
 
 select (select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '未分组') 未分组,
 		(select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '好友圈') 好友圈,
+		(select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '黑名单') 黑名单,
+		(select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '群') 好友圈, --？？
 		(select count(distinct(FUedid)) from FanAndFaned where FUid = 1001) 关注,
 		(select count(distinct(FUid)) from FanAndFaned where FUedid = 1001) 粉丝,
 		(select count(WBid) from WeiBo where WBUId = 1001) 微博
@@ -292,7 +295,7 @@ create table WeiBo(
        WBvideo varchar2(500),         --微博视屏路径(或者给个视屏路径，存本地，存数据库？存服务器？)
        WBmusic varchar2(500),		  --微博音乐路径
        yesOrno char(2),				  --是否是话题产生的weibo	
-       yon char(2),					  --是否是转发微博
+       yon char(2),					  --是否是转发微博  --这个有点重要吧
        WBlocation varchar2(120),
        WBstatue int
        --预留字段      
@@ -370,8 +373,39 @@ insert into WeiBoHelp values(10356,2450,430,600,1780,732);
 insert into WeiBoHelp values(10357,4380,943,845,1480,520);
 insert into WeiBoHelp values(10358,5450,2530,650,1053,565);
 
+
+select k.*,wbu.Uname,wbu.UimgPath from  --找出了为什么刚发出的微博送不到的原因：在weibohelp表中并没有插入新值
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = 1001)) order by WBdate desc) n where 15 * 1 >= rownum)
+ 			where rn > 15 * (1-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid;
+ 			
 select * from WeiBo;
 select * from WeiBoHelp;
+
+select max(WBid) from WeiBo;
+select k.*,wbu.Uname,wbu.UimgPath from  --应该也没有问题√
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where WBstatue = 0 or WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = 1001) order by WBdate desc) n where 5 * 1 >= rownum)
+ 			where rn > 5 * (1-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid;
+ 
+ 			
+ 
+
+ 			
+select k.*,wbu.Uname,wbu.UimgPath from  --没有问题√
+		(select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBoHelp order by WHviewAccount desc) n where 5 * 1 >= rownum)
+ 			where rn > 5 * (1-1)) b
+ 			where w.wbid = b.wbid and WBstatue = 0
+ 			order by WHviewAccount desc) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 --找到id(浏览次数优先，点赞次数其次)
 
 select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
@@ -398,15 +432,15 @@ select * from
 		where rn > 4 * (1-1);
 --找到微博
 select * from WeiBo;
-
+select * from WeiBoHelp;
 --微博操作表
 create table Operate(
        Oid int primary key,           --微博操作id
-       UId int
-           constraint RK_Operate_Uid references WeiBoUser(Uid),--用户Id( 哪几种标签的用户操作了哪几种类型的微博)
+       WBUid int
+           constraint RK_Operate_Uid references WeiBoUser(WBUid),--用户Id( 哪几种标签的用户操作了哪几种类型的微博)
        WBid int
            constraint RK_Operate_WBid references WeiBo(WBid),--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
-       Ostate varchar2(20),           --操作名（转载，收藏，评论，点赞..）
+       Ostate varchar2(20)           --操作名（转载，收藏，评论，点赞..）
        
        --预留字段  
 );

@@ -25,6 +25,10 @@ $.ajax({
 	    		num ++;
 	    		
 	    		var dataMsg = data.weiboList[i];
+	    		
+	    		if(dataMsg != undefined){
+	    			
+	    		
 	    		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
 	    		var username = dataMsg.UNAME;  //用户名
 	    		var userImgPaht = dataMsg.UIMGPATH; //用户图像路径
@@ -191,6 +195,7 @@ $.ajax({
 				
 				$("#xinxin").append('<div id="center-part-content_01">'+newStr+'</div>');  
 	    	}  
+	      }
 	    }
 	  },
 	  error:function(textStatus,error){
@@ -232,7 +237,10 @@ $(window).scroll(function(){
 		if(num == newDataArr.length){
 			dataMsgPre = '{'+newDataArr[num-1].substring(0,newDataArr[num-1].length-1);
 		}
-		console.info(dataMsgPre);
+		
+		if(dataMsgPre == '{' || dataMsgPre == '}' || dataMsgPre == '{undefined}'){
+			return;
+		}
 		var dataMsg = JSON.parse(dataMsgPre);
 		
 		var dataStrJson =  JSON.parse(dataStrArr)   //将json字符串转换为JSON对象

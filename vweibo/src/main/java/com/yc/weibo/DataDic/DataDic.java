@@ -51,4 +51,6 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 
 	//表情路径
 	public static String FACES = "front/image/face_image/";
+	
+	//<!--隐藏域 ：op  用来传   0：公开    1：朋友圈       2：仅自己可见  3：群.... -->
 }
