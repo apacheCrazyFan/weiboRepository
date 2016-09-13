@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -321,4 +325,86 @@ public class UserHandler {
 		out.flush();
 		out.close();
 	}
+	
+	//获取网络IP
+	@ResponseBody
+	@RequestMapping(value="/getIpAddress")
+	public String getIpAddress() throws SocketException{
+		String localip = null;// 本地IP，如果没有配置外网IP则返回它
+        String netip = null;// 外网IP
+ 
+        Enumeration<NetworkInterface> netInterfaces =
+            NetworkInterface.getNetworkInterfaces();
+        InetAddress ip = null;
+        boolean finded = false;// 是否找到外网IP
+        while (netInterfaces.hasMoreElements() && !finded) {
+            NetworkInterface ni = netInterfaces.nextElement();
+            Enumeration<InetAddress> address = ni.getInetAddresses();
+            while (address.hasMoreElements()) {
+                ip = address.nextElement();
+                if (!ip.isSiteLocalAddress()
+                        && !ip.isLoopbackAddress()
+                        && ip.getHostAddress().indexOf(":") == -1) {// 外网IP
+                    netip = ip.getHostAddress();
+                    finded = true;
+                    break;
+                } else if (ip.isSiteLocalAddress()
+                        && !ip.isLoopbackAddress()
+                        && ip.getHostAddress().indexOf(":") == -1) {// 内网IP
+                    localip = ip.getHostAddress();
+                }
+            }
+        }
+     
+        if (netip != null && !"".equals(netip)) {
+            return netip;
+        } else {
+            return localip;
+        }
+	}
+	
+	
+	//电脑端点击确认登录
+	boolean flag=false;
+	@RequestMapping(value="/quickLogin",method=RequestMethod.POST)
+	public String quickLogin(String userName,ModelMap map){
+		System.out.println(userName+"-------");
+		System.out.println(flag);
+		if(flag){
+			System.out.println("电脑端跳转了");
+			WeiBoUser user;
+			if(userName.contains("@")){
+				user=userService.quickLoginByEmail(userName);
+			}else{
+				user=userService.quickLoginByPhone(userName);
+			}
+			map.addAttribute("user",user);
+			return "/front/page/afterlogin.jsp";	
+		}
+		return "/front/page/quickLogin.jsp";
+	}
+	
+	//手机端登录
+	@ResponseBody
+	@RequestMapping("/quickLoginYes")
+	public String quickLoginYes(String userName,ModelMap map){
+		System.out.println("手机连接了....");
+		System.out.println("用户名为:"+userName);
+		WeiBoUser user;
+		if(userName.contains("@")){
+			user=userService.quickLoginByEmail(userName);
+		}else{
+			user=userService.quickLoginByPhone(userName);
+		}
+		map.put("user",user);
+		System.out.println(user);
+		if(user!=null){
+			flag=true;
+			return "登录成功";
+		}else{
+			return "请核对用户名";
+		}
+		
+	}
+	
 }

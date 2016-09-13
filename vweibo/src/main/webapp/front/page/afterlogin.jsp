@@ -58,13 +58,13 @@ function shining(){
 }
 
 //全局变量 
-var weibocount = $("#weibocount").val();  //当前用户的微博数	
 var media = new Array();
 var weibocount;  //当前用户的微博数
 	
 	
 var count=4;
 
+var addclicklike = 1;
 
 	function publishWeibo() {
 		count = 4;
@@ -114,6 +114,7 @@ var count=4;
 
 					var newWeiBoDiv = document.createElement("div");
 					newWeiBoDiv.id = "center-part-content_01";
+					newWeiBoDiv.className = "divid_"+addclicklike;
 
 					$(newWeiBoDiv).insertBefore($("#xixi div").first());
 
@@ -212,8 +213,7 @@ var count=4;
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>转发</a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>评论</a>';
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img" onclick="return clicklike('
-							+ ${sessionScope.user.WBUid}+',' + ${sessionScope.user.WBUid}+')"/>赞</a>';
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img" onclick="return clicklike('+ ${sessionScope.user.WBUid}+',' + data.publishsuccessweiboid+')"/>赞</a>';
 					newWeiBoStr += '</div>';
 
 					newWeiBoStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
@@ -299,6 +299,19 @@ var count=4;
 					document.getElementById("uploadVideo").style.display = "none";
 					document.getElementById("uploadPics").style.display = "none";
 					
+					//刷新状态
+					var statueStr = '';
+					statueStr += '<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/>';
+					statueStr += '<li class="c1" id="choose1" data="0" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>';
+					statueStr += '<a href="javascript:void(0)" id="choosea1" ><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/>';
+		            statueStr += '<li class="c1" id="choose2" data="1" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>';
+		            statueStr += '<a href="javascript:void(0)" id="choosea1" ><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/>';
+		            statueStr += '<li class="c1" id="choose3" data="2" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>';
+		            statueStr += '<a href="javascript:void(0)" id="choosea1" ><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/>';
+		            statueStr += '<li class="c1" id="choose4" data="3" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;">群可见</li></a>';
+		            document.getElementById('choose').innerHTML = statueStr;
+		            
+		            addclicklike ++;
 					alert("剧终!");
 				}
 			},
@@ -307,6 +320,8 @@ var count=4;
 			}
 		});
 	}
+	
+
 </script>
 </head>
 	<%
@@ -315,6 +330,7 @@ var count=4;
 	%>
 <body id="bg">
 <input type="hidden" id="user" value="${sessionScope.user.WBUid}" />
+<input type="hidden" id="username" value="${sessionScope.user.uname}" />
 <!-- <form>
 		<input type="submit">
 	</form> --><input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM}" />
@@ -339,7 +355,7 @@ var count=4;
         </div>
 	</div>
 
-	
+	<div id="test">wolaile</div>
 	
 	<div id="frame">
 		<div id="left-part">
@@ -737,6 +753,11 @@ var count=4;
               </div>
             </div>
           </div>  <!-- 目前三篇微博的根  id="xixi" -->
+          
+          <div id="changePage" style="float:left;background:#fff;margin-top:3px;margin-left:50px;">
+        	<div style="float:left;background:#fff;width:240px;border-right:1px gray solid;"><a href="javascript:void(0)" onclick="void(0)">上一页</a></div>
+        	<div style="float:left;background:#fff;width:240px;"><a href="javascript:void(0)" onclick="void(0)">下一页</a></div>
+    	  </div>
         </div>
        
     </div> 

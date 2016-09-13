@@ -15,7 +15,16 @@ public class WeiBoUser {
 	private Date UregisterDate; 
 	private String YZcode;
 	private String YZcodeInput;
+	private String UserName;
 	
+	public String getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+
 	//图片水印
 	private String waterContent;
 	private String waterLocation;
@@ -32,7 +41,6 @@ public class WeiBoUser {
 	public WeiBoUser() {
 	}
 	
-
 	public WeiBoUser(String upassword, String uphone) {
 		Upassword = upassword;
 		Uphone = uphone;

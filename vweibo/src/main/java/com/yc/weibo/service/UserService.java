@@ -26,4 +26,8 @@ public interface UserService {
 	void saveUserTag(Map<String, String> paramMap);
 
 	void saveFindMe(Map<String, String> paramMap);
+
+	WeiBoUser quickLoginByEmail(String userName);
+
+	WeiBoUser quickLoginByPhone(String userName);
 }

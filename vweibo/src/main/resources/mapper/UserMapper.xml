@@ -38,4 +38,15 @@
 	<update id="saveFindMe" parameterType="map">
 		update WeiBoUser set phoneStatus=#{phoneStatus,jdbcType=VARCHAR},emailStatus=#{emailStatus,jdbcType=VARCHAR} where WBUid=#{WBUid,jdbcType=VARCHAR}
 	</update>
+	
+	
+	<select id="quickLoginByEmail" parameterType="string" resultType="WeiBoUser">
+		select * from WeiBoUser where Uemail = #{Uemail}
+	</select>
+	
+	
+	<select id="quickLoginByPhone" parameterType="string" resultType="WeiBoUser">
+		select * from WeiBoUser where Uphone = #{Uphone}
+	</select>
+	
 </mapper>

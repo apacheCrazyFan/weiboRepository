@@ -109,10 +109,12 @@
 	<!-- <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"> 
 		<property name="converters"> <set> <ref bean="employeeHandler"/> 这个是自定义的数据到对象或者其他的数据转换Handler类 
 		</set> </property> </bean> -->
+		
 	<!-- 1.配制事务管理器 -->
-	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
-		p:dataSource-ref="dataSource" /> -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
+		p:dataSource-ref="dataSource" />
 
-	<!-- 2.配制事务关联 <tx:annotation-driven transaction-manager="transactionManager" 
-		/> -->
+	<!-- 2.配制事务关联 --><!-- 事务支持的注解 -->
+	 <tx:annotation-driven transaction-manager="transactionManager" 
+		/>
 </beans>

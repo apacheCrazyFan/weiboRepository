@@ -9,13 +9,27 @@
 		</selectKey>
 		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
 	</insert>
-	
-	<update id="updateWeiboLike" parameterType="int">
+	<select id="selectCurrMaxWBid" resultType="int">
+		select max(wbid) wbid from WeiBo
+	</select>
+	<insert id="initWeibohelp">
+			insert into WeiBoHelp values (#{currWBid,jdbcType=INTEGER},0,0,0,0,0)
+	</insert>
+	<update id="updateaddWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1 where WBid = #{wbid}
 	</update>
+	<update id="updateWeiminuWeiboboLike" parameterType="int">
+		update WeiBoHelp set WHgreateAccount = WHgreateAccount - 1 where WBid = #{wbid}
+	</update>
+	<select id="selectAfterLike" parameterType="int" resultType="int">
+		select WHgreateAccount from WeiBoHelp where WBid = #{wbid}
+	</select>
 	
-	<insert id="insertWhoLike" >
-		insert into Operate values(seq_op_oid.nextval,#{uid},#{wbid},'点赞')
+	<insert id="insertWhoLike" parameterType="int">
+		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
+			select seq_op_oid.nextval currval from dual
+		</selectKey>
+		insert into Operate values(#{oid},#{userid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'点赞')
 	</insert>
 	
 	
@@ -26,13 +40,17 @@
 			(select n.*,rownum rn from 
 			(select * from WeiBoHelp order by WHviewAccount desc) n where #{pageSize} * #{pageNum} >= rownum)
  			where rn > #{pageSize} * (#{pageNum}-1)) b
- 			where w.wbid = b.wbid
+ 			where w.wbid = b.wbid and WBstatue = 0
  			order by WHviewAccount desc) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
-	<select id="selectWeiboOrderByWHgreateAccount" resultType="Weibo" parameterType="map">
-		select * from WeiBo where WBid in(
-			select WBid from
-			(select n.*,rownum rn from (select * from WeiBoHelp order by WHgreateAccount desc) n where #{pageSize} * #{pageNum} >= rownum)
-			where rn > #{pageSize} * (#{pageNum}-1))
+	
+	<select id="selectWeiboOrderByWBdate" resultType="map" parameterType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid})) order by WBdate desc) n where #{pageSize} * #{pageNum} >= rownum)
+ 			where rn > #{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
 </mapper>
