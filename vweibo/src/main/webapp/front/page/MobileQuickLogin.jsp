@@ -77,6 +77,7 @@
 		    }(), 
 		    language : (navigator.browserLanguage || navigator.language).toLowerCase() 
 		    } 
+		  
 		 if(browser.versions.mobile){
 			 var userName=$("#userName").val();
 			 $.post("user/quickLoginYes",{"userName":userName},function(data){

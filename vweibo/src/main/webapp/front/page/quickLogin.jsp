@@ -9,14 +9,24 @@
 		body{
 		background-color:#E0EDFA;
 		}
+		
 		#textinput{
-		width: 200px;}
+		width: 200px;
+		}
+		#aa{
+		float: left;
+		margin-left: 160px;
+		}
+		#bb{
+		float: left;
+		margin-left: 20px;
+		}
 		#QRCodeImagec{
 		height: 250px;
 		width: 300px;
 		float: left;
-		margin-left: 30px;
-		margin-top:40px;
+		margin-left: 10px;
+		margin-top:60px;
 		}
 	</style>
 <script src="front/js/jquery-1.11.3.min.js" type="text/javascript"></script>
@@ -25,40 +35,41 @@
 
 </head>
 <body class="templatemo-bg-gray">
-	<span style="font-size: 13px;">请输入邮箱或者手机号：</span><input type="text" placeholder="请输入邮箱或者手机号" id="textinput" value="1373930633@qq.com">
-	<input type="submit" value="确定" style="height: 26px;width: 50px" id="loadQRCode" onclick="loadQRCode()">
-	<div id="QRCodeImagec">
+<form action="user/quickLogin" method="post">
+	<div id="aa">
+		<span style="font-size: 13px;">请输入邮箱或者手机号：</span><input type="text" name="userName" placeholder="请输入邮箱或者手机号" id="textinput" value="1373930633@qq.com">
 	</div>
- 	<script>
- 		
-	</script>
+	<div id="bb">
+		<input type="button"  id="loadQRCode" onclick="loadQRCodee()" value="生成二维码"/>
+	</div>
+	<div id="QRCodeImagec">
+	
+	</div>
+	
+</form>
+
 	<script type="text/javascript">
-	function loadQRCode(){
+	function loadQRCodee(){
 		$("#QRCodeImagec").empty();
 		var userName=$("#textinput").val();
 		//var url=window.location.href+"?userName="+userName;
-		var url="http://192.168.191.3:8080/vweibo/front/page/MobileQuickLogin.jsp?userName="+userName;
-		$("#QRCodeImagec").qrcode({
-			render : "canvas",
-			width: 300, //宽度
-			height:250, //高度
-			text: url //任意内容
+		$.post("user/getIpAddress",function(data){
+			var url="http://"+data.substring(1,data.lastIndexOf('"'))+":8080/vweibo/front/page/MobileQuickLogin.jsp?userName="+userName;
+			$("#QRCodeImagec").qrcode({
+				render : "canvas",
+				width: 300, //宽度
+				height:250, //高度
+				text: url //任意内容
+			});
 		});
-		/* $.post("user/quickLogin",{"userName":userName},function(data){
-			alert(data);
-		}) */
-		/* alert(window.location.host+window.location.pathname);
-		var url=window.location.host+window.location.pathname;
-		var sendurl=url.substring(0,url.lastIndexOf("/"));
-		alert(sendurl); */
-		/* alert(returnCitySN["cip"]+','+returnCitySN["cname"]); */
+		
+		
+		$("#bb").empty();
+		$("#bb").append('<input type="submit" value="确认登录" />');
 	
 		  
 	}
 	
-	
 	</script>
-	
-	
 </body>
 </html>
