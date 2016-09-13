@@ -5,12 +5,15 @@ var maxnum = 15;            //设置加载最多次数
 var num = 1;  
 var totalheight = 0; 
 
+var clicklikenum = 1;
+
 var dataStrArrcopy = '';
 
+var userid = 0;
+
 $(document).ready(function(){  
-	
-	var userid = 0;
 	uid = $("#user").val().trim();
+	
 	if(uid != ""){
 		userid = parseInt(uid);
 	}
@@ -28,13 +31,17 @@ $(document).ready(function(){
 		    	dataStrArrcopy = JSON.stringify(data.weiboList); //json对象转化为json字符串
 
 		    	for(var i=0;i<6;i++){
-		    		num ++;
 		    		
 		    		var dataMsg = data.weiboList[i];
+		    		if(dataMsg != undefined){
+		    			
 		    		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
+		    									//用户id
+		    		var weiboid = dataMsg.WBID; //微博id
 		    		var username = dataMsg.UNAME;  //用户名
 		    		var userImgPaht = dataMsg.UIMGPATH; //用户图像路径
 		    		var location = dataMsg.WBLOCATION; //地理位置/电脑用户名 
+		    			
 		    		
 		    		var videoMap = ''; //视频路径
 					var picsMap = ''; //图片路径 
@@ -138,7 +145,7 @@ $(document).ready(function(){
 					newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
 					newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
 					newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
-					newStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';
+					newStr += '<a href="javascript:void(0)" id="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';
 					newStr += '</div>';
 					
 					
@@ -195,8 +202,12 @@ $(document).ready(function(){
 					newStr += '</div>';
 					
 					
-					$("#xixi").append('<div id="center-part-content_01">'+newStr+'</div>');  
+					$("#xixi").append('<div id="center-part-content_01" class="divid_'+clicklikenum+'">'+newStr+'</div>');  
+					
+					num ++;
+					clicklikenum ++;
 		    	}  
+		      }
 		    }
 		  },
 		  error:function(textStatus,error){
@@ -237,6 +248,7 @@ $(window).scroll(function(){
 		//var dataMsg = data.weiboList[i];
 		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
 		var username = dataMsg.UNAME;  //用户名
+		var weiboid = dataMsg.WBID;  //微博id
 		var userImgPaht = dataMsg.UIMGPATH; //用户图像路径
 		var location = dataMsg.WBLOCATION; //地理位置/电脑用户名 
 		
@@ -342,8 +354,8 @@ $(window).scroll(function(){
 		newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
 		newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
 		newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
-		newStr += '<a href="javascript:void(0)" id="center_footnum4"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';
-		newStr += '</div>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';  //点赞在这里处理
+		newStr += '</div>';																	//用户id					//微博id				
 		
 		
 		newStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
@@ -399,12 +411,31 @@ $(window).scroll(function(){
 		newStr += '</div>';
 		
 		
-		$("#xixi").append('<div id="center-part-content_01">'+newStr+'</div>');  
-	
- 		num++;  
-	  
+		$("#xixi").append('<div id="center-part-content_01" class="divid_'+clicklikenum+'">'+newStr+'</div>');  
+																//用于刷新点赞后的点赞数
+ 		num ++;  
+ 		clicklikenum ++;
 	}  
 }); 
+
+//点赞功能                      //用户id   //微博id
+function clicklike(obj,userid,wbid){
+	$.ajax({
+		url: "weibo/addclicklike",
+		  cache: false,
+		  data:{'userid':userid,'wbid':wbid},
+		  dataType:"json",
+		  type:"get",
+		  success: function(data,textStatus){
+			  if(data.success){
+				  obj.innerHTML = '<img src="front/image/center-part_foot04.png" id="foot01_img"/>'+data.greateAccount;
+			  }
+		  },
+		  error:function(error,textStatus){
+			  alert("点赞是发生错误："+error);
+		  }
+	});
+};
 
 
 function letRandom(){
@@ -458,7 +489,7 @@ $(document).ready(function(){
 	//键盘监听事件
 	txt.addEventListener("keyup",function(){
 		str=byteLength(txt.value);
-		if(str>340){
+		if(str>140){
 			document.getElementById("s2").innerHTML='<span style="color:#666">已经超出了'+(str-140)+'个字</span>';	
 		}else{
 			document.getElementById("s2").innerHTML='<span style="color:#666">您还可以输入'+(140-str)+'个字</span>';	

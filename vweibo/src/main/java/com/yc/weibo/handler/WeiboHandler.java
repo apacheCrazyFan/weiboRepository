@@ -29,7 +29,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.WeiBoUser;
-import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.service.WeiboService;
 import com.yc.weibo.util.AddressUtil;
 
@@ -114,6 +113,7 @@ public class WeiboHandler {
 			jsonMap.put("picsMap", operateString(picsMap));
 			jsonMap.put("videoMap", operateString(videoMap));
 			jsonMap.put("musicMap", operateString(musicMap));
+			jsonMap.put("publishsuccessweiboid", currWBid);
 			jsonMap.put("rate", 2);
 		}
 
@@ -251,6 +251,28 @@ public class WeiboHandler {
 		System.out.println( weiboList);
 		jsonMap.put("weiboList", weiboList);
 		jsonMap.put("total", weiboList.size());
+		return jsonMap;
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	@RequestMapping(value="/addclicklike",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> addClickLike(@RequestParam(name="userid")Integer userid,@RequestParam(name="wbid")Integer wbid){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Integer> params = new HashMap<String,Integer>();
+		
+		System.out.println( userid+"  =============  "+wbid);
+		params.put("uid", userid);
+		params.put("wbid", wbid);
+		
+		if(weiboService.insertWhoLike(params) && weiboService.updateWeiboLike(wbid)){
+			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
+			jsonMap.put("success", true);
+			jsonMap.put("greateAccount", greateAccount);
+		}else{
+			jsonMap.put("success", false);
+		}
+
 		return jsonMap;
 	}
 } 

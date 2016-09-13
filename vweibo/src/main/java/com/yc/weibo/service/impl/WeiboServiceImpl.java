@@ -15,6 +15,8 @@ public class WeiboServiceImpl implements WeiboService{
 
 	@Autowired
 	private WeiboMapper weiboMapper;
+	
+	//插入微博
 	@Override
 	public boolean addWeibo(Map<String, Object> map) {
 		return weiboMapper.insertWeibo(map) > 0 ? true : false;
@@ -27,6 +29,8 @@ public class WeiboServiceImpl implements WeiboService{
 	public boolean initWeibohelp(int currWBid) {
 		return weiboMapper.initWeibohelp(currWBid) > 0 ? true : false;
 	}
+	
+	
 	@Override
 	public List<Map<String, Object>> findWeiboOrderByWHviewAccountFirst(Map<String, Integer> map) {
 		return weiboMapper.seleteWeiboOrderByWHviewAccountFirst(map);
@@ -35,9 +39,26 @@ public class WeiboServiceImpl implements WeiboService{
 	public List<Map<String,Object>> findtWeiboOrderByWHgreateAccountFirst(Map<String, Integer> map) {
 		return weiboMapper.selectWeiboOrderByWHgreateAccount(map);
 	}
+	
+	
 	@Override
 	public List<Map<String, Object>> findWeiboOrderByWBdate(Map<String, Integer> map) {
 		return weiboMapper.selectWeiboOrderByWBdate(map);
+	}
+	
+	
+	//点赞
+	@Override
+	public boolean updateWeiboLike(int wbid) {
+		return weiboMapper.updateWeiboLike(wbid) > 0 ? true : false;
+	}
+	@Override
+	public boolean insertWhoLike(Map<String,Integer> map) {
+		return weiboMapper.insertWhoLike(map) > 0 ? true : false;
+	}
+	@Override
+	public int selectAfterLikeGreateAcount(int wbid) {
+		return weiboMapper.selectAfterLike(wbid);
 	}
 
 }

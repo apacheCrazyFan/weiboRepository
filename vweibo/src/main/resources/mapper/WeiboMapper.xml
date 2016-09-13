@@ -15,13 +15,18 @@
 	<insert id="initWeibohelp">
 			insert into WeiBoHelp values (#{currWBid,jdbcType=INTEGER},0,0,0,0,0)
 	</insert>
-	
 	<update id="updateWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1 where WBid = #{wbid}
 	</update>
+	<select id="selectAfterLike" parameterType="int" resultType="int">
+		select WHgreateAccount from WeiBoHelp where WBid = #{wbid}
+	</select>
 	
-	<insert id="insertWhoLike" >
-		insert into Operate values(seq_op_oid.nextval,#{uid},#{wbid},'点赞')
+	<insert id="insertWhoLike" parameterType="int">
+		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
+			select seq_op_oid.nextval currval from dual
+		</selectKey>
+		insert into Operate values(#{oid},#{userid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'点赞')
 	</insert>
 	
 	
