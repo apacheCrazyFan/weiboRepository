@@ -15,8 +15,11 @@
 	<insert id="initWeibohelp">
 			insert into WeiBoHelp values (#{currWBid,jdbcType=INTEGER},0,0,0,0,0)
 	</insert>
-	<update id="updateWeiboLike" parameterType="int">
+	<update id="updateaddWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1 where WBid = #{wbid}
+	</update>
+	<update id="updateWeiminuWeiboboLike" parameterType="int">
+		update WeiBoHelp set WHgreateAccount = WHgreateAccount - 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterLike" parameterType="int" resultType="int">
 		select WHgreateAccount from WeiBoHelp where WBid = #{wbid}

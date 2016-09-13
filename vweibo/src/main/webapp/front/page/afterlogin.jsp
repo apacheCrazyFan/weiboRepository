@@ -320,6 +320,8 @@ var addclicklike = 1;
 			}
 		});
 	}
+	
+
 </script>
 </head>
 	<%
@@ -353,7 +355,7 @@ var addclicklike = 1;
         </div>
 	</div>
 
-	
+	<div id="test">wolaile</div>
 	
 	<div id="frame">
 		<div id="left-part">

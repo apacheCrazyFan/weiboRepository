@@ -330,7 +330,6 @@ create table WeiBoHelp(
        
        --预留字段  
 );
-drop table WeiBoHelp;
 
 update WeiBoHelp set WHgreateAccount = 2210 where WBid in(10437);
 insert into WeiBoHelp values(10424,9854,4562,1433,2555,1345);
@@ -448,17 +447,18 @@ create sequence seq_op_oid start with 1001;
 --评论（回复）微博表  --找爸爸
 create table Comments(
        Cid int primary key,           --评论（回复）id
-       CUidF int,                     --评论（回复）人id
-       CUidN int,                     --下一个评论（回复）人id
-       WBid int
-           constraint RK_Operate_WBid references WeiBo(WBid),--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
-       ContentTxt blob                --评论（回复）文本内容
-       ContentPics varchar2(500)      --评论（回复）图片路径
+       WBUid int unique, --评论（回复）人id
+       WBid int unique,--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
+       ContentTxt varchar2(500),        --评论（回复）文本内容
+       ContentPics varchar2(200),      --评论（回复）图片路径
        Cdate Date,                    --评论日期
        CgreateAccount int,            --评论点赞次数
+       Csonode int					  --下一个评论的id  这里可以列一个树状图出来
        
        --预留字段
 );
+drop table Comments;
+create sequence seq_comments_cid start with 100001 increment by 1;
 
 --私信
 create table PrivateMessage(

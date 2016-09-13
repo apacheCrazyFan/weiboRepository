@@ -7,6 +7,10 @@ var totalheight = 0;
 
 var clicklikenum = 1;
 
+var commentdivnum = 1;
+var transmitdivnum = 1;
+var collectiondivnum = 1;
+
 var dataStrArrcopy = '';
 
 var userid = 0;
@@ -142,14 +146,14 @@ $(document).ready(function(){
 					
 					newStr += '</div>';
 					newStr += '<div id="center_footnum" class="center_footnum">';
-					newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
-					newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
-					newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
-					newStr += '<a href="javascript:void(0)" id="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';
+					newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col_'+collectiondivnum+'&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
+					newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
+					newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
+					newStr += '<a href="javascript:void(0)" id="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';   //点赞
 					newStr += '</div>';
 					
 					
-					newStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
+					newStr += '<div id="center_footnum1_col_'+collectiondivnum+'" class="center_footnum1_col" style="display:none;">';
 					newStr += '<div id="collection_div_unline">';
 					newStr += '<span id="collection_div_title">收藏</span>';
 					newStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum1_col&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -168,7 +172,7 @@ $(document).ready(function(){
 					newStr += '</div>';
 					newStr += '</div>';
 					
-					newStr += '<div id="center_footnum2_transmit" class="center_footnum2_transmit" style="display:none;">';
+					newStr += '<div id="center_footnum2_transmit_'+transmitdivnum+'" class="center_footnum2_transmit" style="display:none;">';
 					newStr += '<div id="transmit_div_unline">';
 					newStr += '<span id="transmit_div_title">转发微博</span>';
 					newStr += '<a href="javascript:void(0)" id="transmit_closepng_a" class="transmit_closepng_a" onMouseOut="transmitdivcloseimg(&quot;transmit_closepng_a&quot;)" onClick="changetransmitsearch(&quot;center_footnum2_transmit&quot;)" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -192,13 +196,13 @@ $(document).ready(function(){
 					newStr += '</div>';
 					newStr += '</div>';
 					
-					newStr += '<div id="comment_div" class="comment_div" style="display:none;">';
+					newStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 					newStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
 					newStr += '<input type="text" id="comment_input"/><br>';
 					newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 					newStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newStr += '<img src="front/image/comment_btn.png" id="comment_btn"/>';
+					newStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo()"/>';
 					newStr += '</div>';
 					
 					
@@ -206,6 +210,9 @@ $(document).ready(function(){
 					
 					num ++;
 					clicklikenum ++;
+					commentdivnum ++;
+					transmitdivnum ++;
+					collectiondivnum ++;
 		    	}  
 		      }
 		    }
@@ -351,14 +358,14 @@ $(window).scroll(function(){
 		
 		newStr += '</div>';
 		newStr += '<div id="center_footnum" class="center_footnum">';
-		newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
-		newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
-		newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum1_col_'+collectiondivnum+'&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum2_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
 		newStr += '<a href="javascript:void(0)" id="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';  //点赞在这里处理
 		newStr += '</div>';																	//用户id					//微博id				
 		
 		
-		newStr += '<div id="center_footnum1_col" class="center_footnum1_col" style="display:none;">';
+		newStr += '<div id="center_footnum1_col_'+collectiondivnum+'" class="center_footnum1_col_" style="display:none;">';
 		newStr += '<div id="collection_div_unline">';
 		newStr += '<span id="collection_div_title">收藏</span>';
 		newStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum1_col&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -377,7 +384,7 @@ $(window).scroll(function(){
 		newStr += '</div>';
 		newStr += '</div>';
 		
-		newStr += '<div id="center_footnum2_transmit" class="center_footnum2_transmit" style="display:none;">';
+		newStr += '<div id="center_footnum2_transmit_'+transmitdivnum+'" class="center_footnum2_transmit" style="display:none;">';
 		newStr += '<div id="transmit_div_unline">';
 		newStr += '<span id="transmit_div_title">转发微博</span>';
 		newStr += '<a href="javascript:void(0)" id="transmit_closepng_a" class="transmit_closepng_a" onMouseOut="transmitdivcloseimg(&quot;transmit_closepng_a&quot;)" onClick="changetransmitsearch(&quot;center_footnum2_transmit&quot;)" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -401,7 +408,7 @@ $(window).scroll(function(){
 		newStr += '</div>';
 		newStr += '</div>';
 		
-		newStr += '<div id="comment_div" class="comment_div" style="display:none;">';
+		newStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 		newStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
 		newStr += '<input type="text" id="comment_input"/><br>';
 		newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
@@ -415,20 +422,25 @@ $(window).scroll(function(){
 																//用于刷新点赞后的点赞数
  		num ++;  
  		clicklikenum ++;
+ 		commentdivnum ++;
+		transmitdivnum ++;
+		collectiondivnum ++;
 	}  
 }); 
 
+var oddAndEven = 1;
 //点赞功能                      //用户id   //微博id
 function clicklike(obj,userid,wbid){
 	$.ajax({
 		url: "weibo/addclicklike",
 		  cache: false,
-		  data:{'userid':userid,'wbid':wbid},
+		  data:{'userid':userid,'wbid':wbid,'oddAndEven':oddAndEven},
 		  dataType:"json",
 		  type:"get",
 		  success: function(data,textStatus){
 			  if(data.success){
 				  obj.innerHTML = '<img src="front/image/center-part_foot04.png" id="foot01_img"/>'+data.greateAccount;
+				  oddAndEven ++;
 			  }
 		  },
 		  error:function(error,textStatus){
@@ -710,7 +722,6 @@ function changewords3(){
 }
 
 
-
 //转发  选择完权限后隐藏div 
 function hidetransmitdiv(id){
 	document.getElementById(id).style.display='none';
@@ -737,20 +748,22 @@ function addtransmitdiv(id){
 		}
 	}
 }
-
-//控制评论标签栏的可见
-function addcommentdiv(id){
-	var tips3=document.getElementById(id);
-	if(tips3){
-		if(tips3.style.display=='block'){
-			tips3.style.display='none';
-		}else{
-			tips3.style.display='block';
+	
+	//控制评论标签栏的可见   没有问题了√
+	function addcommentdiv(id){
+		var tips3=document.getElementById(id);
+		
+		if(tips3){
+			if(tips3.style.display=='block'){
+				tips3.style.display='none';
+			}else{
+				tips3.style.display='block';
+			}
 		}
-	}
-}
+	};
 
-function addcommentdiv1(id){
+
+/*function addcommentdiv1(id){
 	var tips4=document.getElementById(id);
 	if(tips4){
 		if(tips4.style.display=='block'){
@@ -769,7 +782,7 @@ function addcommentdiv2(id){
 			tips5.style.display='block';
 		}
 	}
-}
+}*/
 
 //视频 图片文件的div的可见与隐藏
 function showNone(id1,id2){//先隐藏两个元素，然后显示第一个，
