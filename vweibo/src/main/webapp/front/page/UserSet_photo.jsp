@@ -84,7 +84,7 @@
         </div>
    </div>
     <script type="text/javascript">
-  //调用摄像头自拍
+	//调用摄像头自拍
     var openVideo=document.getElementById("myPhotoTake");
     var snaPhoto=document.getElementById("snaPhoto");
     var canvas=document.getElementById("photocanvas");

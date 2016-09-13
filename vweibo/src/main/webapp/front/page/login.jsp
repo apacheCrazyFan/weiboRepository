@@ -30,8 +30,8 @@
               </div>
 		</form>
 		<a class="register" href="front/page/register.jsp">马上注册</a>
-		<a  class="register" id="quickLogin">快捷登录</a>
-	
+		<a  class="register" id="quickLogin" href="front/page/quickLogin.jsp">快捷登录</a>
+		
 		
 		   <!--<div class="connect">
                 <p>快捷</p>
@@ -53,9 +53,10 @@
 </body>
 
 <script type="text/javascript">
-$("#quickLogin").bind('click',function(){
+/* $("#quickLogin").bind('click',function(){
 	   art.dialog({
-	   lock: true,                      // (弹出框时后面的主页面是否“锁”起来（即蒙上了一个阴影层 true：代表锁起来 false：反之)
+	   lock: true,                      // (弹出框时
+面的主页面是否“锁”起来（即蒙上了一个阴影层 true：代表锁起来 false：反之)
 	   title: '快捷登录',
 	  // (弹出框的标题)
 	  content:'<'+'iframe id="newFream" frameborder="0" src="front/page/quickLogin.jsp" height="400" width="600"></'+'iframe>', // (frameborder="0" : 无框 src：里写需要展示的内容链接，可以是个页面)
@@ -65,7 +66,7 @@ $("#quickLogin").bind('click',function(){
 	  opacity: .10 //阴影层颜色的深浅
 	})
 
-});
+}); */
 	
 	
 </script>
