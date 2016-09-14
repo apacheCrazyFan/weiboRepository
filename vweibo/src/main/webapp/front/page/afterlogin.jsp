@@ -135,7 +135,7 @@ var addclicklike = 1;
 					newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
 					newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+ date + '</a> 来自 ' + location + '</li>';
 					newWeiBoStr += '</ul>';
-
+S
 					var newContent ='';
 					var newContent1 = '';
 					faceArr = content.split("[");
@@ -320,7 +320,6 @@ var addclicklike = 1;
 			}
 		});
 	}
-	
 
 </script>
 </head>
@@ -379,7 +378,7 @@ var addclicklike = 1;
     	
         <ul id="left-part-content">
             <li style="height:25px;"><a href="javascript:void(0)" id="one">首页</a></li>
-            <li style="height:25px;"><a href="javascript:void(0)" id="two">我的收藏</a></li>
+            <li style="height:25px;"><a href="front/page/Personal.jsp?WBUid=${sessionScope.user.WBUid}" id="two">我的收藏</a></li>
             <li style="height:25px;"><a href="javascript:void(0)" id="two">我的赞</a></li>
             <li style="height:25px;"><img src="front/image/afterlogin_logo1.jpg" class="img"/><a href="javascript:findHotWeiBo()" id="two">热门微博</a></li>
             <li style="height:25px;"><img src="front/image/afterlogin_logo2.jpg" class="img1"/><a href="javascript:void(0)" id="two">好友圈</a></li>

@@ -25,11 +25,11 @@
         
         <div id="something" class="headSon">
        		<ul class="headDetails" id="headDetails">      
-          		<li class="a"><a href="#?PersonalIndex="><img src="图片/ThreeProject/index.png"/></a></li>
-            	<li class="a"><a href="#?Find="><img src="图片/ThreeProject/found.png"/></a></li>
-            	<li class="a"><a href="#?Game="><img src="图片/ThreeProject/game.png"/></a></li>
+          		<li class="a"><a href="#?PersonalIndex="><img src="front/image/index.png"/></a></li>
+            	<li class="a"><a href="#?Find="><img src="front/image/found.png"/></a></li>
+            	<li class="a"><a href="#?Game="><img src="front/image/game.png"/></a></li>
             	<li id="weiboname"><a href="front/page/afterlogin.jsp">
-           			<img src="图片/ThreeProject/people.png"/>王大大大啊aa
+           			<img src="front/image/people.png"/>${sessionScope.user.uname}
                 	</a></li>
         </ul>
         </div>
@@ -37,9 +37,9 @@
         
         <div id="MsgAndSetting" class="headSon">
         	<ul class="headDetails" id="headDetails">
-            	<li><a href="MSG"><img src="图片/ThreeProject/chat.png"/></a></li>
-            	<li><a href="SETTING"><img src="图片/ThreeProject/set.png"/></a></li>
-                <li><a href="WRITE"><img src="图片/ThreeProject/write.png"/></a></li>
+            	<li><a href="MSG"><img src="front/image/chat.png"/></a></li>
+            	<li><a href="SETTING"><img src="front/image/set.png"/></a></li>
+                <li><a href="WRITE"><img src="front/image/write.png"/></a></li>
         	</ul>
         </div>   
     </div>
@@ -49,9 +49,8 @@
         	<div id="picANDmsg">
             	<div id="picANDmsg_center">
                 	<dl>
-                    	<dt id="meitu"><img src="front/image/IMG_0110.JPG"/></dt>
-                        <dd><p>啊耐家大大<img src="front/image/LitterFavion/0x1f31d.png"/></p>
-                        	<p>za。</p></dd>
+                    	<dt id="meitu"><img src="/weibouserimages/${sessionScope.user.uimgPath}"/></dt>
+                        <dd><p style="font-size: 22px;color: b">${sessionScope.user.uname}</p></dd>
                     </dl>
                 </div>
             </div>
@@ -67,15 +66,15 @@
         	<div id="content_m2_left">
             	<div id="left_left1" class="left">
                 	<dl>
-                    	<dt>77</dt>
+                    	<dt>${ sessionScope.groupnumber.FOCUSNUM }</dt>
                         <dd><a href="#">关注</a></dd>
                     </dl>
                     <dl>
-                        <dt>1.3W</dt>
+                        <dt>${ sessionScope.groupnumber.FANSNUM }</dt>
                         <dd><a href="#">粉丝</a></dd>
                     </dl>
                     <dl>
-                        <dt>106</dt>
+                        <dt>${ sessionScope.groupnumber.WEIBONUM }</dt>
                         <dd><a href="#">微博</a></dd>
                     </dl>
                 </div>
