@@ -224,8 +224,9 @@ window.onload=function(){
 		  }
 		
 	}); //ajax
+}
 
-<<<<<<< HEAD
+
 //热门微博
 function findHotWeiBo(){
 uid = $("#user").val().trim();
@@ -438,9 +439,7 @@ uid = $("#user").val().trim();
 }
 
 
-=======
-}
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
+
 $(window).scroll(function(){  
 	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
 	
