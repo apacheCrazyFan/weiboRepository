@@ -265,7 +265,7 @@ public class WeiboHandler {
 		params.put("uid", userid);
 		params.put("wbid", wbid);
 		
-		if(oddAndEven % 2 == 0){  //说明是偶数，减一
+		if(oddAndEven % 2 == 0 && oddAndEven != 1){  //说明是偶数，减一
 			weiboService.updateminuWeiboLike(wbid);
 			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
 			jsonMap.put("success", true);
@@ -280,6 +280,36 @@ public class WeiboHandler {
 				jsonMap.put("success", false);
 			}
 		}
+		return jsonMap;
+	}
+	//收藏微博操作
+	@Transactional(propagation=Propagation.REQUIRED)
+	@RequestMapping(value="/addcollection",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> addcollection(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Integer> params = new HashMap<String,Integer>();
+		
+		System.out.println( userid+"  =============  "+wbid);
+		params.put("uid", userid);
+		params.put("wbid", wbid);
+		
+		/*if(oddAndEven % 2 == 0 && oddAndEven != 1){  //说明是偶数，减一
+			weiboService.updateminuWeiboLike(wbid);
+			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
+			jsonMap.put("success", true);
+			jsonMap.put("greateAccount", greateAccount);
+		}else {
+			if(weiboService.insertWhoLike(params) && weiboService.updateaddWeiboLike(wbid)){
+			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
+			jsonMap.put("success", true);
+			jsonMap.put("greateAccount", greateAccount);
+			}else{
+				
+		jsonMap.put("success", false);
+			}
+		}*/
+		jsonMap.put("success", true);
 		return jsonMap;
 	}
 } 

@@ -33,13 +33,10 @@ window.onload=function(){
 		  Type:"GET",
 		  success: function(data,textStatus){
 		    if(data){
-		    	alert("i am coming");
 		    	dataStrArrcopy = JSON.stringify(data.weiboList); //json对象转化为json字符串
-		    	alert(dataStrArrcopy);
-		    
-		    	for(var i = 0; i < 2; i ++){
-		    		alert(i+"  <--");
-		    		var dataMsg = data.weiboList[i];
+
+		    	for(var zz = 0;zz < 6; zz ++){
+		    		var dataMsg = data.weiboList[zz];
 		    		if(dataMsg != undefined){
 		    			
 		    		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
@@ -135,7 +132,7 @@ window.onload=function(){
 					if (videoMap != "") {
 						var video = videoMap.split(",");
 						for (var i = 0; i < video.length; i++) {
-							newStr += '<embed src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+							newStr += '<video controls="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 						}
 					}
 
@@ -143,7 +140,7 @@ window.onload=function(){
 					if (musicMap != "") {
 						var music = musicMap.split(",");
 						for(var i = 0; i < music.length; i ++){
-							newStr += '<embed style="width:400px;height:50px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+							newStr += '<audio controls="true" src="/weibomusics/'+music[i]+'" style="width:500px;height:25px;"></video>';
 						}
 					}
 					
@@ -350,7 +347,7 @@ $(window).scroll(function(){
 		if (videoMap != "") {
 			var video = videoMap.split(",");
 			for (var i = 0; i < video.length; i++) {
-				newStr += '<embed src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+				newStr += '<video controls="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 			}
 		}
 
@@ -358,7 +355,7 @@ $(window).scroll(function(){
 		if (musicMap != "") {
 			var music = musicMap.split(",");
 			for(var i = 0; i < music.length; i ++){
-				newStr += '<embed style="width:400px;height:50px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+				newStr += '<audio controls="true" src="/weibomusics/'+music[i]+'" style="width:500px;height:25px;"></video>';
 			}
 		}
 		
@@ -372,6 +369,7 @@ $(window).scroll(function(){
 		
 		
 		newStr += '<div id="center_footnum1_col_'+collectiondivnum+'" class="center_footnum1_col_" style="display:none;">';
+		newStr += '<springmvc:form >';
 		newStr += '<div id="collection_div_unline">';
 		newStr += '<span id="collection_div_title">收藏</span>';
 		newStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum1_col&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -383,11 +381,12 @@ $(window).scroll(function(){
 		newStr += '<div id="collection_div_word"><img src="front/image/tishi.png" id="tishi_img"/><font id="tishi_word">添加标签来管理你的收藏</font></div>';
 		
 		newStr += '<div id="keyword" style="width:390px;height:32px;">';
-		newStr += '<input type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
+		newStr += '<springmvc:input path="taginput" type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
 		
-		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png"/>';
-		newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum1_col&quot;)"/></div>';
+		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag('+userid+','+weiboid+')"/>';
+		newStr += '<springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum1_col&quot;)"/></div>';
 		newStr += '</div>';
+		newStr += '</springmvc:form>';
 		newStr += '</div>';
 		
 		newStr += '<div id="center_footnum2_transmit_'+transmitdivnum+'" class="center_footnum2_transmit" style="display:none;">';
@@ -425,8 +424,8 @@ $(window).scroll(function(){
 		
 		
 		$("#xixi").append('<div id="center-part-content_01" class="divid_'+clicklikenum+'">'+newStr+'</div>');  
-																//用于刷新点赞后的点赞数
- 		num ++;  
+			
+ 		num ++;  //用于刷新点赞后的点赞数
  		clicklikenum ++;
  		commentdivnum ++;
 		transmitdivnum ++;
@@ -434,8 +433,8 @@ $(window).scroll(function(){
 	}  
 }); 
 
-var oddAndEven = 1;
 //点赞功能                      //用户id   //微博id
+var oddAndEven = 1;
 function clicklike(obj,userid,wbid){
 	$.ajax({
 		url: "weibo/addclicklike",
@@ -454,6 +453,27 @@ function clicklike(obj,userid,wbid){
 		  }
 	});
 };
+
+//收藏功能
+function collectiontag(userid,wbid){
+	$.ajax({
+		url: "weibo/addcollection",
+		  cache: false,
+		  data:{'userid':userid,'wbid':wbid},
+		  dataType:"json",
+		  type:"get",
+		  success: function(data,textStatus){
+			  if(data.success){
+				  alert('hui lai le');
+				  //obj.innerHTML = '<img src="front/image/center-part_foot04.png" id="foot01_img"/>'+data.greateAccount;
+				  //oddAndEven ++;
+			  }
+		  },
+		  error:function(error,textStatus){
+			  alert("收藏时发生错误："+error);
+		  }
+	});
+}
 
 //评论回复功能
 /*<script>
