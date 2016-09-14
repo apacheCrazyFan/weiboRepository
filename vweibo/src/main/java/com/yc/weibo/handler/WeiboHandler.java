@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +32,7 @@ import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.entity.Weibo;
+import com.yc.weibo.service.UserService;
 import com.yc.weibo.service.WeiboService;
 import com.yc.weibo.util.AddressUtil;
 
@@ -44,6 +44,8 @@ public class WeiboHandler {
 	private ServletContext servletContext;
 	@Autowired
 	private WeiboService weiboService;
+	@Autowired
+	private UserService userService;
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
@@ -292,30 +294,41 @@ public class WeiboHandler {
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addcollection",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> addcollection(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid){
+	public Map<String,Object> addcollection(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt, @RequestParam(name="collectiontagnum")Integer collectiontagnum){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
-		Map<String,Integer> params = new HashMap<String,Integer>();
+		Map<String,Object> params = new HashMap<String,Object>();
 		
-		System.out.println( userid+"  =============  "+wbid);
+		System.out.println( userid+"  =============  "+wbid + " +++++++ "+txt + "  ,,,,,,, "+collectiontagnum);
 		params.put("uid", userid);
 		params.put("wbid", wbid);
+		params.put("txt",txt);
 		
-		/*if(oddAndEven % 2 == 0 && oddAndEven != 1){  //说明是偶数，减一
-			weiboService.updateminuWeiboLike(wbid);
-			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
-			jsonMap.put("success", true);
-			jsonMap.put("greateAccount", greateAccount);
-		}else {
-			if(weiboService.insertWhoLike(params) && weiboService.updateaddWeiboLike(wbid)){
-			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
-			jsonMap.put("success", true);
-			jsonMap.put("greateAccount", greateAccount);
-			}else{
+		//收藏完成
+		if(collectiontagnum % 2 != 0){
+			if(weiboService.updateAddCollectWeibo(params)){
 				
-		jsonMap.put("success", false);
+				if(weiboService.updateCollectionAccount(1,wbid)){
+					
+					params.clear();
+					params.put("account", DataDic.COLLECT);
+					params.put("uid", userid);
+					//积分更新完成
+					if(userService.updateUserAccount(params)){
+						
+						//返回收藏后的收藏数
+						int collectionAccount  = weiboService.selectAfterCollection(wbid);
+						jsonMap.put("cureHelp", true);
+						jsonMap.put("success", true);
+						jsonMap.put("collectionAccount", collectionAccount);
+					}
+				}
 			}
-		}*/
-		jsonMap.put("success", true);
+			
+		}else{
+			jsonMap.put("cureHelp", false);
+			jsonMap.put("success", false);
+		}
+		
 		return jsonMap;
 }
 	

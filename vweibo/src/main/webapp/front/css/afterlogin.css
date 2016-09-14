@@ -595,7 +595,7 @@ textarea {
 	bottom: 120px;
 }
 
-#center_footnum {
+.center_footnum {
 	position: relative;
 	bottom: 30px;
 	border-top:#CCC solid 1px;

@@ -40,7 +40,6 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.selectWeiboOrderByWHgreateAccount(map);
 	}
 	
-	
 	@Override
 	public List<Map<String, Object>> findWeiboOrderByWBdate(Map<String, Integer> map) {
 		return weiboMapper.selectWeiboOrderByWBdate(map);
@@ -53,6 +52,10 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.updateaddWeiboLike(wbid) > 0 ? true : false;
 	}
 	@Override
+	public boolean updateminuWeiboLike(int wbid) {
+		return weiboMapper.updateminuWeiboLike(wbid) > 0 ? true : false ;
+	}
+	@Override
 	public boolean insertWhoLike(Map<String,Integer> map) {
 		return weiboMapper.insertWhoLike(map) > 0 ? true : false;
 	}
@@ -60,18 +63,27 @@ public class WeiboServiceImpl implements WeiboService{
 	public int selectAfterLikeGreateAcount(int wbid) {
 		return weiboMapper.selectAfterLike(wbid);
 	}
+	
+	//收藏
 	@Override
-	public boolean updateminuWeiboLike(int wbid) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateAddCollectWeibo(Map<String, Object> map) {
+		return weiboMapper.updateAddCollectWeibo(map) > 0 ? true : false;
 	}
+	@Override
+	public boolean updateCollectionAccount(int opnum, int wbid) {
+		return weiboMapper.updateCollectionAccount(opnum, wbid) > 0 ? true : false;
+	}
+	@Override
+	public int selectAfterCollection(int wbid) {
+		return weiboMapper.selectAfterCollection(wbid);
+	}
+
+
+
 	@Override
 	public Weibo findHotWeiBo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
 
 }

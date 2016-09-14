@@ -442,12 +442,13 @@ create table Operate(
            constraint RK_Operate_Uid references WeiBoUser(WBUid),--用户Id( 哪几种标签的用户操作了哪几种类型的微博)
        WBid int
            constraint RK_Operate_WBid references WeiBo(WBid),--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
-       Ostate varchar2(20)           --操作名（转载，收藏，评论，点赞..）
+       Ostate varchar2(20),           --操作名（转载，收藏，评论，点赞..）
        
-       --预留字段  
+       Ocontent varchar2(500)--预留字段  
 );
 create sequence seq_op_oid start with 1001;
-
+select * from Operate;
+drop table Operate;
 
 
 --评论（回复）微博表  --找爸爸

@@ -80,6 +80,13 @@ public class UserServiceImpl implements UserService {
 		return userMapper.quickLoginByPhone(Uphone);
 	}
 
+	
+	//更新积分
+	@Override
+	public boolean updateUserAccount(Map<String, Object> map) {
+		return userMapper.updateUserAccount(map) > 0 ? true : false;
+	}
+
 
 	
 

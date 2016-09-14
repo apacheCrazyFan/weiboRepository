@@ -145,7 +145,7 @@ window.onload=function(){
 					}
 					
 					newStr += '</div>';
-					newStr += '<div id="center_footnum" class="center_footnum">';
+					newStr += '<div id="center_footnum_'+collectiondivnum+'" class="center_footnum">';
 					newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
 					newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
 					newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
@@ -167,7 +167,7 @@ window.onload=function(){
 					newStr += '<div id="keyword" style="width:390px;height:32px;">';
 					newStr += '<input type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
 					
-					newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png"/>';
+					newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;keyword_tip1&quot;,'+userid+','+weiboid+')"/>';
 					newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col&quot;)"/></div>';
 					newStr += '</div>';
 					newStr += '</div>';
@@ -361,15 +361,14 @@ $(window).scroll(function(){
 		
 		newStr += '</div>';
 		newStr += '<div id="center_footnum" class="center_footnum">';
-		newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
-		newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
-		newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col&quot;)"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
 		newStr += '<a href="javascript:void(0)" id="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';  //点赞在这里处理
 		newStr += '</div>';																	//用户id					//微博id				
 		
 		
 		newStr += '<div id="center_footnum_col" class="center_footnum1_col_" style="display:none;">';
-		newStr += '<springmvc:form >';
 		newStr += '<div id="collection_div_unline">';
 		newStr += '<span id="collection_div_title">收藏</span>';
 		newStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum1_col&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -381,12 +380,11 @@ $(window).scroll(function(){
 		newStr += '<div id="collection_div_word"><img src="front/image/tishi.png" id="tishi_img"/><font id="tishi_word">添加标签来管理你的收藏</font></div>';
 		
 		newStr += '<div id="keyword" style="width:390px;height:32px;">';
-		newStr += '<springmvc:input path="taginput" type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
+		newStr += '<input" type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
 		
-		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag('+userid+','+weiboid+')"/>';
-		newStr += '<springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;)"/></div>';
+		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;keyword_tip1&quot;,'+userid+','+weiboid+')"/>';
+		newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;)"/></div>';
 		newStr += '</div>';
-		newStr += '</springmvc:form>';
 		newStr += '</div>';
 		
 		newStr += '<div id="center_footnum_transmit" class="center_footnum2_transmit" style="display:none;">';
@@ -455,18 +453,21 @@ function clicklike(obj,userid,wbid){
 };
 
 //收藏功能
-function collectiontag(userid,wbid){
+var collectiontagnum = 1;
+function collectiontag(inputobj,userid,wbid){
+	var input = document.getElementById(inputobj);
+	var txt = input.value;   //得到text的值
+	alert(txt);
 	$.ajax({
-		url: "weibo/addcollection",
+		  url: "weibo/addcollection",
 		  cache: false,
-		  data:{'userid':userid,'wbid':wbid},
+		  data:{'userid':userid,'wbid':wbid,'txt':txt,'collectiontagnum':collectiontagnum},
 		  dataType:"json",
 		  type:"get",
 		  success: function(data,textStatus){
 			  if(data.success){
-				  alert('hui lai le');
-				  //obj.innerHTML = '<img src="front/image/center-part_foot04.png" id="foot01_img"/>'+data.greateAccount;
-				  //oddAndEven ++;
+				  data.collectionAccount;
+				  collectiontagnum ++;
 			  }
 		  },
 		  error:function(error,textStatus){
