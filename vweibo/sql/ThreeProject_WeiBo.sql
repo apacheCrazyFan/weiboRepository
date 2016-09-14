@@ -163,7 +163,7 @@ insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.co
 delete from WeiBoUser where WBUid in (1001,1002);
 
 
-update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1005;
+update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1006;
 
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
@@ -183,7 +183,7 @@ create table Relationship(
 create table Group(
 	Gid int primary key,				--群id
 	Gname varchar2(40),					--群名
-	Uid int references WeiBoUser(Uid), 	--群里的用户id
+	Uid int references WeiBoUser(WBUid), 	--群里的用户id
 	Gdate Date							--进群时间
 );
 --黑名单

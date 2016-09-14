@@ -379,8 +379,10 @@ public class UserHandler {
 				user=userService.quickLoginByPhone(userName);
 			}
 			map.addAttribute("user",user);
+			flag=false;
 			return "/front/page/afterlogin.jsp";	
 		}
+		map.put("errorMsgg","请先在手机确认登录");
 		return "/front/page/quickLogin.jsp";
 	}
 	
@@ -402,6 +404,7 @@ public class UserHandler {
 			flag=true;
 			return "登录成功";
 		}else{
+			flag=false;
 			return "请核对用户名";
 		}
 		
