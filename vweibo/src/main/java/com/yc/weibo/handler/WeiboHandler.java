@@ -258,6 +258,7 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
+	//点赞
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addclicklike",method=RequestMethod.GET)
 	@ResponseBody
@@ -269,7 +270,7 @@ public class WeiboHandler {
 		params.put("uid", userid);
 		params.put("wbid", wbid);
 		
-		if(oddAndEven % 2 == 0){  //说明是偶数，减一
+		if(oddAndEven % 2 == 0 && oddAndEven != 1){  //说明是偶数，减一
 			weiboService.updateminuWeiboLike(wbid);
 			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
 			jsonMap.put("success", true);
@@ -287,7 +288,7 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
-	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)
+
 	@ResponseBody
 	public Map<String,Object> findHotWeiBo(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();

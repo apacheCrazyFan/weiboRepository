@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ page import="com.yc.weibo.entity.WeiBoUser"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="springmvc" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 
 	<!-- js操作session的包 -->
 <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
+<!--<script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>-->
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/blueimp-helper.js"></script>
 <script type="text/javascript" src="front/js/blueimp-gallery.js"></script>
@@ -80,7 +81,6 @@ var addclicklike = 1;
 		var statue = $("#form_push_op").val();
 		var content = $("#txt").val().trim();
 
-		alert(statue + " <--> " + content);
 
 		$.ajaxFileUpload({
 			url : 'weibo/publish',
@@ -196,7 +196,7 @@ S
 					if (videoMap != "") {
 						var video = videoMap.split(",");
 						for (var i = 0; i < video.length; i++) {
-							newWeiBoStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+							newWeiBoStr += '<video controls="true" autoplay="false" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 						}
 					}
 
@@ -204,7 +204,7 @@ S
 					if (musicMap != "") {
 						var music = musicMap.split(",");
 						for(var i = 0; i < music.length; i ++){
-							newWeiBoStr += '<audio autoplay="true" style="width:100px;height:100px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+							newWeiBoStr += '<audio controls="true" style="width:500px;height:25px;display:block;" src="/weibomusics/'+music[i]+'"/>';
 						}
 					}
 					newWeiBoStr += '</div>';
@@ -330,9 +330,27 @@ S
 <body id="bg">
 <input type="hidden" id="user" value="${sessionScope.user.WBUid}" />
 <input type="hidden" id="username" value="${sessionScope.user.uname}" />
-<!-- <form>
-		<input type="submit">
-	</form> --><input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM}" />
+<input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM}" />
+		<%-- <div id="center_footnum1_col_'+collectiondivnum+'" class="center_footnum1_col_" style="display:none;">';
+			<springmvc:form >
+				<div id="collection_div_unline">
+				<span id="collection_div_title">收藏</span>
+				<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum1_col&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>
+				</div>
+				<div id="collection_div_tishi">
+				<img src="front/image/collectionsuccess.png" id="collection_div_img"/>
+				<span id="collection_div_su">收藏成功!</span>
+				</div>
+				<div id="collection_div_word"><img src="front/image/tishi.png" id="tishi_img"/><font id="tishi_word">添加标签来管理你的收藏</font></div>
+		
+				<div id="keyword" style="width:390px;height:32px;">
+				<springmvc:input path="taginput" type="text" id="keyword_tip1" style="width:390px;height:32px;"/>
+		
+				<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png"/>
+				<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum1_col&quot;)"/></div>
+				</div>
+			</springmvc:form>
+		</div> --%>
 	<div id="header">
 
     	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
@@ -354,7 +372,6 @@ S
         </div>
 	</div>
 
-	<div id="test">wolaile</div>
 	
 	<div id="frame">
 		<div id="left-part">

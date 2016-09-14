@@ -13,9 +13,10 @@ var collectiondivnum = 1;
 
 var dataStrArrcopy = '';
 
-var userid = 0;
+var userid = 0;  //当前登录的用户
 
-$(document).ready(function(){  
+window.onload=function(){
+	
 	uid = $("#user").val().trim();
 	
 	if(uid != ""){
@@ -23,6 +24,7 @@ $(document).ready(function(){
 	}
 	var pageSize = 15;
 	var pageNum = 1;
+	
 	$.ajax({
 		  url: "weibo/afterLoginDataPrarery",
 		  cache: false,
@@ -31,16 +33,14 @@ $(document).ready(function(){
 		  Type:"GET",
 		  success: function(data,textStatus){
 		    if(data){
-		    	alert("i am coming");
 		    	dataStrArrcopy = JSON.stringify(data.weiboList); //json对象转化为json字符串
 
-		    	for(var i=0;i<6;i++){
-		    		
-		    		var dataMsg = data.weiboList[i];
+		    	for(var zz = 0;zz < 6; zz ++){
+		    		var dataMsg = data.weiboList[zz];
 		    		if(dataMsg != undefined){
 		    			
 		    		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
-		    									//用户id
+		    		var wbuid = dataMsg.WBUID//发表微博的用户id
 		    		var weiboid = dataMsg.WBID; //微博id
 		    		var username = dataMsg.UNAME;  //用户名
 		    		var userImgPaht = dataMsg.UIMGPATH; //用户图像路径
@@ -85,7 +85,7 @@ $(document).ready(function(){
 						}
 					}
 					
-					/* console.info(content);
+					/*console.info(content);
 					console.info(faceArr);
 					console.info(newContent); */
 					var faceRegx1 = new RegExp('\\n','gi');
@@ -132,7 +132,7 @@ $(document).ready(function(){
 					if (videoMap != "") {
 						var video = videoMap.split(",");
 						for (var i = 0; i < video.length; i++) {
-							newStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+							newStr += '<video controls="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 						}
 					}
 
@@ -140,7 +140,7 @@ $(document).ready(function(){
 					if (musicMap != "") {
 						var music = musicMap.split(",");
 						for(var i = 0; i < music.length; i ++){
-							newStr += '<audio autoplay="true" style="width:100px;height:100px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+							newStr += '<audio controls="true" src="/weibomusics/'+music[i]+'" style="width:500px;height:25px;"></video>';
 						}
 					}
 					
@@ -198,11 +198,13 @@ $(document).ready(function(){
 					
 					newStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 					newStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
+					newStr += '<form id="form_'+commentdivnum+'">';
 					newStr += '<input type="text" id="comment_input"/><br>';
 					newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 					newStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo()"/>';
+					newStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+userid+','+weiboid+',&quot;form_'+commentdivnum+'&quot;)"/>';
+					newStr += '</form>';
 					newStr += '</div>';
 					
 					
@@ -214,16 +216,16 @@ $(document).ready(function(){
 					transmitdivnum ++;
 					collectiondivnum ++;
 		    	}  
-		      }
-		    }
-		  },
+		      } //for()
+		    } //if(data)
+		  },  //success
 		  error:function(textStatus,error){
 			  alert("数据加载有误:"+error);
 		  }
 		
-	}); 
-});
+	}); //ajax
 
+<<<<<<< HEAD
 //热门微博
 function findHotWeiBo(){
 uid = $("#user").val().trim();
@@ -436,6 +438,9 @@ uid = $("#user").val().trim();
 }
 
 
+=======
+}
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 $(window).scroll(function(){  
 	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
 	
@@ -466,6 +471,7 @@ $(window).scroll(function(){
 
 		//var dataMsg = data.weiboList[i];
 		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
+		var wbuid = dataMsg.WBUID;  //发表微博的用户id
 		var username = dataMsg.UNAME;  //用户名
 		var weiboid = dataMsg.WBID;  //微博id
 		var userImgPaht = dataMsg.UIMGPATH; //用户图像路径
@@ -509,9 +515,9 @@ $(window).scroll(function(){
 			}
 		}
 		
-		/* console.info(content);
+		 console.info(content);
 		console.info(faceArr);
-		console.info(newContent); */
+		console.info(newContent); 
 		var faceRegx1 = new RegExp('\\n','gi');
 		faceArr1 = newContent.split(faceRegx1);
 		for(var j = 0; j < faceArr1.length; j ++){
@@ -556,7 +562,7 @@ $(window).scroll(function(){
 		if (videoMap != "") {
 			var video = videoMap.split(",");
 			for (var i = 0; i < video.length; i++) {
-				newStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+				newStr += '<video controls="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 			}
 		}
 
@@ -564,7 +570,7 @@ $(window).scroll(function(){
 		if (musicMap != "") {
 			var music = musicMap.split(",");
 			for(var i = 0; i < music.length; i ++){
-				newStr += '<audio autoplay="true" style="width:100px;height:100px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+				newStr += '<audio controls="true" src="/weibomusics/'+music[i]+'" style="width:500px;height:25px;"></video>';
 			}
 		}
 		
@@ -578,6 +584,7 @@ $(window).scroll(function(){
 		
 		
 		newStr += '<div id="center_footnum1_col_'+collectiondivnum+'" class="center_footnum1_col_" style="display:none;">';
+		newStr += '<springmvc:form >';
 		newStr += '<div id="collection_div_unline">';
 		newStr += '<span id="collection_div_title">收藏</span>';
 		newStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum1_col&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -589,11 +596,12 @@ $(window).scroll(function(){
 		newStr += '<div id="collection_div_word"><img src="front/image/tishi.png" id="tishi_img"/><font id="tishi_word">添加标签来管理你的收藏</font></div>';
 		
 		newStr += '<div id="keyword" style="width:390px;height:32px;">';
-		newStr += '<input type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
+		newStr += '<springmvc:input path="taginput" type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
 		
-		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png"/>';
-		newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum1_col&quot;)"/></div>';
+		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag('+userid+','+weiboid+')"/>';
+		newStr += '<springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum1_col&quot;)"/></div>';
 		newStr += '</div>';
+		newStr += '</springmvc:form>';
 		newStr += '</div>';
 		
 		newStr += '<div id="center_footnum2_transmit_'+transmitdivnum+'" class="center_footnum2_transmit" style="display:none;">';
@@ -631,8 +639,8 @@ $(window).scroll(function(){
 		
 		
 		$("#xixi").append('<div id="center-part-content_01" class="divid_'+clicklikenum+'">'+newStr+'</div>');  
-																//用于刷新点赞后的点赞数
- 		num ++;  
+			
+ 		num ++;  //用于刷新点赞后的点赞数
  		clicklikenum ++;
  		commentdivnum ++;
 		transmitdivnum ++;
@@ -640,8 +648,8 @@ $(window).scroll(function(){
 	}  
 }); 
 
-var oddAndEven = 1;
 //点赞功能                      //用户id   //微博id
+var oddAndEven = 1;
 function clicklike(obj,userid,wbid){
 	$.ajax({
 		url: "weibo/addclicklike",
@@ -659,6 +667,39 @@ function clicklike(obj,userid,wbid){
 			  alert("点赞是发生错误："+error);
 		  }
 	});
+};
+
+//收藏功能
+function collectiontag(userid,wbid){
+	$.ajax({
+		url: "weibo/addcollection",
+		  cache: false,
+		  data:{'userid':userid,'wbid':wbid},
+		  dataType:"json",
+		  type:"get",
+		  success: function(data,textStatus){
+			  if(data.success){
+				  alert('hui lai le');
+				  //obj.innerHTML = '<img src="front/image/center-part_foot04.png" id="foot01_img"/>'+data.greateAccount;
+				  //oddAndEven ++;
+			  }
+		  },
+		  error:function(error,textStatus){
+			  alert("收藏时发生错误："+error);
+		  }
+	});
+}
+
+//评论回复功能
+/*<script>
+  $('input[type=checkbox]').change(function(){
+    $('#Jszzdm').val($('input[type=checkbox]:checked').map(function(){return this.value}).get().join(','))
+  })
+</script>*/
+function commentsWeibo(userid,weiboid,formid){
+	var txtContent = $('#'+formid).$('input[type=text]')[0];
+	var booleanCk = $('#'+formid).$('input[type=checkbox]')[0].checked;
+	
 };
 
 

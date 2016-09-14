@@ -249,6 +249,7 @@ insert into FanAndFaned values(1001,1010,'未分组');
 --首先话题是可以放在微博里发表的
 --所以说话题可以是微博的一个附属
 --话题表
+select * from theme;
 drop table Theme;
 create table Theme(
 	Tid int primary key,					--话题id
@@ -455,22 +456,25 @@ create table Operate(
        --预留字段  
 );
 create sequence seq_op_oid start with 1001;
+
+
+
 --评论（回复）微博表  --找爸爸
 create table Comments(
-       Cid int primary key,           --评论（回复）id
-       WBUid int unique, --评论（回复）人id
-       WBid int unique,--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
+       Cid int primary key,          	--评论（回复）id
+       WBUid int unique, 				--评论（回复）人id
+       WBid int unique,					--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
        ContentTxt varchar2(500),        --评论（回复）文本内容
-       ContentPics varchar2(200),      --评论（回复）图片路径
-       Cdate Date,                    --评论日期
-       CgreateAccount int,            --评论点赞次数
-       Csonode int					  --下一个评论的id  这里可以列一个树状图出来
+       ContentPics varchar2(200),      	--评论（回复）图片路径(这里只指表情)
+       Cdate Date,                    	--评论日期
+       CgreateAccount int,            	--评论点赞次数
+       Csonode int					  	--下一个评论的id  这里可以列一个树状图出来 自己是自己的爸爸 自表查询
        
        --预留字段
 );
-drop table Comments;
 create sequence seq_comments_cid start with 100001 increment by 1;
 
+drop table Comments;
 --私信
 create table PrivateMessage(
        PMid int primary key,          --私信id
