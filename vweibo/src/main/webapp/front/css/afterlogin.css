@@ -626,7 +626,7 @@ textarea {
 	right: 10px;
 	top: 2px;
 }
-#center_footnum1_col{
+#center_footnum_col{
 	width:430px;
 	height:330px;
 	background:#FFF;
@@ -682,7 +682,7 @@ textarea {
 	left:125px;
 	top:8px;}	
 
-#center_footnum2_transmit{
+#center_footnum_transmit{
 	width:450px;
 	height:300px;
 	background:#FFF;

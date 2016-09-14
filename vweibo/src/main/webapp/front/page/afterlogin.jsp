@@ -487,7 +487,7 @@ var addclicklike = 1;
         </div>
        
        <div id="xixi">
-        <div id="center-part-content_01" style="margin-top:20px;">
+        <!-- <div id="center-part-content_01" style="margin-top:20px;">
             <a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="啦啦啦" src="front/image/userphoto003.png"/></a>
             <a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick='showcenterhidediv("center-partchoose")' onMouseOver="changecentercolor('center-part_way')" onMouseOut="changecentercolors('center-part_way')"><img src="front/image/conter-part_wayimg01.png"/></a>
                 <div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv('center-partchoose')">
@@ -768,7 +768,7 @@ var addclicklike = 1;
                     <input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>
                     <img src="front/image/comment_btn.png" id="comment_btn"/>
               </div>
-            </div>
+            </div> -->
           </div>  <!-- 目前三篇微博的根  id="xixi" -->
           
           <div id="changePage" style="float:left;background:#fff;margin-top:3px;margin-left:50px;">
