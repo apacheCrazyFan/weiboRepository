@@ -49,8 +49,8 @@ public class WeiboServiceImpl implements WeiboService{
 	
 	//点赞
 	@Override
-	public boolean updateWeiboLike(int wbid) {
-		return weiboMapper.updateWeiboLike(wbid) > 0 ? true : false;
+	public boolean updateaddWeiboLike(int wbid) {
+		return weiboMapper.updateaddWeiboLike(wbid) > 0 ? true : false;
 	}
 	@Override
 	public boolean insertWhoLike(Map<String,Integer> map) {
@@ -61,8 +61,17 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.selectAfterLike(wbid);
 	}
 	@Override
-	public Weibo findHotWeiBo() {
-		return weiboMapper.findHotWeiBo();
+	public boolean updateminuWeiboLike(int wbid) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+	@Override
+	public Weibo findHotWeiBo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 }

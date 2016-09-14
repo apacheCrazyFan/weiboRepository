@@ -10,7 +10,8 @@ public interface WeiboService {
 	int selectCurrMaxWBid();
 	boolean initWeibohelp(int currWBid);
 	
-	boolean updateWeiboLike(int wbid);
+	boolean updateaddWeiboLike(int wbid);
+	boolean updateminuWeiboLike(int wbid);
 	int selectAfterLikeGreateAcount(int wbid);
 	boolean insertWhoLike(Map<String,Integer> map);
 	

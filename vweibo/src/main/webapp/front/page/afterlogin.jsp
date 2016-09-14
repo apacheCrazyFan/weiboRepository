@@ -321,11 +321,7 @@ var addclicklike = 1;
 		});
 	}
 	
-	function findHotWeiBo(){
-		$.post("weibo/findHotWeiBo",function(data){
-			alert(data);
-		})
-	}
+
 </script>
 </head>
 	<%
@@ -359,7 +355,7 @@ var addclicklike = 1;
         </div>
 	</div>
 
-	
+	<div id="test">wolaile</div>
 	
 	<div id="frame">
 		<div id="left-part">

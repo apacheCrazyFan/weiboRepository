@@ -7,14 +7,29 @@ import java.util.Map;
 import com.yc.weibo.entity.Theme;
 
 public interface ThemeMapper {
+	/**
+	 * 这个就是删除的，通过id，好用
+	 * @param tid
+	 * @return
+	 */
     int deleteByPrimaryKey(BigDecimal tid);
 
     int insert(Theme record);
 
+    /**
+     * 插入不为null的参数，好用
+     * @param record
+     * @return
+     */
     int insertSelective(Theme record);
 
     Theme selectByPrimaryKey(BigDecimal tid);
 
+    /**
+     * 更新，根据主键， 更新不为null的 值，好用
+     * @param record  
+     * @return
+     */
     int updateByPrimaryKeySelective(Theme record);
 
     int updateByPrimaryKeyWithBLOBs(Theme record);
@@ -43,5 +58,5 @@ public interface ThemeMapper {
 	 * @return
 	 */
 	List<Theme> findAllTheme(Theme theme);
-    
+	
 }

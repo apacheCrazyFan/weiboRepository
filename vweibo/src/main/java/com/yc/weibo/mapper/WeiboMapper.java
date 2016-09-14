@@ -11,7 +11,8 @@ public interface WeiboMapper {
 	int selectCurrMaxWBid();
 	int initWeibohelp(int currWBid);
 	
-	int updateWeiboLike(int wbid);
+	int updateaddWeiboLike(int wbid);
+	int updateWeiminuWeiboboLike(int wbid);
 	int insertWhoLike(Map<String,Integer> map);
 	int selectAfterLike(int wbid);
 	

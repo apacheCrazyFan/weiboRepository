@@ -22,5 +22,28 @@ public interface ThemeService {
 	 */
 	int findCount();
 	
+	/**
+	 * 随机查询一部分 theme
+	 * @return
+	 */
 	List<Theme> findRandom();
+	
+	/**
+	 * 增加theme  ，需要一个theme对象的信息
+	 * @param tname
+	 * @return
+	 */
+	int addTheme(Theme param);
+	
+	/**
+	 * 更新theme
+	 * @return
+	 */
+	int updateTheme(Theme param);
+	
+	/**
+	 * 删除theme
+	 * @return
+	 */
+	int delTheme(String tid);
 }

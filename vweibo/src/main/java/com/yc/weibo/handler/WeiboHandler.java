@@ -261,22 +261,29 @@ public class WeiboHandler {
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addclicklike",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> addClickLike(@RequestParam(name="userid")Integer userid,@RequestParam(name="wbid")Integer wbid){
+	public Map<String,Object> addClickLike(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="oddAndEven") Integer oddAndEven){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Integer> params = new HashMap<String,Integer>();
 		
-		System.out.println( userid+"  =============  "+wbid);
+		System.out.println( userid+"  =============  "+wbid +"   ===========  "+oddAndEven);
 		params.put("uid", userid);
 		params.put("wbid", wbid);
 		
-		if(weiboService.insertWhoLike(params) && weiboService.updateWeiboLike(wbid)){
+		if(oddAndEven % 2 == 0){  //说明是偶数，减一
+			weiboService.updateminuWeiboLike(wbid);
 			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
 			jsonMap.put("success", true);
 			jsonMap.put("greateAccount", greateAccount);
-		}else{
-			jsonMap.put("success", false);
+		}else {
+			if(weiboService.insertWhoLike(params) && weiboService.updateaddWeiboLike(wbid)){
+			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
+			jsonMap.put("success", true);
+			jsonMap.put("greateAccount", greateAccount);
+			}else{
+				
+				jsonMap.put("success", false);
+			}
 		}
-
 		return jsonMap;
 	}
 	
