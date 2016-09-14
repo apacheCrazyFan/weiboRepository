@@ -50,9 +50,7 @@
 	<insert id="insertSelective" parameterType="com.yc.weibo.entity.Theme">
 		insert into THEME
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="tid != null">
 				TID,
-			</if>
 			<if test="tname != null">
 				TNAME,
 			</if>
@@ -76,9 +74,7 @@
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="tid != null">
-				#{tid,jdbcType=DECIMAL},
-			</if>
+			seq_Theme_Tid.nextval,
 			<if test="tname != null">
 				#{tname,jdbcType=VARCHAR},
 			</if>

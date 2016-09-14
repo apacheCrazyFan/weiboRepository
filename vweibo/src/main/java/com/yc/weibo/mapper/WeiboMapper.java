@@ -3,6 +3,8 @@ package com.yc.weibo.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.yc.weibo.entity.Weibo;
+
 
 public interface WeiboMapper {
 	int insertWeibo(Map<String, Object> map);
@@ -18,4 +20,5 @@ public interface WeiboMapper {
 	List<Map<String,Object>> selectWeiboOrderByWHgreateAccount(Map<String,Integer> map);	//点赞次数优先嵌套查询或者嵌套结果
 	
 	List<Map<String,Object>> selectWeiboOrderByWBdate(Map<String,Integer> map);
+	Weibo findHotWeiBo();
 }

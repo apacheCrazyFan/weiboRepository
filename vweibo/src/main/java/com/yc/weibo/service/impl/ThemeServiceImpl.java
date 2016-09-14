@@ -1,5 +1,6 @@
 package com.yc.weibo.service.impl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -58,7 +59,23 @@ public class ThemeServiceImpl implements ThemeService {
 
 	@Override
 	public List<Theme> findThemeByPage(Theme theme) {
-		return themeMapper.findAllTheme(theme);//可以了，
+		
+		return themeMapper.findAllTheme(theme);
+	}
+
+	@Override
+	public int addTheme(Theme param) {//写完啦，现在只要维护好param 这个参数，在Controller里面，
+		return themeMapper.insertSelective(param);
+	}
+
+	@Override
+	public int updateTheme(Theme param) {
+		return themeMapper.updateByPrimaryKeySelective(param);
+	}
+
+	@Override
+	public int delTheme(String tid) {
+		return themeMapper.deleteByPrimaryKey(BigDecimal.valueOf(Double.parseDouble(tid)));
 	}
 
 }

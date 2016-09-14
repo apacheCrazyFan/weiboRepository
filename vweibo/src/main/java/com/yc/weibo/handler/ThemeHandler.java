@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yc.weibo.entity.MessageResp;
 import com.yc.weibo.entity.Theme;
 import com.yc.weibo.service.ThemeService;
 
@@ -38,5 +39,53 @@ public class ThemeHandler {
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping({"addTheme"})//也可以这么写，里面就是第一个数组，你可以配置多个名字
+	public MessageResp addTheme(Theme theme,String tname,HttpServletRequest request,HttpServletResponse response){
+		int result=themeService.addTheme(theme);
+		MessageResp mes=new MessageResp();
+		if(result>0){
+			mes.setCode(1);
+			mes.setDesc("添加成功");
+			return mes;
+		}else{
+			mes.setCode(0);
+			mes.setDesc("添加失败");
+			return mes;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping({"updateTheme"})
+	public MessageResp updateTheme(Theme theme,HttpServletRequest request,HttpServletResponse response){
+		int result=themeService.updateTheme(theme);
+		MessageResp mes=new MessageResp();
+		if(result>0){
+			mes.setCode(1);
+			mes.setDesc("修改成功");
+			return mes;
+		}else{
+			mes.setCode(0);
+			mes.setDesc("修改失败");
+			return mes;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("delTheme")
+	public MessageResp delTheme(String tids){
+		int result=themeService.delTheme(tids);
+		MessageResp mes=new MessageResp();
+		if(result>0){
+			mes.setCode(1);
+			mes.setDesc("删除成功");
+			return mes;
+		}else{
+			mes.setCode(0);
+			mes.setDesc("删除失败");
+			return mes;
+		}
 	}
 }

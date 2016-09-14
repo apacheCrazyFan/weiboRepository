@@ -15,18 +15,20 @@
 		}
 		#aa{
 		float: left;
-		margin-left: 160px;
+		margin-left: 280px;
+		margin-top: 20px;
 		}
 		#bb{
 		float: left;
 		margin-left: 20px;
+		margin-top: 20px;
 		}
 		#QRCodeImagec{
 		height: 250px;
 		width: 300px;
-		float: left;
-		margin-left: 10px;
-		margin-top:60px;
+		clear:both;
+		margin-left: 400px;
+		padding-top: 60px;
 		}
 	</style>
 <script src="front/js/jquery-1.11.3.min.js" type="text/javascript"></script>
@@ -65,7 +67,7 @@
 		
 		
 		$("#bb").empty();
-		$("#bb").append('<input type="submit" value="确认登录" />');
+		$("#bb").append('<input type="submit" value="确认登录" /> <span>${errorMsgg}</span>');
 	
 		  
 	}

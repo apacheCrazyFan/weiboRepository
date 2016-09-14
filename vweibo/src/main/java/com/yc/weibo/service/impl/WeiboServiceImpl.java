@@ -62,7 +62,16 @@ public class WeiboServiceImpl implements WeiboService{
 	}
 	@Override
 	public boolean updateminuWeiboLike(int wbid) {
-		return weiboMapper.updateWeiminuWeiboboLike(wbid) > 0 ? true : false;
+		// TODO Auto-generated method stub
+		return false;
 	}
+	@Override
+	public Weibo findHotWeiBo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 }

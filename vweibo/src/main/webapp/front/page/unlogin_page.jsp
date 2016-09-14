@@ -285,8 +285,8 @@
    	<div id="right-part">
     	<div id="right-part-content">
         	<div class="nav">
-                <a href="javascript:void(0)"><span id="loginsoon" onclick="clickunlogin('loginsoon','loginslow')">快速登录</span></a>
-                <a href="javascript:void(0)"><span class="span2" id="loginslow" onclick="clickunlogin('loginslow','loginsoon')">账号密码登录</span></a>
+                <a href="javascript:void(0)"><span id="loginsoon" onclick="clickunloginByQuick('loginsoon','loginslow')">快速登录</span></a>
+                <a href="javascript:void(0)"><span class="span2" id="loginslow" onclick="clickunloginByAccount('loginslow','loginsoon')">账号密码登录</span></a>
         	</div>
         	<div class="content" style="position:relative;top:35px;">
         		<div class="content_top">
@@ -311,6 +311,19 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function clickunloginByQuick(id1,id2){
+	$("#"+id1).css("border-bottom","2px solid red");
+	$("#"+id2).css("border-bottom","2px solid #eee");
+	
+}
+function  clickunloginByAccount(id1,id2){
+	$("#"+id1).css("border-bottom","2px solid red");
+	$("#"+id2).css("border-bottom","2px solid #eee");
+}
+
+
+</script>
 </body>
 </html>
 

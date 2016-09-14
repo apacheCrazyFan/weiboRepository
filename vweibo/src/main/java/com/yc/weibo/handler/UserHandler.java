@@ -80,7 +80,7 @@ public class UserHandler {
 		user=userService.login(user);
 		if(user==null){
 			map.put("errorMsg","用户名或密码错误");
-			return "front/page/login.jsp";
+			return "/front/page/login.jsp";
 		}
 		//到这里说明登录成功了。那么我们作为服务器一端     应该要给它准备一些数据 ，还是它自己再做请求去申请数据？？
 		Theme params=new Theme();
@@ -379,8 +379,10 @@ public class UserHandler {
 				user=userService.quickLoginByPhone(userName);
 			}
 			map.addAttribute("user",user);
+			flag=false;
 			return "/front/page/afterlogin.jsp";	
 		}
+		map.put("errorMsgg","请在手机确认登录");
 		return "/front/page/quickLogin.jsp";
 	}
 	
@@ -402,6 +404,7 @@ public class UserHandler {
 			flag=true;
 			return "登录成功";
 		}else{
+			flag=false;
 			return "请核对用户名";
 		}
 		

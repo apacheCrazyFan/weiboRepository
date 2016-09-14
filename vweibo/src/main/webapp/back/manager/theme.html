@@ -33,9 +33,20 @@
 			text:"添加",
 			iconCls:"icon-add",
 			handler:function(){
-				currentOp="addTheme";
 				flag="添加";
-				if(editRow!=undefined){//说明有行正在被编辑
+				currentOp="addTheme";
+				if (editRow != undefined) {
+                    $("#theme_data").datagrid('endEdit', editRow);
+                }
+                if (editRow == undefined) {
+                    $("#theme_data").datagrid('insertRow', {
+                        index: 0,
+                        row: {}
+                    });
+                    $("#theme_data").datagrid('beginEdit', 0);
+                    editRow = 0;
+                }
+				/* if(editRow!=undefined){//说明有行正在被编辑
 					obj.datagrid("rejectChanges");//回滚所有数据
 					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
 					editRow=undefined;
@@ -47,7 +58,7 @@
 					obj.datagrid('insertRow',{index:total,row:{}});
 					obj.datagrid("beginEdit",total);
 					editRow=total;//记录当前被编辑的行的索引
-				}
+				} */
 			}
 		},{
 			text:'修改',
@@ -79,7 +90,7 @@
 			onClick:function(){
 			//获取选中的行
 				var rows=obj.datagrid("getChecked");
-				alert(typeof rows[0].tid);
+				//alert(typeof rows[0].tid);
 				if(rows[0]!=undefined){
 					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有微博）?', function(rs){
 						if (rs){
@@ -91,8 +102,10 @@
 							
 							//发请求到数据库
 							$.post("theme/delTheme",{"tids":tids},function(data){
-								alert(data);
-								if(data>0){
+								flag="删除";
+								data=JSON.parse(data);
+								//alert(data.code);
+								if(data.code>0){
 									$.messager.show({title:'成功提示',msg:'微博标签删除成功....',timeout:2000,showType:'slide'});
 									rows=null;
 									obj.datagrid("reload");//刷新表格
@@ -121,26 +134,20 @@
 					obj.datagrid("rejectChanges");//回滚所有数据
 					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
 					editRow=undefined;
-				}else if(rows.UTname==""){
+				}else if(rows.tname==""){
 					editRow=undefined;
 					obj.datagrid("rejectChanges");
 				}else{
 					//保存到数据库
 					//rows["op"]=currentOp;
-					var wtid=$(rows).attr("tid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
-					//jquery对象--》js对象    ===》1、$("#div").eq(0);  2、$("#div")[0]    
-					//alert(rows);
-					var wtname=$(rows).attr("tname");
-					//   $.post("url","data",function(data));//jquery中封装的post的方法
-						//url：请求的地址，不需要拼接参数，因为是用post提交的
-						//data：可以传一个js对象，但实际上是一个json的数据格式的字符串即可
-						//如：{'name':'yhj','sex':'undifine'}
-						//function（data)    :  回调的函数
-					//alert(rows);
-					//rows=$(rows);
-					$.post("theme/"+currentOp,{"tid":tid,"tname":tname},function(data){
-						alert(data);
-						if(data>0){
+					var tid=$(rows).attr("tid");
+					var tname=$(rows).attr("tname");
+					//var tdate=$(rows).attr("tdate");
+					var ttxt=$(rows).attr("ttxt");
+					$.post("theme/"+currentOp,{"tid":tid,"tname":tname,'ttxt':ttxt},function(data){
+						data=JSON.parse(data);
+						//alert(data.code);
+						if(data.code>0){
 							$.messager.show({
 								title:'成功提示',
 								msg:'新闻类型'+flag+'成功....',

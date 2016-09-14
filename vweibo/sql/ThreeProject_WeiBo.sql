@@ -163,7 +163,7 @@ insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.co
 delete from WeiBoUser where WBUid in (1001,1002);
 
 
-update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1005;
+update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1006;
 
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
@@ -180,10 +180,10 @@ create table Relationship(
 );
 
 --群
-create table Group(
-	Gid int primary key,				--群id
+create table Groups(
+	Gid int,				--群id
 	Gname varchar2(40),					--群名
-	Uid int references WeiBoUser(Uid), 	--群里的用户id
+	WBUid int references WeiBoUser(WBUid) unique,--群里的用户id
 	Gdate Date							--进群时间
 );
 --黑名单
@@ -249,6 +249,7 @@ insert into FanAndFaned values(1001,1010,'未分组');
 --首先话题是可以放在微博里发表的
 --所以说话题可以是微博的一个附属
 --话题表
+select * from theme;
 drop table Theme;
 create table Theme(
 	Tid int primary key,					--话题id
@@ -300,7 +301,7 @@ create table WeiBo(
        WBstatue int
        --预留字段      
 );
-create sequence seq_wb_wbid start with 10001;
+create sequence seq_wb_wbid start with 10001 increment by 1;
 
 alter table WeiBo add WBlocation varchar2(100);
 alter table WeiBo add WBstatue varchar2(20);     --微博的状态  公开 好友圈 群 仅自己可见
@@ -319,6 +320,8 @@ insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1002,sysdate,'bbbbb
 insert into WeiBo values(seq_wb_wbid.nextval,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','衡阳,长沙市',0);
 insert into WeiBo values(seq_wb_wbid.nextval,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y','N','衡阳,长沙市',0);
 
+
+select * from weibo order by 
 --微博附加表
 create table WeiBoHelp(
        WBid int references WeiBo(WBid),--微博id
