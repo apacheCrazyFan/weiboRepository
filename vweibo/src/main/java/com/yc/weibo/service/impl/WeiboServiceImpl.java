@@ -65,10 +65,11 @@ public class WeiboServiceImpl implements WeiboService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
-	public Weibo findHotWeiBo() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String, Object>> findHotWeiBo(Map<String, Integer> map) {
+		
+		return weiboMapper.findHotWeiBo(map);
 	}
 
 

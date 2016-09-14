@@ -287,10 +287,20 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)
 	@ResponseBody
-	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.POST)
-	public void findHotWeiBo(PrintWriter out){
-		Gson gson=new Gson();
-		Weibo hotWeibo=weiboService.findHotWeiBo();
+	public Map<String,Object> findHotWeiBo(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Integer> params = new HashMap<String,Integer>();
+		
+		System.out.println( pageSize+"  =============  "+pageNum);
+		params.put("pageSize", pageSize);
+		params.put("pageNum", pageNum);
+		List<Map<String,Object>> weiboList = weiboService.findHotWeiBo(params);
+
+		System.out.println( weiboList);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		return jsonMap;
 	}
 } 

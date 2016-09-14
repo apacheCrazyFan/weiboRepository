@@ -332,6 +332,9 @@ create table WeiBoHelp(
        
        --预留字段  
 );
+select * from  (
+	select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount,WHreprintAccount
+	) where rn<5 and rn>1;
 
 update WeiBoHelp set WHgreateAccount = 2210 where WBid in(10437);
 insert into WeiBoHelp values(10424,9854,4562,1433,2555,1345);
@@ -423,7 +426,13 @@ select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHg
 --找到id(点赞次数优先，浏览次数其次)
 select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount desc;  --降序查询 前十五条
 
-
+select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned )) order by WBdate desc) n where 2 * 2 >= rownum)
+ 			where rn > 2 * (2-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 
 select * from (select w.*,rownum rn from WeiBoHelp w order by WHgreateAccount desc where 2*1 >= rownum) n
 where 2*0 < rn;

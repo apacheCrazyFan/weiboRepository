@@ -57,8 +57,11 @@
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
 	
-	<select id="findHotWeiBo" resultType="WeiBo">
+	<select id="findHotWeiBo" resultType="map" parameterType="map">
+		select * from  (
+			select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount,WHreprintAccount
+		) where rn>#{pageSize} * (#{pageNum}-1) and #{pageSize} * (#{pageNum})>rn
 		
-	
+		
 	</select>
 </mapper>
