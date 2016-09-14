@@ -18,7 +18,7 @@
 
 	<!-- js操作session的包 -->
 <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
+<!--<script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>-->
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/blueimp-helper.js"></script>
 <script type="text/javascript" src="front/js/blueimp-gallery.js"></script>
@@ -196,7 +196,7 @@ var addclicklike = 1;
 					if (videoMap != "") {
 						var video = videoMap.split(",");
 						for (var i = 0; i < video.length; i++) {
-							newWeiBoStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+							newWeiBoStr += '<embed autoplay="false" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 						}
 					}
 
@@ -204,7 +204,7 @@ var addclicklike = 1;
 					if (musicMap != "") {
 						var music = musicMap.split(",");
 						for(var i = 0; i < music.length; i ++){
-							newWeiBoStr += '<audio autoplay="true" style="width:100px;height:100px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+							newWeiBoStr += '<embed autoplay="false" style="width:400px;height:150px;display:block;" src="/weibomusics/'+music[i]+'"/>';
 						}
 					}
 					newWeiBoStr += '</div>';

@@ -13,9 +13,10 @@ var collectiondivnum = 1;
 
 var dataStrArrcopy = '';
 
-var userid = 0;
+var userid = 0;  //当前登录的用户
 
-$(document).ready(function(){  
+window.onload=function(){
+	
 	uid = $("#user").val().trim();
 	
 	if(uid != ""){
@@ -23,6 +24,7 @@ $(document).ready(function(){
 	}
 	var pageSize = 15;
 	var pageNum = 1;
+	
 	$.ajax({
 		  url: "weibo/afterLoginDataPrarery",
 		  cache: false,
@@ -33,14 +35,15 @@ $(document).ready(function(){
 		    if(data){
 		    	alert("i am coming");
 		    	dataStrArrcopy = JSON.stringify(data.weiboList); //json对象转化为json字符串
-
-		    	for(var i=0;i<6;i++){
-		    		
+		    	alert(dataStrArrcopy);
+		    
+		    	for(var i = 0; i < 2; i ++){
+		    		alert(i+"  <--");
 		    		var dataMsg = data.weiboList[i];
 		    		if(dataMsg != undefined){
 		    			
 		    		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
-		    									//用户id
+		    		var wbuid = dataMsg.WBUID//发表微博的用户id
 		    		var weiboid = dataMsg.WBID; //微博id
 		    		var username = dataMsg.UNAME;  //用户名
 		    		var userImgPaht = dataMsg.UIMGPATH; //用户图像路径
@@ -85,7 +88,7 @@ $(document).ready(function(){
 						}
 					}
 					
-					/* console.info(content);
+					/*console.info(content);
 					console.info(faceArr);
 					console.info(newContent); */
 					var faceRegx1 = new RegExp('\\n','gi');
@@ -132,7 +135,7 @@ $(document).ready(function(){
 					if (videoMap != "") {
 						var video = videoMap.split(",");
 						for (var i = 0; i < video.length; i++) {
-							newStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+							newStr += '<embed src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 						}
 					}
 
@@ -140,7 +143,7 @@ $(document).ready(function(){
 					if (musicMap != "") {
 						var music = musicMap.split(",");
 						for(var i = 0; i < music.length; i ++){
-							newStr += '<audio autoplay="true" style="width:100px;height:100px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+							newStr += '<embed style="width:400px;height:50px;display:block;" src="/weibomusics/'+music[i]+'"/>';
 						}
 					}
 					
@@ -198,11 +201,13 @@ $(document).ready(function(){
 					
 					newStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 					newStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
+					newStr += '<form id="form_'+commentdivnum+'">';
 					newStr += '<input type="text" id="comment_input"/><br>';
 					newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 					newStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo()"/>';
+					newStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+userid+','+weiboid+',&quot;form_'+commentdivnum+'&quot;)"/>';
+					newStr += '</form>';
 					newStr += '</div>';
 					
 					
@@ -214,16 +219,16 @@ $(document).ready(function(){
 					transmitdivnum ++;
 					collectiondivnum ++;
 		    	}  
-		      }
-		    }
-		  },
+		      } //for()
+		    } //if(data)
+		  },  //success
 		  error:function(textStatus,error){
 			  alert("数据加载有误:"+error);
 		  }
 		
-	}); 
-});
+	}); //ajax
 
+}
 $(window).scroll(function(){  
 	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
 	
@@ -254,6 +259,7 @@ $(window).scroll(function(){
 
 		//var dataMsg = data.weiboList[i];
 		var content = dataMsg.WBTXT; //首先已经确定他的内容不为空了！
+		var wbuid = dataMsg.WBUID;  //发表微博的用户id
 		var username = dataMsg.UNAME;  //用户名
 		var weiboid = dataMsg.WBID;  //微博id
 		var userImgPaht = dataMsg.UIMGPATH; //用户图像路径
@@ -297,9 +303,9 @@ $(window).scroll(function(){
 			}
 		}
 		
-		/* console.info(content);
+		 console.info(content);
 		console.info(faceArr);
-		console.info(newContent); */
+		console.info(newContent); 
 		var faceRegx1 = new RegExp('\\n','gi');
 		faceArr1 = newContent.split(faceRegx1);
 		for(var j = 0; j < faceArr1.length; j ++){
@@ -344,7 +350,7 @@ $(window).scroll(function(){
 		if (videoMap != "") {
 			var video = videoMap.split(",");
 			for (var i = 0; i < video.length; i++) {
-				newStr += '<embed autoplay="true" src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
+				newStr += '<embed src="/weibovideoes/'+video[i]+'" style="width:500px;height:300px;"/>';
 			}
 		}
 
@@ -352,7 +358,7 @@ $(window).scroll(function(){
 		if (musicMap != "") {
 			var music = musicMap.split(",");
 			for(var i = 0; i < music.length; i ++){
-				newStr += '<audio autoplay="true" style="width:100px;height:100px;display:block;" src="/weibomusics/'+music[i]+'"/>';
+				newStr += '<embed style="width:400px;height:50px;display:block;" src="/weibomusics/'+music[i]+'"/>';
 			}
 		}
 		
@@ -447,6 +453,18 @@ function clicklike(obj,userid,wbid){
 			  alert("点赞是发生错误："+error);
 		  }
 	});
+};
+
+//评论回复功能
+/*<script>
+  $('input[type=checkbox]').change(function(){
+    $('#Jszzdm').val($('input[type=checkbox]:checked').map(function(){return this.value}).get().join(','))
+  })
+</script>*/
+function commentsWeibo(userid,weiboid,formid){
+	var txtContent = $('#'+formid).$('input[type=text]')[0];
+	var booleanCk = $('#'+formid).$('input[type=checkbox]')[0].checked;
+	
 };
 
 
