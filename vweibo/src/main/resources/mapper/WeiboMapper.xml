@@ -53,4 +53,9 @@
  			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
+	
+	<select id="findHotWeiBo" resultType="WeiBo">
+		
+	
+	</select>
 </mapper>

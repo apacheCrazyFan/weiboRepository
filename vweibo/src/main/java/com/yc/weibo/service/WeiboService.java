@@ -19,4 +19,5 @@ public interface WeiboService {
 	List<Map<String,Object>> findtWeiboOrderByWHgreateAccountFirst(Map<String,Integer> map);
 	
 	List<Map<String,Object>> findWeiboOrderByWBdate(Map<String,Integer> map);
+	Weibo findHotWeiBo();
 }

@@ -60,5 +60,9 @@ public class WeiboServiceImpl implements WeiboService{
 	public int selectAfterLikeGreateAcount(int wbid) {
 		return weiboMapper.selectAfterLike(wbid);
 	}
+	@Override
+	public Weibo findHotWeiBo() {
+		return weiboMapper.findHotWeiBo();
+	}
 
 }

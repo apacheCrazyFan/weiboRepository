@@ -180,10 +180,10 @@ create table Relationship(
 );
 
 --群
-create table Group(
-	Gid int primary key,				--群id
+create table Groups(
+	Gid int,				--群id
 	Gname varchar2(40),					--群名
-	Uid int references WeiBoUser(WBUid), 	--群里的用户id
+	WBUid int references WeiBoUser(WBUid) unique,--群里的用户id
 	Gdate Date							--进群时间
 );
 --黑名单
@@ -300,7 +300,7 @@ create table WeiBo(
        WBstatue int
        --预留字段      
 );
-create sequence seq_wb_wbid start with 10001;
+create sequence seq_wb_wbid start with 10001 increment by 1;
 
 alter table WeiBo add WBlocation varchar2(100);
 alter table WeiBo add WBstatue varchar2(20);     --微博的状态  公开 好友圈 群 仅自己可见
@@ -319,6 +319,8 @@ insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1002,sysdate,'bbbbb
 insert into WeiBo values(seq_wb_wbid.nextval,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','衡阳,长沙市',0);
 insert into WeiBo values(seq_wb_wbid.nextval,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y','N','衡阳,长沙市',0);
 
+
+select * from weibo order by 
 --微博附加表
 create table WeiBoHelp(
        WBid int references WeiBo(WBid),--微博id
