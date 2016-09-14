@@ -9,6 +9,8 @@
 		</selectKey>
 		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
 	</insert>
+	
+	
 	<select id="selectCurrMaxWBid" resultType="int">
 		select max(wbid) wbid from WeiBo
 	</select>
@@ -24,6 +26,7 @@
 	<select id="selectAfterLike" parameterType="int" resultType="int">
 		select WHgreateAccount from WeiBoHelp where WBid = #{wbid}
 	</select>
+	
 	
 	<insert id="insertWhoLike" parameterType="int">
 		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
@@ -52,5 +55,10 @@
 			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid})) order by WBdate desc) n where #{pageSize} * #{pageNum} >= rownum)
  			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
+	
+	<select id="findHotWeiBo" resultType="WeiBo">
+		
+	
 	</select>
 </mapper>
