@@ -249,6 +249,7 @@ insert into FanAndFaned values(1001,1010,'未分组');
 --首先话题是可以放在微博里发表的
 --所以说话题可以是微博的一个附属
 --话题表
+select * from theme;
 drop table Theme;
 create table Theme(
 	Tid int primary key,					--话题id
