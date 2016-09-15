@@ -85,5 +85,10 @@ public class WeiboServiceImpl implements WeiboService{
 		
 		return weiboMapper.findHotWeiBo(map);
 	}
+	@Override
+	public List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params) {
+		// TODO Auto-generated method stub
+		return weiboMapper.findFriendWeiBo(params);
+	}
 
 }

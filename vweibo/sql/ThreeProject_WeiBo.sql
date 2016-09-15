@@ -202,7 +202,7 @@ alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 drop table FanAndFaned;
-select * from FanAndFaned;
+select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
 select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
 delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
@@ -242,9 +242,9 @@ insert into FanAndFaned values(1001,1006,'同学');
 
 
 insert into FanAndFaned values(1001,1007,'未分组');
-insert into FanAndFaned values(1001,1008,'未分组');
-insert into FanAndFaned values(1001,1009,'未分组');
-insert into FanAndFaned values(1001,1010,'未分组');
+insert into FanAndFaned values(1006,1008,'好友圈',null);
+insert into FanAndFaned values(1006,1009,'好友圈',null);
+insert into FanAndFaned values(1006,1010,'未分组',null);
 
 --首先话题是可以放在微博里发表的
 --所以说话题可以是微博的一个附属
@@ -496,3 +496,19 @@ create table PersonalPermission(
        PPid int,                      --用户id
        PPstate char(2),               --权限是否开放{ F(开放) or T(关闭) }
 );
+
+
+select b.*,w.* from
+ (select * from WeiBo where WBUid in
+    (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=1006 )) b,WeiBoUser w where w.WBUid = b.WBUid ;
+
+    select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+				(select * from WeiBo  where WBUid in
+   					 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=1006 ) ) n where 2 * 2 >= rownum)
+ 			where rn > 2 * (2-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+ 			
+ create sequence seq_op_oid start with 1001;

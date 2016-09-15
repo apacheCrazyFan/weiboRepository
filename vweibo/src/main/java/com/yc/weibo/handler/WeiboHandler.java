@@ -331,7 +331,7 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
-	
+	//热门微博
 	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> findHotWeiBo(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
@@ -343,6 +343,26 @@ public class WeiboHandler {
 		params.put("pageSize", pageSize);
 		params.put("pageNum", pageNum);
 		List<Map<String,Object>> weiboList = weiboService.findHotWeiBo(params);
+
+		System.out.println( weiboList);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		return jsonMap;
+		}
+	
+	//好友圈
+	@RequestMapping(value="/findFriendWeiBo",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> findFriendWeiBo(@RequestParam(name="WBUid")Integer WBUid,@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
+		System.out.println( WBUid+"  =============  "+pageNum);
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+
+		Map<String,Integer> params = new HashMap<String,Integer>();
+
+		params.put("pageSize", pageSize);
+		params.put("pageNum", pageNum);
+		params.put("WBUid", WBUid);
+		List<Map<String,Object>> weiboList = weiboService.findFriendWeiBo(params);
 
 		System.out.println( weiboList);
 		jsonMap.put("weiboList", weiboList);
