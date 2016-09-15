@@ -165,10 +165,10 @@ window.onload=function(){
 					newStr += '<div id="collection_div_word"><img src="front/image/tishi.png" id="tishi_img"/><font id="tishi_word">添加标签来管理你的收藏</font></div>';
 					
 					newStr += '<div id="keyword" style="width:390px;height:32px;">';
-					newStr += '<input type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
+					newStr += '<input type="text" id="keyword_tip_'+collectiondivnum+'" class="keyword_tip1" style="width:390px;height:32px;"/>';
 					
-					newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;keyword_tip1&quot;,'+userid+','+weiboid+')"/>';
-					newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;)"/></div>';
+					newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"/>';
+					newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;)"/></div>';
 					newStr += '</div>';
 					newStr += '</div>';
 					
@@ -380,7 +380,7 @@ uid = $("#user").val().trim();
 					newStr += '<div id="keyword" style="width:390px;height:32px;">';
 					newStr += '<input type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
 					
-					newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png"/>';
+					newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;keyword_tip1&quot;,&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"/>';
 					newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"/></div>';
 					newStr += '</div>';
 					newStr += '</div>';
@@ -514,9 +514,7 @@ $(window).scroll(function(){
 			}
 		}
 		
-		 console.info(content);
-		console.info(faceArr);
-		console.info(newContent); 
+	
 		var faceRegx1 = new RegExp('\\n','gi');
 		faceArr1 = newContent.split(faceRegx1);
 		for(var j = 0; j < faceArr1.length; j ++){
@@ -582,7 +580,7 @@ $(window).scroll(function(){
 		newStr += '</div>';																	//用户id					//微博id				
 		
 		
-		newStr += '<div id="center_footnum_col_'+collectiondivnum+'" class="center_footnum1_col_" style="display:none;">';
+		newStr += '<div id="center_footnum_col_'+collectiondivnum+'" class="center_footnum_col" style="display:none;">';
 		newStr += '<div id="collection_div_unline>';
 		newStr += '<span id="collection_div_title">收藏</span>';
 		newStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum_col_'+collectiondivnum+'&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
@@ -594,10 +592,10 @@ $(window).scroll(function(){
 		newStr += '<div id="collection_div_word"><img src="front/image/tishi.png" id="tishi_img"/><font id="tishi_word">添加标签来管理你的收藏</font></div>';
 		
 		newStr += '<div id="keyword" style="width:390px;height:32px;">';
-		newStr += '<input" type="text" id="keyword_tip1" style="width:390px;height:32px;"/>';
+		newStr += '<input type="text" id="keyword_tip_'+collectiondivnum+'" class="keyword_tip1" style="width:390px;height:32px;"/>';
 		
-		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><springmvc:input path="disinput" type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;keyword_tip1&quot;,'+userid+','+weiboid+')"/>';
-		newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;)"/></div>';
+		newStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"/>';
+		newStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;)"/></div>';
 		newStr += '</div>';
 		newStr += '</div>';
 		
@@ -665,11 +663,10 @@ function clicklike(obj,userid,wbid){
 };
 
 //收藏功能
-function collectiontag(inputobj,uid,weiboid){
+function collectiontag(collectionobj,inputobj,uid,weiboid){
 	var input = document.getElementById(inputobj);
 	var txt = input.value;   //得到text的值
-	alert(inputobj+"  ====  "+txt);
-	alert(uid+"  --  "+weiboid);
+	alert(txt);
 	$.ajax({
 		  url: "weibo/addcollection",
 		  cache: false,
@@ -679,8 +676,8 @@ function collectiontag(inputobj,uid,weiboid){
 		  type:"post",
 		  success: function(data,textStatus){
 			  if(data.success){
-				  $("#keyword_tip1").val('');
-				  $("#center_footnum_col").hide();
+				  $("#"+inputobj).val('');
+				  $("#"+collectionobj).hide();
 			  }
 		  },
 		  error:function(error,textStatus){
@@ -884,9 +881,9 @@ function superdivcloseimg(id){
 }
 
 //取消键关闭收藏标签
-function closecollectiondiv(id){
+function closecollectiondiv(id,inputid){
 	var cancelbtn2=document.getElementById(id);
-	$("#keyword_tip1").val('');
+	$("#"+inputid).val('');
 	if(cancelbtn2){
 		if(cancelbtn2.style.display=='block'){
 			cancelbtn2.style.display='none';
