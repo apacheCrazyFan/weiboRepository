@@ -17,9 +17,18 @@
 <link rel="stylesheet" href="front/css/blueimp-gallery-video.css">
 <link rel="stylesheet" href="front/css/demo.css">
 
+<!-- <link rel="stylesheet" href="jquery-easyui-1.3.5/themes/default/easyui.css">
+<link rel="stylesheet" href="jquery-easyui-1.3.5/themes/icon.css">
+<link rel="stylesheet" href="jquery-easyui-1.3.5/demo/demo.css"> -->
+
+<!-- <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script> -->
+<script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
+
+<!-- <script type="text/javascript" src="jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.3.5/easyloader.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script> -->
+
 	<!-- js操作session的包 -->
-<script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
-<!--<script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>-->
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/blueimp-helper.js"></script>
 <script type="text/javascript" src="front/js/blueimp-gallery.js"></script>
@@ -80,14 +89,15 @@ var addclicklike = 1;
 		weibocount = Number($("#weibocount").val());
 		var statue = $("#form_push_op").val();
 		var content = $("#txt").val().trim();
-
+		var uid = $("#user").val().trim();
 
 		$.ajaxFileUpload({
 			url : 'weibo/publish',
 			secureuri : false,
 			data : {
 				'statue' : statue,
-				'content' : content
+				'content' : content,
+				'uid' : parseInt(uid)
 			},
 			fileElementId : media,
 			dataType : 'json',
@@ -135,7 +145,7 @@ var addclicklike = 1;
 					newWeiBoStr += '<li id="center-part_li" style="height:0px;position:relative;left:18px;top:15px;">${sessionScope.user.uname}</li>';
 					newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+ date + '</a> 来自 ' + location + '</li>';
 					newWeiBoStr += '</ul>';
-S
+
 					var newContent ='';
 					var newContent1 = '';
 					faceArr = content.split("[");

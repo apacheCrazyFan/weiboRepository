@@ -18,7 +18,7 @@ public interface WeiboMapper {
 	int updateminuWeiboLike(int wbid);
 	int selectAfterLike(int wbid);
 	
-	int updateCollectionAccount(int opnum,int wbid);
+	int updateCollectionAccount(int wbid);
 	int selectAfterCollection(int wbid);
 	
 	List<Map<String,Object>> seleteWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);  //浏览次数优先mybatis里面是sql非嵌套查询也非嵌套结果

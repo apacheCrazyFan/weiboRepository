@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,7 +52,7 @@ public class WeiboHandler {
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> publishWeibo(MultipartHttpServletRequest multipartRequest,HttpServletRequest request,HttpServletResponse response){
+	public Map<String,Object> publishWeibo(@RequestParam(name="uid")Integer uid,MultipartHttpServletRequest multipartRequest,HttpServletRequest request,HttpServletResponse response){
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 
 		/*@RequestParam(name="myPicFile",required=false) CommonsMultipartFile myPicFile,
@@ -113,14 +115,20 @@ public class WeiboHandler {
 		boolean initWeibohelp = weiboService.initWeibohelp(currWBid);
 		
 		if(!publishDateAndLocation.equals(DataDic.DATESTRING) && initWeibohelp){
-			jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
-			jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
-			//增加了最后的逗号删除操作
-			jsonMap.put("picsMap", operateString(picsMap));
-			jsonMap.put("videoMap", operateString(videoMap));
-			jsonMap.put("musicMap", operateString(musicMap));
-			jsonMap.put("publishsuccessweiboid", currWBid);
-			jsonMap.put("rate", 2);
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("account", DataDic.PUBLIS);
+			params.put("uid", uid);
+			if(userService.updateUserAccount(params)){
+				
+				jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
+				jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
+				//增加了最后的逗号删除操作
+				jsonMap.put("picsMap", operateString(picsMap));
+				jsonMap.put("videoMap", operateString(videoMap));
+				jsonMap.put("musicMap", operateString(musicMap));
+				jsonMap.put("publishsuccessweiboid", currWBid);
+				jsonMap.put("rate", 2);
+			}
 		}
 
 		return jsonMap;
@@ -306,42 +314,65 @@ public class WeiboHandler {
 	}
 	
 	
-	//收藏
-	/*@Transactional(propagation=Propagation.REQUIRED)
-	@RequestMapping(value="/addcollection",method=RequestMethod.GET)
+	//控制收藏的div的display
+	@RequestMapping(value="/collectionDiv",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> addcollection(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt){
+	public Map<String,Object> collectionDiv(@RequestParam(name="uid")Integer uid, @RequestParam(name="wbid")Integer wbid){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Object> params = new HashMap<String,Object>();
 		
-		System.out.println( userid+"  =============  "+wbid + " +++++++ "+txt);
-		params.put("uid", userid);
+		System.out.println( uid+"  =============  "+wbid);
+		params.put("uid", uid);
 		params.put("wbid", wbid);
-		params.put("txt",txt);
+		params.put("Ostate","收藏");
 		
-			if(weiboService.updateAddCollectWeibo(params)){
+		if(operateService.selectoperateId(params) > 0){
+			System.out.println( operateService.selectoperateId(params));
+			jsonMap.put("ishave", true);
+		}else{
+			System.out.println( operateService.selectoperateId(params));
+			jsonMap.put("ishave", false);
+		}
+		
+		return jsonMap;
+	}
+	
+	//收藏
+	@Transactional(propagation=Propagation.REQUIRED)
+	@RequestMapping(value="/addcollection",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> addcollection(@RequestParam(name="uid")Integer uid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Object> params = new HashMap<String,Object>();
+		
+		System.out.println( uid+"  =============  "+wbid + " +++++++ "+txt);
+		params.put("uid", uid);
+		params.put("wbid", wbid);
+		params.put("tag",txt);
+		
+		if(operateService.insertCollectWeibo(params)){  //插入operate
 				
-				if(weiboService.updateCollectionAccount(1,wbid)){
+				if(weiboService.updateCollectionAccount(wbid)){   //weibohelp的浏览次数和收藏次数加一
 					
 					params.clear();
 					params.put("account", DataDic.COLLECT);
-					params.put("uid", userid);
+					params.put("uid", uid);
 					//积分更新完成
-					if(userService.updateUserAccount(params)){
+					if(userService.updateUserAccount(params)){  //跟新微博所属用户的积分
 						
 						//返回收藏后的收藏数
 						int collectionAccount  = weiboService.selectAfterCollection(wbid);
-						jsonMap.put("cureHelp", true);
 						jsonMap.put("success", true);
 						jsonMap.put("collectionAccount", collectionAccount);
 					}
 				}
+			}else{
+				
+				jsonMap.put("success", false);
 			}
 			
-			jsonMap.put("cureHelp", false);
-			jsonMap.put("success", false);
 		return jsonMap;
-	}*/
+	}
 	
 	
 	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)
