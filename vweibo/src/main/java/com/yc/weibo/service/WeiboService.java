@@ -3,7 +3,6 @@ package com.yc.weibo.service;
 import java.util.List;
 import java.util.Map;
 
-import com.yc.weibo.entity.Weibo;
 
 public interface WeiboService {
 	boolean addWeibo(Map<String, Object> map);
@@ -13,9 +12,7 @@ public interface WeiboService {
 	boolean updateaddWeiboLike(int wbid);
 	boolean updateminuWeiboLike(int wbid);
 	int selectAfterLikeGreateAcount(int wbid);
-	boolean insertWhoLike(Map<String,Integer> map);
 	
-	boolean updateAddCollectWeibo(Map<String,Object> map);
 	boolean updateCollectionAccount(int opnum, int wbid);
 	int selectAfterCollection(int wbid);
 	

@@ -645,13 +645,12 @@ $(window).scroll(function(){
 	}  
 }); 
 
-//点赞功能                      //用户id   //微博id
-var oddAndEven = 1;
+//点赞功能                      			//用户id   //微博id
 function clicklike(obj,userid,wbid){
 	$.ajax({
 		url: "weibo/addclicklike",
 		  cache: false,
-		  data:{'userid':userid,'wbid':wbid,'oddAndEven':oddAndEven},
+		  data:{'userid':userid,'wbid':wbid},
 		  dataType:"json",
 		  type:"get",
 		  success: function(data,textStatus){
@@ -667,7 +666,6 @@ function clicklike(obj,userid,wbid){
 };
 
 //收藏功能
-var collectiontagnum = 1;
 function collectiontag(inputobj,userid,wbid){
 	var input = document.getElementById(inputobj);
 	var txt = input.value;   //得到text的值
@@ -675,7 +673,7 @@ function collectiontag(inputobj,userid,wbid){
 	$.ajax({
 		  url: "weibo/addcollection",
 		  cache: false,
-		  data:{'userid':userid,'wbid':wbid,'txt':txt,'collectiontagnum':collectiontagnum},
+		  data:{'userid':userid,'wbid':wbid,'txt':txt},
 		  dataType:"json",
 		  type:"get",
 		  success: function(data,textStatus){

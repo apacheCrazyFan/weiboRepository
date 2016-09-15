@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,10 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.WeiBoUser;
-import com.yc.weibo.entity.Weibo;
+import com.yc.weibo.service.OperateService;
 import com.yc.weibo.service.UserService;
 import com.yc.weibo.service.WeiboService;
 import com.yc.weibo.util.AddressUtil;
@@ -42,6 +40,8 @@ import com.yc.weibo.util.AddressUtil;
 public class WeiboHandler {
 	@Autowired 
 	private ServletContext servletContext;
+	@Autowired
+	private OperateService operateService;
 	@Autowired
 	private WeiboService weiboService;
 	@Autowired
@@ -260,30 +260,46 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
+	
+	//点赞
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addclicklike",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> addClickLike(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="oddAndEven") Integer oddAndEven){
+	public Map<String,Object> addClickLike(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
-		Map<String,Integer> params = new HashMap<String,Integer>();
+		Map<String,	Object> params = new HashMap<String,Object>();
 		
-		System.out.println( userid+"  =============  "+wbid +"   ===========  "+oddAndEven);
+		System.out.println( userid+"  =============  "+wbid);
 		params.put("uid", userid);
 		params.put("wbid", wbid);
+		params.put("Ostate", "点赞");
 		
-		if(oddAndEven % 2 == 0){  //说明是偶数，减一
-			weiboService.updateminuWeiboLike(wbid);
-			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
-			jsonMap.put("success", true);
-			jsonMap.put("greateAccount", greateAccount);
-		}else {
-			if(weiboService.insertWhoLike(params) && weiboService.updateaddWeiboLike(wbid)){
-			int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
-			jsonMap.put("success", true);
-			jsonMap.put("greateAccount", greateAccount);
-			}else{
+		int operateId = operateService.selectoperateId(params);
+		System.out.println( operateId);
+		if(operateId > 0){ //如果该用户已经点赞了
+			
+			if(weiboService.updateminuWeiboLike(wbid) && operateService.deleteOperate(operateId)){  //删除operate 和 weibohelp的数据
+				params.clear();
+				params.put("account", -2);
+				params.put("uid", userid);
 				
-				jsonMap.put("success", false);
+				if(userService.updateUserAccount(params)){  //减少用户的积分
+					int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);  //返回一系列操作后的点赞数
+					jsonMap.put("success", true);
+					jsonMap.put("greateAccount", greateAccount);
+				}
+			};
+		}else {  //说明以前没有点过赞
+			
+			if(operateService.insertWhoLikeWeibo(params) && weiboService.updateaddWeiboLike(wbid)){
+				params.clear();
+				params.put("account", 2);
+				params.put("uid", userid);
+				if(userService.updateUserAccount(params)){ //增加用户积分
+					int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
+					jsonMap.put("success", true);
+					jsonMap.put("greateAccount", greateAccount);
+				}
 			}
 		}
 		return jsonMap;
@@ -291,20 +307,18 @@ public class WeiboHandler {
 	
 	
 	//收藏
-	@Transactional(propagation=Propagation.REQUIRED)
+	/*@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addcollection",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> addcollection(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt, @RequestParam(name="collectiontagnum")Integer collectiontagnum){
+	public Map<String,Object> addcollection(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Object> params = new HashMap<String,Object>();
 		
-		System.out.println( userid+"  =============  "+wbid + " +++++++ "+txt + "  ,,,,,,, "+collectiontagnum);
+		System.out.println( userid+"  =============  "+wbid + " +++++++ "+txt);
 		params.put("uid", userid);
 		params.put("wbid", wbid);
 		params.put("txt",txt);
 		
-		//收藏完成
-		if(collectiontagnum % 2 != 0){
 			if(weiboService.updateAddCollectWeibo(params)){
 				
 				if(weiboService.updateCollectionAccount(1,wbid)){
@@ -324,12 +338,10 @@ public class WeiboHandler {
 				}
 			}
 			
-		}else{
 			jsonMap.put("cureHelp", false);
 			jsonMap.put("success", false);
-		}
 		return jsonMap;
-	}
+	}*/
 	
 	
 	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)

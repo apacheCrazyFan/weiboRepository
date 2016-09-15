@@ -56,19 +56,11 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.updateminuWeiboLike(wbid) > 0 ? true : false ;
 	}
 	@Override
-	public boolean insertWhoLike(Map<String,Integer> map) {
-		return weiboMapper.insertWhoLike(map) > 0 ? true : false;
-	}
-	@Override
 	public int selectAfterLikeGreateAcount(int wbid) {
 		return weiboMapper.selectAfterLike(wbid);
 	}
 	
 	//收藏
-	@Override
-	public boolean updateAddCollectWeibo(Map<String, Object> map) {
-		return weiboMapper.updateAddCollectWeibo(map) > 0 ? true : false;
-	}
 	@Override
 	public boolean updateCollectionAccount(int opnum, int wbid) {
 		return weiboMapper.updateCollectionAccount(opnum, wbid) > 0 ? true : false;
