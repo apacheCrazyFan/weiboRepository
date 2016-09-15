@@ -15,7 +15,7 @@ public interface WeiboService {
 	boolean updateminuWeiboLike(int wbid);
 	int selectAfterLikeGreateAcount(int wbid);
 	
-	boolean updateCollectionAccount(int opnum, int wbid);
+	boolean updateCollectionAccount(int wbid);
 	int selectAfterCollection(int wbid);
 	
 	List<Map<String,Object>> findWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);

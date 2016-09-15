@@ -30,8 +30,8 @@
 	
 	
 	
-	<update id="updateCollectionAccount" parameterType="map">
-		update WeiBoHelp set WHfavoriteAccount = WHfavoriteAccount + {#opnum} where WBid = #{wbid}
+	<update id="updateCollectionAccount" parameterType="int">
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHfavoriteAccount = WHfavoriteAccount + 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterCollection" parameterType="int" resultType="int">
 		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}

@@ -62,8 +62,8 @@ public class WeiboServiceImpl implements WeiboService{
 	
 	//收藏
 	@Override
-	public boolean updateCollectionAccount(int opnum, int wbid) {
-		return weiboMapper.updateCollectionAccount(opnum, wbid) > 0 ? true : false;
+	public boolean updateCollectionAccount(int wbid) {
+		return weiboMapper.updateCollectionAccount(wbid) > 0 ? true : false;
 	}
 	@Override
 	public int selectAfterCollection(int wbid) {
