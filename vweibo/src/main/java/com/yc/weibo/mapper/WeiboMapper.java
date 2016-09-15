@@ -28,4 +28,5 @@ public interface WeiboMapper {
 	List<Map<String, Object>> findHotWeiBo(Map<String, Integer> map);
 	
 	List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params);
+	List<Weibo> myCollections(int wBUid);
 }

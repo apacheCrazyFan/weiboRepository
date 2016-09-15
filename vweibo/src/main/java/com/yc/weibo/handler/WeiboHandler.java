@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,8 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.WeiBoUser;
+import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.service.OperateService;
 import com.yc.weibo.service.UserService;
 import com.yc.weibo.service.WeiboService;
@@ -381,4 +384,15 @@ public class WeiboHandler {
 		jsonMap.put("total", weiboList.size());
 		return jsonMap;
 		}
+	
+	//我的收藏
+	@RequestMapping(value="/myCollections",method=RequestMethod.POST)
+	public void myCollections(int WBUid,PrintWriter out){
+		Gson gson=new Gson();
+		List<Weibo> weibos=weiboService.myCollections(WBUid);
+		System.out.println(weibos);
+		out.print(gson.toJson(weibos));
+		out.flush();
+		out.close();
+	}
 } 

@@ -458,7 +458,7 @@ create table Operate(
 create sequence seq_op_oid start with 1001;
 select * from Operate;
 drop table Operate;
-
+insert into Operate values(seq_op_oid.nextval,1006,10001,' ’≤ÿ',null);
 
 --∆¿¬€£®ªÿ∏¥£©Œ¢≤©±Ì  --’“∞÷∞÷
 create table Comments(
@@ -512,3 +512,5 @@ select b.*,w.* from
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
  			
  create sequence seq_op_oid start with 1001;
+ 
+ select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate=' ’≤ÿ' and p.wbuid=1006;

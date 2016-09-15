@@ -75,4 +75,8 @@
  				where rn>#{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
+	<!-- 我的收藏 -->
+	<select id="myCollections" resultType="Weibo" parameterType="int">
+		 select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=#{WBUid}
+	</select>
 </mapper>

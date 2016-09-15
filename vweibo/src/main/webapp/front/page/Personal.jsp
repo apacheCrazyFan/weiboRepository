@@ -10,8 +10,10 @@
 <link type="text/css" rel="stylesheet" href="front/css/Personal.css"/>
 
 </head>
+<script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="front/js/personal.js"></script>
 <body>
+<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<div class="head" id="head">
     	<div id="logo" class="headSon"><img src="front/image/helpArea_image/logoArea_logo.png"/></div>
   
@@ -118,7 +120,9 @@
                 
             </div>
             <div id="content_m2_right">
-            
+            	<ul id="myCollections" >
+            		
+            	</ul>
             </div>
         </div>
     </div>
@@ -130,4 +134,19 @@
     
 	
 </body>
+
+<script type="text/javascript">
+	var WBUid=$("#hiddenid").val();
+	$(function(){
+		$.post("weibo/myCollections",{"WBUid":WBUid},function(data){
+			var str="";
+			alert(data.length);
+			for(var i=0;i<data.length;i++){
+				str+='<li><a href="javascript:findWeiBo('+data[i].WBid+')">'+data[i].WBtxt+'</a></li>';
+			}
+			$("#myCollections").append(str);
+		})
+	});
+
+</script>
 </html>

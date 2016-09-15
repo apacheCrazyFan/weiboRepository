@@ -82,5 +82,9 @@ public class WeiboServiceImpl implements WeiboService{
 		// TODO Auto-generated method stub
 		return weiboMapper.findFriendWeiBo(params);
 	}
+	@Override
+	public List<Weibo> myCollections(int WBUid) {
+		return weiboMapper.myCollections(WBUid);
+	}
 
 }
