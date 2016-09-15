@@ -64,11 +64,20 @@ window.onload=function(){
 					var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 					
 					var newStr = '';
+					newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+					newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
+					newStr += '<ul>';
+					newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
+					newStr += '<li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>';
+					newStr += '<li class="center-partc1" id="center-partchoose3" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">取消关注</a></li>';
+					newStr += '<li class="center-partc1" id="center-partchoose4" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">举报</a></li>';
+					newStr += '</ul>';
+					newStr += '</div>';
 					
 					newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'"/></a>';
 					newStr += '<ul id="center-part_ul">';
 					newStr += '<li id="center-part_li">'+username+'</li>';
-	                newStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+	                newStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
 	                newStr += '</ul>';
 	                
 					//表情处理
@@ -287,7 +296,7 @@ uid = $("#user").val().trim();
 					//表情处理
 					var newContent ='';
 					var newContent1 = '';
-					faceArr = content.split("[");
+					var faceArr = content.split("[");
 					for(var k = 0; k < faceArr.length; k ++){
 						if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
 							faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
@@ -302,7 +311,7 @@ uid = $("#user").val().trim();
 					console.info(faceArr);
 					console.info(newContent); */
 					var faceRegx1 = new RegExp('\\n','gi');
-					faceArr1 = newContent.split(faceRegx1);
+					var faceArr1 = newContent.split(faceRegx1);
 					for(var j = 0; j < faceArr1.length; j ++){
 						newContent1 += faceArr1[j]+'<br />';
 					}
@@ -497,7 +506,7 @@ $(window).scroll(function(){
 		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'"/></a>';
 		newStr += '<ul id="center-part_ul">';
 		newStr += '<li id="center-part_li">'+username+'</li>';
-        newStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+        newStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         newStr += '</ul>';
         
 		//表情处理
@@ -515,8 +524,9 @@ $(window).scroll(function(){
 		}
 		
 	
+		//换行处理
 		var faceRegx1 = new RegExp('\\n','gi');
-		faceArr1 = newContent.split(faceRegx1);
+		faceArr1 = content.split(faceRegx1);
 		for(var j = 0; j < faceArr1.length; j ++){
 			newContent1 += faceArr1[j]+'<br />';
 		}

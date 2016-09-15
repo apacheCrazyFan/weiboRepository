@@ -182,6 +182,7 @@ public class WeiboHandler {
 		String statue = request.getParameter("statue");
 		String userlocation = AddressUtil.getLocation();
 
+		System.out.println( txtContent + " <----->  "+statue);
 		WeiBoUser user = (WeiBoUser)request.getSession().getAttribute("user");
 
 		SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
