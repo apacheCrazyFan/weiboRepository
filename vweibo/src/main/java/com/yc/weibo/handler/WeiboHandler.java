@@ -5,8 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,8 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.WeiBoUser;
+import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.service.OperateService;
 import com.yc.weibo.service.UserService;
 import com.yc.weibo.service.WeiboService;
@@ -375,7 +376,7 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
-	
+	//热门微博
 	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> findHotWeiBo(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
@@ -393,4 +394,35 @@ public class WeiboHandler {
 		jsonMap.put("total", weiboList.size());
 		return jsonMap;
 		}
+	
+	//好友圈
+	@RequestMapping(value="/findFriendWeiBo",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> findFriendWeiBo(@RequestParam(name="WBUid")Integer WBUid,@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
+		System.out.println( WBUid+"  =============  "+pageNum);
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+
+		Map<String,Integer> params = new HashMap<String,Integer>();
+
+		params.put("pageSize", pageSize);
+		params.put("pageNum", pageNum);
+		params.put("WBUid", WBUid);
+		List<Map<String,Object>> weiboList = weiboService.findFriendWeiBo(params);
+
+		System.out.println( weiboList);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		return jsonMap;
+		}
+	
+	//我的收藏
+	@RequestMapping(value="/myCollections",method=RequestMethod.POST)
+	public void myCollections(int WBUid,PrintWriter out){
+		Gson gson=new Gson();
+		List<Weibo> weibos=weiboService.myCollections(WBUid);
+		System.out.print(weibos);
+		out.print(gson.toJson(weibos));
+		out.flush();
+		out.close();
+	}
 } 
