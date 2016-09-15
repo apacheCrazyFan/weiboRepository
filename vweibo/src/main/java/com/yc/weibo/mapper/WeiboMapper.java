@@ -12,12 +12,12 @@ public interface WeiboMapper {
 	int selectCurrMaxWBid();
 	int initWeibohelp(int currWBid);
 	
+	int selectOperateId(Map<String,Integer> map);
+	
 	int updateaddWeiboLike(int wbid);
 	int updateminuWeiboLike(int wbid);
-	int insertWhoLike(Map<String,Integer> map);
 	int selectAfterLike(int wbid);
 	
-	int updateAddCollectWeibo(Map<String,Object> map);
 	int updateCollectionAccount(int opnum,int wbid);
 	int selectAfterCollection(int wbid);
 	
