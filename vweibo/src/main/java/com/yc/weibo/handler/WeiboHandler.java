@@ -390,7 +390,7 @@ public class WeiboHandler {
 	public void myCollections(int WBUid,PrintWriter out){
 		Gson gson=new Gson();
 		List<Weibo> weibos=weiboService.myCollections(WBUid);
-		System.out.println(weibos);
+		System.out.print(weibos);
 		out.print(gson.toJson(weibos));
 		out.flush();
 		out.close();

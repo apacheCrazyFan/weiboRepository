@@ -140,12 +140,34 @@
 	$(function(){
 		$.post("weibo/myCollections",{"WBUid":WBUid},function(data){
 			var str="";
-			alert(data.length);
 			for(var i=0;i<data.length;i++){
-				str+='<li><a href="javascript:findWeiBo('+data[i].WBid+')">'+data[i].WBtxt+'</a></li>';
+				var txt=data[i].WBtxt.split("[");
+				var newtxt="";
+				for(var g=0;g<txt.length;g++){
+					if(txt[g].indexOf("]")>0){
+						newtxt+="";
+					}else{
+						newtxt+=txt[g];
+					}
+				}
+				var newContent ='';
+				var newContent1 = '';
+				faceArr = data[i].WBtxt.split("[");
+				for(var k = 0; k < faceArr.length; k ++){
+					if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
+						faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+						newContent += faceArr[k];
+					}
+					if(faceArr[k].split("]]").length > 1){
+						newContent+= '[['+faceArr[k];
+					}
+				}
+				
+				
+				str+='<li>'+(i+1)+'.&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'</a></li>';
 			}
 			$("#myCollections").append(str);
-		})
+		},"json")
 	});
 
 </script>
