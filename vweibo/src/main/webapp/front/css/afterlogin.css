@@ -745,7 +745,7 @@ textarea {
 .c1:hover{
 	color:red;}
 .comment_div{
-	height:100px;
+	height:240px;
 	border-top:#CCC 1px solid;
 	background:#FAFAFA;}
 #comment_img{
@@ -776,6 +776,67 @@ textarea {
 	margin-right:36px;
 	padding-top:10px;
 }	
+.comment_div_two{
+	width:505px;
+	height:32px;
+	border-top:1px solid #CCC;
+	margin-top:30px;
+	margin-left:60px;
+}
+.comment_div_two_a1{
+	float:left;
+	margin-top:15px;
+	font-size:12px;
+}
+.comment_div_two_a{
+	position:relative;
+	top:10px;
+	margin-left:20px;
+	font-size:12px;
+}
+.comment_div_two_a2{
+	float:right;
+	margin-top:15px;
+	font-size:12px;
+}
+.comment_div_three{
+	width:505px;
+	margin-left:60px;
+}
+.comment_div_three_a1{
+	position:relative;
+	right:15px;
+}
+.comment_div_three_a{
+	position:relative;
+	right:15px;
+	bottom:8px;
+	font-size:12px;
+}
+.comment_div_four{
+	width:505px;
+	height:30px;
+	margin-top:10px;
+	margin-left:60px;
+	border-bottom:1px solid #CCC;
+}
+.comment_div_four_a1{
+	position:relative;
+	left:35px;
+	font-size:12px;
+}
+.comment_div_four_a{
+	float:right;
+	position:relative;
+	top:4px;
+	margin-left:10px;
+	font-size:12px;
+}
+.comment_div_four_font{
+	position:relative;
+	bottom:5px;
+}
+
 
 	
 #right-part {
