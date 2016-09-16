@@ -17,16 +17,16 @@
 <link rel="stylesheet" href="front/css/blueimp-gallery-video.css">
 <link rel="stylesheet" href="front/css/demo.css">
 
-<!-- <link rel="stylesheet" href="jquery-easyui-1.3.5/themes/default/easyui.css">
+<link rel="stylesheet" href="jquery-easyui-1.3.5/themes/default/easyui.css">
 <link rel="stylesheet" href="jquery-easyui-1.3.5/themes/icon.css">
-<link rel="stylesheet" href="jquery-easyui-1.3.5/demo/demo.css"> -->
+<link rel="stylesheet" href="jquery-easyui-1.3.5/demo/demo.css">
 
-<!-- <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script> -->
+<script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
 
-<!-- <script type="text/javascript" src="jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jquery-easyui-1.3.5/easyloader.js"></script>
-<script type="text/javascript" src="jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script> -->
+<script type="text/javascript" src="jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
 
 	<!-- js操作session的包 -->
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
@@ -982,7 +982,7 @@ var addclicklike = 1;
 			<div id="goodfriend_trends_head">
             	<span class="goodfriend_trends_head">好友关注动态</span>
             </div>
-            <span class="goodfriend_trends_detail">你赞过他的微博</span><br/>
+            <span class="goodfriend_trends_detail">@shuishuishui等关注了</span><br/>
             <div class="goodfriend_trends_content">
               	 <img src="front/image/goodfriend_trens.png" id="goodfriend_img"/>
               	 <a href="javascript:void(0)"><span id="goodfriend_word1">文神原</span></a><br>

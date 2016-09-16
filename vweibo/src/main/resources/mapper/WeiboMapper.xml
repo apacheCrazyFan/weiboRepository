@@ -10,7 +10,7 @@
 		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
 	</insert>
 	<select id="selectCurrMaxWBid" resultType="int">
-		select max(wbid) wbid from WeiBo
+		select nvl(max(wbid),0) wbid from WeiBo
 	</select>
 	<insert id="initWeibohelp">
 			insert into WeiBoHelp values (#{currWBid,jdbcType=INTEGER},0,0,0,0,0)
