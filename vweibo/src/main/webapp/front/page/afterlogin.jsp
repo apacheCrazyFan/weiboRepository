@@ -613,11 +613,9 @@ var addclicklike = 1;
         
         <div id="navigation" style="display:block">
         	<a href="javascript:void(0)" id="na1">全部</a>
-            <a href="javascript:void(0)" id="na1">原创</a>
             <a href="javascript:void(0)" id="na1">视频</a>
             <a href="javascript:void(0)" id="na1">图片</a>
             <a href="javascript:void(0)" id="na1">音乐</a>
-            <a href="javascript:void(0)" id="na1">文章</a>
             <div id="nav_search">
                 <input type="text" id="search_text" placeholder="搜索我关注人的微博"/>
                 <a href="javascript:void(0)"><img src="front/image/icon_search.png" id="nav-search"/></a>
@@ -628,20 +626,19 @@ var addclicklike = 1;
         <div id="supersearch" style="display:none;background:#FFF;position:relative;top:10px">
             <p style="font-size:14px;font-weight:bold; margin-left:20px;position:relative;top:10px;">高级搜索</p>
             <a href="javascript:void(0)" id="superdivclose" class="superdivclose" onMouseOut="superdivcloseimg('superdivclose')" onClick="changesupersearch(2)" onMouseOver="superdivcloseimg2('superdivclose')"><img src="front/image/superdivclose.png" id="closepng"></a>
-           	类&nbsp;&nbsp;&nbsp;型：<input type="checkbox" id="check" checked="checked" style="margin-top:30px;"/>原创
+           	类&nbsp;&nbsp;&nbsp;型：
            	<input type="checkbox" checked="checked" id="check"/>转发&nbsp;&nbsp;
            	<input type="checkbox" checked="checked" id="check"/>纯文字&nbsp;&nbsp;
            	<input type="checkbox" checked="checked" id="check"/>含图片&nbsp;&nbsp;
            	<input type="checkbox" checked="checked" id="check"/>含视频&nbsp;&nbsp;
-           	<input type="checkbox" checked="checked" id="check"/>含音乐&nbsp;&nbsp;
-           	<input type="checkbox" checked="checked" id="check"/>含文章<br>
+           	<input type="checkbox" checked="checked" id="check"/>含音乐&nbsp;&nbsp;<br>
            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字：<input type="text" id="keyword" placeholder="查找我关注人的微博" style="margin-top:10px;height:28px;"/><br>
            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时&nbsp;&nbsp;&nbsp;间：<input type="text" id="dateone" placeholder="选择日期" style="margin-top:10px;height:28px;"/>&nbsp;到&nbsp;<input type="text" id="datetwo" placeholder="2016-08-30" style="height:28px;"/><br>
            	<input type="image" src="front/image/supersearch.png" id="searchbtn" style="position:relative;left:70px;margin-top:20px;"/>
         </div>
        
        <div id="xixi">
-        <!-- <div id="center-part-content_01" style="margin-top:20px;">
+         <div id="center-part-content_01" style="margin-top:20px;">
             <a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="啦啦啦" src="front/image/userphoto003.png"/></a>
             <a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick='showcenterhidediv("center-partchoose")' onMouseOver="changecentercolor('center-part_way')" onMouseOut="changecentercolors('center-part_way')"><img src="front/image/conter-part_wayimg01.png"/></a>
                 <div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv('center-partchoose')">
@@ -942,7 +939,7 @@ var addclicklike = 1;
                     <input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>
                     <img src="front/image/comment_btn.png" id="comment_btn"/>
               </div>
-            </div> -->
+            </div> 
           </div>  <!-- 目前三篇微博的根  id="xixi" -->
           
           <div id="changePage" style="float:left;background:#fff;margin-top:3px;margin-left:50px;">
@@ -979,7 +976,7 @@ var addclicklike = 1;
          </div>
 
 
-		<div class="goodfriend_trends">
+		<!-- <div class="goodfriend_trends">
 			<div id="goodfriend_trends_head">
             	<span class="goodfriend_trends_head">好友关注动态</span>
             </div>
@@ -990,15 +987,15 @@ var addclicklike = 1;
               	 <a href="javascript:void(0)"><span id="goodfriend_word2">新兰本《初》编...</span></a>
               	 <input type="image" src="front/image/attention_friend.png" id="goodfriend_attention"/>
             </div>
-         </div>
+         </div> -->
 	    
 	    <!-- <div id="foot-part">
 	    	<img alt="呼呼" src="front/image/weibofoot.png"/>
 	    </div>
 	        -->
-	    <div id="buoys">
+	    <!-- <div id="buoys">
 	    	<img src="front/image/letterchat.png" id="buoysimg1"/><span id="buoyschat">私信聊天</span><img src="front/image/chatmes.png" id="buoysimg2"/>
-	    </div>
+	    </div> -->
 	</div>
 
 	</body>
