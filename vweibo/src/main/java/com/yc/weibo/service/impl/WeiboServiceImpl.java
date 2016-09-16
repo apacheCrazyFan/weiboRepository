@@ -72,13 +72,19 @@ public class WeiboServiceImpl implements WeiboService{
 
 	//转发
 	@Override
-	public char selectTransmityon(int wbid) {
+	public String selectTransmityon(int wbid) {
 		return weiboMapper.selectTransmityon(wbid);
 	}
 	@Override
 	public List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid){
 		return weiboMapper.selectWeiboandweiboHelpById(wbid);
 	}
+	@Override
+	public boolean insertWeiboByTransmit(Map<String,Object> map){
+		return weiboMapper.insertWeiboByTransmit(map) > 0 ? true : false;
+	}
+	
+	
 	
 	
 	

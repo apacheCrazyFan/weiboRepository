@@ -7,12 +7,12 @@
 		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE" >
 			select seq_wb_wbid.nextval currval from dual
 		</selectKey>
-		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
+		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userLocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
 	</insert>
 	<select id="selectCurrMaxWBid" resultType="int">
 		select nvl(max(wbid),0) wbid from WeiBo
 	</select>
-	<insert id="initWeibohelp">
+	<insert id="initWeibohelp" parameterType="int">
 			insert into WeiBoHelp values (#{currWBid,jdbcType=INTEGER},0,0,0,0,0)
 	</insert>
 	
@@ -38,13 +38,18 @@
 	
 	
 	
-	<select id="selectTransmityon" parameterType="int" resultType="string">
+	<select id="selectTransmityon" parameterType="int" resultType="object">
 		select yon from WeiBo where WBid = #{wbid}
 	</select>
 	<select id="selectWeiboandweiboHelpById" parameterType="int" resultType="map">
 		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = #{wbid,jdbcType=INTEGER}) w,WeiBoHelp h where w.WBid = h.WBid
 	</select>
-	
+	<insert id="insertWeiboByTransmit" parameterType="map">
+		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE" >
+			select seq_wb_wbid.nextval currval from dual
+		</selectKey>
+		insert into WeiBo values (#{wbid},null,#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{transmitDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},null,null,null,#{isThemeWeibo,jdbcType=CHAR},'Y',#{userLocation,jdbcType=VARCHAR},0)
+	</insert>
 	
 	<!-- 根据浏览次数排序 -->
 	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">

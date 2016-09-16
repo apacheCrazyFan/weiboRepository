@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,7 @@ import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.service.OperateService;
 import com.yc.weibo.service.UserService;
+import com.yc.weibo.service.WeiboAndWeiboService;
 import com.yc.weibo.service.WeiboService;
 import com.yc.weibo.util.AddressUtil;
 
@@ -49,6 +51,8 @@ public class WeiboHandler {
 	private WeiboService weiboService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private WeiboAndWeiboService weiboAndWeiboService;
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
@@ -119,7 +123,7 @@ public class WeiboHandler {
 			Map<String,Object> params = new HashMap<String,Object>();
 			params.put("account", DataDic.PUBLIS);
 			params.put("uid", uid);
-			if(userService.updateUserAccount(params)){
+			if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid,0}) && userService.updateUserAccount(params)){
 				
 				jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
 				jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
@@ -190,7 +194,7 @@ public class WeiboHandler {
 		Date date=new Date();
 
 		map.put("statue", Integer.parseInt(statue));
-		map.put("userlocation", userlocation);
+		map.put("userLocation", userlocation);
 		map.put("publishDate", date);
 		map.put("userId", user.getWBUid());
 		map.put("weiboTag", null);
@@ -278,11 +282,11 @@ public class WeiboHandler {
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addclicklike",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> addClickLike(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid){
+	public Map<String,Object> addClickLike(@RequestParam(name="userid")Integer userid, @RequestParam(name="wbid")Integer wbid,@RequestParam(name="wbuid")Integer wbuid){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,	Object> params = new HashMap<String,Object>();
 		
-		System.out.println( userid+"  =============  "+wbid);
+		System.out.println( userid+"  =============  "+wbid + "  ---------  "+wbuid);
 		params.put("uid", userid);
 		params.put("wbid", wbid);
 		params.put("Ostate", "点赞");
@@ -294,7 +298,7 @@ public class WeiboHandler {
 			if(weiboService.updateminuWeiboLike(wbid) && operateService.deleteOperate(operateId)){  //删除operate 和 weibohelp的数据
 				params.clear();
 				params.put("account", -2);
-				params.put("uid", userid);
+				params.put("wbuid", wbuid);
 				
 				if(userService.updateUserAccount(params)){  //减少用户的积分
 					int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);  //返回一系列操作后的点赞数
@@ -307,7 +311,7 @@ public class WeiboHandler {
 			if(operateService.insertWhoLikeWeibo(params) && weiboService.updateaddWeiboLike(wbid)){
 				params.clear();
 				params.put("account", 2);
-				params.put("uid", userid);
+				params.put("wbuid", wbuid);
 				if(userService.updateUserAccount(params)){ //增加用户积分
 					int greateAccount = weiboService.selectAfterLikeGreateAcount(wbid);
 					jsonMap.put("success", true);
@@ -346,7 +350,7 @@ public class WeiboHandler {
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addcollection",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> addcollection(@RequestParam(name="uid")Integer uid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt){
+	public Map<String,Object> addcollection(@RequestParam(name="uid")Integer uid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt,@RequestParam(name="wbuid")Integer wbuid){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Object> params = new HashMap<String,Object>();
 		
@@ -361,7 +365,7 @@ public class WeiboHandler {
 					
 					params.clear();
 					params.put("account", DataDic.COLLECT);
-					params.put("uid", uid);
+					params.put("wbuid", wbuid);
 					//积分更新完成
 					if(userService.updateUserAccount(params)){  //跟新微博所属用户的积分
 						
@@ -384,42 +388,119 @@ public class WeiboHandler {
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/transmitweibo",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> transmitweibo(@RequestParam(name="uid")Integer uid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt){
+	public Map<String,Object> transmitweibo(HttpServletRequest request,@RequestParam(name="uid")Integer uid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt,@RequestParam(name="wbuid")Integer wbuid){
+		HttpSession session = request.getSession();
+		WeiBoUser user = (WeiBoUser) session.getAttribute("user");
+		System.out.println( user );
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Object> params = new HashMap<String,Object>();
 		
 		System.out.println( uid+"  =============  "+wbid + " +++++++ "+txt);
+
 		//首先查找是否是转发微博
-		if(weiboService.selectTransmityon(wbid) == 'N'){ //不是，直接转发
-			List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到
-		}else{
+		if(weiboService.selectTransmityon(wbid) == "N"){ //不是，直接转发
 			
-		}
-		params.put("uid", uid);
-		params.put("wbid", wbid);
-		params.put("tag",txt);
-		
-		if(operateService.insertCollectWeibo(params)){  //插入operate
-				
-				if(weiboService.updateCollectionAccount(wbid)){   //weibohelp的浏览次数和收藏次数加一
-					
-					params.clear();
-					params.put("account", DataDic.COLLECT);
-					params.put("uid", uid);
-					//积分更新完成
-					if(userService.updateUserAccount(params)){  //跟新微博所属用户的积分
-						
-						//返回收藏后的收藏数
-						int collectionAccount  = weiboService.selectAfterCollection(wbid);
-						jsonMap.put("success", true);
-						jsonMap.put("collectionAccount", collectionAccount);
-					}
-				}
+
+			Date date=new Date();
+			String userLocation = AddressUtil.getLocation(); 
+			
+			if(txt.contains("[[") && txt.contains("]]")){ //这里可能有数组越界的异常
+				params.put("weiboTitle", txt.substring(txt.indexOf("[["), txt.indexOf("]]")+2)); //截取标题
+			}else{	
+				params.put("weiboTitle", null);
+			}
+			if(txt.indexOf("#") != txt.lastIndexOf("#")){
+				params.put("isThemeWeibo", 'Y');
 			}else{
-				
-				jsonMap.put("success", false);
+				params.put("isThemeWeibo", 'N');
 			}
 			
+			params.put("userLocation", userLocation);
+			params.put("transmitDate", date);
+			params.put("userId", user.getWBUid());
+			params.put("txtContent", txt);
+			if(weiboService.insertWeiboByTransmit(params)){  //如果插入了weibo表
+				int currWBid = weiboService.selectCurrMaxWBid();
+				//将微博插入数据库weibohelp表
+				if(weiboService.initWeibohelp(currWBid)){ //如果也插入了weiboHelp表
+					
+					params.clear();
+					params.put("uid", uid);
+					params.put("wbid", wbid);
+					params.put("txt",txt);
+					
+					if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
+						params.clear();
+						params.put("account", DataDic.SHARE);
+						params.put("wbuid", wbuid);
+						
+						if(userService.updateUserAccount(params)){  //用户积分更新成功
+							List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
+							jsonMap.put("weibo", weibo);
+							jsonMap.put("sucsess", true);
+						}
+					}
+				}
+			}
+			
+			
+		}else{  //否则说明  转发的微博 是 转发微博，找到根微博
+			int tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(wbid);
+			int rootwbid = 0;
+			if( tempwbid == 0){
+				rootwbid = wbid;
+			}else{
+				while(tempwbid != 0){
+					rootwbid = tempwbid;
+					tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(tempwbid);
+				}
+			}
+			
+			
+			List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
+		
+			Date date=new Date();
+			String userLocation = AddressUtil.getLocation(); 
+			
+			if(txt.contains("[[") && txt.contains("]]")){ //这里可能有数组越界的异常
+				params.put("weiboTitle", txt.substring(txt.indexOf("[["), txt.indexOf("]]")+2)); //截取标题
+			}else{	
+				params.put("weiboTitle", null);
+			}
+			if(txt.indexOf("#") != txt.lastIndexOf("#")){
+				params.put("isThemeWeibo", 'Y');
+			}else{
+				params.put("isThemeWeibo", 'N');
+			}
+			
+			params.put("userLocation", userLocation);
+			params.put("transmitDate", date);
+			params.put("userId", user.getWBUid());
+			params.put("txtContent", txt);
+			if(weiboService.insertWeiboByTransmit(params)){  //如果插入了weibo表
+				int currWBid = weiboService.selectCurrMaxWBid();
+				//将微博插入数据库weibohelp表
+				if(weiboService.initWeibohelp(currWBid)){ //如果也插入了weiboHelp表
+					
+					params.clear();
+					params.put("uid", uid);
+					params.put("wbid", wbid);
+					params.put("txt",txt);
+					
+					if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
+						params.clear();
+						params.put("account", DataDic.SHARE);
+						params.put("wbuid", wbuid);
+						
+						if(userService.updateUserAccount(params)){
+							jsonMap.put("weibo", weibo);
+							jsonMap.put("sucsess", true);
+						}
+					}
+				}
+			}
+		}
+		
 		return jsonMap;
 	}
 	

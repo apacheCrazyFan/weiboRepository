@@ -13,4 +13,6 @@ public interface OperateMapper {
 	int insertWhoLikeWeibo(Map<String,Object> map);  //点赞
 	
 	int insertCollectWeibo(Map<String,Object> map);  //收藏
+	
+	int insertTransmitWeibo(Map<String,Object> map); //转发
 }

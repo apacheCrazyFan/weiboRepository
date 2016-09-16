@@ -18,9 +18,9 @@ public interface WeiboService {
 	boolean updateCollectionAccount(int wbid);
 	int selectAfterCollection(int wbid);
 	
-	char selectTransmityon(int wbid);
+	String selectTransmityon(int wbid);
 	List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid);
-	
+	boolean insertWeiboByTransmit(Map<String,Object> map);
 	
 	
 	List<Map<String,Object>> findWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);

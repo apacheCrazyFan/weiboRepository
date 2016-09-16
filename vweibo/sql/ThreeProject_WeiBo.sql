@@ -282,6 +282,11 @@ insert into Theme values(seq_Theme_Tid.nextval,'#郭俊辰北影报到#',1005,to_date('
 insert into Theme values(seq_Theme_Tid.nextval,'#故事里的旧时光#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
 
 
+--微博和话题的中间表
+create table WBandThe(
+	WBid int references WeiBo(WBid),
+	Tid int references Theme(Tid)
+);
 
 --微博
 create table WeiBo(
@@ -297,8 +302,8 @@ create table WeiBo(
        WBmusic varchar2(500),		  --微博音乐路径
        yesOrno char(2),				  --是否是话题产生的weibo	
        yon char(2),					  --是否是转发微博  --这个有点重要吧
-       WBlocation varchar2(120),
-       WBstatue int
+       WBlocation varchar2(120),	  --发表微博的地址
+       WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
        --预留字段      
 );
 create sequence seq_wb_wbid start with 10001 increment by 1;
@@ -460,6 +465,8 @@ create sequence seq_op_oid start with 1001;
 select * from WeiBo;
 select * from WeiBoHelp;
 select * from Operate;
+select * from WeiboAndWeibo;
+
 
 drop table WeiBo;
 drop table WeiBoHelp;
@@ -468,6 +475,11 @@ insert into Operate values(seq_op_oid.nextval,1006,10001,'收藏',null);
 
 select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = 10582) w,WeiBoHelp h where w.WBid = h.WBid
 
+
+create table WeiboAndWeibo(
+	WBid int references WeiBo(WBid),
+	TWBid int
+);
 
 --评论（回复）微博表  --找爸爸
 create table Comments(
