@@ -148,12 +148,13 @@ var addclicklike = 1;
 					var newContent1 = '';
 					faceArr = content.split("[");
 					for(var k = 0; k < faceArr.length; k ++){
-						if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
-							faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
-							newContent += faceArr[k];
-						}
-						if(faceArr[k].split("]]").length > 1){
+						if(faceArr[k].split("]]").length > 1){  //主题
 							newContent = '[['+faceArr[k]+newContent;
+						}else if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
+								faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+								newContent += faceArr[k];
+						}else{
+							newContent = content;
 						}
 					}
 					

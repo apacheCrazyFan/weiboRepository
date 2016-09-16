@@ -70,8 +70,18 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.selectAfterCollection(wbid);
 	}
 
-
-
+	//转发
+	@Override
+	public char selectTransmityon(int wbid) {
+		return weiboMapper.selectTransmityon(wbid);
+	}
+	@Override
+	public List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid){
+		return weiboMapper.selectWeiboandweiboHelpById(wbid);
+	}
+	
+	
+	
 	@Override
 	public List<Map<String, Object>> findHotWeiBo(Map<String, Integer> map) {
 		

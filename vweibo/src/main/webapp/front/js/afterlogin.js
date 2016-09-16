@@ -204,7 +204,7 @@ window.onload=function(){
 					newStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
 					newStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
 					newStr += '<a href="javascript:void(0)" id="transmit_aa" onClick="showhidetransmitdiv(&quot;transmit_choose&quot;)">公开<img src="front/image/limits_img5.png"/></a>';
-					newStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" oncClick="transmitweibo()">';
+					newStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,'+userid+','+weiboid+')" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)">';
 					
 					newStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(&quot;transmit_choose&quot;)">';
 					newStr += '<ul>';
@@ -926,6 +926,31 @@ function collectiontag(collectionobj,inputobj,cnav,uid,weiboid){
 	});
 }
 
+
+//转发
+function transmitweibo(divid,textareaid,uid,wbid){
+	var inputtxt = $("#"+textareaid).val();
+	alert(inputtxt);
+	
+	$.ajax({
+		  url: "weibo/transmitweibo",
+		  cache: false,
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		  data:{'uid':uid,'wbid':wbid,'txt':inputtxt},
+		  dataType:"json",
+		  type:"post",
+		  success: function(data,textStatus){
+			  if(data.success){
+				  $("#"+inputobj).val('');
+				  $("#"+collectionobj).hide();
+				  $("#"+cnav).html('<img src="front/image/center-part_foot01.png" id="foot01_imgs"/>已收藏');
+			  }
+		  },
+		  error:function(error,textStatus){
+			  alert("收藏时发生错误："+error);
+		  }
+	});
+}
 //评论回复功能
 /*<script>
   $('input[type=checkbox]').change(function(){

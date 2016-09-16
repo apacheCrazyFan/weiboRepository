@@ -29,7 +29,6 @@
 	
 	
 	
-	
 	<update id="updateCollectionAccount" parameterType="int">
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHfavoriteAccount = WHfavoriteAccount + 1 where WBid = #{wbid}
 	</update>
@@ -38,6 +37,16 @@
 	</select>
 	
 	
+	
+	<select id="selectTransmityon" parameterType="int" resultType="CHAR">
+		select yon from WeiBo where WBid = #{wbid}
+	</select>
+	<select id="selectWeiboandweiboHelpById" parameterType="int" resultType="map">
+		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = #{wbid,jdbcTpe=INTEGER}) w,WeiBoHelp h where w.WBid = h.WBid
+	</select>
+	
+	
+	<!-- 根据浏览次数排序 -->
 	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">
 		select k.*,wbu.Uname,wbu.UimgPath from
 		(select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
@@ -48,7 +57,7 @@
  			where w.wbid = b.wbid and WBstatue = 0
  			order by WHviewAccount desc) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
-	
+	<!-- 根据最新日期且是用户自己能看到的排序 -->
 	<select id="selectWeiboOrderByWBdate" resultType="map" parameterType="map">
 		select k.*,wbu.Uname,wbu.UimgPath from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
