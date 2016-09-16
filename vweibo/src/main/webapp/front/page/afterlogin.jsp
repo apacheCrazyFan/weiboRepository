@@ -261,7 +261,7 @@ var addclicklike = 1;
 					newWeiBoStr += '<a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:105px;height:3px;position:relative;top:2px;right:-3px;"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;top:2px;left:6px"/><li class="c1" id="choose1" onClick="changewords()" style="height:12px;position:relative;bottom:4px;top:3px;">公开</li></a><br>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:105px;height:3px;position:relative;top:2px;right:-3px;"><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;top:8px;left:6px;"/><li class="c1" id="choose2" onClick="changewords1()" style="height:12px;position:relative;bottom:-1px;top:3px;">好友圈</li></a><br>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:105px;height:3px;position:relative;top:2px;right:-3px;"><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;top:8px;left:6px;"/><li class="c1" id="choose3" onClick="changewords2()" style="height:12px;position:relative;bottom:-1px;top:3px;">仅自己可见</li></a>';
-					newWeiBoStr += '<a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:105px;height:3px;position:relative;top:2px;right:-3px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;top:8px;left:6px;"/><li class="c1" id="choose4" onClick="changewords3()" style="height:12px;position:relative;bottom:-2px;top:3px;">群可见</li></a>';
+					newWeiBoStr += '<a href="javascript:void(0)" id="choosea1" style="display:inline-block;width:105px;height:3px;position:relative;top:2px;right:-3px;"><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;top:8px;left:6px;"/><li class="c1" id="choose4" onClick="changewords3s)" style="height:12px;position:relative;bottom:-2px;top:3px;">群可见</li></a>';
 					newWeiBoStr += '</ul>';
 					newWeiBoStr += '</div>';
 					newWeiBoStr += '</div>';
@@ -584,14 +584,14 @@ var addclicklike = 1;
             </form>
             
             <div id="choose" style="display:none;" onMouseUp="hidediv()">
-				<a href="javascript:void(0)" id="choosea1"><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/>
+				<a href="javascript:void(0)" class="choosea1" id=""><img src="front/image/limits_img1.png" id="limits_img" style="position:relative;bottom:8px;"/>
 				<li class="c1" id="choose1" data="0" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;"/>公开</li></a><br>
-                <a href="javascript:void(0)" id="choosea1" ><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/>
+                <a href="javascript:void(0)" class="choosea1" ><img src="front/image/limits_img2.png" id="limits_img" style="position:relative;bottom:8px;"/>
                 <li class="c1" id="choose2" data="1" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;right:5px;">好友圈</li></a><br>
-                <a href="javascript:void(0)" id="choosea1" ><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/>
+                <a href="javascript:void(0)" class="choosea1" ><img src="front/image/limits_img3.png" id="limits_img" style="position:relative;bottom:8px;"/>
                 <li class="c1" id="choose3" data="2" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;">仅自己可见</li></a>
                 <a href="javascript:void(0)" id="choosea1" ><img src="front/image/limits_img4.png" id="limits_img" style="position:relative;bottom:8px;"/>
-                <li class="c1" id="choose4" data="3" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
+                <li class="c1" id="choose4" class="3" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;">群可见</li></a>
             </div>
             
             <div id="face_image" style="display:none;"> <!-- z-index应该是要和position一起用，this指针只能放在事件里面用  onClick  onMouseOver等 -->
@@ -739,7 +739,7 @@ var addclicklike = 1;
            			 </div>
               </div>
               
-             
+              <!--评论-
               <div id="comment_div" class="comment_div" style="display:none;">
               		<img src="front/image/comment_header_img.png" id="comment_img">
                     <input type="text" id="comment_input"/><br>
