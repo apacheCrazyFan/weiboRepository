@@ -531,8 +531,8 @@ var addclicklike = 1;
     	
         <ul id="left-part-content">
             <li style="height:25px;"><a href="javascript:void(0)" id="one">首页</a></li>
-            <li style="height:25px;"><a href="front/page/Personal.jsp?WBUid=${sessionScope.user.WBUid}" id="two">我的收藏</a></li>
-            <li style="height:25px;"><a href="javascript:void(0)" id="two">我的赞</a></li>
+            <li style="height:25px;"><a href="front/page/Personal.jsp?operation=findcollection&WBUid=${sessionScope.user.WBUid}" id="two">我的收藏</a></li>
+            <li style="height:25px;"><a href="front/page/Personal.jsp?WBUid=${sessionScope.user.WBUid}" id="two">我的赞</a></li>
             <li style="height:25px;"><img src="front/image/afterlogin_logo1.jpg" class="img"/><a href="javascript:findHotWeiBo()" id="two">热门微博</a></li>
             <li style="height:25px;"><img src="front/image/afterlogin_logo2.jpg" class="img1"/><a href="javascript:findFriendWeiBo(${sessionScope.user.WBUid})" id="two">好友圈</a></li>
             <li style="height:25px;"><img src="front/image/afterlogin_logo3.jpg" class="img1"/><a href="javascript:void(0)" id="two">群微博</a></li>

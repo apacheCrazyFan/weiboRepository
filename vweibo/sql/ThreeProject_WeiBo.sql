@@ -455,6 +455,8 @@ create table Operate(
        
        Ocontent varchar2(500)--‘§¡Ù◊÷∂Œ  
 );
+
+alter table Operate add Odate varchar2(40);
 create sequence seq_op_oid start with 1001;
 select * from Operate;
 drop table Operate;
@@ -514,3 +516,6 @@ select b.*,w.* from
  create sequence seq_op_oid start with 1001;
  
  select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate=' ’≤ÿ' and p.wbuid=1006;
+ 
+ select uname from WeiBouser where wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='µ„‘ﬁ')
+ select b.wbtxt,b.wbpic,b.wbvideo,w.uname from WeiBo b,WeiBoUser w where b.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='µ„‘ﬁ') and w.wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='µ„‘ﬁ');

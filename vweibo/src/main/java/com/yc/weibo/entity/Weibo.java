@@ -100,7 +100,7 @@ public class Weibo {
 	}
 	@Override
 	public String toString() {
-		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUid=" + WBUid + ", WBdate="
+		return "Weibo \n [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUid=" + WBUid + ", WBdate="
 				+ WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic=" + WBmusic
 				+ ", yesOrno=" + yesOrno + ", yon=" + yon + ", WBlocation=" + WBlocation + ", WBstatue=" + WBstatue
 				+ "]";
