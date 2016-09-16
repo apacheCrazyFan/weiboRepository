@@ -459,6 +459,7 @@ create table Operate(
 alter table Operate add Odate varchar2(40);
 create sequence seq_op_oid start with 1001;
 select * from Operate;
+drop table WeiBoHelp;
 drop table Operate;
 insert into Operate values(seq_op_oid.nextval,1006,10001,' ’≤ÿ',null);
 
