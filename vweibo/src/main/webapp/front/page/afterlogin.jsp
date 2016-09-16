@@ -89,7 +89,7 @@ var addclicklike = 1;
 		weibocount = Number($("#weibocount").val());
 		var statue = $("#form_push_op").val();
 		var content = $("#txt").val().trim();
-		var uid = $("#user").val().trim();
+		var uid = parseInt($("#user").val().trim());  //用户id;
 
 		//alert(content);
 		$.ajaxFileUpload({
@@ -98,7 +98,7 @@ var addclicklike = 1;
 			data : {
 				'statue' : statue,
 				'content' : content,
-				'uid' : parseInt(uid)
+				'uid' : uid
 			},
 			fileElementId : media,
 			dataType : 'json',
@@ -115,12 +115,13 @@ var addclicklike = 1;
 					var videoMap = data.videoMap; //视频路径
 					var musicMap = data.musicMap; //音乐路径
 					var date = data.publishDate; //发表日期
-
+					
+					var weiboid = data.weiboid;
 					var faceArr;
 
 					var newWeiBoDiv = document.createElement("div");
 					newWeiBoDiv.id = "center-part-content_01";
-					newWeiBoDiv.className = "divid_"+addclicklike;
+					newWeiBoDiv.className = "divid_d_"+addclicklike;
 					
 					//$(newWeiBoDiv).insertBefore($("#xixi div").first());
 
@@ -139,7 +140,7 @@ var addclicklike = 1;
 
 					newWeiBoStr += '<ul id="center-part_ul">';
 					newWeiBoStr += '<li id="center-part_li">${sessionScope.user.uname}</li>';
-	                newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date.split('\\s')[1]+'</a> 来自 '+location+'</li>';
+	                newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date.split(' ')[1]+'</a> 来自 '+location+'</li>';
 	                newWeiBoStr += '</ul>';
 	                
 					//表情处理
@@ -158,7 +159,7 @@ var addclicklike = 1;
 					
 					
 					var faceRegx1 = new RegExp('\\n','gi');
-					faceArr1 = content.split(faceRegx1);
+					faceArr1 = newContent.split(faceRegx1);
 					for(var j = 0; j < faceArr1.length; j ++){
 						newContent1 += faceArr1[j]+'<br />';
 					}
@@ -215,17 +216,17 @@ var addclicklike = 1;
 					
 					newWeiBoStr += '</div>';
 					newWeiBoStr += '<div id="center_footnum_'+collectiondivnum+'" class="center_footnum">';
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';   //点赞
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+uid+','+weiboid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_'+collectiondivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>'; //转发
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+collectiondivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_'+collectiondivnum+'" class="center_footnum4" onClick="clicklike(this,'+uid+','+weiboid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';   //点赞
 					newWeiBoStr += '</div>';
 					
 					
 					newWeiBoStr += '<div id="center_footnum_col_'+collectiondivnum+'" class="center_footnum_col" style="display:none;">';
 					newWeiBoStr += '<div id="collection_div_unline>';
 					newWeiBoStr += '<span id="collection_div_title">收藏</span>';
-					newWeiBoStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum_col_'+collectiondivnum+'&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
+					newWeiBoStr += '<a href="javascript:void(0)" id="colle_closepng_a" class="colle_closepng_a" onMouseOut="collectiondivcloseimg(&quot;colle_closepng_a&quot;)" onClick="changecollectionsearch(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;)" onMouseOver="collectiondivcloseimg2(&quot;colle_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
 					newWeiBoStr += '</div>';
 					newWeiBoStr += '<div id="collection_div_tishi">';
 					newWeiBoStr += '<img src="front/image/collectionsuccess.png" id="collection_div_img"/>';
@@ -236,7 +237,7 @@ var addclicklike = 1;
 					newWeiBoStr += '<div id="keyword" style="width:390px;height:32px;">';
 					newWeiBoStr += '<input type="text" id="keyword_tip_'+collectiondivnum+'" class="keyword_tip1" style="width:390px;height:32px;"/>';
 					
-					newWeiBoStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"/>';
+					newWeiBoStr += '<div style="height:45px;background:#F0F0F0;width:430px;position:relative;top:16px;right:20px;"><input type="image" id="keyword_tip2" src="front/image/keyword_add.png" onClick="collectiontag(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;,'+uid+','+weiboid+')"/>';
 					newWeiBoStr += '<input type="image" id="keyword_tip2" src="front/image/keyword_cancel.png" onClick="closecollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,&quot;keyword_tip_'+collectiondivnum+'&quot;)"/></div>';
 					newWeiBoStr += '</div>';
 					newWeiBoStr += '</div>';
@@ -244,12 +245,12 @@ var addclicklike = 1;
 					newWeiBoStr += '<div id="center_footnum_transmit_'+transmitdivnum+'" class="center_footnum_transmit" style="display:none;">';
 					newWeiBoStr += '<div id="transmit_div_unline">';
 					newWeiBoStr += '<span id="transmit_div_title">转发微博</span>';
-					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_closepng_a" class="transmit_closepng_a" onMouseOut="transmitdivcloseimg(&quot;transmit_closepng_a&quot;)" onClick="changetransmitsearch(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
+					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_closepng_a" class="transmit_closepng_a" onMouseOut="transmitdivcloseimg(&quot;transmit_closepng_a&quot;)" onClick="changetransmitsearch(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;)" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)"><img src="front/image/superdivclose.png" id="colle_closepng"></a>';
 					newWeiBoStr += '</div>';
 					newWeiBoStr += '<div id="transmit_header">';
 					newWeiBoStr += '<span id="transmit_header_word">转发到：</span><a href="javascript:void(0)" id="transmit_where">我的微博</a>';
 					newWeiBoStr += '</div>';
-					newWeiBoStr += '<textarea class="transmit_input" id="transmit_txt" title="微博输入框" node-type="textE1" placeholder="请输入转发理由"></textarea>';
+					newWeiBoStr += '<textarea id="transmit_input_'+transmitdivnum+'" class="transmit_txt" title="微博输入框" node-type="textE1" placeholder="请输入转发理由"></textarea>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_aa" onClick="showhidetransmitdiv(&quot;transmit_choose&quot;)">公开<img src="front/image/limits_img5.png"/></a>';
@@ -272,7 +273,7 @@ var addclicklike = 1;
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 					newWeiBoStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+userid+','+weiboid+',&quot;form_'+commentdivnum+'&quot;)"/>';
+					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+uid+','+weiboid+',&quot;form_'+commentdivnum+'&quot;)"/>';
 					newWeiBoStr += '</form>';
 					newWeiBoStr += '</div>';
 					

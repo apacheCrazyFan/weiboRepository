@@ -1,5 +1,6 @@
 package com.yc.weibo.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class OperateServiceImpl implements OperateService{
 	@Override
 	public boolean deleteOperate(int wbid) {
 		return operateMapper.deleteOperate(wbid) > 0 ? true : false;
+	}
+	@Override
+	public List<Integer> selectIfavoriteWeiboId(int uid) {
+		return operateMapper.selectIfavoriteWeiboId(uid);
 	}
 	//点赞 插入操作表
 	@Override

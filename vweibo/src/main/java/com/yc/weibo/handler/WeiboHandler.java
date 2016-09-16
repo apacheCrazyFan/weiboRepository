@@ -258,15 +258,18 @@ public class WeiboHandler {
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Integer> params = new HashMap<String,Integer>();
 		
-		System.out.println( pageSize+"  =============  "+pageNum);
 		params.put("pageSize", pageSize);
 		params.put("pageNum", pageNum);
 		params.put("uid",userid);
-		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWBdate(params);
-
-		System.out.println( weiboList);
+		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWBdate(params);   //根据日期降序查询微博 
+		List<Integer> wbids = operateService.selectIfavoriteWeiboId(userid);  //获得所有我收藏的所有微博id
+		int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
+		
+		jsonMap.put("weiboid", weiboid);
+ 		jsonMap.put("wbids", wbids);
 		jsonMap.put("weiboList", weiboList);
 		jsonMap.put("total", weiboList.size());
+		
 		return jsonMap;
 	}
 	

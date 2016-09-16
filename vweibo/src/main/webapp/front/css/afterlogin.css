@@ -511,7 +511,7 @@ textarea {
 #center-part_img {
 	position: relative;
 	top: 20px;
-	margin-left: 20px;
+	margin-right: 10px;
 }
 
 .center-part_way {
@@ -601,7 +601,7 @@ textarea {
 	border-top:#CCC solid 1px;
 }
 
-#center_footnum1, #center_footnum2, #center_footnum3, #center_footnum4 {
+.center_footnum1, .center_footnum2, .center_footnum3, .center_footnum4 {
 	position: relative;
 	left: 50px;
 	top:10px;
@@ -710,7 +710,7 @@ textarea {
 	padding-top:30px;
 	margin-left:20px;
 	}
-#transmit_txt{
+.transmit_txt{
 	width:420px;
 	margin-left:14px;}
 #transmit_pace_png{
