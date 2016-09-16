@@ -18,6 +18,11 @@ public interface WeiboService {
 	boolean updateCollectionAccount(int wbid);
 	int selectAfterCollection(int wbid);
 	
+	char selectTransmityon(int wbid);
+	List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid);
+	
+	
+	
 	List<Map<String,Object>> findWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);
 	
 	List<Map<String,Object>> findtWeiboOrderByWHgreateAccountFirst(Map<String,Integer> map);

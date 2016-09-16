@@ -379,6 +379,51 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
+	
+	//转发微博
+	@Transactional(propagation=Propagation.REQUIRED)
+	@RequestMapping(value="/transmitweibo",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> transmitweibo(@RequestParam(name="uid")Integer uid, @RequestParam(name="wbid")Integer wbid, @RequestParam(name="txt")String txt){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Object> params = new HashMap<String,Object>();
+		
+		System.out.println( uid+"  =============  "+wbid + " +++++++ "+txt);
+		//首先查找是否是转发微博
+		if(weiboService.selectTransmityon(wbid) == 'N'){ //不是，直接转发
+			List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到
+		}else{
+			
+		}
+		params.put("uid", uid);
+		params.put("wbid", wbid);
+		params.put("tag",txt);
+		
+		if(operateService.insertCollectWeibo(params)){  //插入operate
+				
+				if(weiboService.updateCollectionAccount(wbid)){   //weibohelp的浏览次数和收藏次数加一
+					
+					params.clear();
+					params.put("account", DataDic.COLLECT);
+					params.put("uid", uid);
+					//积分更新完成
+					if(userService.updateUserAccount(params)){  //跟新微博所属用户的积分
+						
+						//返回收藏后的收藏数
+						int collectionAccount  = weiboService.selectAfterCollection(wbid);
+						jsonMap.put("success", true);
+						jsonMap.put("collectionAccount", collectionAccount);
+					}
+				}
+			}else{
+				
+				jsonMap.put("success", false);
+			}
+			
+		return jsonMap;
+	}
+	
+	
 	//热门微博
 	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)
 	@ResponseBody
