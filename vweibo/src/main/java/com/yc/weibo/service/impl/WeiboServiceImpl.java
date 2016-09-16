@@ -102,5 +102,9 @@ public class WeiboServiceImpl implements WeiboService{
 	public List<Weibo> myCollections(int WBUid) {
 		return weiboMapper.myCollections(WBUid);
 	}
+	@Override
+	public List<Weibo> findMyZan(int WBUid) {
+		return weiboMapper.findMyZan(WBUid);
+	}
 
 }
