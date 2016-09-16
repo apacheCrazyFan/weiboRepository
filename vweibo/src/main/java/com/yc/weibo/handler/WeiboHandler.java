@@ -59,7 +59,7 @@ public class WeiboHandler {
 	@ResponseBody
 	public Map<String,Object> publishWeibo(@RequestParam(name="uid")Integer uid,MultipartHttpServletRequest multipartRequest,HttpServletRequest request,HttpServletResponse response){
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-
+		System.out.println();
 		/*@RequestParam(name="myPicFile",required=false) CommonsMultipartFile myPicFile,
 		@RequestParam(name="myVideoFile",required=false) CommonsMultipartFile myVideoFile,*/
 
@@ -122,9 +122,10 @@ public class WeiboHandler {
 		if(!publishDateAndLocation.equals(DataDic.DATESTRING) && initWeibohelp){
 			Map<String,Object> params = new HashMap<String,Object>();
 			params.put("account", DataDic.PUBLIS);
-			params.put("uid", uid);
+			params.put("wbuid", uid);
 			if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid,0}) && userService.updateUserAccount(params)){
 				
+				jsonMap.put("wbuid", currWBid);
 				jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
 				jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
 				//增加了最后的逗号删除操作
@@ -336,11 +337,16 @@ public class WeiboHandler {
 		params.put("Ostate","收藏");
 		
 		if(operateService.selectoperateId(params) > 0){
-			System.out.println( operateService.selectoperateId(params));
-			jsonMap.put("ishave", true);
+			if(weiboService.updateViewOnly(wbid)){
+				
+				//System.out.println( operateService.selectoperateId(params));
+				jsonMap.put("ishave", true);
+			}
 		}else{
-			System.out.println( operateService.selectoperateId(params));
-			jsonMap.put("ishave", false);
+			if(weiboService.updateViewOnly(wbid)){
+				//System.out.println( operateService.selectoperateId(params));
+				jsonMap.put("ishave", false);
+			}
 		}
 		
 		return jsonMap;
@@ -430,14 +436,17 @@ public class WeiboHandler {
 					params.put("txt",txt);
 					
 					if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
-						params.clear();
-						params.put("account", DataDic.SHARE);
-						params.put("wbuid", wbuid);
 						
-						if(userService.updateUserAccount(params)){  //用户积分更新成功
-							List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
-							jsonMap.put("weibo", weibo);
-							jsonMap.put("sucsess", true);
+						if(weiboService.updateTransmitAccount(wbid)){
+							params.clear();
+							params.put("account", DataDic.SHARE);
+							params.put("wbuid", wbuid);
+						
+							if(userService.updateUserAccount(params)){  //用户积分更新成功
+								List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
+								jsonMap.put("weibo", weibo);
+								jsonMap.put("success", true);
+							}
 						}
 					}
 				}
@@ -457,7 +466,6 @@ public class WeiboHandler {
 			}
 			
 			
-			List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
 		
 			Date date=new Date();
 			String userLocation = AddressUtil.getLocation(); 
@@ -488,13 +496,17 @@ public class WeiboHandler {
 					params.put("txt",txt);
 					
 					if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
-						params.clear();
-						params.put("account", DataDic.SHARE);
-						params.put("wbuid", wbuid);
 						
-						if(userService.updateUserAccount(params)){
-							jsonMap.put("weibo", weibo);
-							jsonMap.put("sucsess", true);
+						if(weiboService.updateTransmitAccount(wbid)){
+							params.clear();
+							params.put("account", DataDic.SHARE);
+							params.put("wbuid", wbuid);
+						
+							if(userService.updateUserAccount(params)){
+								List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
+								jsonMap.put("weibo", weibo);
+								jsonMap.put("success", true);
+							}
 						}
 					}
 				}

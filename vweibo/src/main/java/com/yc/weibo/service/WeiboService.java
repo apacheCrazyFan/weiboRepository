@@ -11,6 +11,8 @@ public interface WeiboService {
 	int selectCurrMaxWBid();
 	boolean initWeibohelp(int currWBid);
 	
+	boolean updateViewOnly(int wbid);
+	
 	boolean updateaddWeiboLike(int wbid);
 	boolean updateminuWeiboLike(int wbid);
 	int selectAfterLikeGreateAcount(int wbid);
@@ -21,7 +23,7 @@ public interface WeiboService {
 	String selectTransmityon(int wbid);
 	List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid);
 	boolean insertWeiboByTransmit(Map<String,Object> map);
-	
+	boolean updateTransmitAccount(int wbid);
 	
 	List<Map<String,Object>> findWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);
 	

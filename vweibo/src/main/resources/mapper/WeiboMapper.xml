@@ -17,11 +17,15 @@
 	</insert>
 	
 	
+	<update id="updateViewOnly" parameterType="int">
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
+	</update>
+	
 	<update id="updateaddWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1,WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
 	</update>
 	<update id="updateminuWeiboLike" parameterType="int">
-		update WeiBoHelp set WHgreateAccount = WHgreateAccount - 1 where WBid = #{wbid}
+		update WeiBoHelp set WHgreateAccount = WHgreateAccount - 1,WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterLike" parameterType="int" resultType="int">
 		select WHgreateAccount from WeiBoHelp where WBid = #{wbid}
@@ -50,6 +54,10 @@
 		</selectKey>
 		insert into WeiBo values (#{wbid},null,#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{transmitDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},null,null,null,#{isThemeWeibo,jdbcType=CHAR},'Y',#{userLocation,jdbcType=VARCHAR},0)
 	</insert>
+	<update id="updateTransmitAccount" parameterType="int">
+		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1,WHreprintAccount = WHreprintAccount + 1 where WBid = #{wbid}
+	</update>
+	
 	
 	<!-- 根据浏览次数排序 -->
 	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">

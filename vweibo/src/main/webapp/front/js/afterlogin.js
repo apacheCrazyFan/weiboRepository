@@ -880,7 +880,7 @@ $(window).scroll(function(){
 	}  
 }); 
 
-//点赞功能                      			//用户id   //微博id
+//点赞功能                      			//用户id //微博id //微博所属用户id
 function clicklike(obj,userid,wbid,wbuid){
 	$.ajax({
 		url: "weibo/addclicklike",
@@ -941,8 +941,8 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 		  type:"post",
 		  success: function(data,textStatus){
 			  if(data.success){
-				  $("#"+inputobj).val('');
-				  $("#"+collectionobj).hide();
+				  $("#"+textareaid).val('');
+				  $("#"+divid).hide();
 				  $("#"+cnav).html('<img src="front/image/center-part_foot01.png" id="foot01_imgs"/>已收藏');
 			  }
 		  },

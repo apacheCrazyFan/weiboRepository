@@ -12,6 +12,8 @@ public interface WeiboMapper {
 	int selectCurrMaxWBid();
 	int initWeibohelp(int currWBid);
 	
+	int updateViewOnly(int wbid);
+	
 	int selectOperateId(Map<String,Integer> map);
 	
 	int updateaddWeiboLike(int wbid);
@@ -24,7 +26,7 @@ public interface WeiboMapper {
 	String selectTransmityon(int wbid);  //查是否是转发微博   N/Y
 	List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid); //根据id查weibo和weibohelp表
 	int insertWeiboByTransmit(Map<String, Object> map);  //插入转发微博
-	
+	int updateTransmitAccount(int wbid);
 	
 	
 	List<Map<String,Object>> seleteWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);  //浏览次数优先mybatis里面是sql非嵌套查询也非嵌套结果
