@@ -428,4 +428,15 @@ public class WeiboHandler {
 		out.flush();
 		out.close();
 	}
+	
+	//我的赞
+	@RequestMapping(value="/findMyZan",method=RequestMethod.POST)
+	public void findMyZan(int WBUid,PrintWriter out){
+		Gson gson=new Gson();
+		List<Weibo> weibos=weiboService.findMyZan(WBUid);
+		System.out.print(weibos);
+		out.print(gson.toJson(weibos));
+		out.flush();
+		out.close();
+	}
 } 

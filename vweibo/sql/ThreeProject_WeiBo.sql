@@ -456,13 +456,15 @@ create table Operate(
        Ocontent varchar2(500)--预留字段  
 );
 
-alter table Operate add Odate varchar2(40);
+alter table Operate add Odate date;
+alter table OPerate drop column  Odate;
 create sequence seq_op_oid start with 1001;
 select * from Operate;
 drop table WeiBoHelp;
 drop table Operate;
 insert into Operate values(seq_op_oid.nextval,1006,10001,'收藏',null);
-
+insert into Operate(Odate) values(to_date('2016-9-15','yyyy-mm-dd'));
+update Operate set Odate=to_date('2016-9-15','yyyy-mm-dd') where oid in (1022,1041,1065);
 --评论（回复）微博表  --找爸爸
 create table Comments(
        Cid int primary key,          	--评论（回复）id
@@ -518,5 +520,6 @@ select b.*,w.* from
  
  select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=1006;
  
+ select p.odate from operate p where p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞');
  select uname from WeiBouser where wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞')
- select b.wbtxt,b.wbpic,b.wbvideo,w.uname from WeiBo b,WeiBoUser w where b.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') and w.wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞');
+ select * from (select rownum rn,b.wbtxt,b.wbpic,b.wbvideo,w.uname, p.odate from WeiBo b,WeiBoUser w, operate p where b.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') and w.wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞') and p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') order by odate) where rn<15;

@@ -26,4 +26,5 @@ public interface WeiboService {
 	List<Map<String, Object>> findHotWeiBo(Map<String,Integer> map);
 	List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params);
 	List<Weibo> myCollections(int wBUid);
+	List<Weibo> findMyZan(int wBUid);
 }

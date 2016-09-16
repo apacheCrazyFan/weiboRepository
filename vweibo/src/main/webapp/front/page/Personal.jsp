@@ -145,7 +145,6 @@
 	$("#myCollections").empty();
 	var WBUid=$("#hiddenid").val();
 	$(function(){
-		 alert(operation);
 		if(operation=="findcollection"){
 			$.post("weibo/myCollections",{"WBUid":WBUid},function(data){
 				var str="";
@@ -198,7 +197,7 @@
 							for(var r = 0; r <pics.length; r ++){
 								str2 += '<img width="160px;" height="160px;" src="/weibopics/'+pics[r]+'"/>';
 							}
-						}else{
+						}else {
 							//图片轮换
 							
 						}
@@ -206,13 +205,79 @@
 					
 					
 					
-					str+='<li>'+(i+1)+'.&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'</a></li>'+str2;
+					var newDate = new Date(data[i].Odate);
+					str+=newDate.toLocaleString()+'收藏了&nbsp;&nbsp;<li><a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'</a></li>'+str2;
 					
 				}
 				$("#myCollections").append(str);
 			},"json")
-		}else{
-			alert("222");
+		}else if(operation=="findmyzan"){
+			
+			$.post("weibo/findMyZan",{"WBUid":WBUid},function(data){
+				var str="";
+				var str2="";
+				for(var i=0;i<data.length;i++){
+					//微博内容
+					var txt=data[i].WBtxt.split("[");
+					var newtxt="";
+					for(var g=0;g<txt.length;g++){
+						if(txt[g].indexOf("]")>0){
+							newtxt+="";
+						}else{
+							newtxt+=txt[g];
+						}
+					}
+					var newContent ='';
+					var newContent1 = '';
+					faceArr = data[i].WBtxt.split("[");
+					for(var k = 0; k < faceArr.length; k ++){
+						if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
+							faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+							newContent += faceArr[k];
+						}
+						if(faceArr[k].split("]]").length > 1){
+							newContent+= '[['+faceArr[k];
+						}
+					}
+					
+					//图片处理 
+					if (data[i].WBpic != "") {
+						str2="";
+						var pics = data[i].WBpic.split(",");
+						//console.info(pics);
+						if(pics.length == 1){
+							str2 += '<img width="100px;" height="80px;" src="/weibopics/'+pics[0]+'"/>';
+						}else if(pics.length == 2){
+							for(var l = 0; l < pics.length; l ++){
+								str2 += '<img width="245px;" height="250px;" src="/weibopics/'+pics[l]+'"/>';
+							}
+						}else if(pics.length == 3){
+							for(var m = 0; m < pics.length; m ++){
+								str2 += '<img width="100px;" height="80px;" src="/weibopics/'+pics[m]+'"/>';
+							}
+						}else if(pics.length == 4){
+							str2 += '<img style="width="100px;" height="80px;"" src="/weibopics/'+pics[0]+'"/>';
+							for(var n = 1; n < pics.length; n ++){
+								str2 += '<img style="width:160px;height:80px;padding-right:3px;padding-left:3px;padding-top:3px;" src="/weibopics/'+pics[n]+'"/>';
+							}
+						}else if(pics.length == 9){
+							for(var r = 0; r <pics.length; r ++){
+								str2 += '<img width="160px;" height="160px;" src="/weibopics/'+pics[r]+'"/>';
+							}
+						}else {
+							//图片轮换
+							
+						}
+					}
+					
+					
+					var newDate = new Date(data[i].Odate);
+					str+=newDate.toLocaleString()+'&nbsp;&nbsp;&nbsp;'+data[i].Uname+'赞了你:'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'</a></li>'+str2;
+					
+				}
+				$("#myCollections").append(str);
+				
+			},"json");
 		}
 	});
 

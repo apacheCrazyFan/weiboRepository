@@ -18,8 +18,22 @@ public class Weibo {
      private char yon;  	//是否是转发的
      private String WBlocation;	//发表微博 的地理位置
      private int WBstatue;   //微博状态0：公开    1：朋友圈       2：....
+     private Date Odate;//操作的时间
+     private String Uname;
      
-	
+     
+	public Date getOdate() {
+		return Odate;
+	}
+	public void setOdate(Date odate) {
+		Odate = odate;
+	}
+	public String getUname() {
+		return Uname;
+	}
+	public void setUname(String uname) {
+		Uname = uname;
+	}
 	public char getYon() {
 		return yon;
 	}
@@ -103,8 +117,7 @@ public class Weibo {
 		return "Weibo \n [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUid=" + WBUid + ", WBdate="
 				+ WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic=" + WBmusic
 				+ ", yesOrno=" + yesOrno + ", yon=" + yon + ", WBlocation=" + WBlocation + ", WBstatue=" + WBstatue
-				+ "]";
+				+ ", Odate=" + Odate + ", Uname=" + Uname + "]";
 	}
-	
 	
 }
