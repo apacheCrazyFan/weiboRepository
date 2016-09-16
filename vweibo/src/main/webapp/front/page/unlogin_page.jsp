@@ -7,7 +7,7 @@
 <base href="/vweibo/">
 <title>登录前的页面</title>
 <link type="text/css" rel="stylesheet" href="front/css/unlogin_page.css"/>
-<!-- <script src="front/js/jquery-1.11.1.min.js"></script>-->
+<script src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="front/js/unlogin_page.js"></script>
 </head>
 

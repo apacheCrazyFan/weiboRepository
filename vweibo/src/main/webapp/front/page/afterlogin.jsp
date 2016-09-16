@@ -17,16 +17,16 @@
 <link rel="stylesheet" href="front/css/blueimp-gallery-video.css">
 <link rel="stylesheet" href="front/css/demo.css">
 
-<!-- <link rel="stylesheet" href="jquery-easyui-1.3.5/themes/default/easyui.css">
+<link rel="stylesheet" href="jquery-easyui-1.3.5/themes/default/easyui.css">
 <link rel="stylesheet" href="jquery-easyui-1.3.5/themes/icon.css">
-<link rel="stylesheet" href="jquery-easyui-1.3.5/demo/demo.css"> -->
+<link rel="stylesheet" href="jquery-easyui-1.3.5/demo/demo.css">
 
-<!-- <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script> -->
+<script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
 
-<!-- <script type="text/javascript" src="jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jquery-easyui-1.3.5/easyloader.js"></script>
-<script type="text/javascript" src="jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script> -->
+<script type="text/javascript" src="jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
 
 	<!-- js操作session的包 -->
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
@@ -742,7 +742,7 @@ var addclicklike = 1;
            			 </div>
               </div>
               
-              <!--评论-->
+             
               <div id="comment_div" class="comment_div" style="display:none;">
               		<img src="front/image/comment_header_img.png" id="comment_img">
                     <input type="text" id="comment_input"/><br>
