@@ -38,11 +38,11 @@
 	
 	
 	
-	<select id="selectTransmityon" parameterType="int" resultType="CHAR">
+	<select id="selectTransmityon" parameterType="int" resultType="string">
 		select yon from WeiBo where WBid = #{wbid}
 	</select>
 	<select id="selectWeiboandweiboHelpById" parameterType="int" resultType="map">
-		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = #{wbid,jdbcTpe=INTEGER}) w,WeiBoHelp h where w.WBid = h.WBid
+		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = #{wbid,jdbcType=INTEGER}) w,WeiBoHelp h where w.WBid = h.WBid
 	</select>
 	
 	

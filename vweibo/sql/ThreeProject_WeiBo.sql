@@ -464,8 +464,10 @@ select * from Operate;
 drop table WeiBo;
 drop table WeiBoHelp;
 drop table Operate;
-
 insert into Operate values(seq_op_oid.nextval,1006,10001,' ’≤ÿ',null);
+
+select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = 10582) w,WeiBoHelp h where w.WBid = h.WBid
+
 
 --∆¿¬€£®ªÿ∏¥£©Œ¢≤©±Ì  --’“∞÷∞÷
 create table Comments(
