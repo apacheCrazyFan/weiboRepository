@@ -30,4 +30,6 @@ public interface UserService {
 	WeiBoUser quickLoginByEmail(String userName);
 
 	WeiBoUser quickLoginByPhone(String userName);
+	
+	boolean updateUserAccount(Map<String,Object> map);
 }

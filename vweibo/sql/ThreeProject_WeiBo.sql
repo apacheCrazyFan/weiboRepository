@@ -202,7 +202,7 @@ alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 drop table FanAndFaned;
-select * from FanAndFaned;
+select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
 select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
 delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
@@ -242,9 +242,9 @@ insert into FanAndFaned values(1001,1006,'同学');
 
 
 insert into FanAndFaned values(1001,1007,'未分组');
-insert into FanAndFaned values(1001,1008,'未分组');
-insert into FanAndFaned values(1001,1009,'未分组');
-insert into FanAndFaned values(1001,1010,'未分组');
+insert into FanAndFaned values(1006,1008,'好友圈',null);
+insert into FanAndFaned values(1006,1009,'好友圈',null);
+insert into FanAndFaned values(1006,1010,'未分组',null);
 
 --首先话题是可以放在微博里发表的
 --所以说话题可以是微博的一个附属
@@ -333,6 +333,9 @@ create table WeiBoHelp(
        
        --预留字段  
 );
+select * from  (
+	select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount,WHreprintAccount
+	) where rn<5 and rn>1;
 
 update WeiBoHelp set WHgreateAccount = 2210 where WBid in(10437);
 insert into WeiBoHelp values(10424,9854,4562,1433,2555,1345);
@@ -424,7 +427,13 @@ select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHg
 --找到id(点赞次数优先，浏览次数其次)
 select WBid,rownum rn from WeiBoHelp where rownum < 15 order by WHgreateAccount desc;  --降序查询 前十五条
 
-
+select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned )) order by WBdate desc) n where 2 * 2 >= rownum)
+ 			where rn > 2 * (2-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 
 select * from (select w.*,rownum rn from WeiBoHelp w order by WHgreateAccount desc where 2*1 >= rownum) n
 where 2*0 < rn;
@@ -442,27 +451,31 @@ create table Operate(
            constraint RK_Operate_Uid references WeiBoUser(WBUid),--用户Id( 哪几种标签的用户操作了哪几种类型的微博)
        WBid int
            constraint RK_Operate_WBid references WeiBo(WBid),--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
-       Ostate varchar2(20)           --操作名（转载，收藏，评论，点赞..）
+       Ostate varchar2(20),           --操作名（转载，收藏，评论，点赞..）
        
-       --预留字段  
+       Ocontent varchar2(500)--预留字段  
 );
 create sequence seq_op_oid start with 1001;
+select * from Operate;
+drop table Operate;
+insert into Operate values(seq_op_oid.nextval,1006,10001,'收藏',null);
+
 --评论（回复）微博表  --找爸爸
 create table Comments(
-       Cid int primary key,           --评论（回复）id
-       WBUid int unique, --评论（回复）人id
-       WBid int unique,--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
+       Cid int primary key,          	--评论（回复）id
+       WBUid int unique, 				--评论（回复）人id
+       WBid int unique,					--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
        ContentTxt varchar2(500),        --评论（回复）文本内容
-       ContentPics varchar2(200),      --评论（回复）图片路径
-       Cdate Date,                    --评论日期
-       CgreateAccount int,            --评论点赞次数
-       Csonode int					  --下一个评论的id  这里可以列一个树状图出来
+       ContentPics varchar2(200),      	--评论（回复）图片路径(这里只指表情)
+       Cdate Date,                    	--评论日期
+       CgreateAccount int,            	--评论点赞次数
+       Csonode int					  	--下一个评论的id  这里可以列一个树状图出来 自己是自己的爸爸 自表查询
        
        --预留字段
 );
-drop table Comments;
 create sequence seq_comments_cid start with 100001 increment by 1;
 
+drop table Comments;
 --私信
 create table PrivateMessage(
        PMid int primary key,          --私信id
@@ -483,3 +496,21 @@ create table PersonalPermission(
        PPid int,                      --用户id
        PPstate char(2),               --权限是否开放{ F(开放) or T(关闭) }
 );
+
+
+select b.*,w.* from
+ (select * from WeiBo where WBUid in
+    (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=1006 )) b,WeiBoUser w where w.WBUid = b.WBUid ;
+
+    select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+				(select * from WeiBo  where WBUid in
+   					 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=1006 ) ) n where 2 * 2 >= rownum)
+ 			where rn > 2 * (2-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+ 			
+ create sequence seq_op_oid start with 1001;
+ 
+ select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=1006;

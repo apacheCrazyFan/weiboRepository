@@ -23,5 +23,7 @@ public class WeiboServiceImplTest {
 		List<Map<String, Object>> list = weiboService.findWeiboOrderByWHviewAccountFirst(map);
 		System.out.println( list);
 	}
+	
+	
 
 }

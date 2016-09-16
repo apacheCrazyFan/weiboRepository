@@ -44,11 +44,13 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 	public static String DATABASE = "DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana";
 	
 	//积分
-	public static Integer LIKE = 1;   //点赞
-	public static Integer COMMENT = 2;//评论
+	public static Integer LIKE = 2;   //点赞
+	public static Integer COMMENT = 1;//评论
 	public static Integer SHARE = 5;  //分享，转发
 	public static Integer COLLECT = 6;//收藏
-
+	public static Integer PUBLIS = 10;  //发表微博
+	public static Integer FOCUS = 3;	//关注你
+	
 	//表情路径
 	public static String FACES = "front/image/face_image/";
 	

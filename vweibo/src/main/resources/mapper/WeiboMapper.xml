@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.weibo.mapper.WeiboMapper">
 	<insert id="insertWeibo" parameterType="map">
-		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE">
+		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE" >
 			select seq_wb_wbid.nextval currval from dual
 		</selectKey>
 		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
 	</insert>
-	
-	
 	<select id="selectCurrMaxWBid" resultType="int">
 		select max(wbid) wbid from WeiBo
 	</select>
 	<insert id="initWeibohelp">
 			insert into WeiBoHelp values (#{currWBid,jdbcType=INTEGER},0,0,0,0,0)
 	</insert>
+	
+	
 	<update id="updateaddWeiboLike" parameterType="int">
-		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1 where WBid = #{wbid}
+		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1,WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
 	</update>
-	<update id="updateWeiminuWeiboboLike" parameterType="int">
+	<update id="updateminuWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount - 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterLike" parameterType="int" resultType="int">
@@ -28,12 +28,14 @@
 	</select>
 	
 	
-	<insert id="insertWhoLike" parameterType="int">
-		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
-			select seq_op_oid.nextval currval from dual
-		</selectKey>
-		insert into Operate values(#{oid},#{userid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'点赞')
-	</insert>
+	
+	
+	<update id="updateCollectionAccount" parameterType="int">
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHfavoriteAccount = WHfavoriteAccount + 1 where WBid = #{wbid}
+	</update>
+	<select id="selectAfterCollection" parameterType="int" resultType="int">
+		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}
+	</select>
 	
 	
 	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">
@@ -56,9 +58,25 @@
  			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
-	
-	<select id="findHotWeiBo" resultType="WeiBo">
-		
-	
+	<!-- 热门微博 -->
+	<select id="findHotWeiBo" resultType="map" parameterType="map">
+		select * from  (
+			select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount,WHreprintAccount
+		) where rn>#{pageSize} * (#{pageNum}-1) and #{pageSize} * (#{pageNum})>rn
+	</select>
+	<!-- 好友圈 -->
+	<select id="findFriendWeiBo" parameterType="map" resultType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+			(select * from 
+				(select n.*,rownum rn from 
+					(select * from WeiBo where WBUid in
+   						 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=#{WBUid} ) ) n where #{pageSize} * (#{pageNum}) >= rownum)
+ 				where rn>#{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
+	<!-- 我的收藏 -->
+	<select id="myCollections" resultType="Weibo" parameterType="int">
+		 select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=#{WBUid}
 	</select>
 </mapper>

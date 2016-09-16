@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.yc.weibo.entity.Weibo;
 
+
 public interface WeiboService {
 	boolean addWeibo(Map<String, Object> map);
 	int selectCurrMaxWBid();
@@ -13,12 +14,16 @@ public interface WeiboService {
 	boolean updateaddWeiboLike(int wbid);
 	boolean updateminuWeiboLike(int wbid);
 	int selectAfterLikeGreateAcount(int wbid);
-	boolean insertWhoLike(Map<String,Integer> map);
+	
+	boolean updateCollectionAccount(int wbid);
+	int selectAfterCollection(int wbid);
 	
 	List<Map<String,Object>> findWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);
 	
 	List<Map<String,Object>> findtWeiboOrderByWHgreateAccountFirst(Map<String,Integer> map);
 	
 	List<Map<String,Object>> findWeiboOrderByWBdate(Map<String,Integer> map);
-	Weibo findHotWeiBo();
+	List<Map<String, Object>> findHotWeiBo(Map<String,Integer> map);
+	List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params);
+	List<Weibo> myCollections(int wBUid);
 }

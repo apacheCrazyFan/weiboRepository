@@ -49,4 +49,8 @@
 		select * from WeiBoUser where Uphone = #{Uphone}
 	</select>
 	
+	
+	<update id="updateUserAccount" parameterType="map">
+		update WeiBoUser set Uscore = Uscore + #{account,jdbcType=INTEGER} where  WBUid = #{uid,jdbcType=INTEGER}
+	</update>
 </mapper>

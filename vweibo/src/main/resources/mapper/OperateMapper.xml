@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.weibo.mapper.OperateMapper">
+	<select id="selectoperateId" parameterType="map" resultType="INTEGER">
+		select nvl(max(Oid),0) as Oid from Operate where WBUid = #{uid,jdbcType=INTEGER} and WBid = #{wbid,jdbcType=INTEGER} and Ostate = #{Ostate,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteOperate" parameterType="int">
+		delete from Operate where Oid = #{Operateid,jdbcType=INTEGER}
+	</delete>
+	
+	<insert id="insertWhoLikeWeibo" parameterType="map">
+		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
+			select seq_op_oid.nextval currval from dual
+		</selectKey>
+		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'点赞',null)
+	</insert>
+	
+	<insert id="insertCollectWeibo" parameterType="map">
+		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
+			select seq_op_oid.nextval currval from dual
+		</selectKey>
+		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'收藏',#{tag,jdbcType=VARCHAR})
+	</insert>
+</mapper>

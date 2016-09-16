@@ -30,5 +30,7 @@ public interface UserMapper {
 	public WeiBoUser quickLoginByEmail(String Uemail);
 
 	public WeiBoUser quickLoginByPhone(String Uphone);
+	
+	int updateUserAccount(Map<String, Object> map);
 
 }

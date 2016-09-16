@@ -9,7 +9,7 @@ a{
 	}
 body{
 	text-align:center;
-	background:url(../image/IMG_0110.JPG) repeat;
+	/* background:url(../image/IMG_0110.JPG) repeat; */
 	}
 
 #head{
@@ -253,3 +253,11 @@ body{
 	width:600px;
 	height:1166px;
 	}
+#content_m2_right ul{	
+	float:left;
+	margin-left:100px;
+}	
+#content_m2_right ul li{
+	list-style: none;
+	margin-top: 20px;
+}
