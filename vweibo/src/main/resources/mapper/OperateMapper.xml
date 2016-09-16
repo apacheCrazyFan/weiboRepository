@@ -11,6 +11,10 @@
 		delete from Operate where Oid = #{Operateid,jdbcType=INTEGER}
 	</delete>
 	
+	<select id="selectIfavoriteWeiboId" parameterType="int" resultType="INTEGER">
+		select distinct(WBid) from Operate where WBUid = #{uid,jdbcType=INTEGER} and Ostate = '收藏'
+	</select>
+	
 	<insert id="insertWhoLikeWeibo" parameterType="map">
 		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
 			select seq_op_oid.nextval currval from dual
