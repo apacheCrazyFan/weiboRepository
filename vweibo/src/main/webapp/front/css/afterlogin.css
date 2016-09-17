@@ -536,8 +536,8 @@ textarea {
 	font-size:13px;
 }
 
-#center-part_p {
-	width:500px;
+.center-part_p {
+	width:450px;
 	position: relative;
 	bottom: 60px;
 	left: 35px;
@@ -617,7 +617,6 @@ textarea {
 
 #foot01_img {
 	position: relative;
-	right: 10px;
 	top: 5px;
 }
 
@@ -982,7 +981,8 @@ textarea {
 	
 .center_footnum_{
 	position: relative;
-	top:10px;
-	margin-right: 10px;
+	bottom:4px;
+	margin-right: 12px;
+	padding-left:15px;
 	font-size: 12px;
 }

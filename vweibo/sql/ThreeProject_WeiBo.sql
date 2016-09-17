@@ -149,6 +149,7 @@ create table WeiBoUser(
        UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
 update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f3.png' where WBUid = 1001;
+update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f0.png' where WBUid = 1005;
 
 
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);

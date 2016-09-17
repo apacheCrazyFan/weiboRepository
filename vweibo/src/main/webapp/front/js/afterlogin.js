@@ -6,7 +6,6 @@ var num = 1;
 var totalheight = 0; 
 
 var clicklikenum = 1;
-
 var commentdivnum = 1;
 var transmitdivnum = 1;
 var collectiondivnum = 1;
@@ -88,15 +87,15 @@ window.onload=function(){
 					var newContent ='';
 					var newContent1 = '';
 					if(content != undefined){
-						faceArr = content.split("[");
+						var faceArr = content.split("[");
 						for(var k = 0; k < faceArr.length; k ++){
 							if(faceArr[k].split("]]").length > 1){  //主题
 								newContent = '[['+faceArr[k]+newContent;
 							}else if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
-								faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
-								newContent += faceArr[k];
+									faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+									newContent += faceArr[k];
 							}else{
-								newContent = content;
+								newContent += faceArr[k];
 							}
 						}
 					}
@@ -105,11 +104,11 @@ window.onload=function(){
 					console.info(faceArr);
 					console.info(newContent); */
 					var faceRegx1 = new RegExp('\\n','gi');
-					faceArr1 = newContent.split(faceRegx1);
+					var faceArr1 = newContent.split(faceRegx1);
 					for(var j = 0; j < faceArr1.length; j ++){
 						newContent1 += faceArr1[j]+'<br />';
 					}
-					newStr += '<p id="center-part_p" style="width:500px;position:relative;margin-left:80px;">'+newContent1+'</p>';
+					newStr += '<p id="center-part_p_'+collectiondivnum+'" class="center-part_p" style="width:450px;position:relative;margin-left:80px;">'+newContent1+'</p>';
 				
 					
 					newStr += '<div id="content_img01">';
@@ -169,9 +168,9 @@ window.onload=function(){
 						newStr += '<a href="javascript:void(0)"	id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>已收藏</a>';	//收藏
 					}
 					
-					newStr += '<a href="javascript:void(0)" id="center_footnum2_'+collectiondivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
-					newStr += '<a href="javascript:void(0)" id="center_footnum3_'+collectiondivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
-					newStr += '<a href="javascript:void(0)" id="center_footnum4_'+collectiondivnum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';   //点赞
+					newStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
+					newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
+					newStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';   //点赞
 					newStr += '</div>';
 					
 					
@@ -206,7 +205,7 @@ window.onload=function(){
 					newStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
 					newStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
 					newStr += '<a href="javascript:void(0)" id="transmit_aa" onClick="showhidetransmitdiv(&quot;transmit_choose&quot;)">公开<img src="front/image/limits_img5.png"/></a>';
-					newStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,'+userid+','+weiboid+','+wbuid+')" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)">';
+					newStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,&quot;center_footnum3_'+commentdivnum+'&quot;,'+userid+','+weiboid+','+wbuid+')" onMouseOver="transmitdivcloseimg2(&quot;transmit_closepng_a&quot;)">';
 					
 					newStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(&quot;transmit_choose&quot;)">';
 					newStr += '<ul>';
@@ -735,7 +734,7 @@ $(window).scroll(function(){
 		//表情处理
 		var newContent ='';
 		var newContent1 = '';
-		faceArr = content.split("[");
+		var faceArr = content.split("[");
 		for(var k = 0; k < faceArr.length; k ++){
 			if(faceArr[k].split("]]").length > 1){  //主题
 				newContent = '[['+faceArr[k]+newContent;
@@ -743,18 +742,18 @@ $(window).scroll(function(){
 					faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
 					newContent += faceArr[k];
 			}else{
-				newContent = content;
+				newContent += faceArr[k];
 			}
 		}
 		
 	
 		//换行处理
 		var faceRegx1 = new RegExp('\\n','gi');
-		faceArr1 = content.split(faceRegx1);
+		var faceArr1 = content.split(faceRegx1);
 		for(var j = 0; j < faceArr1.length; j ++){
 			newContent1 += faceArr1[j]+'<br />';
 		}
-		newStr += '<p id="center-part_p" style="width:500px;position:relative;margin-left:80px;">'+newContent1+'</p>';
+		newStr += '<p id="center-part_p_'+collectiondivnum+'" class="center-part_p" style="width:450px;position:relative;margin-left:80px;">'+newContent1+'</p>';
 	
 		newStr += '<div id="content_img01">';
 		
@@ -813,9 +812,9 @@ $(window).scroll(function(){
 		}else{
 			newStr += '<a href="javascript:void(0)"	id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>已收藏</a>';	//收藏
 		}
-		newStr += '<a href="javascript:void(0)" id="center_footnum2_'+collectiondivnum+'" class="center_footnum1" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
-		newStr += '<a href="javascript:void(0)" id="center_footnum3_'+collectiondivnum+'" class="center_footnum1" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
-		newStr += '<a href="javascript:void(0)" id="center_footnum4_'+collectiondivnum+'" class="center_footnum1" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';  //点赞在这里处理
+		newStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum1" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum1" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
+		newStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum1" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';  //点赞在这里处理
 		newStr += '</div>';																	//用户id					//微博id				
 		
 		
@@ -850,7 +849,7 @@ $(window).scroll(function(){
 		newStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
 		newStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
 		newStr += '<a href="javascript:void(0)" id="transmit_aa" onClick="showhidetransmitdiv(&quot;transmit_choose&quot;)">公开<img src="front/image/limits_img5.png"/></a>';
-		newStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,'+userid+','+weiboid+','+wbuid+')">';
+		newStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,&quot;center_footnum2_'+transmitdivnum+'&quot;,'+userid+','+weiboid+','+wbuid+')">';
 		
 		newStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(&quot;transmit_choose&quot;)">';
 		newStr += '<ul>';
@@ -930,7 +929,7 @@ function collectiontag(collectionobj,inputobj,cnav,uid,weiboid,wbuid){
 
 
 //转发								//用户id  发表的微博id 发表微博的用户的id
-function transmitweibo(divid,textareaid,uid,wbid,wbuid){
+function transmitweibo(divid,textareaid,transmitid,uid,wbid,wbuid){
 	var inputtxt = $("#"+textareaid).val();
 	alert(inputtxt);
 	
@@ -965,7 +964,7 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 				  var currWBid = data.currWBid;//当前微博的id
 				  var date = new Date();  //当前时间
 				  var stringDate = date.toLocaleString().substring(date.toLocaleString().indexOf(" "));
-				  var location = data.location; //当前地址
+				  var location = data.userLocation; //当前地址
 				  
 				  
 				  	var newWeiBoDiv = document.createElement("div");
@@ -973,7 +972,6 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 				  	newWeiBoDiv.className = "divid_d_"+addclicklike;
 				  
 				  	var newWeiBoStr = '';
-				  	newWeiBoStr += '<div id="c_f_'+addclicklike+'" class="c_f_">';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+addclicklike+'" title="'+$("#username").val()+'" src="/weibouserimages/'+$("#uimgPath").val()+'"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+addclicklike+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
@@ -988,13 +986,13 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 					
 					newWeiBoStr += '<ul id="center-part_ul">';
 					newWeiBoStr += '<li id="center-part_li">'+$("#username").val()+'</li>';
-	                newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">今天&&nbsp;'+stringDate+'</a> 来自 '+location+'</li>';
+	                newWeiBoStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">今天&nbsp;'+stringDate+'</a> 来自 '+location+'</li>';
 	                newWeiBoStr += '</ul>';
 				  
 	              //表情处理
 					var newContent ='';
 					var newContent1 = '';
-					faceArr = inputtxt.split("[");
+					var faceArr = inputtxt.split("[");
 					for(var k = 0; k < faceArr.length; k ++){
 						if(faceArr[k].split("]]").length > 1){  //主题
 							newContent = '[['+faceArr[k]+newContent;
@@ -1002,53 +1000,51 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 								faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
 								newContent += faceArr[k];
 						}else{
-							newContent = inputtxt;
+							newContent += faceArr[k];
 						}
 					}
 					
 					
 					var faceRegx1 = new RegExp('\\n','gi');
-					faceArr1 = newContent.split(faceRegx1);
+					var faceArr1 = newContent.split(faceRegx1);
 					for(var j = 0; j < faceArr1.length; j ++){
 						newContent1 += faceArr1[j]+'<br />';
 					}
-					newWeiBoStr += '<p id="center-part_p">'+newContent1+'</p>';
-					newWeiBoStr += '</div>';
+					newWeiBoStr += '<p id="center-part_p_'+addclicklike+'" class="center-part_p" style="width:450px;position:relative;left:29px;">'+newContent1+'</p>';
 					
 					
 					//转发的源微博处理
-					newWeiBoStr += '<div id="c_s_'+addclicklike+'" class="c_s_">';
-					newWeiBoStr += '<div id="c_s_1_'+addclicklike+'" class="c_s_1_">';
 					var weiboUserMsg = '';
-					weiboUserMsg += '@'+wbuname;
-					weiboUserMsg += '&nbsp;'+wbutag;
-					weiboUserMsg += '&nbsp;<img src="/weiboContriesFlags/'+wbuspeciatag+'"/>';
+					weiboUserMsg += '<a href="javascript:void(0)"><span style="color:red;">@'+wbuname+'</span></a>';
+					weiboUserMsg += '&nbsp;<a href="javascript:void(0)"><span style="color:red;">'+wbutag+'</span></a>';
+					weiboUserMsg += '&nbsp;<a href="javascript:void(0)"><span style="color:red;"><img src="/weiboContriesFlags/'+wbuspeciatag+'"</span></a>';
 					
-					newWeiBoStr += '<p id="center-part_p_m_i_g_'+addclicklike+'" style="width:500px;">'+weiboUserMsg+'</p>';
+					newWeiBoStr += '<p id="center-part_p_'+addclicklike+'" class="center-part_p" style="width:450px;position:relative;left:29px;">'+weiboUserMsg+'</p>';
 					
 					//表情处理
 					var wb_newContent ='';
 					var wb_newContent1 = '';
-					faceArr = wb_content.split("[");
+					var faceArr = wb_content.split("[");
 					for(var k = 0; k < faceArr.length; k ++){
 						if(faceArr[k].split("]]").length > 1){  //主题
-							wb_newContent = '[['+faceArr[k]+wb_newContent;
+							newContent = '[['+faceArr[k]+newContent;
 						}else if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
 								faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
-								wb_newContent += faceArr[k];
+								newContent += faceArr[k];
 						}else{
-							wb_newContent = wb_content;
+							newContent += faceArr[k];
 						}
 					}
 					
 					
 					var faceRegx1 = new RegExp('\\n','gi');
-					faceArr1 = wb_newContent.split(faceRegx1);
+					var faceArr1 = wb_newContent.split(faceRegx1);
 					for(var j = 0; j < faceArr1.length; j ++){
 						wb_newContent1 += faceArr1[j]+'<br />';
 					}
-					newWeiBoStr += '<p id="center-part_p" style="width:500px;">'+wb_newContent1+'</p>';
+					newWeiBoStr += '<p id="center-part_p_'+addclicklike+'" class="center-part_p" style="width:450px;position:relative;left:29px;">'+wb_newContent1+'</p>';
 				
+					newWeiBoStr += '<div id="content_img01">';
 					//图片处理 
 					if (wb_picsMap != "" && wb_picsMap != undefined) {
 						var wb_pics = wb_picsMap.split(",");
@@ -1095,27 +1091,29 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 							newWeiBoStr += '<audio controls="true" src="/weibomusics/'+wb_music[i]+'" style="width:500px;height:25px;"></video>';
 						}
 					}
-					newWeiBoStr += '</div>';
-						
-					newWeiBoStr += '<div id="c_s_2_'+addclicklike+'" class="c_s_2_">';
-					newWeiBoStr += '<li style="height:0px;width:250px;float:left;"><a href="javascript:void(0)">'+wb_wbdate+'</a> 来自 '+wb_location+'</li>';
+					
+					var wb_string = new Date();
+					wb_string.setTime(wb_wbdate);
+					var wb_string_date = wb_string.toLocaleString();
+					newWeiBoStr += '<div>';
+					newWeiBoStr += '<li style="height:0px;width:250px;float:left;"><a href="javascript:void(0)">'+wb_string_date+'</a> 来自 '+wb_location;
+					newWeiBoStr += '</li>';
 					newWeiBoStr += '<li style="height:0px;width:250px;float:right;">';
-					newWeiBoStr += '<div id="center_footnum_i_m_g_'+addclicklike+'" class="center_footnum_">';
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1_i_m_g_'+addclicklike+'" class="center_footnum_" onClick="addcollectiondiv_i_m_g('+wb_wbid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_i_m_g_'+addclicklike+'" class="center_footnum_" onClick="addtransmitdiv_i_m_g('+wb_wbid+')"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+wb_transmitaccount+'</a>'; //转发
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_i_m_g_'+addclicklike+'" class="center_footnum_" onClick="addcommentdiv_i_m_g('+wb_wbid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+wb_commentaccount+'</a>';	//评论
+					newWeiBoStr += '<div id="center_footnum_i_m_g_'+collectiondivnum+'" class="center_footnum_">';
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_i_m_g_'+transmitdivnum+'" class="center_footnum_" onClick="addtransmitdiv_i_m_g('+wb_wbid+')"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+wb_transmitaccount+'</a>'; //转发
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_i_m_g_'+commentdivnum+'" class="center_footnum_" onClick="addcommentdiv_i_m_g('+wb_wbid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+wb_commentaccount+'</a>';	//评论
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_i_m_g_'+addclicklike+'" class="center_footnum_" onClick="clicklike_i_m_g('+wb_wbid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+wb_greateaccount+'</a>';   //点赞
 					newWeiBoStr += '</div>';
 					newWeiBoStr += '</li>';
 					newWeiBoStr += '</div>';
 					newWeiBoStr += '</div>';
 					
-					newWeiBoStr += '<div id="c_t_'+addclicklike+'" class="c_t_">';
+					
 					newWeiBoStr += '<div id="center_footnum_'+collectiondivnum+'" class="center_footnum">';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+currWBid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_'+collectiondivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>'; //转发
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+collectiondivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_'+collectiondivnum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+currWBid+','+userid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';   //点赞
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>'; //转发
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_'+addclicklike+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+currWBid+','+userid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';   //点赞
 					newWeiBoStr += '</div>';
 					
 					newWeiBoStr += '<div id="center_footnum_col_'+collectiondivnum+'" class="center_footnum_col" style="display:none;">';
@@ -1149,7 +1147,7 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_aa" onClick="showhidetransmitdiv(&quot;transmit_choose&quot;)">公开<img src="front/image/limits_img5.png"/></a>';
-					newWeiBoStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,'+userid+','+currWBid+','+userid+')">';
+					newWeiBoStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,&quot;center_footnum2_'+transmitdivnum+'&quot;,'+userid+','+currWBid+','+userid+')">';
 					
 					newWeiBoStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(&quot;transmit_choose&quot;)">';
 					newWeiBoStr += '<ul>';
@@ -1177,7 +1175,9 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 					
 					//刷新右边用户信息框
 					//刷新微博数
-					weibocount += 1;
+					tempweibocount = document.getElementById("weibocount").value;
+					
+					weibocount = parseInt(tempweibocount) + 1;
 					MsgStr = '';
 					MsgStr += '<a href="javascript:void(0)" id="user_img"><img src="/weibouserimages/'+$("#uimgPath").val()+'"/></a>';
 					MsgStr += '<a href="javascript:void(0)" id="user_name">'+$("#username").val()+'</a>';
@@ -1186,7 +1186,7 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 		            MsgStr += '<a href="javascript:void(0)" id="level">Lv.10</a>';
 		            MsgStr += '</div>';
 		            MsgStr += '<div id="usernum">';
-		            MsgStr += ' <a href="javascript:void(0)" id="usernumone"><font id="num">'+$("#focuscount").val()+'</font>关注</a>';
+		            MsgStr += '<a href="javascript:void(0)" id="usernumone"><font id="num">'+$("#focuscount").val()+'</font>关注</a>';
 		            MsgStr += '<a href="javascript:void(0)" id="usernumone"><font id="num">'+$("#fanedbocount").val()+'</font>粉丝</a>';
 		            MsgStr += '<a href="javascript:void(0)" id="usernumone"><font id="num">'+weibocount+'</font>微博</a>';
 		            MsgStr += '</div>';
@@ -1197,7 +1197,10 @@ function transmitweibo(divid,textareaid,uid,wbid,wbuid){
 					document.getElementById("weibocount").value =weibocount;
 					
 					
+					$("#"+transmitid).html('<img src="front/image/center-part_foot02.png" id="foot01_img"/>'+wb_transmitaccount);
+					
 					$("#"+textareaid).val('');
+					
 					$("#"+divid).hide();
 					
 					addclicklike ++;

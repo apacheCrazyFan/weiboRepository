@@ -422,7 +422,7 @@ public class WeiboHandler {
 				params.put("isThemeWeibo", 'N');
 			}
 			
-			params.put("userLocation", userLocation);
+			
 			params.put("transmitDate", date);
 			params.put("userId", user.getWBUid());
 			params.put("txtContent", txt);
@@ -446,6 +446,7 @@ public class WeiboHandler {
 							if(userService.updateUserAccount(params)){  //用户积分更新成功
 								
 								List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
+								jsonMap.put("userLocation", userLocation);
 								jsonMap.put("currWBid", currWBid);
 								jsonMap.put("weibo", weibo);
 								jsonMap.put("success", true);
@@ -484,7 +485,7 @@ public class WeiboHandler {
 				params.put("isThemeWeibo", 'N');
 			}
 			
-			params.put("userLocation", userLocation);
+	
 			params.put("transmitDate", date);
 			params.put("userId", user.getWBUid());
 			params.put("txtContent", txt);
@@ -507,6 +508,7 @@ public class WeiboHandler {
 						
 							if(userService.updateUserAccount(params)){
 								List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
+								jsonMap.put("userLocation", userLocation);
 								jsonMap.put("currWBid", currWBid);
 								jsonMap.put("weibo", weibo);
 								jsonMap.put("success", true);
