@@ -539,8 +539,8 @@ select b.*,w.* from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
 			(select n.*,rownum rn from 
-				(select * from WeiBo  where wbtag like '%大学%' order by WBdate) n where 2 * 2 >= rownum)
- 			where rn > 2 * (2-1)) b
+				(select * from WeiBo  where wbtag like '%大学%' order by WBdate) n where 100 >= rownum)
+ 			where rn >0) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
  			
  create sequence seq_op_oid start with 1001;

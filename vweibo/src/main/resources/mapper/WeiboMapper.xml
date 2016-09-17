@@ -83,7 +83,7 @@
 	<!-- 热门微博 -->
 	<select id="findHotWeiBo" resultType="map" parameterType="map">
 		select * from  (
-			select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount,WHreprintAccount
+			select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount desc,WHreprintAccount desc
 		) where rn>#{pageSize} * (#{pageNum}-1) and #{pageSize} * (#{pageNum})>rn
 	</select>
 	<!-- 好友圈 -->
@@ -99,7 +99,7 @@
 	</select>
 	<!-- 我的收藏 -->
 	<select id="myCollections" resultType="Weibo" parameterType="int">
-		select * from ( select rownum rn, w.*,p.odate from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=#{WBUid} order by odate) where 15>rn
+		select * from ( select rownum rn, w.*,p.odate from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=#{WBUid} order by odate desc) where 15>rn
 	</select>
 	
 	<!-- 我的赞 -->
