@@ -325,6 +325,14 @@ insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1002,sysdate,'bbbbb
 insert into WeiBo values(seq_wb_wbid.nextval,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','衡阳,长沙市',0);
 insert into WeiBo values(seq_wb_wbid.nextval,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y','N','衡阳,长沙市',0);
 
+update WeiBo set wbtag='大学' where wbid=10001;
+update WeiBo set wbtag='搞笑' where wbid=10002;
+update WeiBo set wbtag='时尚' where wbid=10003;
+update WeiBo set wbtag='大学,时尚' where wbid=10004;
+update WeiBo set wbtag='大学,搞笑' where wbid=10021;
+update WeiBo set wbtag='大学,搞笑,时尚' where wbid=10022;
+
+select * from WeiBo where wbtag like '%大学%'
 
 select * from weibo order by 
 --微博附加表
@@ -531,8 +539,7 @@ select b.*,w.* from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
 			(select n.*,rownum rn from 
-				(select * from WeiBo  where WBUid in
-   					 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=1006 ) ) n where 2 * 2 >= rownum)
+				(select * from WeiBo  where wbtag like '%大学%' order by WBdate) n where 2 * 2 >= rownum)
  			where rn > 2 * (2-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
  			
@@ -543,3 +550,11 @@ select b.*,w.* from
  select p.odate from operate p where p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞');
  select uname from WeiBouser where wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞')
  select * from (select rownum rn,b.wbtxt,b.wbpic,b.wbvideo,w.uname, p.odate from WeiBo b,WeiBoUser w, operate p where b.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') and w.wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞') and p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') order by odate) where rn<15;
+ 
+ select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+				(select * from WeiBo   order by WBdate) n where 5 >= rownum)
+ 					rn>1) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid

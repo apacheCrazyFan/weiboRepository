@@ -172,7 +172,7 @@
 							newContent+= '[['+faceArr[k];
 						}
 					}
-					
+					alert(data[i].WBpic);
 					//图片处理 
 					if (data[i].WBpic != "") {
 						str2="";
@@ -206,7 +206,7 @@
 					
 					
 					var newDate = new Date(data[i].Odate);
-					str+=newDate.toLocaleString()+'收藏了&nbsp;&nbsp;<li><a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'</a></li>'+str2;
+					str+=newDate.toLocaleString()+'收藏了&nbsp;&nbsp;<li><a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'<br/>'+str2+'</a></li>';
 					
 				}
 				$("#myCollections").append(str);
@@ -241,7 +241,9 @@
 					}
 					
 					//图片处理 
-					if (data[i].WBpic != "") {
+					
+					if (data[i].WBpic != "" || data[i].WBpic !=null) {
+						alert(data[i].WBpic)
 						str2="";
 						var pics = data[i].WBpic.split(",");
 						//console.info(pics);
@@ -272,7 +274,7 @@
 					
 					
 					var newDate = new Date(data[i].Odate);
-					str+=newDate.toLocaleString()+'&nbsp;&nbsp;&nbsp;'+data[i].Uname+'赞了你:'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'</a></li>'+str2;
+					str+=newDate.toLocaleString()+'&nbsp;&nbsp;&nbsp;'+data[i].Uname+'赞了你:'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'<br/>'+str2+'</a></li>';
 					
 				}
 				$("#myCollections").append(str);

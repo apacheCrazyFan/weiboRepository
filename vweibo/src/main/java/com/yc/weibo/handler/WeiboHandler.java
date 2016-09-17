@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -577,4 +579,30 @@ public class WeiboHandler {
 		out.flush();
 		out.close();
 	}
+	
+	//分类浏览
+	@ResponseBody
+	@RequestMapping(value="/findWeiBoByWBtag",method=RequestMethod.GET)
+	public Map<String,Object> findWeiBoByWBtag(@RequestParam(name="pageSize")String pageSize,@RequestParam(name="pageNum")String pageNum,@RequestParam("wbtag")String wbtag){
+		try {
+			wbtag=URLDecoder.decode(wbtag,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println( pageSize+"  =============  "+pageNum+"---"+wbtag);
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+
+		Map<String,Object> params = new HashMap<String,Object>();
+		String searchText = new StringBuilder("%").append(wbtag).append("%").toString();
+		params.put("pageSize", pageSize);
+		params.put("pageNum", pageNum);
+		params.put("wbtag", searchText);
+		List<Map<String,Object>> weiboList = weiboService.findWeiBoByWBtag(params);
+
+		System.out.println( weiboList);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		return jsonMap;
+		}
+	
 } 
