@@ -125,7 +125,8 @@ public class WeiboHandler {
 			params.put("wbuid", uid);
 			if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid,0}) && userService.updateUserAccount(params)){
 				
-				jsonMap.put("wbuid", currWBid);
+				System.out.println( "=======================================> 我来了");
+				jsonMap.put("wbid", currWBid);
 				jsonMap.put("publishDate", publishDateAndLocation.substring(0,publishDateAndLocation.indexOf(",")));
 				jsonMap.put("location", publishDateAndLocation.substring(publishDateAndLocation.indexOf(",")+1));
 				//增加了最后的逗号删除操作
@@ -443,7 +444,9 @@ public class WeiboHandler {
 							params.put("wbuid", wbuid);
 						
 							if(userService.updateUserAccount(params)){  //用户积分更新成功
+								
 								List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
+								jsonMap.put("currWBid", currWBid);
 								jsonMap.put("weibo", weibo);
 								jsonMap.put("success", true);
 							}
@@ -504,6 +507,7 @@ public class WeiboHandler {
 						
 							if(userService.updateUserAccount(params)){
 								List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
+								jsonMap.put("currWBid", currWBid);
 								jsonMap.put("weibo", weibo);
 								jsonMap.put("success", true);
 							}
