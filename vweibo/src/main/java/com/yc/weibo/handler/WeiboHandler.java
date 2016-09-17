@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -260,6 +261,7 @@ public class WeiboHandler {
 	 * @param pageNum
 	 * @return
 	 */
+	@Transactional(propagation=Propagation.REQUIRED)  //事务的隔离级别
 	@RequestMapping(value="/afterLoginDataPrarery",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> getAfterLoginDataPrarery(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid){
@@ -268,10 +270,36 @@ public class WeiboHandler {
 		
 		params.put("pageSize", pageSize);
 		params.put("pageNum", pageNum);
-		params.put("uid",userid);
+		params.put("uid",userid);  //用来控制该用户 可看的微博
 		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWBdate(params);   //根据日期降序查询微博 
 		List<Integer> wbids = operateService.selectIfavoriteWeiboId(userid);  //获得所有我收藏的所有微博id
 		int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
+		
+		//根据按日期降序分页查询后的 找出其中是转发微博的 源微博
+		Map<Integer,Object> tweiboMap = new HashMap<Integer,Object>();
+		
+		for(Map<String,Object> weibo : weiboList){
+			if( ((String)weibo.get("YON")).indexOf("Y") > -1){  //如果是转发微博
+				System.out.println("转发微博id： "+((String)weibo.get("YON")));
+				int wbid = Integer.parseInt(String.valueOf(weibo.get("WBID"))); //得到是转发微博的微博id
+				
+				int tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(wbid);
+				int rootwbid = 0;
+				if( tempwbid == 0){
+					rootwbid = wbid;
+				}else{
+					while(tempwbid != 0){
+						rootwbid = tempwbid;
+						tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(tempwbid);
+					}
+				}
+				
+				Map<String,Object> tweibo = weiboService.selectWeiboandweiboHelpById(rootwbid).get(0); //找到要转发的微博所有信息
+				tweiboMap.put(wbid, tweibo);
+				
+			}
+		}
+		jsonMap.put("tweiboMap", tweiboMap);
 		
 		jsonMap.put("weiboid", weiboid);
  		jsonMap.put("wbids", wbids);
@@ -503,7 +531,7 @@ public class WeiboHandler {
 					
 					if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
 						
-						if(weiboService.updateTransmitAccount(wbid)){
+						if(weiboService.updateTransmitAccount(wbid) && weiboService.updateTransmitAccount(currWBid)){
 							params.clear();
 							params.put("account", DataDic.SHARE);
 							params.put("wbuid", wbuid);
