@@ -46,7 +46,9 @@
 		select yon from WeiBo where WBid = #{wbid}
 	</select>
 	<select id="selectWeiboandweiboHelpById" parameterType="int" resultType="map">
-		select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = #{wbid,jdbcType=INTEGER}) w,WeiBoHelp h where w.WBid = h.WBid
+		select wb.*,Utag,Uname,UspecialTag from
+			(select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = #{wbid,jdbcType=INTEGER}) w,WeiBoHelp h where w.WBid = h.WBid) wb,WeiBoUser u 
+				where wb.WBUid = u.WBUid
 	</select>
 	<insert id="insertWeiboByTransmit" parameterType="map">
 		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE" >
@@ -55,7 +57,7 @@
 		insert into WeiBo values (#{wbid},null,#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{transmitDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},null,null,null,#{isThemeWeibo,jdbcType=CHAR},'Y',#{userLocation,jdbcType=VARCHAR},0)
 	</insert>
 	<update id="updateTransmitAccount" parameterType="int">
-		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1,WHreprintAccount = WHreprintAccount + 1 where WBid = #{wbid}
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHreprintAccount = WHreprintAccount + 1 where WBid = #{wbid}
 	</update>
 	
 	

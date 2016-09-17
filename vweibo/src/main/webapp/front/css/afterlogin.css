@@ -979,3 +979,10 @@ textarea {
 	position:relative;
 	bottom:20px;
 	left:50px;}
+	
+.center_footnum_{
+	position: relative;
+	top:10px;
+	margin-right: 10px;
+	font-size: 12px;
+}

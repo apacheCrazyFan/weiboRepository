@@ -148,6 +148,9 @@ create table WeiBoUser(
        Uscore number(8),              --用户积分（用来计算vip等级）				√
        UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
+update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f3.png' where WBUid = 1001;
+
+
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
 alter table WeiBoUser drop column phoneStatus;
 alter table WeiBoUser drop column emailStatus;
@@ -306,6 +309,7 @@ create table WeiBo(
        WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
        --预留字段      
 );
+
 create sequence seq_wb_wbid start with 10001 increment by 1;
 
 alter table WeiBo add WBlocation varchar2(100);
