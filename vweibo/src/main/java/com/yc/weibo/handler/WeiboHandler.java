@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -526,22 +528,24 @@ public class WeiboHandler {
 	//热门微博
 	@RequestMapping(value="/findHotWeiBo",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> findHotWeiBo(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
-		System.out.println( pageSize+"  =============  "+pageNum);
+	public Map<String,Object> findHotWeiBo(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
-
 		Map<String,Integer> params = new HashMap<String,Integer>();
-
+		
 		params.put("pageSize", pageSize);
 		params.put("pageNum", pageNum);
-		List<Map<String,Object>> weiboList = weiboService.findHotWeiBo(params);
-
-		System.out.println( weiboList);
+		params.put("uid",userid);
+		List<Map<String,Object>> weiboList = weiboService.findHotWeiBo(params);   
+		List<Integer> wbids = operateService.selectIfavoriteWeiboId(userid);  //获得所有我收藏的所有微博id
+		int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
+		
+		jsonMap.put("weiboid", weiboid);
+ 		jsonMap.put("wbids", wbids);
 		jsonMap.put("weiboList", weiboList);
 		jsonMap.put("total", weiboList.size());
+		
 		return jsonMap;
-		}
-	
+	}
 	//好友圈
 	@RequestMapping(value="/findFriendWeiBo",method=RequestMethod.GET)
 	@ResponseBody
@@ -583,4 +587,47 @@ public class WeiboHandler {
 		out.flush();
 		out.close();
 	}
+	
+	//分类浏览
+	@ResponseBody
+	@RequestMapping(value="/findWeiBoByWBtag",method=RequestMethod.GET)
+	public Map<String,Object> findWeiBoByWBtag(@RequestParam(name="pageSize")String pageSize,@RequestParam(name="pageNum")String pageNum,@RequestParam("wbtag")String wbtag,Integer userid){
+		try {
+			wbtag=URLDecoder.decode(wbtag,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println( pageSize+"  =============  "+pageNum+"---"+wbtag);
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+
+		Map<String,Object> params = new HashMap<String,Object>();
+		String searchText = new StringBuilder("%").append(wbtag).append("%").toString();
+		params.put("pageSize", pageSize);
+		params.put("pageNum", pageNum);
+		params.put("wbtag", searchText);
+		List<Map<String,Object>> weiboList = weiboService.findWeiBoByWBtag(params);
+		System.out.println(weiboList);
+		List<Integer> wbids = operateService.selectIfavoriteWeiboId(userid);  //获得所有我收藏的所有微博id
+		int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
+		
+		jsonMap.put("weiboid", weiboid);
+ 		jsonMap.put("wbids", wbids);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		
+		return jsonMap;
+		}
+	
+	
+		//我的赞
+		@RequestMapping(value="/findpersonal",method=RequestMethod.POST)
+		public void findpersonal(int WBUid,PrintWriter out){
+			Gson gson=new Gson();
+			List<Weibo> weibos=weiboService.findMyZan(WBUid);
+			System.out.print(weibos);
+			out.print(gson.toJson(weibos));
+			out.flush();
+			out.close();
+		}
+	
 } 

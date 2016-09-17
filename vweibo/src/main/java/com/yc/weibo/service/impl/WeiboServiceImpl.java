@@ -117,4 +117,9 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.findMyZan(WBUid);
 	}
 
+	@Override
+	public List<Map<String, Object>> findWeiBoByWBtag(Map<String, Object> params) {
+		return weiboMapper.findWeiBoByWBtag(params);
+	}
+
 }

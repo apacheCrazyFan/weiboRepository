@@ -34,4 +34,5 @@ public interface WeiboService {
 	List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params);
 	List<Weibo> myCollections(int wBUid);
 	List<Weibo> findMyZan(int wBUid);
+	List<Map<String, Object>> findWeiBoByWBtag(Map<String, Object> params);
 }

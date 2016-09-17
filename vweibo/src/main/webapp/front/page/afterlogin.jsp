@@ -334,7 +334,7 @@ var addclicklike = 1;
 			}
 		});
 	}
-
+	
 </script>
 </head>
 	<%
@@ -381,7 +381,7 @@ var addclicklike = 1;
             <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
             <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
             <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
-            <li><a href="javascript:void(0)" class="personPage">${sessionScope.user.uname}</a></li>
+            <li><a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>
         <div class="settingArea">
         	<a href="javascript:void(0)" class="message_pic"></a>
@@ -402,9 +402,9 @@ var addclicklike = 1;
             <li style="height:25px;"><img src="front/image/afterlogin_logo2.jpg" class="img1"/><a href="javascript:findFriendWeiBo(${sessionScope.user.WBUid})" id="two">好友圈</a></li>
             <li style="height:25px;"><img src="front/image/afterlogin_logo3.jpg" class="img1"/><a href="javascript:void(0)" id="two">群微博</a></li>
             <li style="height:25px;"><img src="front/image/afterlogin_logo4.jpg" class="img"/><a href="javascript:void(0)" id="two">特别关注</a></li>
-            <li style="height:25px;"><img src="front/image/afterlogin_logo5.jpg" class="img2"/><a href="javascript:void(0)" id="two">大学</a></li>
-            <li style="height:25px;"><img src="front/image/afterlogin_logo5.jpg" class="img2"/><a href="javascript:void(0)" id="two">搞笑</a></li>
-            <li style="height:25px;"><img src="front/image/afterlogin_logo5.jpg" class="img2"/><a href="javascript:void(0)" id="two">时尚</a></li>
+            <li style="height:25px;"><img src="front/image/afterlogin_logo5.jpg" class="img2"/><a onclick="javascript:findWeiBoByWBtag(this)" id="two">大学</a></li>
+            <li style="height:25px;"><img src="front/image/afterlogin_logo5.jpg" class="img2"/><a onclick="javascript:findWeiBoByWBtag(this)" id="two">搞笑</a></li>
+            <li style="height:25px;"><img src="front/image/afterlogin_logo5.jpg" class="img2"/><a onclick="javascript:findWeiBoByWBtag(this)" id="two">时尚</a></li>
         </ul>
         
     </div>
