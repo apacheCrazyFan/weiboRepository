@@ -16,7 +16,7 @@ body {
 	border-top:2px solid red;
 	background:#FFF;
 	position:fixed;
-	z-index:999;}
+	z-index:99;}
 .head_logo{
 	margin-left:130px;
 	margin-top:5px;}
@@ -536,8 +536,8 @@ textarea {
 	font-size:13px;
 }
 
-#center-part_p {
-	width:500px;
+.center-part_p {
+	width:450px;
 	position: relative;
 	bottom: 60px;
 	left: 35px;
@@ -617,7 +617,6 @@ textarea {
 
 #foot01_img {
 	position: relative;
-	right: 10px;
 	top: 5px;
 }
 
@@ -979,3 +978,11 @@ textarea {
 	position:relative;
 	bottom:20px;
 	left:50px;}
+	
+.center_footnum_{
+	position: relative;
+	bottom:4px;
+	margin-right: 12px;
+	padding-left:15px;
+	font-size: 12px;
+}

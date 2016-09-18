@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.yc.weibo.entity.WeiBoUser;
-import com.yc.weibo.entity.Weibo;
 
 public interface UserMapper {
 	public WeiBoUser login(WeiBoUser user);

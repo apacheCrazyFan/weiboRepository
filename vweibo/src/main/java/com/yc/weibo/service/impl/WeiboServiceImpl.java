@@ -16,6 +16,13 @@ public class WeiboServiceImpl implements WeiboService{
 	@Autowired
 	private WeiboMapper weiboMapper;
 	
+	
+	//纯view 加一
+	@Override
+	public boolean updateViewOnly(int wbid){
+		return weiboMapper.updateViewOnly(wbid) > 0 ? true : false;
+	}
+	
 	//插入微博
 	@Override
 	public boolean addWeibo(Map<String, Object> map) {
@@ -70,8 +77,27 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.selectAfterCollection(wbid);
 	}
 
-
-
+	//转发
+	@Override
+	public String selectTransmityon(int wbid) {
+		return weiboMapper.selectTransmityon(wbid);
+	}
+	@Override
+	public List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid){
+		return weiboMapper.selectWeiboandweiboHelpById(wbid);
+	}
+	@Override
+	public boolean insertWeiboByTransmit(Map<String,Object> map){
+		return weiboMapper.insertWeiboByTransmit(map) > 0 ? true : false;
+	}
+	@Override
+	public boolean updateTransmitAccount(int wbid){
+		return weiboMapper.updateTransmitAccount(wbid) > 0 ? true : false;
+	}
+	
+	
+	
+	
 	@Override
 	public List<Map<String, Object>> findHotWeiBo(Map<String, Integer> map) {
 		
@@ -85,6 +111,15 @@ public class WeiboServiceImpl implements WeiboService{
 	@Override
 	public List<Weibo> myCollections(int WBUid) {
 		return weiboMapper.myCollections(WBUid);
+	}
+	@Override
+	public List<Weibo> findMyZan(int WBUid) {
+		return weiboMapper.findMyZan(WBUid);
+	}
+
+	@Override
+	public List<Map<String, Object>> findWeiBoByWBtag(Map<String, Object> params) {
+		return weiboMapper.findWeiBoByWBtag(params);
 	}
 
 }
