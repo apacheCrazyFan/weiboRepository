@@ -1222,11 +1222,13 @@ $(window).scroll(function(){
 			if(yon.indexOf("N") > -1){
 			
 		
+
 		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img" style="padding-left:20px;"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'" style="height:60px;width:60px"/></a>';
 		newStr += '<ul id="center-part_ul">';
 		newStr += '<li id="center-part_li">'+username+'</li>';
         newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         newStr += '</ul>';
+
 			if(dataMsg.WBPIC != undefined){
 				picsMap = dataMsg.WBPIC;
 			}
@@ -1247,7 +1249,6 @@ $(window).scroll(function(){
         	newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         	newStr += '</ul>';
 
-        	//表情处理
 			var newContent ='';
 			var newContent1 = '';
 			var faceArr = content.split("[");

@@ -122,7 +122,7 @@ var count=4;
 					newWeiBoDiv.className = "divid_d_"+clicklikenum;
 					
 					var newWeiBoStr = '';
-
+					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+clicklikenum+'" title="${sessionScope.user.uname}" style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+clicklikenum+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 					newWeiBoStr += '<ul>';
@@ -282,7 +282,7 @@ var count=4;
 					//刷新微博数
 					weibocount += 1;
 					MsgStr = '';
-
+					MsgStr += '<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
 					MsgStr += '<a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>';
 					MsgStr += '<a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>';
 					MsgStr += '<div id="levelimg">';

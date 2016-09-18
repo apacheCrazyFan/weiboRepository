@@ -18,13 +18,16 @@ function InputYZcode(){
 	var yzm=$("#YZcodeInput").val();
 	if(yzm.length==4){
 		$.post("front/page/CheckYZcode.jsp",{"yzm":yzm},function(data){
-		if(data){
+			alert(data.length);
+		if(data==0){
 			flag=true;
 		}else{
 			flag=false;
 			$("#errorMsg").append("验证码错误");
 		}
 	});
+	}else{
+		flag=false;
 	}
 }
 function checkYZcode(){
