@@ -174,12 +174,15 @@ public class UserHandler {
 				}
 			}
 			String filename=new Date().getTime()+""+new Random().nextInt(100000)+".jpg";
-			String rootDir = DataDic.PICPATH;
+			String rootDir = DataDic.IMAGES;
 			String uploadPicPath = servletContext.getRealPath(rootDir).
 					substring(0, servletContext.getRealPath(rootDir).lastIndexOf(DataDic.PROJECTNAME)-1)+rootDir; 
 			
 			FileOutputStream photopath = new FileOutputStream(uploadPicPath+filename);
 			photopath.write(bytes); 
+			photopath.flush();
+			photopath.close();
+			
 			Map<String,String> paramMap=new HashMap<>();
 			paramMap.put("UimgPath", filename);
 			paramMap.put("WBUid", WBUid);
@@ -407,7 +410,5 @@ public class UserHandler {
 			flag=false;
 			return "请核对用户名";
 		}
-		
 	}
-	
 }

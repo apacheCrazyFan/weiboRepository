@@ -621,3 +621,5 @@ select k.*,wbu.Uname,wbu.UimgPath from
  			
  			
 select b.*,w.* from WeiBoUser b,WeiBo w where b.WBUid=w.WBUid and W.WBUid=1006
+
+select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=1006 and WBpic is not null) where 10>rn;

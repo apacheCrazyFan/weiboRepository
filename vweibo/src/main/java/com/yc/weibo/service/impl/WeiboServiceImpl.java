@@ -136,4 +136,9 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.findMoreAttentionWeiBo(params);
 	}
 
+	@Override
+	public List<Weibo> findMyPhoto(Integer WBUid) {
+		return weiboMapper.findMyPhoto(WBUid);
+	}
+
 }

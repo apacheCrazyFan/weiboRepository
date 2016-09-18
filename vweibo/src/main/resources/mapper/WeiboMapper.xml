@@ -148,4 +148,8 @@
  				where rn>#{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
+	
+	<select id="findMyPhoto" resultType="WeiBo" parameterType="int">
+		select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=#{WBUid} and WBpic is not null) where 15>rn
+	</select>
 </mapper>

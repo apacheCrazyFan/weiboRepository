@@ -122,7 +122,7 @@ var count=4;
 					newWeiBoDiv.className = "divid_d_"+clicklikenum;
 					
 					var newWeiBoStr = '';
-					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+clicklikenum+'" title="${sessionScope.user.uname}" style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
+
 					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+clicklikenum+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 					newWeiBoStr += '<ul>';
@@ -282,7 +282,7 @@ var count=4;
 					//刷新微博数
 					weibocount += 1;
 					MsgStr = '';
-					MsgStr += '<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
+
 					MsgStr += '<a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>';
 					MsgStr += '<a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>';
 					MsgStr += '<div id="levelimg">';
@@ -393,7 +393,7 @@ function findGroupWeiBo(WBUid){
 						newStr += '</ul>';
 						newStr += '</div>';
 					
-						newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'"/></a>';
+						newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'"style="hight:60px;width:60px"/></a>';
 						newStr += '<ul id="center-part_ul">';
 						newStr += '<li id="center-part_li">'+username+'</li>';
 	                	newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
@@ -1279,7 +1279,11 @@ function findGroupWeiBo(WBUid){
     
     <div id="right-part">
     	<div id="right-part-content">
+<<<<<<< HEAD
+        	<a href="javascript:void(0)" id="user_img"><img src="/weibouserimages/${sessionScope.user.uimgPath}" style="hight:60px;width:60px"/></a>
+=======
         	<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
             <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
             <div id="levelimg">

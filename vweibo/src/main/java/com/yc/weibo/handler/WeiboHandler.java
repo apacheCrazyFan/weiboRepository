@@ -713,4 +713,15 @@ public class WeiboHandler {
 			jsonMap.put("total", weiboList.size());
 			return jsonMap;
 			}
+		
+		//我的相册
+		@RequestMapping(value="/findMyPhoto",method=RequestMethod.POST)
+		public void findMyPhoto(Integer WBUid,PrintWriter out){
+			Gson gson=new Gson();
+			List<Weibo> weibos=weiboService.findMyPhoto(WBUid);
+			System.out.print(weibos);
+			out.print(gson.toJson(weibos));
+			out.flush();
+			out.close();
+		}
 } 
