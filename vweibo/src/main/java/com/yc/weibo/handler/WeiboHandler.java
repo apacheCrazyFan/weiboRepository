@@ -585,6 +585,8 @@ public class WeiboHandler {
 		
 		return jsonMap;
 	}
+	
+	
 	//好友圈
 	@RequestMapping(value="/findFriendWeiBo",method=RequestMethod.GET)
 	@ResponseBody
@@ -658,15 +660,57 @@ public class WeiboHandler {
 		}
 	
 	
-		//我的赞
+		//我的首页
 		@RequestMapping(value="/findpersonal",method=RequestMethod.POST)
 		public void findpersonal(int WBUid,PrintWriter out){
 			Gson gson=new Gson();
-			List<Weibo> weibos=weiboService.findMyZan(WBUid);
+			List<Weibo> weibos=weiboService.findpersonal(WBUid);
 			System.out.print(weibos);
 			out.print(gson.toJson(weibos));
 			out.flush();
 			out.close();
 		}
-	
+		
+		//好友圈
+		@RequestMapping(value="/findGroupWeiBo",method=RequestMethod.GET)
+		@ResponseBody
+		public Map<String,Object> findGroupWeiBo(@RequestParam(name="WBUid")Integer WBUid,@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
+			Map<String,Object> jsonMap = new HashMap<String,Object>();
+			Map<String,Integer> params = new HashMap<String,Integer>();
+			
+			params.put("pageSize", pageSize);
+			params.put("pageNum", pageNum);
+			params.put("WBUid",WBUid);
+			List<Map<String,Object>> weiboList = weiboService.findGroupWeiBo(params);   
+			List<Integer> wbids = operateService.selectIfavoriteWeiboId(WBUid);  //获得所有我收藏的所有微博id
+			int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
+			
+			jsonMap.put("weiboid", weiboid);
+	 		jsonMap.put("wbids", wbids);
+			jsonMap.put("weiboList", weiboList);
+			jsonMap.put("total", weiboList.size());
+			
+			return jsonMap;
+		}
+		
+	/*特别关心*/
+		//好友圈
+		@RequestMapping(value="/findMoreAttentionWeiBo",method=RequestMethod.GET)
+		@ResponseBody
+		public Map<String,Object> findMoreAttentionWeiBo(@RequestParam(name="WBUid")Integer WBUid,@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum){
+			System.out.println( WBUid+"  =============  "+pageNum);
+			Map<String,Object> jsonMap = new HashMap<String,Object>();
+
+			Map<String,Integer> params = new HashMap<String,Integer>();
+
+			params.put("pageSize", pageSize);
+			params.put("pageNum", pageNum);
+			params.put("WBUid", WBUid);
+			List<Map<String,Object>> weiboList = weiboService.findMoreAttentionWeiBo(params);
+
+			System.out.println( weiboList);
+			jsonMap.put("weiboList", weiboList);
+			jsonMap.put("total", weiboList.size());
+			return jsonMap;
+			}
 } 

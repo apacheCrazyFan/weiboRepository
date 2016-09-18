@@ -120,4 +120,32 @@
  			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
   </select>
+  
+ <!--  个人首页发过的微博 -->
+ <select id="findpersonal" parameterType="int" resultType="WeiBo">
+ 	select b.*,w.* from WeiBoUser b,WeiBo w where b.WBUid=w.WBUid and W.WBUid=#{WBUid} order by WBdate desc
+ </select>
+  
+  <!-- 群微博 -->
+  <select id="findGroupWeiBo" parameterType="map" resultType="map">
+  	   select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+				(select * from WeiBo  where WBUid in (select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=#{WBUid}) )order by WBdate desc) n where #{pageSize} * (#{pageNum}) >= rownum)
+ 			where rn >#{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+  </select>
+  
+  <!-- 特别关心-->
+	<select id="findMoreAttentionWeiBo" parameterType="map" resultType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+			(select * from 
+				(select n.*,rownum rn from 
+					(select * from WeiBo where WBUid in
+   						 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='特别关注' and wb.WBUid=#{WBUid} ) ) n where #{pageSize} * (#{pageNum}) >= rownum)
+ 				where rn>#{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
 </mapper>
