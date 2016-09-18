@@ -476,7 +476,7 @@ create table Comments(
 );
 create sequence seq_comments_cid start with 100001 increment by 1;
 
-drop table Comments;
+drop table Comments; 
 --к╫пе
 create table PrivateMessage(
        PMid int primary key,          --к╫пеid
