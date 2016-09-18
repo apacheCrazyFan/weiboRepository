@@ -85,11 +85,7 @@ window.onload=function(){
 						newStr += '</ul>';
 						newStr += '</div>';
 					
-<<<<<<< HEAD
-						newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'" style="height:60px;width:60px" style="height:60px;width:60px"/></a>';
-=======
 						newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" style="width:65px;height:65px;border-radius:10px;padding-left:10px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 						newStr += '<ul id="center-part_ul">';
 						newStr += '<li id="center-part_li">'+username+'</li>';
 	                	newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
@@ -1228,13 +1224,11 @@ $(window).scroll(function(){
 			if(yon.indexOf("N") > -1){
 			
 		
-<<<<<<< HEAD
 		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img" style="padding-left:20px;"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'" style="height:60px;width:60px"/></a>';
 		newStr += '<ul id="center-part_ul">';
 		newStr += '<li id="center-part_li">'+username+'</li>';
         newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         newStr += '</ul>';
-=======
 			if(dataMsg.WBPIC != undefined){
 				picsMap = dataMsg.WBPIC;
 			}
@@ -1254,9 +1248,8 @@ $(window).scroll(function(){
 			newStr += '<li id="center-part_li">'+username+'</li>';
         	newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         	newStr += '</ul>';
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
-        
-			//表情处理
+
+        	//表情处理
 			var newContent ='';
 			var newContent1 = '';
 			var faceArr = content.split("[");
@@ -1748,11 +1741,7 @@ function transmitweibo(divid,textareaid,origintransmitid,transmitid,uid,wbid,wbu
 				  	newWeiBoDiv.className = "divid_d_"+clicklikenum;
 				  
 				  	var newWeiBoStr = '';
-<<<<<<< HEAD
-					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+addclicklike+'" title="'+$("#username").val()+'" src="/weibouserimages/'+$("#uimgPath").val()+'" style="hight:60px;width:60px"/></a>';
-=======
 					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+clicklikenum+'" title="'+$("#username").val()+'" style="width:65px;height:65px;border-radius:10px;padding-left:20px;" src="/weibouserimages/'+$("#uimgPath").val()+'"/></a>';
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+clicklikenum+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 					newWeiBoStr += '<ul>';
