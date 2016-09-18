@@ -1067,7 +1067,7 @@ function findGroupWeiBo(WBUid){
            			 </div>
               </div>
               
-              <!--评论-
+              
               <div id="comment_div" class="comment_div" style="display:none;">
               		<img src="front/image/comment_header_img.png" id="comment_img">
                     <input type="text" id="comment_input"/><br>
@@ -1076,19 +1076,19 @@ function findGroupWeiBo(WBUid){
                     <input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>
                     <img src="front/image/comment_btn.png" id="comment_btn"/>
                     
-                    <div class="comment_div_two">
+                    <div id="comment_div_two" class="comment_div_two">
                     	<a href="javascript:void(0)" class="comment_div_two_a1">全部</a>
                     	<a href="javascript:void(0)" class="comment_div_two_a">关注的人</a>
                     	<a href="javascript:void(0)" class="comment_div_two_a">陌生人</a>
                     	<a href="javascript:void(0)" class="comment_div_two_a2">共<font>10087</font>条</a>
                     </div>
                     
-                    <div class="comment_div_three">
+                    <div id="comment_div_three" class="comment_div_three">
                     	<a href="javascript:void(0)" class="comment_div_three_a1"><img src="front/image/comment_header_img.png" id="comment_img"></a>
                     	<a href="javascript:void(0)" class="comment_div_three_a">扎个马尾:</a>
                     	<span class="comment_div_three_a">中秋节快乐!!!</span>
                     </div>
-                    <div class="comment_div_four">
+                    <div id="comment_div_four" class="comment_div_four">
                     	<span class="comment_div_four_a1">9月15日  22:08</span>
                     	<a href="javascript:void(0)" class="comment_div_four_a"><img src="front/image/center-part_foot04.png"/><font class="comment_div_four_font">650</font></a>
                     	<a href="javascript:void(0)" class="comment_div_four_a">回复</a>

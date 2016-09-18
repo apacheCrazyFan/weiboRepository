@@ -752,8 +752,8 @@ textarea {
 #comment_img{
 	margin-left:15px;
 	position:relative;
-	top:12px;}
-#comment_input{
+	top:10px;}
+.comment_input{
 	border:none;
 	border:red 1px solid;
 	width:500px;
@@ -763,7 +763,7 @@ textarea {
 	position:relative;
 	top:5px;
 	left:56px;}
-#comment_check{
+.comment_check{
 	position:relative;
 	left:60px;
 	}
