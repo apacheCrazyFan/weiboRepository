@@ -182,14 +182,23 @@ create table Relationship(
        
        --预留字段 
 );
-
+select * from Groups;
+drop table Groups;
 --群
 create table Groups(
 	Gid int,				--群id
 	Gname varchar2(40),					--群名
-	WBUid int references WeiBoUser(WBUid) unique,--群里的用户id
+	WBUid int references WeiBoUser(WBUid),--群里的用户id,如果加上unique则只能加入一个群 所以去掉
 	Gdate Date							--进群时间
 );
+insert into Groups values (2003,'学习',1001,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2003,'学习',1005,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2002,'学习',1006,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2001,'学习',1006,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2001,'学习',1002,to_date('2016-09-18','yyyy-mm-dd'));
+insert into Groups values (2001,'学习',1005,to_date('2016-08-05','yyyy-mm-dd'));
+
+select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=1006);
 --黑名单
 create table BlackList(
 	Bid int primary key,				--黑名单id
@@ -544,7 +553,7 @@ select b.*,w.* from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
 			(select n.*,rownum rn from 
-				(select * from WeiBo  where wbtag like '%大学%' order by WBdate) n where 100 >= rownum)
+				(select * from WeiBo  where WBUid in (select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=1006) )order by WBdate) n where 100 >= rownum)
  			where rn >0) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
  			
@@ -555,11 +564,15 @@ select b.*,w.* from
  select p.odate from operate p where p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞');
  select uname from WeiBouser where wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞')
  select * from (select rownum rn,b.wbtxt,b.wbpic,b.wbvideo,w.uname, p.odate from WeiBo b,WeiBoUser w, operate p where b.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') and w.wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞') and p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') order by odate) where rn<15;
- 
- select k.*,wbu.Uname,wbu.UimgPath from
+
+ 			
+select k.*,wbu.Uname,wbu.UimgPath from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
 			(select n.*,rownum rn from 
-				(select * from WeiBo   order by WBdate) n where 5 >= rownum)
+				(select * from WeiBo where WBUid in (select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=1006) )order by WBdate) n where 5 >= rownum)
  					rn>1) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+ 			
+ 			
+select b.*,w.* from WeiBoUser b,WeiBo w where b.WBUid=w.WBUid and W.WBUid=1006

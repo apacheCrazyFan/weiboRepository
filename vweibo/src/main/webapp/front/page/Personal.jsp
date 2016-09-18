@@ -303,9 +303,7 @@
 					}
 					
 					//图片处理 
-					
-					if (data[i].WBpic != "" || data[i].WBpic !=null) {
-						alert(data[i].WBpic)
+					if (data[i].WBpic != "" && data[i].WBpic !=null) {
 						str2="";
 						var pics = data[i].WBpic.split(",");
 						//console.info(pics);
@@ -332,8 +330,8 @@
 					}
 					
 					
-					var newDate = new Date(data[i].Odate);
-					str+=newDate.toLocaleString()+'&nbsp;&nbsp;&nbsp;'+data[i].Uname+'赞了你:'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'<br/>'+str2+'</a></li>';
+					var newDate = new Date(data[i].WBdate);
+					str+=newDate.toLocaleString()+'&nbsp;&nbsp;&nbsp;'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+''+str2+'</a></li>'+'<br/>';
 					
 				}
 				$("#myCollections").append(str);

@@ -105,7 +105,6 @@ public class WeiboServiceImpl implements WeiboService{
 	}
 	@Override
 	public List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params) {
-		// TODO Auto-generated method stub
 		return weiboMapper.findFriendWeiBo(params);
 	}
 	@Override
@@ -120,6 +119,21 @@ public class WeiboServiceImpl implements WeiboService{
 	@Override
 	public List<Map<String, Object>> findWeiBoByWBtag(Map<String, Object> params) {
 		return weiboMapper.findWeiBoByWBtag(params);
+	}
+
+	@Override
+	public List<Weibo> findpersonal(int WBUid) {
+		return weiboMapper.findpersonal(WBUid);
+	}
+
+	@Override
+	public List<Map<String, Object>> findGroupWeiBo(Map<String, Integer> params) {
+		return weiboMapper.findGroupWeiBo(params);
+	}
+
+	@Override
+	public List<Map<String, Object>> findMoreAttentionWeiBo(Map<String, Integer> params) {
+		return weiboMapper.findMoreAttentionWeiBo(params);
 	}
 
 }

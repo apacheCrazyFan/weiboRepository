@@ -252,7 +252,7 @@ window.onload=function(){
 	}); //ajax
 }
 
-
+/*好友圈*/
 function findFriendWeiBo(WBUid){
 	$("#xixi").empty();
 	var pageSize = 15;
@@ -459,6 +459,8 @@ function findFriendWeiBo(WBUid){
 		
 	}); //ajax
 }
+
+//群微博
 
 //热门微博
 function findHotWeiBo(){
