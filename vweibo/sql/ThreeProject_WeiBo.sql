@@ -3,7 +3,22 @@ create table Admin(
 	Aname varchar2(20),
 	Apwd varchar2(30)
 );
+
 drop table Admin;
+drop table WeiBoTag;
+drop table UserTag;
+drop table WeiBoUser;
+drop table Groups;
+drop table UserTagFather;
+drop table FanAndFaned;
+drop table Theme;
+drop table WBandThe;
+drop table WeiBo;
+drop table WeiBoHelp;
+drop table Operate;
+drop table WeiboAndWeibo;
+
+
 select * from Admin;
 insert into Admin values('admin','sa');
 
@@ -148,8 +163,12 @@ create table WeiBoUser(
        Uscore number(8),              --用户积分（用来计算vip等级）				√
        UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
-update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f3.png' where WBUid = 1001;
+update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f3.png' where WBUid = 1006;
 update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f0.png' where WBUid = 1005;
+update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1002;
+update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1007;
+
+update WeiBoUser set  UimgPath = '9.gif' where WBUid = 1007;
 
 
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
@@ -157,17 +176,28 @@ alter table WeiBoUser drop column phoneStatus;
 alter table WeiBoUser drop column emailStatus;
 alter table WeiBoUser add phoneStatus int default 1;	--增加两列，用来处理通过何种方式找到好友,1为可以，0为否
 alter table WeiBoUser add emailStatus int default 1;
-select * from WeiBOUser;
+
+
+select * from WeiBoUser;
 create sequence seq_WeiBoUser_Wbuid start with 1006;
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
-insert into WeiBoUser values(1002,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
-insert into WeiBoUser values(1003,'巴拉拉','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
-insert into WeiBoUser values(1004,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
-insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1002,'啊大大','sa','15675471111','15675471111@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1005,'admin','sa','15675470000','15675470000@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,日本',10000,'0x1f1ef0x1f1f5.png');
+
+
 delete from WeiBoUser where WBUid in (1001,1002);
 
+update WeiBoUser set Uphone = '15675471111' where WBUid = 1002;
+update WeiBoUser set Uphone = '15675470000' where WBUid = 1005;
 
-update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1006;
+update WeiBoUser set Uemail = '15675471111@163.com' where WBUid = 1002;
+update WeiBoUser set Uemail = '15675470000@163.com' where WBUid = 1005;
+
+update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1002;
+update WeiBoUser set UimgPath='userimg.jpg' where WBUid=1005;
+update WeiBoUser set UimgPath='userphoto003.png' where WBUid=1006;
+
 
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
@@ -202,7 +232,7 @@ select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUi
 --黑名单
 create table BlackList(
 	Bid int primary key,				--黑名单id
-	Uid int references WeiBoUser(Uid),  --哪个用户下的黑名单
+	WBUid int references WeiBoUser(WBUid),  --哪个用户下的黑名单
 	BUid int							--黑名单用户id
 );
 --粉与被粉（关注与被关注）
@@ -214,13 +244,17 @@ create table FanAndFaned(
 alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
+
 drop table FanAndFaned;
+
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
 select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
+
 delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1009 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1010 and Fstatus='同学';
+
 --关注的人数
 select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus != '未分组';
 select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '未分组';
@@ -306,8 +340,8 @@ create table WeiBo(
        WBid int primary key,          --微博id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
-       WBUId int
-           constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
+       WBUid int
+           constraint RK_WeiBo_Uid references WeiBoUser(WBUid),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
        WBtxt varchar2(2000),          --微博文字内容
        WBpic  varchar2(500),          --微博图片路径
@@ -325,10 +359,21 @@ create sequence seq_wb_wbid start with 10001 increment by 1;
 alter table WeiBo add WBlocation varchar2(100);
 alter table WeiBo add WBstatue varchar2(20);     --微博的状态  公开 好友圈 群 仅自己可见
 alter table WeiBo modify WBstatue int; 
+
 drop table WeiBo;
+
 delete from WeiBo;
+
 select * from WeiBo;
+
 select count(WBid) from WeiBo where WBUId = 1001;
+
+select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = 1001)) order by WBdate desc) n where 15 * 1 >= rownum)
+ 			where rn > 15 * (1-1)) b
+ 			where w.wbid = b.wbid;
 
 insert into WeiBo values(seq_wb_wbid.nextval,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N','N','衡阳,长沙市',0);
 insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N','N','衡阳,长沙市',0);
@@ -505,7 +550,7 @@ create table WeiboAndWeibo(
 	WBid int references WeiBo(WBid),
 	TWBid int
 );
-
+select * from WeiboAndWeibo;
 
 --评论（回复）微博表  --找爸爸
 create table Comments(

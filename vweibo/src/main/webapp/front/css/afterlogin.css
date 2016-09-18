@@ -485,6 +485,8 @@ textarea {
 }
 
 #usernumone {
+	padding-right:12px;
+	padding-left:12px;
 	color: #666;
 }
 
