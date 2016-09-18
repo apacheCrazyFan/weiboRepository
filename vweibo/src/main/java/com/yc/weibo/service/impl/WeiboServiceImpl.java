@@ -23,6 +23,11 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.updateViewOnly(wbid) > 0 ? true : false;
 	}
 	
+	@Override
+	public int selectWBUidByWbid(int wbid) {
+		return weiboMapper.selectWBUidByWbid(wbid);
+	}
+	
 	//插入微博
 	@Override
 	public boolean addWeibo(Map<String, Object> map) {
@@ -95,6 +100,15 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.updateTransmitAccount(wbid) > 0 ? true : false;
 	}
 	
+	//评论
+	@Override
+	public boolean updateCommentAccount(int wbid) {
+		return weiboMapper.updateCommentAccount(wbid) > 0 ? true : false;
+	}
+	@Override
+	public int selectAfterComment(int wbid) {
+		return weiboMapper.selectAfterComment(wbid);
+	}
 	
 	
 	
@@ -141,4 +155,5 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.findMyPhoto(WBUid);
 	}
 
+	
 }

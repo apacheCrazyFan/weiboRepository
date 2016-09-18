@@ -14,6 +14,8 @@ public interface WeiboMapper {
 	
 	int updateViewOnly(int wbid);
 	
+	int selectWBUidByWbid(int wbid);
+	
 	int selectOperateId(Map<String,Integer> map);
 	
 	int updateaddWeiboLike(int wbid);
@@ -28,6 +30,8 @@ public interface WeiboMapper {
 	int insertWeiboByTransmit(Map<String, Object> map);  //插入转发微博
 	int updateTransmitAccount(int wbid);
 	
+	int updateCommentAccount(int wbid); //更新评论后的weiboHelp
+	int selectAfterComment(int wbid); //查出更新评论后的评论数
 	
 	List<Map<String,Object>> seleteWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);  //浏览次数优先mybatis里面是sql非嵌套查询也非嵌套结果
 	List<Map<String,Object>> selectWeiboOrderByWHgreateAccount(Map<String,Integer> map);	//点赞次数优先嵌套查询或者嵌套结果

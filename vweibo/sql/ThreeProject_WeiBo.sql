@@ -555,10 +555,9 @@ select * from WeiboAndWeibo;
 --评论（回复）微博表  --找爸爸
 create table Comments(
        Cid int primary key,          	--评论（回复）id
-       WBUid int unique, 				--评论（回复）人id
-       WBid int unique,					--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
-       ContentTxt varchar2(500),        --评论（回复）文本内容
-       ContentPics varchar2(200),      	--评论（回复）图片路径(这里只指表情)
+       WBUid int, 						--评论（回复）人id
+       WBid int,						--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
+       ContentTxt varchar2(500),        --评论（回复）文本内容+图片路径(这里只指表情)
        Cdate Date,                    	--评论日期
        CgreateAccount int,            	--评论点赞次数
        Csonode int					  	--下一个评论的id  这里可以列一个树状图出来 自己是自己的爸爸 自表查询

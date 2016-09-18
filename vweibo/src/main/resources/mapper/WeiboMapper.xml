@@ -21,6 +21,10 @@
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
 	</update>
 	
+	<select id="selectWBUidByWbid" resultType="int">
+		select WBUid from WeiBo where WBid = #{wbid}
+	</select>
+	
 	<update id="updateaddWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1,WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
 	</update>
@@ -37,7 +41,7 @@
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHfavoriteAccount = WHfavoriteAccount + 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterCollection" parameterType="int" resultType="int">
-		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}
+		select WHcommentAccount from WeiBoHelp where WBid = #{wbid}
 	</select>
 	
 	
@@ -61,6 +65,14 @@
 	</update>
 	
 	
+	<update id="updateCommentAccount" parameterType="int">
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHcommentAccount = WHcommentAccount + 1 where WBid = #{wbid}
+	</update>
+	<select id="selectAfterComment" parameterType="int" resultType="int">
+		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}
+	</select>
+
+
 	<!-- 根据浏览次数排序 -->
 	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">
 		select k.*,wbu.Uname,wbu.UimgPath from

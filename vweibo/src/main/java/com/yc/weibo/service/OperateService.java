@@ -15,4 +15,6 @@ public interface OperateService {
 	boolean insertCollectWeibo(Map<String,Object> map);  //收藏
 	
 	boolean insertTransmitWeibo(Map<String,Object> map);    //转发
+	
+	boolean insertCommentWeibo(Map<String,Object> map); //评论
 }

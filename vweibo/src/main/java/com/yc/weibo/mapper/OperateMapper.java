@@ -15,4 +15,6 @@ public interface OperateMapper {
 	int insertCollectWeibo(Map<String,Object> map);  //收藏
 	
 	int insertTransmitWeibo(Map<String,Object> map); //转发
+	
+	int insertCommentWeibo(Map<String,Object> map); //评论
 }

@@ -746,13 +746,12 @@ textarea {
 .c1:hover{
 	color:red;}
 .comment_div{
-	height:240px;
 	border-top:#CCC 1px solid;
 	background:#FAFAFA;}
-#comment_img{
+/* #comment_img{
 	margin-left:15px;
 	position:relative;
-	top:10px;}
+} */
 .comment_input{
 	border:none;
 	border:red 1px solid;
@@ -773,8 +772,7 @@ textarea {
 	}	
 #comment_btn{
 	float:right;
-	margin-right:36px;
-	padding-top:10px;
+	margin-right:40px;
 }	
 .comment_div_two{
 	width:505px;
@@ -802,6 +800,7 @@ textarea {
 .comment_div_three{
 	width:505px;
 	margin-left:60px;
+	margin-top:10px;
 }
 .comment_div_three_a1{
 	position:relative;

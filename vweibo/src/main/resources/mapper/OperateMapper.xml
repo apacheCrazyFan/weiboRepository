@@ -35,4 +35,11 @@
 		</selectKey>
 		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'转发',#{txt,jdbcType=VARCHAR},sysdate)
 	</insert>
+	
+	<insert id="insertCommentWeibo" parameterType="map">
+		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
+			select seq_op_oid.nextval currval from dual
+		</selectKey>
+		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'评论',#{txt,jdbcType=VARCHAR},sysdate)
+	</insert>
 </mapper>
