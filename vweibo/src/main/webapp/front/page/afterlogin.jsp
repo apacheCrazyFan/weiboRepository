@@ -122,7 +122,6 @@ var count=4;
 					newWeiBoDiv.className = "divid_d_"+clicklikenum;
 					
 					var newWeiBoStr = '';
-					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+addclicklike+'" title="${sessionScope.user.uname}" src="/weibouserimages/${sessionScope.user.uimgPath}" style="hight:60px;width:60px" style="hight:60px;width:60px" style="hight:60px;width:60px" /></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+clicklikenum+'" title="${sessionScope.user.uname}" style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+clicklikenum+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
@@ -283,7 +282,6 @@ var count=4;
 					//刷新微博数
 					weibocount += 1;
 					MsgStr = '';
-					MsgStr += '<a href="javascript:void(0)" id="user_img"><img src="/weibouserimages/${sessionScope.user.uimgPath}" style="hight:60px;width:60px"/></a>';
 					MsgStr += '<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
 					MsgStr += '<a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>';
 					MsgStr += '<a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>';
@@ -1069,7 +1067,7 @@ function findGroupWeiBo(WBUid){
            			 </div>
               </div>
               
-              <!--评论-
+              
               <div id="comment_div" class="comment_div" style="display:none;">
               		<img src="front/image/comment_header_img.png" id="comment_img">
                     <input type="text" id="comment_input"/><br>
@@ -1078,19 +1076,19 @@ function findGroupWeiBo(WBUid){
                     <input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>
                     <img src="front/image/comment_btn.png" id="comment_btn"/>
                     
-                    <div class="comment_div_two">
+                    <div id="comment_div_two" class="comment_div_two">
                     	<a href="javascript:void(0)" class="comment_div_two_a1">全部</a>
                     	<a href="javascript:void(0)" class="comment_div_two_a">关注的人</a>
                     	<a href="javascript:void(0)" class="comment_div_two_a">陌生人</a>
                     	<a href="javascript:void(0)" class="comment_div_two_a2">共<font>10087</font>条</a>
                     </div>
                     
-                    <div class="comment_div_three">
+                    <div id="comment_div_three" class="comment_div_three">
                     	<a href="javascript:void(0)" class="comment_div_three_a1"><img src="front/image/comment_header_img.png" id="comment_img"></a>
                     	<a href="javascript:void(0)" class="comment_div_three_a">扎个马尾:</a>
                     	<span class="comment_div_three_a">中秋节快乐!!!</span>
                     </div>
-                    <div class="comment_div_four">
+                    <div id="comment_div_four" class="comment_div_four">
                     	<span class="comment_div_four_a1">9月15日  22:08</span>
                     	<a href="javascript:void(0)" class="comment_div_four_a"><img src="front/image/center-part_foot04.png"/><font class="comment_div_four_font">650</font></a>
                     	<a href="javascript:void(0)" class="comment_div_four_a">回复</a>
@@ -1281,7 +1279,6 @@ function findGroupWeiBo(WBUid){
     
     <div id="right-part">
     	<div id="right-part-content">
-        	<a href="javascript:void(0)" id="user_img"><img src="/weibouserimages/${sessionScope.user.uimgPath}" style="hight:60px;width:60px"/></a>
         	<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
             <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>

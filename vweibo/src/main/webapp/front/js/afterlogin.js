@@ -85,7 +85,6 @@ window.onload=function(){
 						newStr += '</ul>';
 						newStr += '</div>';
 					
-						newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'" style="height:60px;width:60px" style="height:60px;width:60px"/></a>';
 						newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" style="width:65px;height:65px;border-radius:10px;padding-left:10px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
 						newStr += '<ul id="center-part_ul">';
 						newStr += '<li id="center-part_li">'+username+'</li>';
@@ -228,13 +227,11 @@ window.onload=function(){
 					
 						newStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 						newStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
-						newStr += '<form id="form_'+commentdivnum+'">';
-						newStr += '<input type="text" id="comment_input"/><br>';
+						newStr += '<input type="text" id="comment_input" class="comment_input"/><br>';
 						newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 						newStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 						newStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
 						newStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+userid+','+weiboid+',&quot;form_'+commentdivnum+'&quot;)"/>';
-						newStr += '</form>';
 						newStr += '</div>';
 					
 					
@@ -1253,8 +1250,7 @@ $(window).scroll(function(){
 			newStr += '<li id="center-part_li">'+username+'</li>';
         	newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         	newStr += '</ul>';
-        
-			//表情处理
+
 			var newContent ='';
 			var newContent1 = '';
 			var faceArr = content.split("[");
@@ -1746,7 +1742,6 @@ function transmitweibo(divid,textareaid,origintransmitid,transmitid,uid,wbid,wbu
 				  	newWeiBoDiv.className = "divid_d_"+clicklikenum;
 				  
 				  	var newWeiBoStr = '';
-					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+addclicklike+'" title="'+$("#username").val()+'" src="/weibouserimages/'+$("#uimgPath").val()+'" style="hight:60px;width:60px"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+clicklikenum+'" title="'+$("#username").val()+'" style="width:65px;height:65px;border-radius:10px;padding-left:20px;" src="/weibouserimages/'+$("#uimgPath").val()+'"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+clicklikenum+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
@@ -1936,13 +1931,11 @@ function transmitweibo(divid,textareaid,origintransmitid,transmitid,uid,wbid,wbu
 					
 					newWeiBoStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 					newWeiBoStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
-					newWeiBoStr += '<form id="form_'+commentdivnum+'">';
-					newWeiBoStr += '<input type="text" id="comment_input"/><br>';
+					newWeiBoStr += '<input type="text" id="comment_input_'+commentdivnum+'" class="comment_input"/><br>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
-					newWeiBoStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+uid+','+wbid+',&quot;form_'+commentdivnum+'&quot;)"/>';
-					newWeiBoStr += '</form>';
+					newWeiBoStr += '<input type="checkbox" id="comment_check_'+commentdivnum+'" class="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
+					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input_'+commentdivnum+'&quot;,&quot;comment_check_'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
 					newWeiBoStr += '</div>';
 					
 					newWeiBoDiv.innerHTML = newWeiBoStr;
@@ -1998,7 +1991,7 @@ function transmitweibo(divid,textareaid,origintransmitid,transmitid,uid,wbid,wbu
     $('#Jszzdm').val($('input[type=checkbox]:checked').map(function(){return this.value}).get().join(','))
   })
 </script>*/
-//回复
+//回复(评论)
 function commentsWeibo(userid,weiboid,formid){
 	var txtContent = $('#'+formid).$('input[type=text]')[0];
 	var booleanCk = $('#'+formid).$('input[type=checkbox]')[0].checked;
