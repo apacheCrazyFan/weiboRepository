@@ -15,6 +15,8 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 	
 	public static String PICPATH = "/weibopics/";
 	
+	public static String IMAGES="/weibouserimages/";
+	
 	public static String VIDEOPATH = "/weibovideoes/";
 	
 	public static String MUSICPATH = "/weibomusics/";

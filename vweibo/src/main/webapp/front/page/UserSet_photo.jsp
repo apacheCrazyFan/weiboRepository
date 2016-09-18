@@ -155,6 +155,8 @@
     //保存头像
     function savePhoto(){
     	var imageData=document.getElementById("photocanvas").toDataURL("image/jpg");
+    	imageData.height=60;
+    	imageData.width=60;
 		var base64Data = imageData.substr(22);
     	$.post("user/setphoto",{"photodata":base64Data,"WBUid":$("#hiddenid").val()},function(data){
     		alert(data);

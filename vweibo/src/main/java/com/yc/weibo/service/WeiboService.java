@@ -38,4 +38,5 @@ public interface WeiboService {
 	List<Weibo> findpersonal(int wBUid);
 	List<Map<String, Object>> findGroupWeiBo(Map<String, Integer> params);
 	List<Map<String, Object>> findMoreAttentionWeiBo(Map<String, Integer> params);
+	List<Weibo> findMyPhoto(Integer wBUid);
 }
