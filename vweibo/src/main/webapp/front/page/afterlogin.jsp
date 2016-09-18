@@ -74,8 +74,6 @@ var weibocount;  //当前用户的微博数
 	
 var count=4;
 
-var addclicklike = 1;
-
 	function publishWeibo() {
 		count = 4;
 		var obj = $("#txt");
@@ -121,12 +119,12 @@ var addclicklike = 1;
 
 					var newWeiBoDiv = document.createElement("div");
 					newWeiBoDiv.id = "center-part-content_01";
-					newWeiBoDiv.className = "divid_d_"+addclicklike;
+					newWeiBoDiv.className = "divid_d_"+clicklikenum;
 					
 					var newWeiBoStr = '';
-					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+addclicklike+'" title="${sessionScope.user.uname}" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
+					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+clicklikenum+'" title="${sessionScope.user.uname}" style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
-					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+addclicklike+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
+					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+clicklikenum+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 					newWeiBoStr += '<ul>';
 					newWeiBoStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
 					newWeiBoStr += '<li class="center-partc1" id="center-partchoose2" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">屏蔽</a></li><br>';
@@ -161,7 +159,7 @@ var addclicklike = 1;
 					for(var j = 0; j < faceArr1.length; j ++){
 						newContent1 += faceArr1[j]+'<br />';
 					}
-					newWeiBoStr += '<p id="center-part_p_'+addclicklike+'" class="center-part_p" style="width:450px;position:relative;left:29px;">'+newContent1+'</p>';
+					newWeiBoStr += '<p id="center-part_p_'+clicklikenum+'" class="center-part_p" style="width:450px;position:relative;left:29px;">'+newContent1+'</p>';
 				
 					newWeiBoStr += '<div id="content_img01">';
 					
@@ -217,7 +215,7 @@ var addclicklike = 1;
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+uid+','+wbid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>'; //转发
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_'+addclicklike+'" class="center_footnum4" onClick="clicklike(this,'+uid+','+wbid+','+uid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';   //点赞
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum4" onClick="clicklike(this,'+uid+','+wbid+','+uid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';   //点赞
 					newWeiBoStr += '</div>';
 					
 					
@@ -252,7 +250,7 @@ var addclicklike = 1;
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img1.png" id="transmit_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_pace"><img src="front/image/write_img2.png" id="transmit_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="transmit_aa" onClick="showhidetransmitdiv(&quot;transmit_choose&quot;)">公开<img src="front/image/limits_img5.png"/></a>';
-					newWeiBoStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,&quot;center_footnum2_'+transmitdivnum+'&quot;,'+uid+','+wbid+','+uid+')">';
+					newWeiBoStr += '<input name="imgbtn" type="image" src="front/image/transmit_sure.png" id="transmit" onClick="transmitweibo(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;,&quot;transmit_input_'+transmitdivnum+'&quot;,&quot;center_footnum2_'+transmitdivnum+'&quot;,&quot;center_footnum2_'+transmitdivnum+'&quot;,'+uid+','+wbid+','+uid+')">';
 					
 					newWeiBoStr += '<div id="transmit_choose" class="transmit_choose" style="display:none;" onMouseUp="hidetransmitdiv(&quot;transmit_choose&quot;)">';
 					newWeiBoStr += '<ul>';
@@ -284,7 +282,7 @@ var addclicklike = 1;
 					//刷新微博数
 					weibocount += 1;
 					MsgStr = '';
-					MsgStr += '<a href="javascript:void(0)" id="user_img"><img src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
+					MsgStr += '<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
 					MsgStr += '<a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>';
 					MsgStr += '<a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>';
 					MsgStr += '<div id="levelimg">';
@@ -321,7 +319,7 @@ var addclicklike = 1;
 		            statueStr += '<li class="c1" id="choose4" data="3" onClick="changeword(this)" style="height:12px;position:relative;bottom:8px;">群可见</li></a>';
 		            document.getElementById('choose').innerHTML = statueStr;
 		            
-		            addclicklike ++;
+		            clicklikenum ++;
 					commentdivnum ++;
 					transmitdivnum ++;
 					collectiondivnum ++;
@@ -348,6 +346,8 @@ var addclicklike = 1;
 <input type="hidden" id="weibocount" value="${sessionScope.groupnumber.WEIBONUM}" />
 <input type="hidden" id="focuscount" value="${sessionScope.groupnumber.FOCUSNUM}" />
 <input type="hidden" id="fanedbocount" value="${sessionScope.groupnumber.FANSNUM}" /> 
+
+<input type="hidden" id="originTransmitid" value="" /> 
 
 		<%-- <div id="center_footnum1_col_'+collectiondivnum+'" class="center_footnum1_col_" style="display:none;">';
 			<springmvc:form >
@@ -815,7 +815,7 @@ var addclicklike = 1;
     
     <div id="right-part">
     	<div id="right-part-content">
-        	<a href="javascript:void(0)" id="user_img"><img src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
+        	<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
             <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
             <div id="levelimg">
