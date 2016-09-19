@@ -161,7 +161,12 @@
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
 	
+	<!-- 我的相册 -->
 	<select id="findMyPhoto" resultType="WeiBo" parameterType="int">
 		select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=#{WBUid} and WBpic is not null) where 15>rn
+	</select>
+	
+	<select id="findMyFans" resultType="WeiBoUser" parameterType="int">
+		select  Uname from WeiBoUser where WBUid in (select distinct FUid from FanAndFaned where FUedid=#{WBUid})
 	</select>
 </mapper>

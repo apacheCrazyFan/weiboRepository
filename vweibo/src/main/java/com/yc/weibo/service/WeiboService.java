@@ -3,6 +3,7 @@ package com.yc.weibo.service;
 import java.util.List;
 import java.util.Map;
 
+import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.entity.Weibo;
 
 
@@ -45,4 +46,5 @@ public interface WeiboService {
 	List<Map<String, Object>> findGroupWeiBo(Map<String, Integer> params);
 	List<Map<String, Object>> findMoreAttentionWeiBo(Map<String, Integer> params);
 	List<Weibo> findMyPhoto(Integer wBUid);
+	List<WeiBoUser> findMyFans(Integer wBUid);
 }

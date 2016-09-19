@@ -921,4 +921,15 @@ public class WeiboHandler {
 			out.flush();
 			out.close();
 		}
+		
+		//我的粉丝
+		@RequestMapping(value="/findMyFans",method=RequestMethod.POST)
+		public void findMyFans(Integer WBUid,PrintWriter out){
+			Gson gson=new Gson();
+			List<WeiBoUser> myFans=weiboService.findMyFans(WBUid);
+			System.out.print(myFans);
+			out.print(gson.toJson(myFans));
+			out.flush();
+			out.close();
+		}
 } 
