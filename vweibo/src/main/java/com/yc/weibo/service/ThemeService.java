@@ -50,4 +50,6 @@ public interface ThemeService {
 	
 	
 	int selectTidByTname(String tname);
+	
+	List<Theme> findThemeByTname(Theme theme);
 }

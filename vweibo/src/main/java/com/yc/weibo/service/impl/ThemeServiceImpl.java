@@ -82,5 +82,9 @@ public class ThemeServiceImpl implements ThemeService {
 	public int selectTidByTname(String tname) {
 		return themeMapper.selectTidByTname(tname);
 	}
+	@Override
+	public List<Theme> findThemeByTname(Theme theme) {
+		return themeMapper.findThemeByTname(theme);
+	}
 
 }

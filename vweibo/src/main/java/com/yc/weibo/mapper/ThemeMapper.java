@@ -61,4 +61,6 @@ public interface ThemeMapper {
 	
 	int selectTidByTname(String tname);
 	
+	List<Theme> findThemeByTname(Theme theme);
+	
 }
