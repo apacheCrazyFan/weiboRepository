@@ -3,7 +3,22 @@ create table Admin(
 	Aname varchar2(20),
 	Apwd varchar2(30)
 );
+
 drop table Admin;
+drop table WeiBoTag;
+drop table UserTag;
+drop table WeiBoUser;
+drop table Groups;
+drop table UserTagFather;
+drop table FanAndFaned;
+drop table Theme;
+drop table WBandThe;
+drop table WeiBo;
+drop table WeiBoHelp;
+drop table Operate;
+drop table WeiboAndWeibo;
+
+
 select * from Admin;
 insert into Admin values('admin','sa');
 
@@ -148,22 +163,41 @@ create table WeiBoUser(
        Uscore number(8),              --用户积分（用来计算vip等级）				√
        UspecialTag varchar2(40)       --特权标签（实名认证，会员，国籍）			√我们就弄一个国籍
 );
+update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f3.png' where WBUid = 1006;
+update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f0.png' where WBUid = 1005;
+update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1002;
+update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1007;
+
+update WeiBoUser set  UimgPath = '9.gif' where WBUid = 1007;
+
+
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
 alter table WeiBoUser drop column phoneStatus;
 alter table WeiBoUser drop column emailStatus;
 alter table WeiBoUser add phoneStatus int default 1;	--增加两列，用来处理通过何种方式找到好友,1为可以，0为否
 alter table WeiBoUser add emailStatus int default 1;
-select * from WeiBOUser;
+
+
+select * from WeiBoUser;
 create sequence seq_WeiBoUser_Wbuid start with 1006;
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
-insert into WeiBoUser values(1002,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
-insert into WeiBoUser values(1003,'巴拉拉','sa','15675471040','1373930643@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,学生',10000,'CN');
-insert into WeiBoUser values(1004,'啊大大','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
-insert into WeiBoUser values(1005,'admin','sa','15675471040','15675471040@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1002,'啊大大','sa','15675471111','15675471111@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1005,'admin','sa','15675470000','15675470000@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,日本',10000,'0x1f1ef0x1f1f5.png');
+
+
 delete from WeiBoUser where WBUid in (1001,1002);
 
+update WeiBoUser set Uphone = '15675471111' where WBUid = 1002;
+update WeiBoUser set Uphone = '15675470000' where WBUid = 1005;
 
-update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1006;
+update WeiBoUser set Uemail = '15675471111@163.com' where WBUid = 1002;
+update WeiBoUser set Uemail = '15675470000@163.com' where WBUid = 1005;
+
+update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1002;
+update WeiBoUser set UimgPath='userimg.jpg' where WBUid=1005;
+update WeiBoUser set UimgPath='userphoto003.png' where WBUid=1006;
+
 
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
@@ -178,18 +212,27 @@ create table Relationship(
        
        --预留字段 
 );
-
+select * from Groups;
+drop table Groups;
 --群
 create table Groups(
 	Gid int,				--群id
 	Gname varchar2(40),					--群名
-	WBUid int references WeiBoUser(WBUid) unique,--群里的用户id
+	WBUid int references WeiBoUser(WBUid),--群里的用户id,如果加上unique则只能加入一个群 所以去掉
 	Gdate Date							--进群时间
 );
+insert into Groups values (2003,'学习',1001,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2003,'学习',1005,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2002,'学习',1006,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2001,'学习',1006,to_date('2016-05-12','yyyy-mm-dd'));
+insert into Groups values (2001,'学习',1002,to_date('2016-09-18','yyyy-mm-dd'));
+insert into Groups values (2001,'学习',1005,to_date('2016-08-05','yyyy-mm-dd'));
+
+select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=1006);
 --黑名单
 create table BlackList(
 	Bid int primary key,				--黑名单id
-	Uid int references WeiBoUser(Uid),  --哪个用户下的黑名单
+	WBUid int references WeiBoUser(WBUid),  --哪个用户下的黑名单
 	BUid int							--黑名单用户id
 );
 --粉与被粉（关注与被关注）
@@ -201,13 +244,17 @@ create table FanAndFaned(
 alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
+
 drop table FanAndFaned;
+
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
 select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
+
 delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1009 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1010 and Fstatus='同学';
+
 --关注的人数
 select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus != '未分组';
 select count(distinct(FUedid)) from FanAndFaned where FUid = 1001 and Fstatus = '未分组';
@@ -282,6 +329,11 @@ insert into Theme values(seq_Theme_Tid.nextval,'#郭俊辰北影报到#',1005,to_date('
 insert into Theme values(seq_Theme_Tid.nextval,'#故事里的旧时光#',1005,to_date('2016-9-2','yyyy-MM-dd'),'享悦微博欢迎您的使用,祝您浏览愉快',null,1800,28000);
 
 
+--微博和话题的中间表
+create table WBandThe(
+	WBid int references WeiBo(WBid),
+	Tid int references Theme(Tid)
+);
 
 --微博
 create table WeiBo(
@@ -289,8 +341,8 @@ create table WeiBo(
        Tid int						  --话题id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
-       WBUId int
-           constraint RK_WeiBo_Uid references WeiBoUser(WBUId),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
+       WBUid int
+           constraint RK_WeiBo_Uid references WeiBoUser(WBUid),--用户Id( 哪几种标签的用户发表了哪几种类型的微博)
        WBdate Date,                   --微博发表日期
        WBtxt varchar2(2000),          --微博文字内容
        WBpic  varchar2(500),          --微博图片路径
@@ -298,20 +350,32 @@ create table WeiBo(
        WBmusic varchar2(500),		  --微博音乐路径
        yesOrno char(2),				  --是否是话题产生的weibo	
        yon char(2),					  --是否是转发微博  --这个有点重要吧
-       WBlocation varchar2(120),
-       WBstatue int
+       WBlocation varchar2(120),	  --发表微博的地址
+       WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
        --预留字段      
 );
 alter table WeiBo add Tid int;
+
 create sequence seq_wb_wbid start with 10001 increment by 1;
 
 alter table WeiBo add WBlocation varchar2(100);
 alter table WeiBo add WBstatue varchar2(20);     --微博的状态  公开 好友圈 群 仅自己可见
 alter table WeiBo modify WBstatue int; 
+
 drop table WeiBo;
+
 delete from WeiBo;
+
 select * from WeiBo;
+
 select count(WBid) from WeiBo where WBUId = 1001;
+
+select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = 1001)) order by WBdate desc) n where 15 * 1 >= rownum)
+ 			where rn > 15 * (1-1)) b
+ 			where w.wbid = b.wbid;
 
 insert into WeiBo values(seq_wb_wbid.nextval,'视频','小鸭子',1001,sysdate,'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',null,null,null,'N','N','衡阳,长沙市',0);
 insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1001,sysdate,'bbbbbbbbbbbbbbbbbbbbbbbbbbbb',null,null,null,'N','N','衡阳,长沙市',0);
@@ -322,7 +386,15 @@ insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1002,sysdate,'bbbbb
 insert into WeiBo values(seq_wb_wbid.nextval,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','衡阳,长沙市',0);
 insert into WeiBo values(seq_wb_wbid.nextval,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y','N','衡阳,长沙市',0);
 
-update weibo set tid=1 where wbid in()
+update WeiBo set wbtag='大学' where wbid=10001;
+update WeiBo set wbtag='搞笑' where wbid=10002;
+update WeiBo set wbtag='时尚' where wbid=10003;
+update WeiBo set wbtag='大学,时尚' where wbid=10004;
+update WeiBo set wbtag='大学,搞笑' where wbid=10021;
+update WeiBo set wbtag='大学,搞笑,时尚' where wbid=10022;
+
+select * from WeiBo where wbtag like '%大学%'
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select * from weibo order by 
 --微博附加表
@@ -456,21 +528,39 @@ create table Operate(
            constraint RK_Operate_WBid references WeiBo(WBid),--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
        Ostate varchar2(20),           --操作名（转载，收藏，评论，点赞..）
        
-       Ocontent varchar2(500)--预留字段  
+       Ocontent varchar2(500),
+       Odate Date--预留字段  
 );
+
+alter table Operate add Odate date;
+alter table OPerate drop column  Odate;
 create sequence seq_op_oid start with 1001;
+select * from WeiBo;
+select * from WeiBoHelp;
 select * from Operate;
+select * from WeiboAndWeibo;
+
+
+drop table WeiBo;
 drop table WeiBoHelp;
 drop table Operate;
 insert into Operate values(seq_op_oid.nextval,1006,10001,'收藏',null);
 
+select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = 10582) w,WeiBoHelp h where w.WBid = h.WBid
+
+
+create table WeiboAndWeibo(
+	WBid int references WeiBo(WBid),
+	TWBid int
+);
+select * from WeiboAndWeibo;
+
 --评论（回复）微博表  --找爸爸
 create table Comments(
        Cid int primary key,          	--评论（回复）id
-       WBUid int unique, 				--评论（回复）人id
-       WBid int unique,					--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
-       ContentTxt varchar2(500),        --评论（回复）文本内容
-       ContentPics varchar2(200),      	--评论（回复）图片路径(这里只指表情)
+       WBUid int, 						--评论（回复）人id
+       WBid int,						--微博Id( 哪几种标签的用户操作了哪几种类型的微博)
+       ContentTxt varchar2(500),        --评论（回复）文本内容+图片路径(这里只指表情)
        Cdate Date,                    	--评论日期
        CgreateAccount int,            	--评论点赞次数
        Csonode int					  	--下一个评论的id  这里可以列一个树状图出来 自己是自己的爸爸 自表查询
@@ -479,7 +569,7 @@ create table Comments(
 );
 create sequence seq_comments_cid start with 100001 increment by 1;
 
-drop table Comments;
+drop table Comments; 
 --私信
 create table PrivateMessage(
        PMid int primary key,          --私信id
@@ -510,11 +600,28 @@ select b.*,w.* from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
 			(select n.*,rownum rn from 
-				(select * from WeiBo  where WBUid in
-   					 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=1006 ) ) n where 2 * 2 >= rownum)
- 			where rn > 2 * (2-1)) b
+				(select * from WeiBo  where WBUid in (select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=1006) )order by WBdate) n where 100 >= rownum)
+ 			where rn >0) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
  			
  create sequence seq_op_oid start with 1001;
  
  select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=1006;
+ 
+ select p.odate from operate p where p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞');
+ select uname from WeiBouser where wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞')
+ select * from (select rownum rn,b.wbtxt,b.wbpic,b.wbvideo,w.uname, p.odate from WeiBo b,WeiBoUser w, operate p where b.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') and w.wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=1006) and Ostate='点赞') and p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=1006) and Ostate='点赞') order by odate) where rn<15;
+
+ 			
+select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+				(select * from WeiBo where WBUid in (select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=1006) )order by WBdate) n where 5 >= rownum)
+ 					rn>1) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+ 			
+ 			
+select b.*,w.* from WeiBoUser b,WeiBo w where b.WBUid=w.WBUid and W.WBUid=1006
+
+select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=1006 and WBpic is not null) where 10>rn;

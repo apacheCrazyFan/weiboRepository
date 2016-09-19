@@ -19,30 +19,66 @@
 	<select id="selectCurrMaxWBid" resultType="int">
 		select nvl(max(wbid),0) wbid from WeiBo
 	</select>
-	<insert id="initWeibohelp">
+	<insert id="initWeibohelp" parameterType="int">
 			insert into WeiBoHelp values (#{currWBid,jdbcType=INTEGER},0,0,0,0,0)
 	</insert>
 	
+	
+	<update id="updateViewOnly" parameterType="int">
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
+	</update>
+	
+	<select id="selectWBUidByWbid" resultType="int">
+		select WBUid from WeiBo where WBid = #{wbid}
+	</select>
 	
 	<update id="updateaddWeiboLike" parameterType="int">
 		update WeiBoHelp set WHgreateAccount = WHgreateAccount + 1,WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
 	</update>
 	<update id="updateminuWeiboLike" parameterType="int">
-		update WeiBoHelp set WHgreateAccount = WHgreateAccount - 1 where WBid = #{wbid}
+		update WeiBoHelp set WHgreateAccount = WHgreateAccount - 1,WHviewAccount = WHviewAccount + 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterLike" parameterType="int" resultType="int">
 		select WHgreateAccount from WeiBoHelp where WBid = #{wbid}
 	</select>
 	
-	
 	<update id="updateCollectionAccount" parameterType="int">
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHfavoriteAccount = WHfavoriteAccount + 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterCollection" parameterType="int" resultType="int">
-		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}
+		select WHcommentAccount from WeiBoHelp where WBid = #{wbid}
 	</select>
 	
 	
+	
+	<select id="selectTransmityon" parameterType="int" resultType="object">
+		select yon from WeiBo where WBid = #{wbid}
+	</select>
+	<select id="selectWeiboandweiboHelpById" parameterType="int" resultType="map">
+		select wb.*,Utag,Uname,UspecialTag from
+			(select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = #{wbid,jdbcType=INTEGER}) w,WeiBoHelp h where w.WBid = h.WBid) wb,WeiBoUser u 
+				where wb.WBUid = u.WBUid
+	</select>
+	<insert id="insertWeiboByTransmit" parameterType="map">
+		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE" >
+			select seq_wb_wbid.nextval currval from dual
+		</selectKey>
+		insert into WeiBo values (#{wbid},null,#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{transmitDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},null,null,null,#{isThemeWeibo,jdbcType=CHAR},'Y',#{userLocation,jdbcType=VARCHAR},0)
+	</insert>
+	<update id="updateTransmitAccount" parameterType="int">
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHreprintAccount = WHreprintAccount + 1 where WBid = #{wbid}
+	</update>
+	
+	
+	<update id="updateCommentAccount" parameterType="int">
+		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHcommentAccount = WHcommentAccount + 1 where WBid = #{wbid}
+	</update>
+	<select id="selectAfterComment" parameterType="int" resultType="int">
+		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}
+	</select>
+
+
+	<!-- 根据浏览次数排序 -->
 	<select id="seleteWeiboOrderByWHviewAccountFirst" resultType="map" parameterType="map">
 		select k.*,wbu.Uname,wbu.UimgPath from
 		(select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBo w,
@@ -53,7 +89,7 @@
  			where w.wbid = b.wbid and WBstatue = 0
  			order by WHviewAccount desc) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
-	
+	<!-- 根据最新日期且是用户自己能看到的排序 -->
 	<select id="selectWeiboOrderByWBdate" resultType="map" parameterType="map">
 		select k.*,wbu.Uname,wbu.UimgPath from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
@@ -66,7 +102,7 @@
 	<!-- 热门微博 -->
 	<select id="findHotWeiBo" resultType="map" parameterType="map">
 		select * from  (
-			select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount,WHreprintAccount
+			select rownum rn, w.*,h.WHviewAccount,h.WHreprintAccount,h.WHfavoriteAccount,h.WHcommentAccount,h.WHgreateAccount,b.UimgPath,b.Uname from WeiBo w,WeiBoHelp h, weibouser b where w.wbid=h.wbid and b.wbuid=w.wbuid order by WHviewAccount desc,WHreprintAccount desc
 		) where rn>#{pageSize} * (#{pageNum}-1) and #{pageSize} * (#{pageNum})>rn
 	</select>
 	<!-- 好友圈 -->
@@ -82,7 +118,56 @@
    	</select>
 	<!-- 我的收藏 -->
 	<select id="myCollections" resultType="Weibo" parameterType="int">
-		 select * from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=#{WBUid}
+		select * from ( select rownum rn, w.*,p.odate from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=#{WBUid} order by odate desc) where 15>rn
+	</select>
+	
+	<!-- 我的赞 -->
+	<select id="findMyZan" resultType="Weibo" parameterType="int">
+		select * from  (select rownum rn, b.wbtxt,b.wbpic,b.wbvideo,w.uname, p.odate from WeiBo b,WeiBoUser w, operate p where b.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=#{WBUid}) and Ostate='点赞') and w.wbuid in (select wbuid from Operate where wbuid in (select wbuid from WeiBo where WBUid=#{WBUid}) and Ostate='点赞') and 
+		 p.wbid in (select wbid from Operate where wbid in (select wbid from WeiBo where WBUid=#{WBUid}) and Ostate='点赞') order by odate	) where 15>rn
+  </select>
+  
+ <!--  分类浏览 -->
+  <select id="findWeiBoByWBtag" parameterType="map" resultType="map">
+ 	 select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+				(select * from WeiBo  where wbtag like #{wbtag} order by WBdate) n where #{pageSize} * (#{pageNum}) >= rownum)
+ 			where rn > #{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+  </select>
+  
+ <!--  个人首页发过的微博 -->
+ <select id="findpersonal" parameterType="int" resultType="WeiBo">
+ 	select b.*,w.* from WeiBoUser b,WeiBo w where b.WBUid=w.WBUid and W.WBUid=#{WBUid} order by WBdate desc
+ </select>
+  
+  <!-- 群微博 -->
+  <select id="findGroupWeiBo" parameterType="map" resultType="map">
+  	   select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+				(select * from WeiBo  where WBUid in (select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=#{WBUid}) )order by WBdate desc) n where #{pageSize} * (#{pageNum}) >= rownum)
+ 			where rn >#{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+  </select>
+  
+  <!-- 特别关心-->
+	<select id="findMoreAttentionWeiBo" parameterType="map" resultType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+			(select * from 
+				(select n.*,rownum rn from 
+					(select * from WeiBo where WBUid in
+   						 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='特别关注' and wb.WBUid=#{WBUid} ) ) n where #{pageSize} * (#{pageNum}) >= rownum)
+ 				where rn>#{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
+	
+	<select id="findMyPhoto" resultType="WeiBo" parameterType="int">
+		select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=#{WBUid} and WBpic is not null) where 15>rn
 	</select>
 	
 	<select id="findWeiBoByTid" parameterType="int" resultType="Weibo">

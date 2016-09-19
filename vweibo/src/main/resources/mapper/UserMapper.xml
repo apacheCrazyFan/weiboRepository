@@ -51,6 +51,6 @@
 	
 	
 	<update id="updateUserAccount" parameterType="map">
-		update WeiBoUser set Uscore = Uscore + #{account,jdbcType=INTEGER} where  WBUid = #{uid,jdbcType=INTEGER}
+		update WeiBoUser set Uscore = Uscore + #{account,jdbcType=INTEGER} where  WBUid = #{wbuid,jdbcType=INTEGER}
 	</update>
 </mapper>

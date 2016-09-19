@@ -3,9 +3,10 @@
 <%
 	String rand = (String)session.getAttribute("rand");
 	String yzm=request.getParameter("yzm");
+	System.out.println(rand+"----"+yzm);
 	if(yzm.equalsIgnoreCase(rand)){
-		out.print(true);
+		out.print(0);
 	}else{
-		out.print(false);
+		out.print(1);
 	}
 %>

@@ -11,12 +11,25 @@ public interface WeiboService {
 	int selectCurrMaxWBid();
 	boolean initWeibohelp(int currWBid);
 	
+	boolean updateViewOnly(int wbid);
+	
+	int selectWBUidByWbid(int wbid);
+	
 	boolean updateaddWeiboLike(int wbid);
 	boolean updateminuWeiboLike(int wbid);
 	int selectAfterLikeGreateAcount(int wbid);
 	
 	boolean updateCollectionAccount(int wbid);
 	int selectAfterCollection(int wbid);
+	
+	String selectTransmityon(int wbid);
+	List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid);
+	boolean insertWeiboByTransmit(Map<String,Object> map);
+	boolean updateTransmitAccount(int wbid);
+	
+	boolean updateCommentAccount(int wbid);
+	int selectAfterComment(int wbid);
+	
 	
 	List<Map<String,Object>> findWeiboOrderByWHviewAccountFirst(Map<String,Integer> map);
 	
@@ -47,4 +60,11 @@ public interface WeiboService {
 	 * @return
 	 */
 	List<Weibo> findWeiboByPage(Map<String, Object> params);
+
+	List<Weibo> findMyZan(int wBUid);
+	List<Map<String, Object>> findWeiBoByWBtag(Map<String, Object> params);
+	List<Weibo> findpersonal(int wBUid);
+	List<Map<String, Object>> findGroupWeiBo(Map<String, Integer> params);
+	List<Map<String, Object>> findMoreAttentionWeiBo(Map<String, Integer> params);
+	List<Weibo> findMyPhoto(Integer wBUid);
 }

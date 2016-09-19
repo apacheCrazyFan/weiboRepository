@@ -16,6 +16,18 @@ public class WeiboServiceImpl implements WeiboService{
 	@Autowired
 	private WeiboMapper weiboMapper;
 	
+	
+	//纯view 加一
+	@Override
+	public boolean updateViewOnly(int wbid){
+		return weiboMapper.updateViewOnly(wbid) > 0 ? true : false;
+	}
+	
+	@Override
+	public int selectWBUidByWbid(int wbid) {
+		return weiboMapper.selectWBUidByWbid(wbid);
+	}
+	
 	//插入微博
 	@Override
 	public boolean addWeibo(Map<String, Object> map) {
@@ -70,8 +82,36 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.selectAfterCollection(wbid);
 	}
 
-
-
+	//转发
+	@Override
+	public String selectTransmityon(int wbid) {
+		return weiboMapper.selectTransmityon(wbid);
+	}
+	@Override
+	public List<Map<String,Object>> selectWeiboandweiboHelpById(int wbid){
+		return weiboMapper.selectWeiboandweiboHelpById(wbid);
+	}
+	@Override
+	public boolean insertWeiboByTransmit(Map<String,Object> map){
+		return weiboMapper.insertWeiboByTransmit(map) > 0 ? true : false;
+	}
+	@Override
+	public boolean updateTransmitAccount(int wbid){
+		return weiboMapper.updateTransmitAccount(wbid) > 0 ? true : false;
+	}
+	
+	//评论
+	@Override
+	public boolean updateCommentAccount(int wbid) {
+		return weiboMapper.updateCommentAccount(wbid) > 0 ? true : false;
+	}
+	@Override
+	public int selectAfterComment(int wbid) {
+		return weiboMapper.selectAfterComment(wbid);
+	}
+	
+	
+	
 	@Override
 	public List<Map<String, Object>> findHotWeiBo(Map<String, Integer> map) {
 		
@@ -79,7 +119,6 @@ public class WeiboServiceImpl implements WeiboService{
 	}
 	@Override
 	public List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params) {
-		// TODO Auto-generated method stub
 		return weiboMapper.findFriendWeiBo(params);
 	}
 	@Override
@@ -98,5 +137,34 @@ public class WeiboServiceImpl implements WeiboService{
 	public List<Weibo> findWeiboByPage(Map<String, Object> params) {
 		return weiboMapper.findWeiboByPage(params);
 	}
+	public List<Weibo> findMyZan(int WBUid) {
+		return weiboMapper.findMyZan(WBUid);
+	}
 
+	@Override
+	public List<Map<String, Object>> findWeiBoByWBtag(Map<String, Object> params) {
+		return weiboMapper.findWeiBoByWBtag(params);
+	}
+
+	@Override
+	public List<Weibo> findpersonal(int WBUid) {
+		return weiboMapper.findpersonal(WBUid);
+	}
+
+	@Override
+	public List<Map<String, Object>> findGroupWeiBo(Map<String, Integer> params) {
+		return weiboMapper.findGroupWeiBo(params);
+	}
+
+	@Override
+	public List<Map<String, Object>> findMoreAttentionWeiBo(Map<String, Integer> params) {
+		return weiboMapper.findMoreAttentionWeiBo(params);
+	}
+
+	@Override
+	public List<Weibo> findMyPhoto(Integer WBUid) {
+		return weiboMapper.findMyPhoto(WBUid);
+	}
+
+	
 }

@@ -36,5 +36,15 @@ public class OperateServiceImpl implements OperateService{
 	public boolean insertCollectWeibo(Map<String, Object> map) {
 		return operateMapper.insertCollectWeibo(map) > 0 ? true : false;
 	}
+	//转发插入操作表
+	@Override
+	public boolean insertTransmitWeibo(Map<String, Object> map) {
+		return operateMapper.insertTransmitWeibo(map) > 0 ? true : false;
+	}
+	//评论插入操作表
+	@Override
+	public boolean insertCommentWeibo(Map<String, Object> map) {
+		return operateMapper.insertCommentWeibo(map) > 0 ? true : false;
+	}
 
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.weibo.mapper.WeiboAndWeiboMapper">
+	<select id="selectrootWeibo" parameterType="int" resultType="int">
+		select TWBid from WeiboAndWeibo where WBid = #{wbid,jdbcType=INTEGER}
+	</select>
+	
+	<insert id="insertWeiboAndWeibo" parameterType="int">
+		insert into WeiboAndWeibo values 
+		<foreach collection="array" item="wbids" open="(" close=")" separator=",">
+			#{wbids}
+		</foreach>
+	</insert>
+</mapper>
+
+
