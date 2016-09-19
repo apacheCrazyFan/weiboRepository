@@ -424,7 +424,7 @@ window.onload=function(){
 							newStr += '<a href="javascript:void(0)"	id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>已收藏</a>';	//收藏
 						}
 						newStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
-						newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
+						newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;,'+weiboid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
 						newStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';   //点赞
 						newStr += '</div>';
 						
@@ -1100,7 +1100,7 @@ function findWeiBoByWBtag(obj){
 						}
 					
 						newStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
-						newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
+						newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;,'+weiboid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
 						newStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';   //点赞
 						newStr += '</div>';
 					
@@ -1334,7 +1334,7 @@ $(window).scroll(function(){
 				newStr += '<a href="javascript:void(0)"	id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>已收藏</a>';	//收藏
 			}
 			newStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum1" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>';
-			newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum1" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
+			newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum1" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;,'+weiboid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';
 			newStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum1" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';  //点赞在这里处理
 			newStr += '</div>';																	//用户id					//微博id				
 		
@@ -1582,7 +1582,7 @@ $(window).scroll(function(){
 				newStr += '<a href="javascript:void(0)"	id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+weiboid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>已收藏</a>';	//收藏
 			}
 			newStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>'+dataMsg.WHREPRINTACCOUNT+'</a>'; //转发
-			newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
+			newStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;,'+weiboid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>'+dataMsg.WHCOMMENTACCOUNT+'</a>';		//评论
 			newStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+weiboid+','+wbuid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>'+dataMsg.WHGREATEACCOUNT+'</a>';   //点赞
 			newStr += '</div>';
 			
@@ -1882,7 +1882,7 @@ function transmitweibo(divid,textareaid,origintransmitid,transmitid,uid,wbid,wbu
 					newWeiBoStr += '<div id="center_footnum_'+collectiondivnum+'" class="center_footnum">';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+currWBid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>'; //转发
-					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
+					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;,'+currWBid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
 					newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+currWBid+','+userid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';   //点赞
 					newWeiBoStr += '</div>';
 					
@@ -1935,7 +1935,7 @@ function transmitweibo(divid,textareaid,origintransmitid,transmitid,uid,wbid,wbu
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 					newWeiBoStr += '<input type="checkbox" id="comment_check_'+commentdivnum+'" class="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input_'+commentdivnum+'&quot;,&quot;comment_check_'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
+					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input'+commentdivnum+'&quot;,&quot;comment_check'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
 					newWeiBoStr += '</div>';
 					
 					newWeiBoDiv.innerHTML = newWeiBoStr;
@@ -2041,10 +2041,14 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
                 	str += '<span class="comment_div_four_a1">'+data.commentDate+'</span>';
                 	str += '<a href="javascript:void(0)" class="comment_div_four_a"><img src="front/image/center-part_foot04.png"/><font class="comment_div_four_font">0</font></a>';
                 	str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentDelete()">删除</a>';
-                	str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentOthers('+userid+','+userid+')">回复</a>';
+                	str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_d_'+commentdivnum+'&quot;)">回复</a>';
                 	str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentTip()">举报</a>';
                 	str += '</div>';
-                	
+	                str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
+	                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
+	                str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five" style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
+	                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
+	                str += '</div>';
 					$("#"+commentdiv).append(str);
 					 
 				  }else{ //要转发
@@ -2220,7 +2224,7 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 						newWeiBoStr += '<div id="center_footnum_'+collectiondivnum+'" class="center_footnum">';
 						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum1_'+collectiondivnum+'" class="center_footnum1" onClick="addcollectiondiv(&quot;center_footnum_col_'+collectiondivnum+'&quot;,'+userid+','+currWBid+')"><img src="front/image/center-part_foot01.png" id="foot01_imgs"/>收藏</a>';	//收藏
 						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum2_'+transmitdivnum+'" class="center_footnum2" onClick="addtransmitdiv(&quot;center_footnum_transmit_'+transmitdivnum+'&quot;)"><img src="front/image/center-part_foot02.png" id="foot01_img"/>0</a>'; //转发
-						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;)"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
+						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum3_'+commentdivnum+'" class="center_footnum3" onClick="addcommentdiv(&quot;comment_div_'+commentdivnum+'&quot;,'+currWBid+')"><img src="front/image/center-part_foot03.png" id="foot01_img"/>0</a>';		//评论
 						newWeiBoStr += '<a href="javascript:void(0)" id="center_footnum4_'+clicklikenum+'" class="center_footnum4" onClick="clicklike(this,'+userid+','+currWBid+','+userid+')"><img src="front/image/center-part_foot04.png" id="foot01_img"/>0</a>';   //点赞
 						newWeiBoStr += '</div>';
 						
@@ -2273,7 +2277,7 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 						newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 						newWeiBoStr += '<input type="checkbox" id="comment_check_'+commentdivnum+'" class="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-						newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input_'+commentdivnum+'&quot;,&quot;comment_check_'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
+						newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input'+commentdivnum+'&quot;,&quot;comment_check'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
 						newWeiBoStr += '</div>';
 						
 						newWeiBoDiv.innerHTML = newWeiBoStr;
@@ -2342,17 +2346,15 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 		                str += '<span class="comment_div_four_a1">'+data.commentDate+'</span>';
 		               	str += '<a href="javascript:void(0)" class="comment_div_four_a"><img src="front/image/center-part_foot04.png"/><font class="comment_div_four_font">0</font></a>';
 		                str += '<a href="javascript:void(0)" class="comment_div_four_a" onclick="commentDelete()">删除</a>';
-		                str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentOthers(&quot;comment_div_d_'+commentdivnum+'&quot;,&quot;comment_input_d_'+commentdivnum+'&quot;,&quot;comment_check_d_'+commentdivnum+'&quot;)">回复</a>';
+		                str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_d_'+commentdivnum+'&quot;)">回复</a>';
 		                str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentTip()">举报</a>';
 		                str += '</div>';
-		                str += '<div id="comment_div_d_'+commentdivnum+'" class="comment_div" style="display:none;">';
-		                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:30px;margin-top:10px;position:relative;">';
-		                str += '<input type="text" id="comment_input_d_'+commentdivnum+'" class="comment_input"/><br>';
-		                str += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
-		                str += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
-		                str += '<input type="checkbox" id="comment_check_d_'+commentdivnum+'" class="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-		                str += '<img src="front/image/comment_btn.png" id="comment_btn_d_'+commentdivnum+'" onClick="commentsWeiboAndcommentOthers(&quot;comment_div_d_'+commentdivnum+'&quot;,&quot;comment_input_d_'+commentdivnum+'&quot;,&quot;comment_check_d_'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
+		                str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
+		                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
+		                str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five"  style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
+		                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
 		                str += '</div>';
+		                
 						$("#"+commentdiv).append(str);
 							
 							
@@ -2371,7 +2373,10 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 
 }
 
-
+//评论 评论的评论（不转发，无图片，被我删掉了）
+function commentsWeiboAndcommentOthers(){
+	
+}
 
 function letRandom(){
 	$.ajax({
@@ -2705,12 +2710,13 @@ function addtransmitdiv(id){
 	}
 }
 	
-function commentOthers(commentsWeiboAndOtherDivid,commentsWeiboAndOthertext,commentsWeiboAndOthercheck){
+function commentOthers(commentsWeiboAndOtherDivid,commentsWeiboAndOthertext){
+	alert("wo lai le ");
 	var commentsWeiboAndOtherDiv = document.getElementById(commentsWeiboAndOtherDivid);
+
 	if(commentsWeiboAndOtherDiv){
 		if(commentsWeiboAndOtherDiv.style.display == 'block'){
 			$("#"+commentsWeiboAndOthertext).val('');
-			$("#"+commentsWeiboAndOthercheck).attr("checked", false);
 			commentsWeiboAndOtherDiv.style.display='none';
 		}else{
 			commentsWeiboAndOtherDiv.style.display='block';
@@ -2718,11 +2724,11 @@ function commentOthers(commentsWeiboAndOtherDivid,commentsWeiboAndOthertext,comm
 	}
 	
 }
-	//控制收藏标签栏的可见   没有问题了√
+	//控制评论标签栏的可见   
 	function addcommentdiv(commentdivid,wbid){
 		var tips3=document.getElementById(commentdivid);
 		
-		$.ajax({
+		/*$.ajax({
 			url : 'weibo/commentDiv',
 			cache: false,
 			data:{"wbid":wbid},
@@ -2743,19 +2749,13 @@ function commentOthers(commentsWeiboAndOtherDivid,commentsWeiboAndOthertext,comm
 						}
 					}); */
 
-				}else if(tips3){
+				if(tips3){
 					if(tips3.style.display=='block'){
 						tips3.style.display='none';
 					}else{
 						tips3.style.display='block';
 					}
-				}
-				
-			},
-			error:function(){
-				
-			}
-		});
+				}				
 	}
 
 
