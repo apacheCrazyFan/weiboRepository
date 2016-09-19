@@ -99,6 +99,47 @@
  			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
+	
+	<!-- 根据最新日期且是用户自己能看到的视屏微博 -->
+	<select id="selectWeiboOrderByWBdateAndIsVideo" resultType="map" parameterType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0 and WBvideo != 'NULL') or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid}) and WBvideo != 'NULL') order by WBdate desc) n where #{pageSize} * #{pageNum} >= rownum)
+ 			where rn > #{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
+	
+	<!-- 根据最新日期且是用户自己能看到的音乐微博 -->
+	<select id="selectWeiboOrderByWBdateAndIsMusic" resultType="map" parameterType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0 and WBmusic != 'NULL') or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid}) and WBmusic != 'NULL') order by WBdate desc) n where #{pageSize} * #{pageNum} >= rownum)
+ 			where rn > #{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
+	
+	<!-- 根据最新日期且是用户自己能看到的图片微博 -->
+	<select id="selectWeiboOrderByWBdateAndIsPicture" resultType="map" parameterType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0 and WBpic != 'NULL') or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid}) and WBpic != 'NULL') order by WBdate desc) n where #{pageSize} * #{pageNum} >= rownum)
+ 			where rn > #{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 热门微博 -->
 	<select id="findHotWeiBo" resultType="map" parameterType="map">
 		select * from  (

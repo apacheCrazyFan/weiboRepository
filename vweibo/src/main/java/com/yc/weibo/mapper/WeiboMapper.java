@@ -38,6 +38,9 @@ public interface WeiboMapper {
 	List<Map<String,Object>> selectWeiboOrderByWHgreateAccount(Map<String,Integer> map);	//点赞次数优先嵌套查询或者嵌套结果
 	
 	List<Map<String,Object>> selectWeiboOrderByWBdate(Map<String,Integer> map);
+	List<Map<String,Object>> selectWeiboOrderByWBdateAndIsVideo(Map<String,Integer> map);
+	List<Map<String,Object>> selectWeiboOrderByWBdateAndIsMusic(Map<String,Integer> map);
+	List<Map<String,Object>> selectWeiboOrderByWBdateAndIsPicture(Map<String,Integer> map);
 	
 	List<Map<String, Object>> findHotWeiBo(Map<String, Integer> map);
 	

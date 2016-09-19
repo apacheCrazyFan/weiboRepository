@@ -58,6 +58,20 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.selectWeiboOrderByWBdate(map);
 	}
 	
+	@Override
+	public List<Map<String, Object>> selectWeiboOrderByWBdateAndIsVideo(Map<String, Integer> map) {
+		return weiboMapper.selectWeiboOrderByWBdateAndIsVideo(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectWeiboOrderByWBdateAndIsMusic(Map<String, Integer> map) {
+		return weiboMapper.selectWeiboOrderByWBdateAndIsMusic(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectWeiboOrderByWBdateAndIsPicture(Map<String, Integer> map) {
+		return weiboMapper.selectWeiboOrderByWBdateAndIsPicture(map);
+	}
 	
 	//点赞
 	@Override
@@ -171,6 +185,8 @@ public class WeiboServiceImpl implements WeiboService{
 	public List<WeiBoUser> findMyFans(Integer WBUid) {
 		return weiboMapper.findMyFans(WBUid);
 	}
+
+	
 
 	
 }

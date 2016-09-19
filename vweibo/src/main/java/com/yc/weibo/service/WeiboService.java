@@ -37,6 +37,11 @@ public interface WeiboService {
 	List<Map<String,Object>> findtWeiboOrderByWHgreateAccountFirst(Map<String,Integer> map);
 	
 	List<Map<String,Object>> findWeiboOrderByWBdate(Map<String,Integer> map);
+	List<Map<String,Object>> selectWeiboOrderByWBdateAndIsVideo(Map<String,Integer> map);
+	List<Map<String,Object>> selectWeiboOrderByWBdateAndIsMusic(Map<String,Integer> map);
+	List<Map<String,Object>> selectWeiboOrderByWBdateAndIsPicture(Map<String,Integer> map);
+	
+	
 	List<Map<String, Object>> findHotWeiBo(Map<String,Integer> map);
 	List<Map<String, Object>> findFriendWeiBo(Map<String, Integer> params);
 	List<Weibo> myCollections(int wBUid);

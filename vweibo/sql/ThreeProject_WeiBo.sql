@@ -367,6 +367,14 @@ create table WeiBo(
        WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
        --预留字段      
 );
+select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0 and WBvideo != null) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = 1001) and WBvideo != null) order by WBdate desc) n where 15 * 1 >= rownum)
+ 			where rn > 15 * (1-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid;
+ 			
 alter table WeiBo add Tid int;
 
 create sequence seq_wb_wbid start with 10001 increment by 1;
