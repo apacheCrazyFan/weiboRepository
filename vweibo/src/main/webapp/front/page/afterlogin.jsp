@@ -264,13 +264,11 @@ var count=4;
 					
 					newWeiBoStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 					newWeiBoStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
-					newWeiBoStr += '<form id="form_'+commentdivnum+'">';
-					newWeiBoStr += '<input type="text" id="comment_input"/><br>';
+					newWeiBoStr += '<input type="text" id="comment_input'+commentdivnum+'" class="comment_input"/><br>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
-					newWeiBoStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+uid+','+wbid+',&quot;form_'+commentdivnum+'&quot;)"/>';
-					newWeiBoStr += '</form>';
+					newWeiBoStr += '<input type="checkbox" id="comment_check'+commentdivnum+'" class="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
+					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input'+commentdivnum+'&quot;,&quot;comment_check'+commentdivnum+'&quot;,'+uid+','+wbid+')"/>';
 					newWeiBoStr += '</div>';
 					
 					

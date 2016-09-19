@@ -9,4 +9,6 @@
 		</selectKey>
 			insert into Comments values (#{cid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},#{txt,jdbcType=VARCHAR},sysdate,0,-1)
 	</insert>
+	
+	
 </mapper>
