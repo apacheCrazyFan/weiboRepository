@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -33,15 +36,18 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
+import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.service.CommentService;
 import com.yc.weibo.service.OperateService;
+import com.yc.weibo.service.ThemeService;
 import com.yc.weibo.service.UserService;
 import com.yc.weibo.service.WeiBoHelpService;
 import com.yc.weibo.service.WeiboAndWeiboService;
 import com.yc.weibo.service.WeiboService;
 import com.yc.weibo.util.AddressUtil;
+import com.yc.weibo.util.PageUtil;
 
 
 @Controller
@@ -55,6 +61,10 @@ public class WeiboHandler {
 	private WeiboService weiboService;
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ThemeService themeService;
+
 	@Autowired
 	private WeiboAndWeiboService weiboAndWeiboService;
 	@Autowired
@@ -194,6 +204,33 @@ public class WeiboHandler {
 		Map<String,Object> map = new HashMap<String,Object>();
 
 		String txtContent = request.getParameter("content");
+		
+		//如果内容里面有#asdfasdf#  就把 asdfasdf   作为一个话题的标题，
+		String regEx = "#[\u4e00-\u9fa5_a-zA-Z0-9]+#"; //中文字母数字
+		Pattern pat = Pattern.compile(regEx);
+		Matcher mat = pat.matcher(txtContent);
+		boolean rs = mat.find();
+//		System.out.println(rs);
+		
+		Theme param=new Theme();
+		
+		if(rs){
+			String themename=mat.group(0);
+			System.out.println(mat.group(0));
+			
+			param.setTname(themename);
+			param.setTdate(new Date());
+			param.setTuid(new BigDecimal(((WeiBoUser)request.getSession().getAttribute("user")).getWBUid()));
+			param.setTdeliver(new BigDecimal(0));
+			param.setTview(new BigDecimal(0)); 
+			
+			int result=themeService.addTheme(param);
+			if(result<=0){
+				//话题添加失败
+				return "话题添加失败";
+			}
+		}
+		
 		String statue = request.getParameter("statue");
 		String userlocation = AddressUtil.getLocation();
 
@@ -210,6 +247,7 @@ public class WeiboHandler {
 		map.put("weiboTag", null);
 		map.put("txtContent", txtContent);
 		map.put("isForwarded", 'N');
+		map.put("tid", param.getTid());
 		if(picsMap != null && !picsMap.equals("")){
 			map.put("picsMap", picsMap.substring(0, picsMap.length()-1));
 		}else{
@@ -269,13 +307,18 @@ public class WeiboHandler {
 	@Transactional(propagation=Propagation.REQUIRED)  //事务的隔离级别
 	@RequestMapping(value="/afterLoginDataPrarery",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> getAfterLoginDataPrarery(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid){
+	public Map<String,Object> getAfterLoginDataPrarery(HttpServletRequest request,@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Integer> params = new HashMap<String,Integer>();
 		
-		params.put("pageSize", pageSize);
-		params.put("pageNum", pageNum);
-		params.put("uid",userid);  //用来控制该用户 可看的微博
+		HttpSession session=request.getSession();
+		PageUtil pages=(PageUtil) session.getAttribute("pageUtil");
+		if(pages==null){
+			pages=new PageUtil();  
+		} 
+		params.put("pageSize", pages.getPageSize());
+		params.put("pageNum", pages.getPageNo());
+		params.put("uid",userid);
 		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWBdate(params);   //根据日期降序查询微博 
 		List<Integer> wbids = operateService.selectIfavoriteWeiboId(userid);  //获得所有我收藏的所有微博id
 		int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
@@ -310,6 +353,11 @@ public class WeiboHandler {
  		jsonMap.put("wbids", wbids);
 		jsonMap.put("weiboList", weiboList);
 		jsonMap.put("total", weiboList.size());
+		
+		int count =weiboService.WBTfindCount(new HashMap<String,Object>());
+		pages.setTotalSize(count);
+		
+		session.setAttribute("pageUtil", pages);
 		
 		return jsonMap;
 	}
@@ -388,6 +436,34 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
+
+	//控制评论的div的display
+		@RequestMapping(value="/commentDiv",method=RequestMethod.GET)
+		@ResponseBody
+		public Map<String,Object> commentDiv(@RequestParam(name="wbid")Integer wbid){
+			Map<String,Object> jsonMap = new HashMap<String,Object>();
+			Map<String,Object> params = new HashMap<String,Object>();
+			/*
+			System.out.println("  =============  "+wbid);
+			params.put("uid", uid);
+			params.put("wbid", wbid);
+			params.put("Ostate","收藏");
+			
+			if(operateService.selectoperateId(params) > 0){
+				if(weiboService.updateViewOnly(wbid)){
+					
+					//System.out.println( operateService.selectoperateId(params));
+					jsonMap.put("ishave", true);
+				}
+			}else{
+				if(weiboService.updateViewOnly(wbid)){
+					//System.out.println( operateService.selectoperateId(params));
+					jsonMap.put("ishave", false);
+				}
+			}*/
+			
+			return jsonMap;
+		}
 	//收藏
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addcollection",method=RequestMethod.POST)
@@ -550,24 +626,30 @@ public class WeiboHandler {
 							params.put("wbuid", wbuid);
 						
 							if(userService.updateUserAccount(params)){
-								int wboid = weiboService.selectWBUidByWbid(rootwbid);
 								params.clear();
-								params.put("account", DataDic.PUBLIS);
-								params.put("wbuid", wboid);
-								
+								params.put("account", DataDic.SHARE);
+								params.put("wbuid", uid);
 								if(userService.updateUserAccount(params)){
 									
-									int originTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(rootwbid);
-									int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
-									List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
+									int wboid = weiboService.selectWBUidByWbid(rootwbid);
+									params.clear();
+									params.put("account", DataDic.PUBLIS);
+									params.put("wbuid", wboid);
 								
-									jsonMap.put("userLocation", userLocation);
-									jsonMap.put("currWBid", currWBid);
-									jsonMap.put("weibo", weibo);
-									jsonMap.put("originTransmitAccount", originTransmitAccount);
-									jsonMap.put("currTransmitAccount",currTransmitAccount);
+									if(userService.updateUserAccount(params)){
+									
+										int originTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(rootwbid);
+										int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
+										List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
 								
-									jsonMap.put("success", true);
+										jsonMap.put("userLocation", userLocation);
+										jsonMap.put("currWBid", currWBid);
+										jsonMap.put("weibo", weibo);
+										jsonMap.put("originTransmitAccount", originTransmitAccount);
+										jsonMap.put("currTransmitAccount",currTransmitAccount);
+								
+										jsonMap.put("success", true);
+									}
 								}
 							}
 						}
@@ -589,6 +671,10 @@ public class WeiboHandler {
 			Map<String,Object> params = new HashMap<String,Object>();
 			
 			System.out.println( uid+"  =============  "+wbid + " +++++++ "+txt+"  ++++++++ "+ischeck);
+			SimpleDateFormat sdf = new SimpleDateFormat("MM月dd HH:mm:ss");
+			Date date = new Date();
+			String commentdate = sdf.format(date);
+
 			if(!ischeck){ // 不用转发到我的微博"
 				params.clear();
 				params.put("uid", uid);
@@ -597,16 +683,17 @@ public class WeiboHandler {
 				if(commentService.insertCommentDirect(params) && operateService.insertCommentWeibo(params)){  //插入评论表  he 操作表 成功
 					
 					if(weiboService.selectTransmityon(wbid).indexOf("N") > -1){ //是否本事就是源微博  是
-						
+						System.out.println( "shi yuan wei bo");
 						if(weiboService.updateCommentAccount(wbid)){  //跟新浏览次数及评论次数
-							
+							int wbuid = weiboService.selectWBUidByWbid(wbid);
 							//更新用户积分
 							params.clear();
 							params.put("account", DataDic.COMMENT);
-							params.put("wbuid", uid);
+							params.put("wbuid", wbuid);
 							
 							if(userService.updateUserAccount(params)){ //跟新用户积分
 								int CommentAccount = weiboService.selectAfterComment(wbid);
+								jsonMap.put("commentDate", commentdate);
 								jsonMap.put("success", true);
 								jsonMap.put("flag", false);  //返回  确定到底是不是要转发微博
 								jsonMap.put("commentAccount", CommentAccount);
@@ -614,6 +701,7 @@ public class WeiboHandler {
 						}
 					}else{  //不是源微博
 						//找到原微博
+						System.out.println( "bushi yuan weibo");
 						int tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(wbid);
 						int rootwbid = 0;
 						if( tempwbid == 0){
@@ -625,14 +713,16 @@ public class WeiboHandler {
 							}
 						}
 						if(weiboService.updateCommentAccount(wbid) && weiboService.updateViewOnly(rootwbid)){  //跟新浏览次数及评论次数
+							int wbuid = weiboService.selectWBUidByWbid(wbid);
 							//更新用户积分
 							params.clear();
 							params.put("account", DataDic.COMMENT);
-							params.put("wbuid", uid);
+							params.put("wbuid", wbuid);
 							
 							if(userService.updateUserAccount(params)){ //跟新所属微博用户积分
 								int CommentAccount = weiboService.selectAfterComment(wbid);
 								jsonMap.put("commentAccount", CommentAccount);
+								jsonMap.put("commentDate", commentdate);
 								jsonMap.put("success", true);
 								jsonMap.put("flag", false);  //返回  确定到底是不是要转发微博
 							}
@@ -645,7 +735,6 @@ public class WeiboHandler {
 				System.out.println( "评论转发");
 				String userLocation = AddressUtil.getLocation(); 
 				
-				Date date=new Date();
 				//首先查找是否是转发微博
 				if(weiboService.selectTransmityon(wbid).indexOf("N") > -1){ //不是，直接转发
 					params.put("userLocation", userLocation);
@@ -661,11 +750,11 @@ public class WeiboHandler {
 							params.put("uid", uid);
 							params.put("wbid", wbid);
 							params.put("txt",txt);
-							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
-								if(weiboService.updateTransmitAccount(wbid)){
+							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params) && operateService.insertCommentWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
+								if(weiboService.updateTransmitAccount(wbid) && weiboService.updateCommentAccount(wbid)){
 									int wbuid = weiboService.selectWBUidByWbid(wbid);
 									params.clear();
-									params.put("account", DataDic.SHARE);
+									params.put("account", DataDic.SHARE+DataDic.COMMENT); 
 									params.put("wbuid", wbuid);
 								
 									if(userService.updateUserAccount(params)){  //用户积分更新成功
@@ -677,10 +766,13 @@ public class WeiboHandler {
 											int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
 											List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
 										
+											int CommentAccount = weiboService.selectAfterComment(wbid);
+											jsonMap.put("commentDate", commentdate);
+											jsonMap.put("commentAccount", CommentAccount);
 											jsonMap.put("success", true);
 											jsonMap.put("flag", true);  //返回  确定到底是不是要转发微博
 											jsonMap.put("userLocation", userLocation);
-											jsonMap.put("currWBid", currWBid);
+											jsonMap.put("currWBid", currWBid);   //成功插入weibo表后的微博id
 											jsonMap.put("weibo", weibo);
 											jsonMap.put("originTransmitAccount", originTransmitAccount);
 											jsonMap.put("currTransmitAccount",currTransmitAccount);
@@ -720,8 +812,8 @@ public class WeiboHandler {
 							params.put("wbid", wbid);
 							params.put("txt",txt);
 							
-							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
-								if(weiboService.updateTransmitAccount(wbid) && weiboService.updateTransmitAccount(rootwbid)){
+							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params) && operateService.insertCommentWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
+								if(weiboService.updateTransmitAccount(wbid) && weiboService.updateCommentAccount(wbid) && weiboService.updateTransmitAccount(rootwbid)){
 									int wbuid = weiboService.selectWBUidByWbid(wbid);
 									params.clear();
 									params.put("account", DataDic.SHARE);
@@ -738,8 +830,11 @@ public class WeiboHandler {
 											if(userService.updateUserAccount(params)){ //更新当前用户的积分
 												int originTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
 												int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
-												List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
+												List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的微博所有信息
 											
+												int CommentAccount = weiboService.selectAfterComment(wbid);
+												jsonMap.put("commentDate", commentdate);
+												jsonMap.put("commentAccount", CommentAccount);
 												jsonMap.put("success", true);
 												jsonMap.put("flag", true);  //返回  确定到底是不是要转发微博
 												jsonMap.put("userLocation", userLocation);
@@ -813,6 +908,53 @@ public class WeiboHandler {
 		out.print(gson.toJson(weibos));
 		out.flush();
 		out.close();
+	}
+	
+	@ResponseBody
+	@RequestMapping({"findWeiboByTid"})
+	public Map<String,Object> findWeiboByTid(String tid,HttpServletRequest request,HttpServletResponse response){
+		//TODO:封装成easyui可以识别的json格式
+		List<Weibo> list=weiboService.findWeiBoByTid(Integer.parseInt(tid));
+		int total=weiboService.WBTfindCount(new HashMap<String,Object>());
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("rows", list);
+		map.put("total",total);
+		return map;
+	}
+	
+	
+	/**
+	 *  根据分页的情况，查询微博
+	 * @param weibo
+	 * @param  op:"nextPage",pageNo:''
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping({"findWeiboByPage"})//因为这里传了pageNo=‘’的情况，所以还是用String的吧，，
+	public List<Weibo> findWeiboByPage(String op,String pageNo,HttpServletRequest request,HttpServletResponse response){
+		Map<String,Object> params = new HashMap<String,Object>();
+		HttpSession session=request.getSession();
+		PageUtil pages=(PageUtil) session.getAttribute("pageUtil");
+		if(pages==null){
+			pages=new PageUtil();  //正常情况下，这里的pages是直接从session中拿取的，不需要new
+		} 
+		//判断 是 上一页，   下一页   ，还是跳转到页面，
+		if(op.equals("")){
+			//跳转页面
+			pages.setPageNo(Integer.parseInt(pageNo));
+		}else if(op.equals("prePage")){
+			//前一页
+			pages.setPageNo(pages.getProPageNo());//设置为上一页，然后pageSize不变
+		}else{
+			//后一页
+			pages.setPageNo(pages.getNextPageNo());//设置为xia一页，然后pageSize不变
+		}
+		//至此，页面的信息已经维护好了，现在只要到service里面查询了，
+		
+		params.put("start", pages.getPageSize()*(pages.getPageNo()-1));
+		params.put("end", pages.getPageNo()*pages.getPageSize());
+		List<Weibo> weiboList = weiboService.findWeiboByPage(params);   //根据日期降序查询微博 
+		return weiboList;
 	}
 	
 	//我的赞
@@ -918,6 +1060,17 @@ public class WeiboHandler {
 			List<Weibo> weibos=weiboService.findMyPhoto(WBUid);
 			System.out.print(weibos);
 			out.print(gson.toJson(weibos));
+			out.flush();
+			out.close();
+		}
+		
+		//我的粉丝
+		@RequestMapping(value="/findMyFans",method=RequestMethod.POST)
+		public void findMyFans(Integer WBUid,PrintWriter out){
+			Gson gson=new Gson();
+			List<WeiBoUser> myFans=weiboService.findMyFans(WBUid);
+			System.out.print(myFans);
+			out.print(gson.toJson(myFans));
 			out.flush();
 			out.close();
 		}
