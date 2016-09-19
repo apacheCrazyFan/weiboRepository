@@ -74,7 +74,7 @@
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHcommentAccount = WHcommentAccount + 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterComment" parameterType="int" resultType="int">
-		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}
+		select WHcommentAccount from WeiBoHelp where WBid = #{wbid}
 	</select>
 
 
@@ -166,10 +166,16 @@
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
 	
+	<!-- 我的相册 -->
 	<select id="findMyPhoto" resultType="WeiBo" parameterType="int">
 		select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=#{WBUid} and WBpic is not null) where 15>rn
 	</select>
 	
+	<!-- 我的粉丝 -->
+	<select id="findMyFans" resultType="WeiBoUser" parameterType="int">
+		select  Uname from WeiBoUser where WBUid in (select distinct FUid from FanAndFaned where FUedid=#{WBUid})
+	</select>
+
 	<select id="findWeiBoByTid" parameterType="int" resultType="Weibo">
 		select * from weibo where tid=#{tid}
 	</select>
@@ -190,5 +196,4 @@
 			</if>
 		</where>
 	</select>
-	
 </mapper>

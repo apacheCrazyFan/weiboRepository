@@ -78,7 +78,7 @@
                     </dl>
                     <dl>
                         <dt>${ sessionScope.groupnumber.FANSNUM }</dt>
-                        <dd><a href="#">粉丝</a></dd>
+                        <dd><a href="javascript:findMyFans(${sessionScope.user.WBUid})">粉丝</a></dd>
                     </dl>
                     <dl>
                         <dt>${ sessionScope.groupnumber.WEIBONUM }</dt>
@@ -379,5 +379,16 @@
 			$("#myCollections").append(str);
 		},"json")
 }
+	//我的粉丝
+	function findMyFans(WBUid){
+		$("#myCollections").empty();
+		$.post("weibo/findMyFans",{"WBUid":WBUid},function(data){
+			var str="";
+			for(var i=0;i<data.length;i++){
+				str+='<li><a href="#">'+data[i].Uname+'</a>&nbsp;&nbsp;&nbsp;关注了你</li>'+'<br/>';
+			};
+			$("#myCollections").append(str);
+		},"json")
+	}
 </script>
 </html>

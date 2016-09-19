@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.mapper.WeiboMapper;
 import com.yc.weibo.service.WeiboService;
@@ -164,6 +165,11 @@ public class WeiboServiceImpl implements WeiboService{
 	@Override
 	public List<Weibo> findMyPhoto(Integer WBUid) {
 		return weiboMapper.findMyPhoto(WBUid);
+	}
+
+	@Override
+	public List<WeiBoUser> findMyFans(Integer WBUid) {
+		return weiboMapper.findMyFans(WBUid);
 	}
 
 	

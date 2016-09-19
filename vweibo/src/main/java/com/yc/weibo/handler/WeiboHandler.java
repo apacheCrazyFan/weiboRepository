@@ -441,6 +441,34 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
+
+	//控制评论的div的display
+		@RequestMapping(value="/commentDiv",method=RequestMethod.GET)
+		@ResponseBody
+		public Map<String,Object> commentDiv(@RequestParam(name="wbid")Integer wbid){
+			Map<String,Object> jsonMap = new HashMap<String,Object>();
+			Map<String,Object> params = new HashMap<String,Object>();
+			/*
+			System.out.println("  =============  "+wbid);
+			params.put("uid", uid);
+			params.put("wbid", wbid);
+			params.put("Ostate","收藏");
+			
+			if(operateService.selectoperateId(params) > 0){
+				if(weiboService.updateViewOnly(wbid)){
+					
+					//System.out.println( operateService.selectoperateId(params));
+					jsonMap.put("ishave", true);
+				}
+			}else{
+				if(weiboService.updateViewOnly(wbid)){
+					//System.out.println( operateService.selectoperateId(params));
+					jsonMap.put("ishave", false);
+				}
+			}*/
+			
+			return jsonMap;
+		}
 	//收藏
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addcollection",method=RequestMethod.POST)
@@ -603,24 +631,30 @@ public class WeiboHandler {
 							params.put("wbuid", wbuid);
 						
 							if(userService.updateUserAccount(params)){
-								int wboid = weiboService.selectWBUidByWbid(rootwbid);
 								params.clear();
-								params.put("account", DataDic.PUBLIS);
-								params.put("wbuid", wboid);
-								
+								params.put("account", DataDic.SHARE);
+								params.put("wbuid", uid);
 								if(userService.updateUserAccount(params)){
 									
-									int originTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(rootwbid);
-									int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
-									List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
+									int wboid = weiboService.selectWBUidByWbid(rootwbid);
+									params.clear();
+									params.put("account", DataDic.PUBLIS);
+									params.put("wbuid", wboid);
 								
-									jsonMap.put("userLocation", userLocation);
-									jsonMap.put("currWBid", currWBid);
-									jsonMap.put("weibo", weibo);
-									jsonMap.put("originTransmitAccount", originTransmitAccount);
-									jsonMap.put("currTransmitAccount",currTransmitAccount);
+									if(userService.updateUserAccount(params)){
+									
+										int originTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(rootwbid);
+										int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
+										List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的根微博所有信息
 								
-									jsonMap.put("success", true);
+										jsonMap.put("userLocation", userLocation);
+										jsonMap.put("currWBid", currWBid);
+										jsonMap.put("weibo", weibo);
+										jsonMap.put("originTransmitAccount", originTransmitAccount);
+										jsonMap.put("currTransmitAccount",currTransmitAccount);
+								
+										jsonMap.put("success", true);
+									}
 								}
 							}
 						}
@@ -642,6 +676,10 @@ public class WeiboHandler {
 			Map<String,Object> params = new HashMap<String,Object>();
 			
 			System.out.println( uid+"  =============  "+wbid + " +++++++ "+txt+"  ++++++++ "+ischeck);
+			SimpleDateFormat sdf = new SimpleDateFormat("MM月dd HH:mm:ss");
+			Date date = new Date();
+			String commentdate = sdf.format(date);
+
 			if(!ischeck){ // 不用转发到我的微博"
 				params.clear();
 				params.put("uid", uid);
@@ -650,16 +688,17 @@ public class WeiboHandler {
 				if(commentService.insertCommentDirect(params) && operateService.insertCommentWeibo(params)){  //插入评论表  he 操作表 成功
 					
 					if(weiboService.selectTransmityon(wbid).indexOf("N") > -1){ //是否本事就是源微博  是
-						
+						System.out.println( "shi yuan wei bo");
 						if(weiboService.updateCommentAccount(wbid)){  //跟新浏览次数及评论次数
-							
+							int wbuid = weiboService.selectWBUidByWbid(wbid);
 							//更新用户积分
 							params.clear();
 							params.put("account", DataDic.COMMENT);
-							params.put("wbuid", uid);
+							params.put("wbuid", wbuid);
 							
 							if(userService.updateUserAccount(params)){ //跟新用户积分
 								int CommentAccount = weiboService.selectAfterComment(wbid);
+								jsonMap.put("commentDate", commentdate);
 								jsonMap.put("success", true);
 								jsonMap.put("flag", false);  //返回  确定到底是不是要转发微博
 								jsonMap.put("commentAccount", CommentAccount);
@@ -667,6 +706,7 @@ public class WeiboHandler {
 						}
 					}else{  //不是源微博
 						//找到原微博
+						System.out.println( "bushi yuan weibo");
 						int tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(wbid);
 						int rootwbid = 0;
 						if( tempwbid == 0){
@@ -678,14 +718,16 @@ public class WeiboHandler {
 							}
 						}
 						if(weiboService.updateCommentAccount(wbid) && weiboService.updateViewOnly(rootwbid)){  //跟新浏览次数及评论次数
+							int wbuid = weiboService.selectWBUidByWbid(wbid);
 							//更新用户积分
 							params.clear();
 							params.put("account", DataDic.COMMENT);
-							params.put("wbuid", uid);
+							params.put("wbuid", wbuid);
 							
 							if(userService.updateUserAccount(params)){ //跟新所属微博用户积分
 								int CommentAccount = weiboService.selectAfterComment(wbid);
 								jsonMap.put("commentAccount", CommentAccount);
+								jsonMap.put("commentDate", commentdate);
 								jsonMap.put("success", true);
 								jsonMap.put("flag", false);  //返回  确定到底是不是要转发微博
 							}
@@ -698,7 +740,6 @@ public class WeiboHandler {
 				System.out.println( "评论转发");
 				String userLocation = AddressUtil.getLocation(); 
 				
-				Date date=new Date();
 				//首先查找是否是转发微博
 				if(weiboService.selectTransmityon(wbid).indexOf("N") > -1){ //不是，直接转发
 					params.put("userLocation", userLocation);
@@ -714,11 +755,11 @@ public class WeiboHandler {
 							params.put("uid", uid);
 							params.put("wbid", wbid);
 							params.put("txt",txt);
-							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
-								if(weiboService.updateTransmitAccount(wbid)){
+							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params) && operateService.insertCommentWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
+								if(weiboService.updateTransmitAccount(wbid) && weiboService.updateCommentAccount(wbid)){
 									int wbuid = weiboService.selectWBUidByWbid(wbid);
 									params.clear();
-									params.put("account", DataDic.SHARE);
+									params.put("account", DataDic.SHARE+DataDic.COMMENT); 
 									params.put("wbuid", wbuid);
 								
 									if(userService.updateUserAccount(params)){  //用户积分更新成功
@@ -730,10 +771,13 @@ public class WeiboHandler {
 											int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
 											List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
 										
+											int CommentAccount = weiboService.selectAfterComment(wbid);
+											jsonMap.put("commentDate", commentdate);
+											jsonMap.put("commentAccount", CommentAccount);
 											jsonMap.put("success", true);
 											jsonMap.put("flag", true);  //返回  确定到底是不是要转发微博
 											jsonMap.put("userLocation", userLocation);
-											jsonMap.put("currWBid", currWBid);
+											jsonMap.put("currWBid", currWBid);   //成功插入weibo表后的微博id
 											jsonMap.put("weibo", weibo);
 											jsonMap.put("originTransmitAccount", originTransmitAccount);
 											jsonMap.put("currTransmitAccount",currTransmitAccount);
@@ -773,8 +817,8 @@ public class WeiboHandler {
 							params.put("wbid", wbid);
 							params.put("txt",txt);
 							
-							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
-								if(weiboService.updateTransmitAccount(wbid) && weiboService.updateTransmitAccount(rootwbid)){
+							if(weiboAndWeiboService.insertWeiboAndWeibo(new int[]{currWBid, wbid}) && operateService.insertTransmitWeibo(params) && operateService.insertCommentWeibo(params)){  //如果转发插入operate表成功  这里要注意weibo表和operate表中都有txt 也就是转发的理由 文本内容
+								if(weiboService.updateTransmitAccount(wbid) && weiboService.updateCommentAccount(wbid) && weiboService.updateTransmitAccount(rootwbid)){
 									int wbuid = weiboService.selectWBUidByWbid(wbid);
 									params.clear();
 									params.put("account", DataDic.SHARE);
@@ -791,8 +835,11 @@ public class WeiboHandler {
 											if(userService.updateUserAccount(params)){ //更新当前用户的积分
 												int originTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
 												int currTransmitAccount = weiBoHelpService.selectWBreprintaccountOnly(wbid);
-												List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(wbid); //找到要转发的微博所有信息
+												List<Map<String,Object>> weibo = weiboService.selectWeiboandweiboHelpById(rootwbid); //找到要转发的微博所有信息
 											
+												int CommentAccount = weiboService.selectAfterComment(wbid);
+												jsonMap.put("commentDate", commentdate);
+												jsonMap.put("commentAccount", CommentAccount);
 												jsonMap.put("success", true);
 												jsonMap.put("flag", true);  //返回  确定到底是不是要转发微博
 												jsonMap.put("userLocation", userLocation);
@@ -1068,6 +1115,17 @@ public class WeiboHandler {
 			List<Weibo> weibos=weiboService.findMyPhoto(WBUid);
 			System.out.print(weibos);
 			out.print(gson.toJson(weibos));
+			out.flush();
+			out.close();
+		}
+		
+		//我的粉丝
+		@RequestMapping(value="/findMyFans",method=RequestMethod.POST)
+		public void findMyFans(Integer WBUid,PrintWriter out){
+			Gson gson=new Gson();
+			List<WeiBoUser> myFans=weiboService.findMyFans(WBUid);
+			System.out.print(myFans);
+			out.print(gson.toJson(myFans));
 			out.flush();
 			out.close();
 		}

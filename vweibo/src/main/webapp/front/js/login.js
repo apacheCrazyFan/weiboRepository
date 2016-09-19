@@ -16,9 +16,10 @@ function checkUsername(){
 var flag=false;
 function InputYZcode(){
 	var yzm=$("#YZcodeInput").val();
+	$("#errorMsg").empty();
 	if(yzm.length==4){
 		$.post("front/page/CheckYZcode.jsp",{"yzm":yzm},function(data){
-			alert(data.length);
+			$("#errorMsg").append("");
 		if(data==0){
 			flag=true;
 		}else{

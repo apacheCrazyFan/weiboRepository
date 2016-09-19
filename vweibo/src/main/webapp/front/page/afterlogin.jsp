@@ -271,13 +271,11 @@ var count=4;
 					
 					newWeiBoStr += '<div id="comment_div_'+commentdivnum+'" class="comment_div" style="display:none;">';
 					newWeiBoStr += '<img src="front/image/comment_header_img.png" id="comment_img">';
-					newWeiBoStr += '<form id="form_'+commentdivnum+'">';
-					newWeiBoStr += '<input type="text" id="comment_input"/><br>';
+					newWeiBoStr += '<input type="text" id="comment_input'+commentdivnum+'" class="comment_input"/><br>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 					newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
-					newWeiBoStr += '<input type="checkbox" id="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo('+uid+','+wbid+',&quot;form_'+commentdivnum+'&quot;)"/>';
-					newWeiBoStr += '</form>';
+					newWeiBoStr += '<input type="checkbox" id="comment_check'+commentdivnum+'" class="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
+					newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input'+commentdivnum+'&quot;,&quot;comment_check'+commentdivnum+'&quot;,'+uid+','+wbid+')"/>';
 					newWeiBoStr += '</div>';
 					
 					
@@ -1527,7 +1525,7 @@ function findGroupWeiBo(WBUid){
 						src="front/image/comment_btn.png" id="comment_btn" />
 				</div>
 			</div>
-			-->
+			
 		</div>
 		<!-- 目前三篇微博的根  id="xixi" -->
 
@@ -1552,6 +1550,28 @@ function findGroupWeiBo(WBUid){
 			</div>
 		</div>
 	</div>
+    
+    <div id="right-part">
+    	<div id="right-part-content">
+        	<a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
+            <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
+            <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
+            <div id="levelimg">
+            	<a href="javascript:void(0)" id="level">Lv.10</a>
+            </div>
+            <div id="usernum">
+                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>
+                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>
+                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.WEIBONUM }</font>微博</a>
+            </div>
+        </div>
+        
+        <div class="hot_topic">
+            <span class="hot_topic_head">热门话题<a href="javascript:void(0)" onClick="letRandom()" id="huanyihuan" class="hot_topic_change">换一换</a></span>
+            <div  id="hot_topic_content" class="hot_topic_content">
+            	<c:forEach items="${Themes}" var="theme">
+            		<li style="margin-bottom:0px;"><a href="javascript:void(0)" class="hot_topic_detail">${theme.tname}</a><span class="hot_topic_detail_click">${theme.tview}</span></li>
+            	</c:forEach>
 
 	</div>
 

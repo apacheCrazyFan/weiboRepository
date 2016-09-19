@@ -168,7 +168,7 @@ update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f0.png' where WBUid = 1005;
 update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1002;
 update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1007;
 
-update WeiBoUser set  UimgPath = '9.gif' where WBUid = 1007;
+update WeiBoUser set  Uname = 'lalal' where WBUid = 1001;
 
 
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
@@ -212,6 +212,7 @@ create table Relationship(
        
        --预留字段 
 );
+select * from Relationship;
 select * from Groups;
 drop table Groups;
 --群
@@ -241,14 +242,17 @@ create table FanAndFaned(
 	FUedid int,							--被粉者
 	Fstatus varchar2(16)				--粉与被粉之间的py状态(好友圈,同学,同事,未分组,名人明星,悄悄关注,特别关注,其他自己添加的。。)
 );
+select  Uname from WeiBoUser where WBUid in (select distinct FUid from FanAndFaned where FUid=1006);
+
 alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 
 drop table FanAndFaned;
+select fuedid from fanandfaned where fuid=1001 and fstatus='好友圈'
 
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
-select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
+select count(*),distinct(fstatus) from FanAndFaned where Fuid = 1001; 
 
 delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
@@ -581,7 +585,7 @@ create table PrivateMessage(
        --预留字段
 );
 
-
+select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=1008
 --微博访问权限设置
 create table PersonalPermission(
        PPid int primary key,          --权限id

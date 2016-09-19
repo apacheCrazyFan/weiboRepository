@@ -215,15 +215,17 @@
 	    	for(var i=0;i<alldiv.length;i++){
 	    		strTag+=alldiv[i].innerHTML+",";
 	    	}
-	    	if(strTag!="" || strTag!=null){
+	    	if(strTag!=null){
 		    	if(strTag.indexOf(obj.innerHTML) > 0){
 		    		alert("请勿重复添加");
 	    		}else{
 	    			$(".userLabelList").append(str);
 	    		}
 	    	}else{
-	    		alert("sorry,只能添加四项");
+	    		$(".userLabelList").append(str);
 	    	}
+    	}else{
+    		alert("sorry,只能添加四项");
     	}
     }
     
