@@ -1396,7 +1396,15 @@ function clicktopic(obj){
 	txt.val(txt.val()+topic);    
 }
 
-
-
-//图片放大镜
+function showcommentfour(id){
+	var commentfour=document.getElementById(id);
+	if(commentfour){
+		if(commentfour.style.display=='block'){
+			commentfour.style.display='none';
+		}else{
+			commentfour.style.display='block';
+		}
+	}
+	
+}
 

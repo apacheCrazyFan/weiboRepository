@@ -1,5 +1,6 @@
 package com.yc.weibo.handler;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ import com.yc.weibo.service.ThemeService;
 public class ThemeHandler {
 	@Autowired
 	private ThemeService themeService;
-
+	
 	@RequestMapping(value = "/random", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Theme> random() {
@@ -43,7 +44,8 @@ public class ThemeHandler {
 	
 	@ResponseBody
 	@RequestMapping({"addTheme"})//也可以这么写，里面就是第一个数组，你可以配置多个名字
-	public MessageResp addTheme(Theme theme,String tname,HttpServletRequest request,HttpServletResponse response){
+	public MessageResp addTheme(Theme theme,HttpServletRequest request,HttpServletResponse response){
+		theme.setTdate(new Date());
 		int result=themeService.addTheme(theme);
 		MessageResp mes=new MessageResp();
 		if(result>0){

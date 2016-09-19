@@ -286,6 +286,7 @@ insert into Theme values(seq_Theme_Tid.nextval,'#故事里的旧时光#',1005,to_date('
 --微博
 create table WeiBo(
        WBid int primary key,          --微博id
+       Tid int						  --话题id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
        WBUId int
@@ -301,6 +302,7 @@ create table WeiBo(
        WBstatue int
        --预留字段      
 );
+alter table WeiBo add Tid int;
 create sequence seq_wb_wbid start with 10001 increment by 1;
 
 alter table WeiBo add WBlocation varchar2(100);
@@ -320,6 +322,7 @@ insert into WeiBo values(seq_wb_wbid.nextval,'视频','大鸭子',1002,sysdate,'bbbbb
 insert into WeiBo values(seq_wb_wbid.nextval,'衡阳','湖工',1002,sysdate,'ccccccccccccccccccccccccccccccccccc',null,null,null,'N','N','衡阳,长沙市',0);
 insert into WeiBo values(seq_wb_wbid.nextval,'时尚','麻衣寸衫',1002,sysdate,'ddddddddddddddddddddddddddddd',null,null,null,'Y','N','衡阳,长沙市',0);
 
+update weibo set tid=1 where wbid in()
 
 select * from weibo order by 
 --微博附加表

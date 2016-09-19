@@ -4,6 +4,7 @@ package com.yc.weibo.entity;
 import java.util.Date;
 
 public class Weibo {
+	 private int tid;            //话题id
 	 private int WBid;          //--微博id
      private String WBtag;      //--微博标签（）
      private String WBtitle;    //--微博标题（可以写，也可以不写，但必须有）
@@ -98,13 +99,19 @@ public class Weibo {
 	public void setWBmusic(String wBmusic) {
 		WBmusic = wBmusic;
 	}
+	
+	public int getTid() {
+		return tid;
+	}
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
 	@Override
 	public String toString() {
-		return "Weibo [WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUid=" + WBUid + ", WBdate="
-				+ WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic=" + WBmusic
-				+ ", yesOrno=" + yesOrno + ", yon=" + yon + ", WBlocation=" + WBlocation + ", WBstatue=" + WBstatue
-				+ "]";
+		return "Weibo [tid=" + tid + ", WBid=" + WBid + ", WBtag=" + WBtag + ", WBtitle=" + WBtitle + ", WBUid=" + WBUid
+				+ ", WBdate=" + WBdate + ", WBtxt=" + WBtxt + ", WBpic=" + WBpic + ", WBvideo=" + WBvideo + ", WBmusic="
+				+ WBmusic + ", yesOrno=" + yesOrno + ", yon=" + yon + ", WBlocation=" + WBlocation + ", WBstatue="
+				+ WBstatue + "]";
 	}
-	
 	
 }

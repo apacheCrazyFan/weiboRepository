@@ -6,16 +6,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,12 +34,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
+import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.entity.Weibo;
 import com.yc.weibo.service.OperateService;
+import com.yc.weibo.service.ThemeService;
 import com.yc.weibo.service.UserService;
 import com.yc.weibo.service.WeiboService;
 import com.yc.weibo.util.AddressUtil;
+import com.yc.weibo.util.PageUtil;
 
 
 @Controller
@@ -49,6 +56,9 @@ public class WeiboHandler {
 	private WeiboService weiboService;
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ThemeService themeService;
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/publish",method=RequestMethod.POST)
@@ -180,6 +190,33 @@ public class WeiboHandler {
 		Map<String,Object> map = new HashMap<String,Object>();
 
 		String txtContent = request.getParameter("content");
+		
+		//如果内容里面有#asdfasdf#  就把 asdfasdf   作为一个话题的标题，
+		String regEx = "#[\u4e00-\u9fa5_a-zA-Z0-9]+#"; //中文字母数字
+		Pattern pat = Pattern.compile(regEx);
+		Matcher mat = pat.matcher(txtContent);
+		boolean rs = mat.find();
+//		System.out.println(rs);
+		
+		Theme param=new Theme();
+		
+		if(rs){
+			String themename=mat.group(0);
+			System.out.println(mat.group(0));
+			
+			param.setTname(themename);
+			param.setTdate(new Date());
+			param.setTuid(new BigDecimal(((WeiBoUser)request.getSession().getAttribute("user")).getWBUid()));
+			param.setTdeliver(new BigDecimal(0));
+			param.setTview(new BigDecimal(0)); 
+			
+			int result=themeService.addTheme(param);
+			if(result<=0){
+				//话题添加失败
+				return "话题添加失败";
+			}
+		}
+		
 		String statue = request.getParameter("statue");
 		String userlocation = AddressUtil.getLocation();
 
@@ -196,6 +233,7 @@ public class WeiboHandler {
 		map.put("weiboTag", null);
 		map.put("txtContent", txtContent);
 		map.put("isForwarded", 'N');
+		map.put("tid", param.getTid());
 		if(picsMap != null && !picsMap.equals("")){
 			map.put("picsMap", picsMap.substring(0, picsMap.length()-1));
 		}else{
@@ -254,12 +292,17 @@ public class WeiboHandler {
 	 */
 	@RequestMapping(value="/afterLoginDataPrarery",method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> getAfterLoginDataPrarery(@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid){
+	public Map<String,Object> getAfterLoginDataPrarery(HttpServletRequest request,@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid){
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Map<String,Integer> params = new HashMap<String,Integer>();
 		
-		params.put("pageSize", pageSize);
-		params.put("pageNum", pageNum);
+		HttpSession session=request.getSession();
+		PageUtil pages=(PageUtil) session.getAttribute("pageUtil");
+		if(pages==null){
+			pages=new PageUtil();  
+		} 
+		params.put("pageSize", pages.getPageSize());
+		params.put("pageNum", pages.getPageNo());
 		params.put("uid",userid);
 		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWBdate(params);   //根据日期降序查询微博 
 		List<Integer> wbids = operateService.selectIfavoriteWeiboId(userid);  //获得所有我收藏的所有微博id
@@ -269,6 +312,11 @@ public class WeiboHandler {
  		jsonMap.put("wbids", wbids);
 		jsonMap.put("weiboList", weiboList);
 		jsonMap.put("total", weiboList.size());
+		
+		int count =weiboService.WBTfindCount(new HashMap<String,Object>());
+		pages.setTotalSize(count);
+		
+		session.setAttribute("pageUtil", pages);
 		
 		return jsonMap;
 	}
@@ -427,5 +475,52 @@ public class WeiboHandler {
 		out.print(gson.toJson(weibos));
 		out.flush();
 		out.close();
+	}
+	
+	@ResponseBody
+	@RequestMapping({"findWeiboByTid"})
+	public Map<String,Object> findWeiboByTid(String tid,HttpServletRequest request,HttpServletResponse response){
+		//TODO:封装成easyui可以识别的json格式
+		List<Weibo> list=weiboService.findWeiBoByTid(Integer.parseInt(tid));
+		int total=weiboService.WBTfindCount(new HashMap<String,Object>());
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("rows", list);
+		map.put("total",total);
+		return map;
+	}
+	
+	
+	/**
+	 *  根据分页的情况，查询微博
+	 * @param weibo
+	 * @param  op:"nextPage",pageNo:''
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping({"findWeiboByPage"})//因为这里传了pageNo=‘’的情况，所以还是用String的吧，，
+	public List<Weibo> findWeiboByPage(String op,String pageNo,HttpServletRequest request,HttpServletResponse response){
+		Map<String,Object> params = new HashMap<String,Object>();
+		HttpSession session=request.getSession();
+		PageUtil pages=(PageUtil) session.getAttribute("pageUtil");
+		if(pages==null){
+			pages=new PageUtil();  //正常情况下，这里的pages是直接从session中拿取的，不需要new
+		} 
+		//判断 是 上一页，   下一页   ，还是跳转到页面，
+		if(op.equals("")){
+			//跳转页面
+			pages.setPageNo(Integer.parseInt(pageNo));
+		}else if(op.equals("prePage")){
+			//前一页
+			pages.setPageNo(pages.getProPageNo());//设置为上一页，然后pageSize不变
+		}else{
+			//后一页
+			pages.setPageNo(pages.getNextPageNo());//设置为xia一页，然后pageSize不变
+		}
+		//至此，页面的信息已经维护好了，现在只要到service里面查询了，
+		
+		params.put("start", pages.getPageSize()*(pages.getPageNo()-1));
+		params.put("end", pages.getPageNo()*pages.getPageSize());
+		List<Weibo> weiboList = weiboService.findWeiboByPage(params);   //根据日期降序查询微博 
+		return weiboList;
 	}
 } 
