@@ -804,6 +804,7 @@ textarea {
 	margin-left:60px;
 	margin-top:10px;
 }
+
 .comment_div_three_a1{
 	position:relative;
 	right:15px;
@@ -865,10 +866,15 @@ textarea {
 	top:8px;
 	right:10px;
 }
-
+comment_div_five{
+	width:505px;
+	height:80px;
+	margin-left:60px;
+	margin-top:10px;
+}
 	
 #right-part {
-	float: left;
+	float: right;
 	width: 230px;
 	min-height:500px;
 	height:auto;

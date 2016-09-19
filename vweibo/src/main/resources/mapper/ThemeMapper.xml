@@ -191,10 +191,21 @@
 		from (select a.* ,rownum rn from (select * from theme)a) where rn in
 		(${str})
 	</select>
+
+	
+	<select id="selectTidByTname" parameterType="string" resultType="int">
+		select Tid from Theme where Tname = #{tname}
+	</select>
 	<select id=""></select>
+
 	
 	<!-- 微话题 -->
 	<select id="findMiniThemes" resultType="Theme">
 		select * from (select rownum rn ,t.*,w.* from Theme t,WeiBoUser w  order by Tview desc) where 11>rn
 	</select>
+
+	<select id="findThemeByTname" parameterType="Theme" resultType="Theme">
+		select * from theme where tname=#{tname}
+	</select>
+
 </mapper>

@@ -47,6 +47,15 @@ public interface ThemeService {
 	 */
 	int delTheme(String tid);
 
+
 	//微话题
 	List<Theme> findMiniThemes();
+
+	
+	
+	
+	int selectTidByTname(String tname);
+	
+	List<Theme> findThemeByTname(Theme theme);
+
 }

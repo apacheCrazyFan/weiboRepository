@@ -250,10 +250,15 @@ alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 
+<<<<<<< HEAD
 delete from  FanAndFaned where FUid=1006 and FUedid=1021;
+=======
+drop table FanAndFaned;
+select fuedid from fanandfaned where fuid=1001 and fstatus='好友圈'
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
-select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
+select count(*),distinct(fstatus) from FanAndFaned where Fuid = 1001; 
 
 delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
@@ -577,6 +582,8 @@ create table Comments(
 );
 create sequence seq_comments_cid start with 100001 increment by 1;
 
+select Uname from WeiBoUser where WBUid in ( select WBUid from Comments where Cid = #{cid} )
+
 drop table Comments; 
 --私信
 create table PrivateMessage(
@@ -584,19 +591,19 @@ create table PrivateMessage(
        PM1user int,                   --发信人
        PM2user int,                   --收信人
        PMcontent varchar2(500),       --信息内容(  [文字，图片，视屏，url，文件，语音]  到时候再想吧)
-       PMdate Date,                   --信息日期
+       PMdate Date                   --信息日期
        
        --预留字段
 );
 
-
+select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=1008
 --微博访问权限设置
 create table PersonalPermission(
        PPid int primary key,          --权限id
        UId int
            constraint RK_PP_Uid references WeiBoUser(Uid),--用户Id
        PPid int,                      --用户id
-       PPstate char(2),               --权限是否开放{ F(开放) or T(关闭) }
+       PPstate char(2)               --权限是否开放{ F(开放) or T(关闭) }
 );
 
 

@@ -63,7 +63,7 @@
 		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE" >
 			select seq_wb_wbid.nextval currval from dual
 		</selectKey>
-		insert into WeiBo values (#{wbid},null,#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{transmitDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},null,null,null,#{isThemeWeibo,jdbcType=CHAR},'Y',#{userLocation,jdbcType=VARCHAR},0)
+		insert into WeiBo values (#{wbid},null,#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{transmitDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},null,null,null,#{isThemeWeibo,jdbcType=CHAR},'Y',#{userLocation,jdbcType=VARCHAR},0,#{tid,jdbcType=INTEGER})
 	</insert>
 	<update id="updateTransmitAccount" parameterType="int">
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHreprintAccount = WHreprintAccount + 1 where WBid = #{wbid}
@@ -74,7 +74,7 @@
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHcommentAccount = WHcommentAccount + 1 where WBid = #{wbid}
 	</update>
 	<select id="selectAfterComment" parameterType="int" resultType="int">
-		select WHfavoriteAccount from WeiBoHelp where WBid = #{wbid}
+		select WHcommentAccount from WeiBoHelp where WBid = #{wbid}
 	</select>
 
 
