@@ -242,14 +242,20 @@ create table FanAndFaned(
 	FUedid int,							--被粉者
 	Fstatus varchar2(16)				--粉与被粉之间的py状态(好友圈,同学,同事,未分组,名人明星,悄悄关注,特别关注,其他自己添加的。。)
 );
+select * from FanAndFaned
+insert into FanAndFaned values (1006,1021,'名人明星',sysdate);
 select  Uname from WeiBoUser where WBUid in (select distinct FUid from FanAndFaned where FUid=1006);
 
 alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 
+<<<<<<< HEAD
+delete from  FanAndFaned where FUid=1006 and FUedid=1021;
+=======
 drop table FanAndFaned;
 select fuedid from fanandfaned where fuid=1001 and fstatus='好友圈'
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
 select count(*),distinct(fstatus) from FanAndFaned where Fuid = 1001; 
@@ -301,6 +307,7 @@ insert into FanAndFaned values(1006,1010,'未分组',null);
 --所以说话题可以是微博的一个附属
 --话题表
 select * from theme;
+
 drop table Theme;
 create table Theme(
 	Tid int primary key,					--话题id
@@ -312,6 +319,8 @@ create table Theme(
 	Tdeliver int,							--话题被发表的次数
 	Tview int								--话题访问次数
 );
+select * from (select rownum rn ,t.*,w.* from Theme t,WeiBoUser w  order by Tview desc) where 11>rn
+update Theme set tpics='bg-6.jpg' where tid=8;
 create sequence seq_Theme_Tid start with 1;
 select tname from 
 (select n.*,rownum rn from (select * from Theme) n 
@@ -669,3 +678,5 @@ select k.*,wbu.Uname,wbu.UimgPath from
 select b.*,w.* from WeiBoUser b,WeiBo w where b.WBUid=w.WBUid and W.WBUid=1006
 
 select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=1006 and WBpic is not null) where 10>rn;
+
+select * from (select w.*, rownum rn from WeiBoUser w) where 5>rn

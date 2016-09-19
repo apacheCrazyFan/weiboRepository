@@ -6,12 +6,14 @@ var num = 1;
 var totalheight = 0; 
 
 var dataStrArr = '';
+window.onload=function(){
+	alert("11");
+}
 $(document).ready(function(){  
-
-
+	alert("22");
 var pageSize = 15;
 var pageNum = 1;
-/*$.ajax({
+$.ajax({
 	  url: "weibo/indexDataPrarery",
 	  cache: false,
 	  data:{"pageSize":pageSize,"pageNum":pageNum},
@@ -205,7 +207,7 @@ var pageNum = 1;
 });
 
 
-/*$(window).scroll(function(){  
+$(window).scroll(function(){  
 	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
 	  
 	//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());  
@@ -219,10 +221,10 @@ var pageNum = 1;
 		$("#center-part").append('<div id="center-part-content"></div>');  
  		num++;  
 	}  
-}); */ 
+});
 });  
 
-/*$(window).scroll(function(){  
+$(window).scroll(function(){  
 	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
 	  
 	//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());  
@@ -416,7 +418,7 @@ var pageNum = 1;
 	
  		num++;  
 	}  
-});*/
+});
 
 
 //取消键关闭收藏标签
@@ -432,7 +434,7 @@ function closecollectiondiv(id){
 }
 
 //取消键关闭添加标签(jquery)
-/*function closecollectiondiv(id){
+function closecollectiondiv(id){
 	var cancelbtn2=$('.'+id);
 	if(cancelbtn2.is(":visible")){
 		if(cancelbtn2.is(":visible")){
@@ -441,7 +443,7 @@ function closecollectiondiv(id){
 				cancelbtn2.show();
 			}
 	}
-}*/
+}
 
 
 //控制收藏标签栏的可见

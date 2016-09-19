@@ -844,6 +844,25 @@ function findGroupWeiBo(WBUid){
 		</div> --%>
 	<div id="header">
 
+<<<<<<< HEAD
+    	<img class="head_logo" src="front/image/head_logo_sh_mini.png"/>
+        <div class="searchTextBorder">
+        	<input type="text" class="searchText" placeholder="iphone7 发布会" onClick="searchClick()" onBlur="searchBlur()"/>
+            <a href="javascript:void(0)" class="search_pic"></a>
+        </div>
+        <ul>
+        	<li><a href="javascript:void(0)" class="homePage">首页</a></li>
+            <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
+            <li><a href="front/page/found_hotWeibo.jsp?WBUid=${sessionScope.user.WBUid}" class="foundPage">发现</a></li>
+            <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
+            <li><a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" class="personPage">${sessionScope.user.uname}</a></li>
+        </ul>
+        <div class="settingArea">
+        	<a href="javascript:void(0)" class="message_pic"></a>
+            <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" class="setting_pic"></a>
+            <a href="javascript:void(0)" class="sendMess_pic"></a>
+        </div>
+=======
 		<img class="head_logo" src="front/image/head_logo_sh_mini.png" />
 		<div class="searchTextBorder">
 			<input type="text" class="searchText" placeholder="iphone7 发布会"
@@ -865,6 +884,7 @@ function findGroupWeiBo(WBUid){
 				class="setting_pic"></a> <a href="javascript:void(0)"
 				class="sendMess_pic"></a>
 		</div>
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 	</div>
 
 

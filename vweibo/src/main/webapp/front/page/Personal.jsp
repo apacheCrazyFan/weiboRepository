@@ -11,7 +11,7 @@
 
 </head>
 <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="front/js/personal.js"></script>
+<!-- <script type="text/javascript" src="front/js/personal.js"></script> -->
 <%
 	String operation=request.getParameter("operation");
 	System.out.println(operation);
@@ -172,7 +172,6 @@
 							newContent+= '[['+faceArr[k];
 						}
 					}
-					alert(data[i].WBpic);
 					//图片处理 
 					if (data[i].WBpic != "" && data[i].WBpic!=null) {
 						str2="";
@@ -203,7 +202,7 @@
 					
 					
 					var newDate = new Date(data[i].Odate);
-					str+=newDate.toLocaleString()+'收藏了&nbsp;&nbsp;<li><a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'<br/>'+str2+'</a></li>';
+					str+='<li>'+newDate.toLocaleString()+'收藏了&nbsp;&nbsp;<br/><a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'<br/>'+str2+'</a></li>';
 					
 				}
 				$("#myCollections").append(str);
@@ -331,7 +330,7 @@
 					
 					
 					var newDate = new Date(data[i].WBdate);
-					str+=newDate.toLocaleString()+'&nbsp;&nbsp;&nbsp;'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+''+str2+'</a></li>'+'<br/>';
+					str+='<li>'+newDate.toLocaleString()+'<br/>&nbsp;&nbsp;&nbsp;'+'&nbsp;&nbsp;<a href="javascript:findWeiBo('+data[i].WBid+')">'+newtxt+newContent+'<br/>'+str2+'</a></li>'+'<br/>';
 					
 				}
 				$("#myCollections").append(str);

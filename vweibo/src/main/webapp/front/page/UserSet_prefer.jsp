@@ -86,7 +86,7 @@
                         <!-- <input class="simpChinese" type="radio" name="langSet" value="simpChinese"/><span class="simpChineseW">中文(简体)</span><br/>
                         <input class="english" type="radio" name="langSet" value="english"/><span class="englishW">English</span><br/> -->
                        
-                       <select id="ddlSomoveLanguage" onchange="chgLang();">
+                       <select id="ddlSomoveLanguage">
 							<option value="ch">请选择语言</option>
 							<option value="ch">中文</option>
 							<option value="en">ENGLISH</option>

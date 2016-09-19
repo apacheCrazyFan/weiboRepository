@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.weibo.mapper.PMMapper">
+  	<select id="getMessageByPMUser" parameterType="PrivateMessage" resultType="PrivateMessage">
+		select * from PrivateMessage where pm1user=#{pm1user} and pm2user=#{pm2user} or pm1user=#{pm2user} and pm2user=#{pm1user} order by PMDATE asc 
+	</select>
+	
+	<insert id="talkToPmUser" parameterType="PrivateMessage">
+		insert into PrivateMessage values(seq_pmid.nextval,#{pm1user},#{pm2user},#{pmcontent},sysdate)
+	</insert>
+</mapper>

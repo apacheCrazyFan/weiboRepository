@@ -78,7 +78,11 @@ public class ThemeServiceImpl implements ThemeService {
 		return themeMapper.deleteByPrimaryKey(BigDecimal.valueOf(Double.parseDouble(tid)));
 	}
 
+	//微话题
 	@Override
+	public List<Theme> findMiniThemes() {
+		return themeMapper.findMiniThemes();
+	}
 	public int selectTidByTname(String tname) {
 		return themeMapper.selectTidByTname(tname);
 	}

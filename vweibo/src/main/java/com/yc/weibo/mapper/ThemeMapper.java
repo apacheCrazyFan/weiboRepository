@@ -58,6 +58,9 @@ public interface ThemeMapper {
 	 * @return
 	 */
 	List<Theme> findAllTheme(Theme theme);
+
+	//微话题
+	List<Theme> findMiniThemes();
 	
 	int selectTidByTname(String tname);
 	

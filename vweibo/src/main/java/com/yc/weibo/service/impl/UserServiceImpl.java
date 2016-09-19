@@ -87,6 +87,16 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateUserAccount(map) > 0 ? true : false;
 	}
 
+	@Override
+	public List<WeiBoUser> findMingRen() {
+		return userMapper.findMingRen();
+	}
+
+	@Override
+	public void guanzhu(Map<String, Object> params) {
+		userMapper.guanzhu(params);
+	}
+
 
 	
 

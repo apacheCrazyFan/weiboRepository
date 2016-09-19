@@ -1,4 +1,42 @@
-
+var hisid=0;
+var myid=0;
+$(function(){
+	var url=window.location.href;
+	myid=url.substring(61);
+	var n = 0;
+	$.ajax({
+		url:"../../../../vweibo/message/getFstatusByFuid",
+		type:"POST",
+		data:{"fuid":myid},
+		dataType:"JSON",
+		success: function(data){
+			var groupName="";
+			//var group=new Array();
+			for(var i=0;i<data.length;i++){
+				groupName+='<li class="linkList'+(i+1)+'"><a href="javascript:linkListClick('+(i+1)+')">'+data[i].fstatus+'（'+data[i].count+'）</a><span class="remind'+(i+1)+'">•</span></li> <div class="linkMan'+(i+1)+'"></div>';
+				$.ajax({
+					url:"../../../../vweibo/message/getFuedidByFstatus",
+					type:"POST",
+					data:{"fuid":myid,"fstatus":data[i].fstatus},
+					dataType:"JSON",
+					success: function(datas){
+						n ++;
+						var g = "";
+						for(var j=0;j<datas.length;j++){
+							g+=' <a href="javascript:startChat('+datas[j].fuedid+')">'+datas[j].uname+'<span style="color:red;font-size:18px" class="detailremind'+datas[j].fuedid+'">•</span></a>';
+						}
+						$(".linkMan"+n).html(g);
+					}
+				});
+			}
+			$(".linkmanList").html(groupName);
+		},
+		error:function (data) {
+			alert("error:"+data); 
+		}
+		
+	});
+});
 function messListClick(messId){
 	for(var i=1;i<=4;i++){
 		$(".mess_list"+i).css('background','url(../image/messagebox_image/icon_dot.png) no-repeat center left');
@@ -30,24 +68,62 @@ function linkListClick(messId){
 
 
 function startChat(nameId){
+	var length=0;
 	$('.center0').hide();
 	$('.center2').show();	
-	for(var i=1;i<=2;i++){
-		var w=$('.meC'+i).width();	
-		var left=490-w;
-		$('.meC'+i).css("margin-left",left+"px");
+	var i = setInterval(function() { 
+		var str="";
 		$.ajax({
-			url:"../../../../vweibo/message/getTalkNameFromFuedid",
+			url:"../../../../vweibo/message/getMessageByPMUser",
 			type:"POST",
-			data:{"fuedid":nameId},
+			data:{"pm1user":myid,"pm2user":nameId},
 			dataType:"JSON",
 			success: function(data){
-				alert(data);
+				for(var i=0;i<data.length;i++){
+					length=data.length;
+					if(data[i].pm1user==myid){
+						str+='<div class="meSpeak"><img src="../image/messagebox_image/head_image.png"/><span class="meC'+i+'">'+data[i].pmcontent+'</span></div>';
+						$('.chatContent').html(str);
+					}else if(data[i].pm1user==nameId){
+						str+='<div class="heSpeak"><img src="../image/messagebox_image/head_image.png"/><span>'+data[i].pmcontent+'</span></div>';
+						$('.chatContent').html(str);
+					}
+				}
+				for(var i=0;i<=length;i++){
+					var w=$('.meC'+i).width();	
+					var left=490-w;
+					$('.meC'+i).css("margin-left",left+"px");
+					$.ajax({
+						url:"../../../../vweibo/message/getTalkNameFromFuedid",
+						type:"POST",
+						data:{"fuedid":nameId},
+						dataType:"JSON",
+						success: function(data){
+							for(var i=0;i<data.length;i++){
+								$('.talkToWho').html(data[i].uname);
+							}
+						}
+					});
+				}
 			}
 		});
-	}
+	}, 1000); 
+	hisid=nameId;
 }
-
+function sendMessage(){
+	var content=$('.chatText').val();
+	console.info(content);
+	$.ajax({
+		url:"../../../../vweibo/message/talkToPmUser",
+		type:"POST",
+		data:{"pm1user":myid,"pm2user":hisid,"pmcontent":content},
+		dataType:"JSON",
+		success: function(data){
+			
+		}
+	});
+	$('.chatText').val("");
+}
 function returnChatList(){
 	$('.center0').show();
 	$('.center2').hide();	
@@ -59,38 +135,3 @@ function closeWindow(winId){
 	$(winId).hide();	
 }
 
-$(function(){
-	var n = 0;
-	$.ajax({
-		url:"../../../../vweibo/message/getFstatusByFuid",
-		type:"POST",
-		data:{"fuid":1001},
-		dataType:"JSON",
-		success: function(data){
-			var groupName="";
-			//var group=new Array();
-			for(var i=0;i<data.length;i++){
-				groupName+='<li class="linkList'+(i+1)+'"><a href="javascript:linkListClick('+(i+1)+')">'+data[i].fstatus+'（'+data[i].count+'）</a></li> <div class="linkMan'+(i+1)+'"></div>';
-				$.ajax({
-					url:"../../../../vweibo/message/getFuedidByFstatus",
-					type:"POST",
-					data:{"fuid":1001,"fstatus":data[i].fstatus},
-					dataType:"JSON",
-					success: function(datas){
-						n ++;
-						var g = "";
-						for(var j=0;j<datas.length;j++){
-							g+=' <a href="javascript:startChat('+datas[j].fuedid+')">'+datas[j].uname+'</a>';
-						}
-						$(".linkMan"+n).html(g);
-					}
-				});
-			}
-			$(".linkmanList").html(groupName);
-		},
-		error:function (data) {
-			alert("error:"+data); 
-		}
-		
-	});
-});
