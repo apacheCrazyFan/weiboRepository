@@ -9,7 +9,7 @@
   		select weibouser.uname,fuedid from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuid=#{fuid} and fstatus=#{fstatus}
   	</select>
   	
-  	<select id="getFuedidByFstatus" parameterType="int" resultType="Fan">
+  	<select id="getTalkNameFromFuedid" parameterType="int" resultType="Fan">
   		select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=#{fuedid}
   	</select>
 </mapper>
