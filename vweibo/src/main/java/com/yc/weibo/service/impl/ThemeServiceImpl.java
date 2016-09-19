@@ -78,4 +78,9 @@ public class ThemeServiceImpl implements ThemeService {
 		return themeMapper.deleteByPrimaryKey(BigDecimal.valueOf(Double.parseDouble(tid)));
 	}
 
+	@Override
+	public int selectTidByTname(String tname) {
+		return themeMapper.selectTidByTname(tname);
+	}
+
 }

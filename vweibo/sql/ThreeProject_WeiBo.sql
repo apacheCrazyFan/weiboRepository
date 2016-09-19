@@ -573,6 +573,8 @@ create table Comments(
 );
 create sequence seq_comments_cid start with 100001 increment by 1;
 
+select Uname from WeiBoUser where WBUid in ( select WBUid from Comments where Cid = #{cid} )
+
 drop table Comments; 
 --к╫пе
 create table PrivateMessage(

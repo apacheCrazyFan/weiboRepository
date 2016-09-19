@@ -2007,6 +2007,9 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 		  success: function(data,textStatus){
 			  if(data.success){
 				  if(!data.flag){  //不用转发
+					  
+					  var currCid = data.currCid;
+					  
 					  $("#"+textid).val('');
 					  $("#"+checkid).attr("checked", false);
 					  $("#"+commentnav).html('<img src="front/image/center-part_foot03.png" id="foot01_img"/>'+data.commentAccount);
@@ -2047,11 +2050,13 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 	                str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
 	                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
 	                str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five" style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
-	                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
+	                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
 	                str += '</div>';
 					$("#"+commentdiv).append(str);
 					 
 				  }else{ //要转发
+					  var currCid = data.currCid;
+					  
 					  var weibo = data.weibo[0];  //跟微博或者这要转发的最原始的微博
 					  var wbuname = weibo.UNAME;  //微博用户名
 					  var wbutag = weibo.UTAG;	//学生，java工程师
@@ -2352,7 +2357,7 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 		                str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
 		                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
 		                str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five"  style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
-		                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
+		                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
 		                str += '</div>';
 		                
 						$("#"+commentdiv).append(str);
@@ -2373,9 +2378,80 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 
 }
 
-//评论 评论的评论（不转发，无图片，被我删掉了）
-function commentsWeiboAndcommentOthers(){
+//评论 评论的评论（不转发，无图片，被我删掉了）												//当前用户id  微博id  评论的id
+function commentsWeiboAndcommentOthers(commentnav,commentAndCommentId,inputTextId,uid,wbid,cid){
+	var txt = $("#"+inputTextId).val();
 	
+	$.ajax({
+		url: "weibo/commentAndComment",
+		cache: false,
+		data:{"uid":uid,"wbid":wbid,"cid":cid,'txt':txt},
+		dataType:"json",
+		type:"POST",
+		success: function(data,textStatus){
+			
+			if(data.success){
+				var dateString = data.commentDate;  //评论时间
+				var commentAccount = data.commentAccount; //评论后该微博的评论数
+				var currCid = data.currCid;	//评论评论的评论的评论id
+				var commentUname = data.commentUname; //所属评论的用户名
+				
+				$("#"+inputTextId).val('');
+				
+				$("#"+commentAndCommentId).hide();
+				
+				$("#"+commentnav).html('<img src="front/image/center-part_foot03.png" id="foot01_img"/>'+commentAccount);
+				//添加评论的内容
+				var str = '';
+				str += '<div id="comment_div_three" class="comment_div_three">';
+				str += '<a href="javascript:void(0)" class="comment_div_three_a1"><img style="width:30px;height:30px;margin-left:30px;position:relative;" src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img"></a>';
+				str += '<a href="javascript:void(0)" class="comment_div_three_a">'+$("#username").val()+'  :  </a>';
+					
+				//表情处理
+				var wb_newContent ='';
+				var wb_newContent1 = '';
+				var faceArr = text.split("[");
+				for(var k = 0; k < faceArr.length; k ++){
+					if(faceArr[k].split("]]").length > 1){  //主题
+						wb_newContent = '[['+faceArr[k]+wb_newContent;
+					}else if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
+						faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+						wb_newContent += faceArr[k];
+					}else{
+						wb_newContent += faceArr[k];
+					}
+				}
+				var faceRegx1 = new RegExp('\\n','gi');
+				var faceArr1 = wb_newContent.split(faceRegx1);
+				for(var j = 0; j < faceArr1.length; j ++){
+					wb_newContent1 += faceArr1[j]+'<br />';
+				}
+				str += '<span class="comment_div_three_a">回复@'+commentUname+'  : '+wb_newContent1+'</span>';
+                str += '</div>';
+                str += '<div id="comment_div_four" class="comment_div_four">';
+                str += '<span class="comment_div_four_a1">'+dateString+'</span>';
+               	str += '<a href="javascript:void(0)" class="comment_div_four_a"><img src="front/image/center-part_foot04.png"/><font class="comment_div_four_font">0</font></a>';
+                str += '<a href="javascript:void(0)" class="comment_div_four_a" onclick="commentDelete()">删除</a>';
+                str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_d_'+commentdivnum+'&quot;)">回复</a>';
+                str += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentTip()">举报</a>';
+                str += '</div>';
+                str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
+                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
+                str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five"  style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
+                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
+                str += '</div>';
+                
+				$("#"+commentdiv).append(str);
+				
+				commentdivnum ++;
+			}
+			
+		},
+		error:function(error,textStatus){
+			alert("评论评论的评论发生错误："+error);
+		}
+		
+	});
 }
 
 function letRandom(){
