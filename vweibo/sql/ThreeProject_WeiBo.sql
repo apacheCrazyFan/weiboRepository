@@ -168,7 +168,7 @@ update WeiBoUser set  UspecialTag = '0x1f1e80x1f1f0.png' where WBUid = 1005;
 update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1002;
 update WeiBoUser set  UspecialTag = '0x1f1ec1f1e7.png' where WBUid = 1007;
 
-update WeiBoUser set  UimgPath = '9.gif' where WBUid = 1007;
+update WeiBoUser set  Uname = 'lalal' where WBUid = 1001;
 
 
 alter table WeiBoUser add constraint pk_wbu_wbuid primary key (WBUid);
@@ -212,6 +212,7 @@ create table Relationship(
        
        --预留字段 
 );
+select * from Relationship;
 select * from Groups;
 drop table Groups;
 --群
@@ -241,6 +242,8 @@ create table FanAndFaned(
 	FUedid int,							--被粉者
 	Fstatus varchar2(16)				--粉与被粉之间的py状态(好友圈,同学,同事,未分组,名人明星,悄悄关注,特别关注,其他自己添加的。。)
 );
+select  Uname from WeiBoUser where WBUid in (select distinct FUid from FanAndFaned where FUid=1006);
+
 alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
@@ -338,6 +341,7 @@ create table WBandThe(
 --微博
 create table WeiBo(
        WBid int primary key,          --微博id
+       Tid int						  --话题id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
        WBUid int
@@ -353,6 +357,7 @@ create table WeiBo(
        WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
        --预留字段      
 );
+alter table WeiBo add Tid int;
 
 create sequence seq_wb_wbid start with 10001 increment by 1;
 
@@ -392,6 +397,7 @@ update WeiBo set wbtag='大学,搞笑' where wbid=10021;
 update WeiBo set wbtag='大学,搞笑,时尚' where wbid=10022;
 
 select * from WeiBo where wbtag like '%大学%'
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select * from weibo order by 
 --微博附加表

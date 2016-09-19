@@ -7,7 +7,14 @@
 		<selectKey keyColumn="currval" keyProperty="wbid" resultType="int" order="BEFORE" >
 			select seq_wb_wbid.nextval currval from dual
 		</selectKey>
-		insert into WeiBo values (#{wbid},#{weiboTag,jdbcType=VARCHAR},#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},#{isForwarded,jdbcType=CHAR},#{userLocation,jdbcType=VARCHAR},#{statue,jdbcType=INTEGER})
+		insert into WeiBo values 
+		(#{wbid},#{weiboTag,jdbcType=VARCHAR},
+			#{weiboTitle,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},
+			#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},
+			#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},
+			#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},
+			#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},
+			#{statue,jdbcType=INTEGER},#{tid,jdbcType=INTEGER})
 	</insert>
 	<select id="selectCurrMaxWBid" resultType="int">
 		select nvl(max(wbid),0) wbid from WeiBo
@@ -34,8 +41,6 @@
 	<select id="selectAfterLike" parameterType="int" resultType="int">
 		select WHgreateAccount from WeiBoHelp where WBid = #{wbid}
 	</select>
-	
-	
 	
 	<update id="updateCollectionAccount" parameterType="int">
 		update WeiBoHelp set WHviewAccount = WHviewAccount + 1,WHfavoriteAccount = WHfavoriteAccount + 1 where WBid = #{wbid}
@@ -110,7 +115,7 @@
    						 (select distinct f.FUedid from WeiBo wb,FanAndFaned f where f.FUid=wb.WBUid and Fstatus ='好友圈' and wb.WBUid=#{WBUid} ) ) n where #{pageSize} * (#{pageNum}) >= rownum)
  				where rn>#{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
-	</select>
+   	</select>
 	<!-- 我的收藏 -->
 	<select id="myCollections" resultType="Weibo" parameterType="int">
 		select * from ( select rownum rn, w.*,p.odate from WeiBo w ,Operate p where w.wbid=p.wbid and Ostate='收藏' and p.wbuid=#{WBUid} order by odate desc) where 15>rn
@@ -161,7 +166,34 @@
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>
 	
+	<!-- 我的相册 -->
 	<select id="findMyPhoto" resultType="WeiBo" parameterType="int">
 		select * from (select rownum rn, WBdate,WBpic from WeiBo where WBUid=#{WBUid} and WBpic is not null) where 15>rn
+	</select>
+	
+	<!-- 我的粉丝 -->
+	<select id="findMyFans" resultType="WeiBoUser" parameterType="int">
+		select  Uname from WeiBoUser where WBUid in (select distinct FUid from FanAndFaned where FUedid=#{WBUid})
+	</select>
+
+	<select id="findWeiBoByTid" parameterType="int" resultType="Weibo">
+		select * from weibo where tid=#{tid}
+	</select>
+	
+	<!-- 根据分页信息来查询微博 -->
+	<select id="findWeiboByPage" parameterType="Map" resultType="Weibo">
+		select * from (select a.* ,rownum rn from (select * from weibo)a) where rn>#{start} and #{end}>=rn
+	</select>
+	
+	<select id="WBTfindCount" resultType="int" parameterType="Map">
+		select count(*) from weibo
+		<where>
+			<if test="tid!=null">
+				tid=#{tid}
+			</if>
+			<if test="yon!=null">
+				yon=#{yon}
+			</if>
+		</where>
 	</select>
 </mapper>

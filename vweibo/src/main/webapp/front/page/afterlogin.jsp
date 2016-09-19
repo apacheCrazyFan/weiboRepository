@@ -1,3 +1,4 @@
+<%@page import="com.yc.weibo.util.PageUtil"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="com.yc.weibo.entity.WeiBoUser"%>
@@ -1065,7 +1066,7 @@ function findGroupWeiBo(WBUid){
            			 </div>
               </div>
               
-              
+              <!-- 评论 -->
               <div id="comment_div" class="comment_div" style="display:none;">
               		<img src="front/image/comment_header_img.png" id="comment_img">
                     <input type="text" id="comment_input"/><br>
@@ -1089,9 +1090,18 @@ function findGroupWeiBo(WBUid){
                     <div id="comment_div_four" class="comment_div_four">
                     	<span class="comment_div_four_a1">9月15日  22:08</span>
                     	<a href="javascript:void(0)" class="comment_div_four_a"><img src="front/image/center-part_foot04.png"/><font class="comment_div_four_font">650</font></a>
-                    	<a href="javascript:void(0)" class="comment_div_four_a">回复</a>
+                    	<a href="javascript:void(0)" class="comment_div_four_a" onclick="showcommentfour('comment_div_four_click')">回复</a>
                     	<a href="javascript:void(0)" class="comment_div_four_a">举报</a>
                     </div>
+                    <div id="comment_four_first">
+	                    <div id="comment_div_four_click" class="comment_div_four_click" style="display:none;">
+		                    <input type="text" id="comment_input" class="comment_div_four_input"/><br>
+		                    <a href="javascript:void(0)" id="comment_four_pace" class="comment_div_four_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>
+		           			<a href="javascript:void(0)" id="comment_four_pace" class="comment_div_four_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>
+		                    <input type="checkbox" id="comment_four_check" class="comment_div_four_check"><span id="comment_four_check_span" class="comment_div_four_check">同时转发到我的微博</span>
+		                    <img src="front/image/comment_btn.png" id="comment_four_btn"/>
+	              		</div>
+	              	</div>
               </div>
               
         </div>
@@ -1268,8 +1278,18 @@ function findGroupWeiBo(WBUid){
           </div>  <!-- 目前三篇微博的根  id="xixi" -->
           
           <div id="changePage" style="float:left;background:#fff;margin-top:3px;margin-left:50px;">
-        	<div style="float:left;background:#fff;width:240px;border-right:1px gray solid;"><a href="javascript:void(0)" onclick="void(0)">上一页</a></div>
-        	<div style="float:left;background:#fff;width:240px;"><a href="javascript:void(0)" onclick="void(0)">下一页</a></div>
+        	<div style="float:left;background:#fff;width:240px;border-right:1px gray solid;"><a href="javascript:void(0)" onclick="prePage(0)">上一页</a></div>
+        	<select id="select1" onChange="selectPageNo(this)">
+        		<%
+        			PageUtil pages=(PageUtil)session.getAttribute("pageUtil");
+        			for(int i=1;i<=pages.getTotalPages();i++){
+        		%>
+        				<option><%=i %></option>
+        		<%
+        			}
+        		%>
+        	</select>
+        	<div style="float:left;background:#fff;width:240px;"><a href="javascript:void(0)" onclick="nextPage(0)">下一页</a></div>
     	  </div>
         </div>
        
@@ -1277,7 +1297,7 @@ function findGroupWeiBo(WBUid){
     
     <div id="right-part">
     	<div id="right-part-content">
-        	<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
+        	<a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
             <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
             <div id="levelimg">
@@ -1322,6 +1342,52 @@ function findGroupWeiBo(WBUid){
 	    	<img src="front/image/letterchat.png" id="buoysimg1"/><span id="buoyschat">私信聊天</span><img src="front/image/chatmes.png" id="buoysimg2"/>
 	    </div> -->
 	</div>
+	
+	<script>
+		function selectPageNo(obj){//这里就是点击页数的情况，
+			//TODO:用ajax传选择的pageno，到后台，设置到session中取出来的pageUtil里面，然后查询，返回参数，然后进行填充
+			$.ajax({
+				url:'weibo/findWeiboByPage',//请求的url地址
+				data:{op:"",pageNo:$(obj).val()},//传输的是json的数据格式
+				type:'POST',//请求的类型
+				dataType:'JSON',//返回类型的解析方式  
+				success:function(data){
+					
+				}
+			});
+		}
+		
+		function prePage(){
+			//TODO:用ajax到后台，session中取出pageUtil，然后调用prePage方法，设置pageNo为上一页，，然后查询，返回参数，然后进行填充   
+			$.ajax({//这里就是点击前一页的时候，
+				url:'weibo/findWeiboByPage',//请求的url地址
+				data:{op:"prePage",pageNo:''},//传输的是json的数据格式
+				type:'POST',//请求的类型
+				dataType:'JSON',//返回类型的解析方式  
+				success:function(data){
+					//alert("放大招");
+					var str="";
+					for(var i=0;i<data.length;i++){
+						var item=data[i];
+						str+="";
+					}
+				}
+			});
+		}
+		
+		function nextPage(){
+			//TODO:用ajax到后台，session中取出pageUtil，然后调用prePage方法，设置pageNo为下一页，，然后查询，返回参数，然后进行填充
+			$.ajax({//这里就是点击前一页的时候，
+				url:'weibo/findWeiboByPage',//请求的url地址
+				data:{op:"nextPage",pageNo:''},//传输的是json的数据格式
+				type:'POST',//请求的类型
+				dataType:'JSON',//返回类型的解析方式  
+				success:function(data){
+					
+				}
+			});
+		}
+	</script>
 
 	</body>
 </html>
