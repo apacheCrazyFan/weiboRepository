@@ -234,7 +234,7 @@ body {
 	position:absolute;
 	top:70px;
 	width:230px;
-	min-height:400px;
+	min-height:420px;
 	border:1px solid #ccc;
 	border-radius:3px;
 	background:#fff;
@@ -261,6 +261,9 @@ body {
 	font:12px "宋体";}
 .linkmanList>li>a:hover{
 	text-decoration:underline;}
+.linkmanList>li>span{
+	color:red;
+	display:none;}
 .linkmanList div{
 	display:none;}
 .linkmanList>div>a{
@@ -272,6 +275,9 @@ body {
 .linkmanList>div>a:hover{
 	color:#F6F;
 	}	
+.linkmanList>div>a>span{
+	display:none;
+}
 .center_content1>div{
 	text-align:left;
 	min-height:100px;
@@ -401,7 +407,7 @@ body {
 	height:auto;
 	position:relative;
 	padding-bottom:20px;}
-.allRead,.cleanAll{
+.cleanAll{
 	display:inline-block;
 	width:96px;
 	height:21px;
@@ -411,61 +417,12 @@ body {
 	padding-top:5px;
 	font:12px "宋体";
 	position:absolute;
-	top:10px;
-	margin-bottom:10px;}
-.allRead{
-	left:20px;}
-.cleanAll{
-	left:126px;}
-.center_content4>div{
-	position:relative;
-	text-align:left;
-	height:80px;
-	padding-left:20px;
-	padding-right:20px;}
-.center_content4>div>a{
-	border-bottom:1px solid #f0f0f0;
-	display:inline-block;
-	height:80px;
-	width:560px;
-	position:relative;}
-.center_content4>div>a:hover{
-	background:#f0f0f0;}
-.center_content4>div>a>img{
-	margin-top:0;
-	float:left;
-	position:absolute;
-	top:15px;
-	border-radius:25px;}
-.center_content4>div>a>b{
-	display:block;
-	color:#000;
-	margin-left:60px;
-	margin-top:15px;
-	font-size:14px;}	
-.center_content4 div a span{
-	display:inline-block;
-	color:#666;
-	margin-left:60px;
-	margin-top:10px;
-	font-size:14px;}
-.center_content4>div>a>font{
-	color:#666;
-	position:absolute;
-	top:10px;
-	right:30px;
-	font-size:12px;}
-.center_content4>div>span{
-	display:inline-block;
-	background:url(../image/messagebox_image/icon_delete1.png) no-repeat;
-	width:15px;
-	height:15px;
-	position:absolute;
-	top:10px;
-	right:25px;
-}
-.center_content4>div>span:hover{
-	background:url(../image/messagebox_image/icon_delete2.png) no-repeat;}
+	top:62px;
+	left:380px;
+	text-align:center;
+	}
+
+
 	
 .center2{
 	min-height:550px;

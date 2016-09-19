@@ -42,30 +42,7 @@
                     <a class="priLetter">私信</a>
                 </div>
                 <div class="center_content4">
-                	<a href="javascript:showLittleWin('#ifAllReaded')" class="allRead">全部置为已读</a>
-                    <a href="javascript:showLittleWin('#ifCleanAll')" class="cleanAll">清空所有私信</a>
-                    <img src="../image/messagebox_image/icon_atten1.jpg"/><br/>
-                    <span>还没有私信！</span>
-					<div>
-                    	<a href="javascript:startChat()">
-                            <img src="../image/messagebox_image/head_image.png"/>
-                            <b>某某</b>
-                            <span>嘿，你好吗？</span>
-                            <font>2016-9-10 10:31</font>
-                        </a>
-                        <span onClick="showLittleWin('#ifDelete')"></span>
-                    </div>
-                    
-                    <div>
-                    	<a href="javascript:startChat()">
-                            <img src="../image/messagebox_image/head_image.png"/>
-                            <b>某某</b>
-                            <span>嘿，你好吗？</span>
-                            <font>2016-9-10 10:31</font>
-                        </a>
-                        <span onClick="showLittleWin('#ifDelete')"></span>
-                    </div>
-                   
+                    <img src="../image/messagebox_image/talkBg.jpg"/><br/>
                 </div>
             </div>
             <div class="center2" style="display:none">
@@ -74,30 +51,12 @@
                     <span>与<b class="talkToWho">某某</b>对话中</span>
                 </div>
                 <div class="chatContent" style="overflow:scroll;overflow-x:hidden">
-                	<div class="meSpeak">
-                    	<img src="../image/messagebox_image/head_image.png"/>
-                        <span class="meC1">你好啊？</span>
-                    </div>
-                    <div class="heSpeak">
-	                    <img src="../image/messagebox_image/head_image.png"/>
-                        <span class="heC1">我不认识你啊!我不认识你啊!我不认识你啊!我不认识你啊!我不认识你啊!</span>
-                    </div>
-                    <div class="meSpeak">
-                    	<img src="../image/messagebox_image/head_image.png"/>
-                        <span class="meC2">你居然不认识我？我可是享悦小助手啊！</span>
-                    </div>
-                    <div class="meSpeak">
-                    	<img src="../image/messagebox_image/head_image.png"/>
-                        <span class="meC2">你居然不认识我？我可是享悦小助手啊！</span>
-                    </div>
-                    <div class="meSpeak">
-                    	<img src="../image/messagebox_image/head_image.png"/>
-                        <span class="meC2">你居然不认识我？我可是享悦小助手啊！</span>
-                    </div>
+                	
                 </div>
                 <div class="chatConfirm">
                 	<textarea class="chatText"></textarea>
-                    <input type="image" class="sendChatBtn" src="../image/messagebox_image/sendChatBtn1.jpg"/>
+                	<!-- <a href="javascript:showLittleWin('#ifDelete')" class="cleanAll">清空所有私信</a> -->
+                    <input type="image" onClick="sendMessage()" class="sendChatBtn" src="../image/messagebox_image/sendChatBtn1.jpg"/>
                 </div>
             </div>
             <div class="linkman">
@@ -108,31 +67,12 @@
             </div>
 		</div>
         
-        <div id="ifAllReaded" style="display:none">
-        	<b>设置已读<a class="closeBtn" href="javascript:closeWindow('#ifAllReaded')"></a></b>
-            <img src="../image/messagebox_image/icon_if.jpg"/>
-            <span>您确定要将所有消息的状态置为已读吗？</span>
-            <p>
-            	<a href="" style="background:#F60;color:#fff">确定</a>
-                <a href="javascript:closeWindow('#ifAllReaded')">取消</a>
-            </p>
-        </div>
-        <div id="ifCleanAll" style="display:none">
-        	<b>提示<a class="closeBtn" href="javascript:closeWindow('#ifCleanAll')"></a></b>
-            <img src="../image/messagebox_image/icon_if.jpg"/>
-            <span>清空所有私信将不可恢复,是否继续？</span>
-            <p>
-            	<a href="" style="background:#F60;color:#fff">确定</a>
-                <a href="javascript:closeWindow('#ifCleanAll')">取消</a>
-            </p>
-        </div>
-        
          <div id="ifDelete" style="display:none">
         	<b>提示<a class="closeBtn" href="javascript:closeWindow('#ifDelete')"></a></b>
             <img src="../image/messagebox_image/icon_if.jpg"/>
             <span>是否确认删除与该联系人的消息记录？</span>
             <p>
-            	<a href="" style="background:#F60;color:#fff">确定</a>
+            	<a href="javascript:deleteMessage(myid,hisid)" style="background:#F60;color:#fff">确定</a>
                 <a href="javascript:closeWindow('#ifDelete')">取消</a>
             </p>
         </div>
