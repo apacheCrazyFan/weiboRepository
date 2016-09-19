@@ -350,8 +350,11 @@ body {
 	border:1px solid #999;
 	border-radius:3px;
 	background:#FFF;
-	margin-top:10px;}
-	
+	margin-top:10px;
+	postion:relative;
+	}
+
+
 #music_right,#video_right,#news_right{
 	padding-top:17px;}
 .music_one,.video_one,.news_one{

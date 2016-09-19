@@ -32,4 +32,8 @@ public interface UserMapper {
 	
 	int updateUserAccount(Map<String, Object> map);
 
+	public List<WeiBoUser> findMingRen();
+
+	public void guanzhu(Map<String, Object> params);
+
 }

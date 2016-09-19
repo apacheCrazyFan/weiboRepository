@@ -46,4 +46,7 @@ public interface ThemeService {
 	 * @return
 	 */
 	int delTheme(String tid);
+
+	//微话题
+	List<Theme> findMiniThemes();
 }

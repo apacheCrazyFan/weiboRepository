@@ -32,4 +32,8 @@ public interface UserService {
 	WeiBoUser quickLoginByPhone(String userName);
 	
 	boolean updateUserAccount(Map<String,Object> map);
+
+	List<WeiBoUser> findMingRen();
+
+	void guanzhu(Map<String, Object> params);
 }

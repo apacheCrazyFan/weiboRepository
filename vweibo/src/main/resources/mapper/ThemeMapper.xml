@@ -192,4 +192,9 @@
 		(${str})
 	</select>
 	<select id=""></select>
+	
+	<!-- 微话题 -->
+	<select id="findMiniThemes" resultType="Theme">
+		select * from (select rownum rn ,t.*,w.* from Theme t,WeiBoUser w  order by Tview desc) where 11>rn
+	</select>
 </mapper>

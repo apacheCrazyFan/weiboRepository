@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Theme extends BaseEntity{
+	private WeiBoUser weiBoUser;
+	
     private BigDecimal tid;
 
     private String tname;
@@ -20,7 +22,15 @@ public class Theme extends BaseEntity{
 
     private String ttxt;
 
-    public BigDecimal getTid() {
+    public WeiBoUser getWeiBoUser() {
+		return weiBoUser;
+	}
+
+	public void setWeiBoUser(WeiBoUser weiBoUser) {
+		this.weiBoUser = weiBoUser;
+	}
+
+	public BigDecimal getTid() {
         return tid;
     }
 
@@ -83,4 +93,14 @@ public class Theme extends BaseEntity{
     public void setTtxt(String ttxt) {
         this.ttxt = ttxt == null ? null : ttxt.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Theme [weiBoUser=" + weiBoUser + ", tid=" + tid + ", tname=" + tname + ", tuid=" + tuid + ", tdate="
+				+ tdate + ", tpics=" + tpics + ", tdeliver=" + tdeliver + ", tview=" + tview + ", ttxt=" + ttxt + "]";
+	}
+
+
+    
+    
 }

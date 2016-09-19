@@ -1,5 +1,6 @@
 package com.yc.weibo.handler;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.yc.weibo.entity.MessageResp;
 import com.yc.weibo.entity.Theme;
+import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.ThemeService;
 
 @Controller
@@ -89,5 +92,16 @@ public class ThemeHandler {
 			mes.setDesc("删除失败");
 			return mes;
 		}
+	}
+	
+	//微话题
+	@RequestMapping(value="/miniTheme",method=RequestMethod.POST)
+	public void findMyFans(Integer WBUid,PrintWriter out){
+		Gson gson=new Gson();
+		List<Theme> miniThemes=themeService.findMiniThemes();
+		System.out.print(miniThemes);
+		out.print(gson.toJson(miniThemes));
+		out.flush();
+		out.close();
 	}
 }

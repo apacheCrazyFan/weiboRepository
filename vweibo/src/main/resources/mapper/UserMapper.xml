@@ -53,4 +53,14 @@
 	<update id="updateUserAccount" parameterType="map">
 		update WeiBoUser set Uscore = Uscore + #{account,jdbcType=INTEGER} where  WBUid = #{wbuid,jdbcType=INTEGER}
 	</update>
+	
+	<!-- 找人 -->
+	<select id="findMingRen"  resultType="WeiBoUser">
+		select * from (select w.*, rownum rn from WeiBoUser w) where 5>rn
+	</select>
+	
+	<!-- 关注 -->
+	<insert id="guanzhu" parameterType="map">
+		insert into FanAndFaned values (#{FUid},#{FUedid},'名人明星',sysdate)	
+	</insert>
 </mapper>

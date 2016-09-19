@@ -844,7 +844,7 @@ function findGroupWeiBo(WBUid){
         <ul>
         	<li><a href="javascript:void(0)" class="homePage">首页</a></li>
             <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
-            <li><a href="javascript:void(0)" class="foundPage">发现</a></li>
+            <li><a href="front/page/found_hotWeibo.jsp?WBUid=${sessionScope.user.WBUid}" class="foundPage">发现</a></li>
             <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
             <li><a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>

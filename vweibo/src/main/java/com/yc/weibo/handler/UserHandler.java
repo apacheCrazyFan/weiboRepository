@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
 import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
@@ -410,5 +411,33 @@ public class UserHandler {
 			flag=false;
 			return "请核对用户名";
 		}
+	}
+	@RequestMapping("/findMingRen")
+	public void findMingRen(PrintWriter out){
+		Gson gson=new Gson();
+		List<WeiBoUser> mingRens=userService.findMingRen();
+		System.out.print(mingRens);
+		out.print(gson.toJson(mingRens));
+		out.flush();
+		out.close();
+	}
+	@RequestMapping("/guanzhu")
+	public void guanzhu(String WBUid,String MWBUid, PrintWriter out){
+		System.out.println(WBUid+"----------"+MWBUid);
+		Map<String, Object> params=new HashMap<>();
+		params.put("FUid",WBUid);
+		params.put("FUedid",MWBUid);
+		List<WeiBoUser> mingRens=userService.findMingRen();
+		for(int i=0;i<mingRens.size();i++){
+			if(MWBUid.equals(mingRens.get(i).getWBUid()+"")){
+				out.print("您已经关注过此人");
+				break;
+			}else{
+				userService.guanzhu(params);
+				out.println("关注成功");
+				break;
+			}
+		}
+		
 	}
 }

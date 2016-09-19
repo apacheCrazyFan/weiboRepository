@@ -78,4 +78,9 @@ public class ThemeServiceImpl implements ThemeService {
 		return themeMapper.deleteByPrimaryKey(BigDecimal.valueOf(Double.parseDouble(tid)));
 	}
 
+	@Override
+	public List<Theme> findMiniThemes() {
+		return themeMapper.findMiniThemes();
+	}
+
 }
