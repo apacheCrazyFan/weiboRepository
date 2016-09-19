@@ -1279,7 +1279,7 @@ function findGroupWeiBo(WBUid){
     
     <div id="right-part">
     	<div id="right-part-content">
-        	<a href="javascript:void(0)" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
+        	<a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
             <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
             <div id="levelimg">
