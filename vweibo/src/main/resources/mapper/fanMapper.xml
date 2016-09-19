@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.weibo.mapper.FanMapper">
+  	<select id="getFstatusByFuid" parameterType="int" resultType="Fan">
+  		select count(fstatus) count,fstatus from FanAndFaned where Fuid = #{fuid} group by fstatus
+  	</select>
+  	
+  	<select id="getFuedidByFstatus" parameterType="Fan" resultType="Fan">
+  		select weibouser.uname,fuedid from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuid=#{fuid} and fstatus=#{fstatus}
+  	</select>
+  	
+  	<select id="getFuedidByFstatus" parameterType="int" resultType="Fan">
+  		select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=#{fuedid}
+  	</select>
+</mapper>

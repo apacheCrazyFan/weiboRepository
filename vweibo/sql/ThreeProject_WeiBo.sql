@@ -246,9 +246,10 @@ alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 
 drop table FanAndFaned;
+select fuedid from fanandfaned where fuid=1001 and fstatus='好友圈'
 
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
-select count(*) from FanAndFaned where Fstatus = '同学' and Fuid = 1001;
+select count(*),distinct(fstatus) from FanAndFaned where Fuid = 1001; 
 
 delete from FanAndFaned where FUid=1001 and FUedid=1007 and Fstatus='同学';
 delete from FanAndFaned where FUid=1001 and FUedid=1008 and Fstatus='同学';
@@ -578,7 +579,7 @@ create table PrivateMessage(
        --预留字段
 );
 
-
+select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=1008
 --微博访问权限设置
 create table PersonalPermission(
        PPid int primary key,          --权限id
