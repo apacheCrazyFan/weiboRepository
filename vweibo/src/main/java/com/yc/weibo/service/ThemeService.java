@@ -46,4 +46,6 @@ public interface ThemeService {
 	 * @return
 	 */
 	int delTheme(String tid);
+	
+	List<Theme> findThemeByTname(Theme theme);
 }

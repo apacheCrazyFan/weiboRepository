@@ -576,7 +576,7 @@ create table PrivateMessage(
        PM1user int,                   --发信人
        PM2user int,                   --收信人
        PMcontent varchar2(500),       --信息内容(  [文字，图片，视屏，url，文件，语音]  到时候再想吧)
-       PMdate Date,                   --信息日期
+       PMdate Date                   --信息日期
        
        --预留字段
 );
@@ -588,7 +588,7 @@ create table PersonalPermission(
        UId int
            constraint RK_PP_Uid references WeiBoUser(Uid),--用户Id
        PPid int,                      --用户id
-       PPstate char(2),               --权限是否开放{ F(开放) or T(关闭) }
+       PPstate char(2)               --权限是否开放{ F(开放) or T(关闭) }
 );
 
 

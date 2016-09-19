@@ -217,17 +217,22 @@ public class WeiboHandler {
 		if(rs){
 			String themename=mat.group(0);
 			System.out.println(mat.group(0));
-			
 			param.setTname(themename);
-			param.setTdate(new Date());
-			param.setTuid(new BigDecimal(((WeiBoUser)request.getSession().getAttribute("user")).getWBUid()));
-			param.setTdeliver(new BigDecimal(0));
-			param.setTview(new BigDecimal(0)); 
 			
-			int result=themeService.addTheme(param);
-			if(result<=0){
-				//话题添加失败
-				return "话题添加失败";
+			List<Theme> themelist=themeService.findThemeByTname(param);
+			if(themelist.isEmpty()){
+				param.setTdate(new Date());
+				param.setTuid(new BigDecimal(((WeiBoUser)request.getSession().getAttribute("user")).getWBUid()));
+				param.setTdeliver(new BigDecimal(0));
+				param.setTview(new BigDecimal(0)); 
+				
+				int result=themeService.addTheme(param);
+				if(result<=0){
+					//话题添加失败
+					return "话题添加失败";
+				}
+			}else{
+				param.setTid(themelist.get(0).getTid());
 			}
 		}
 		
@@ -884,8 +889,10 @@ public class WeiboHandler {
 	 */
 	@ResponseBody
 	@RequestMapping({"findWeiboByPage"})//因为这里传了pageNo=‘’的情况，所以还是用String的吧，，
-	public List<Weibo> findWeiboByPage(String op,String pageNo,HttpServletRequest request,HttpServletResponse response){
-		Map<String,Object> params = new HashMap<String,Object>();
+	public Map<String,Object> findWeiboByPage(String userid,String op,String pageNo,HttpServletRequest request,HttpServletResponse response){
+//		Map<String,Object> params = new HashMap<String,Object>();
+		
+		
 		HttpSession session=request.getSession();
 		PageUtil pages=(PageUtil) session.getAttribute("pageUtil");
 		if(pages==null){
@@ -904,10 +911,58 @@ public class WeiboHandler {
 		}
 		//至此，页面的信息已经维护好了，现在只要到service里面查询了，
 		
-		params.put("start", pages.getPageSize()*(pages.getPageNo()-1));
-		params.put("end", pages.getPageNo()*pages.getPageSize());
-		List<Weibo> weiboList = weiboService.findWeiboByPage(params);   //根据日期降序查询微博 
-		return weiboList;
+//		params.put("start", pages.getPageSize()*(pages.getPageNo()-1));
+//		params.put("end", pages.getPageNo()*pages.getPageSize());
+//		List<Weibo> weiboList = weiboService.findWeiboByPage(params);   //根据日期降序查询微博 
+		
+		Map<String,Integer> params=new HashMap<String,Integer>();
+		
+		params.put("pageSize", pages.getPageSize());
+		params.put("pageNum", pages.getPageNo());
+		params.put("uid",Integer.parseInt(userid));
+		List<Map<String,Object>> weiboList = weiboService.findWeiboOrderByWBdate(params);
+		
+		List<Integer> wbids = operateService.selectIfavoriteWeiboId(Integer.parseInt(userid));  //获得所有我收藏的所有微博id
+		int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
+		
+		//根据按日期降序分页查询后的 找出其中是转发微博的 源微博
+		Map<Integer,Object> tweiboMap = new HashMap<Integer,Object>();
+		
+		for(Map<String,Object> weibo : weiboList){
+			if( ((String)weibo.get("YON")).indexOf("Y") > -1){  //如果是转发微博
+
+				int wbid = Integer.parseInt(String.valueOf(weibo.get("WBID"))); //得到是转发微博的微博id
+				
+				int tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(wbid);
+				int rootwbid = 0;
+				if( tempwbid == 0){
+					rootwbid = wbid;
+				}else{
+					while(tempwbid != 0){
+						rootwbid = tempwbid;
+						tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(tempwbid);
+					}
+				}
+				
+				Map<String,Object> tweibo = weiboService.selectWeiboandweiboHelpById(rootwbid).get(0); //找到要转发的微博所有信息
+				tweiboMap.put(wbid, tweibo);
+				
+			}
+		}
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		jsonMap.put("tweiboMap", tweiboMap);
+		
+		jsonMap.put("weiboid", weiboid);
+ 		jsonMap.put("wbids", wbids);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		
+		int count =weiboService.WBTfindCount(new HashMap<String,Object>());
+		pages.setTotalSize(count);
+		
+		session.setAttribute("pageUtil", pages);
+		
+		return jsonMap;
 	}
 	
 	//我的赞

@@ -191,5 +191,7 @@
 		from (select a.* ,rownum rn from (select * from theme)a) where rn in
 		(${str})
 	</select>
-	<select id=""></select>
+	<select id="findThemeByTname" parameterType="Theme" resultType="Theme">
+		select * from theme where tname=#{tname}
+	</select>
 </mapper>

@@ -59,4 +59,6 @@ public interface ThemeMapper {
 	 */
 	List<Theme> findAllTheme(Theme theme);
 	
+	List<Theme> findThemeByTname(Theme theme);
+	
 }
