@@ -11,4 +11,20 @@
 	</insert>
 	
 	
+	<select id="selectCurrCommentId" resultType="int">
+		select nvl(max(Cid),0) from Comments
+	</select>
+	
+	
+	<insert id="insertCommentByComment" parameterType="map">
+		<selectKey keyColumn="currval" keyProperty="cid" resultType="int" order="BEFORE" >
+			select seq_comments_cid.nextval currval from dual
+		</selectKey>
+			insert into Comments values (#{cid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},#{txt,jdbcType=VARCHAR},sysdate,0,#{cid,jdbcType=INTEGER})
+	</insert>
+	
+	<select id="selectUnameByCid" parameterType="int" resultType="string">
+		select Uname from WeiBoUser where WBUid in ( select WBUid from Comments where Cid = #{cid} )
+	</select>
+	
 </mapper>

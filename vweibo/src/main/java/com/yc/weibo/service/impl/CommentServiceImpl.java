@@ -18,4 +18,19 @@ public class CommentServiceImpl implements CommentService {
 		return commentMapper.insertCommentDirect(map) > 0 ? true : false;
 	}
 
+	@Override
+	public int selectCurrCommentId() {
+		return commentMapper.selectCurrCommentId();
+	}
+
+	@Override
+	public boolean insertCommentByComment(Map<String, Object> map) {
+		return commentMapper.insertCommentByComment(map) > 0 ? true : false;
+	}
+
+	@Override
+	public String selectUnameByCid(int cid) {
+		return commentMapper.selectUnameByCid(cid);
+	}
+
 }
