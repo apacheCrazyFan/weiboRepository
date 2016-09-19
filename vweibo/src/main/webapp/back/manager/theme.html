@@ -1,7 +1,19 @@
-<table id="theme_data"></table>
+   
+    <div id='dialog-d1'>
+    	<table id="table1"></table>
+    
+    </div><!-- 在showinfo界面里面，用    你理解错了，这个div我的意思是外面的容器，里面的table再用datagrid实现，
+    $('#dg').datagrid({
+        url:'datagrid_data.json',--这里要拼接 tid  比如   weibo/findWeiboBytid?tid=xxx
+        columns:[[
+    		{field:'code',title:'Code',width:100},
+    		{field:'name',title:'Name',width:100},
+    		{field:'price',title:'Price',width:100,align:'right'}
+        ]]
+    }); -->
+<table id="theme_data" style="position:relative;z-index:2"></table>
 
-<!-- <script type="text/javascript" src="back/js/jquery-1.9.1.js"></script> -->
-<script>
+<script type="text/javascript">
 	var obj;
 	var editRow=undefined;//记录当前正在被编辑的行
 	var currentOp;
@@ -23,8 +35,17 @@
 			{field:'tuid',title:'',width:100,align:'center',checkbox:true},
 			{field:'tid',title:'话题编号',width:100,align:'center',sortable:true},
 			{field:'tname',title:'话题名称',width:100,align:'center',editor:{type:'text',option:{requires:true}}},
-			{field:'tdate',title:'话题日期',width:100,align:'center'},
-			{field:'ttxt',title:'话题内容',width:100,align:'center',editor:{type:'text',option:{requires:true}}},
+			{field:'tdate',title:'话题日期',width:100,align:'center',
+				 formatter:function(value,row,index){  
+                     var unixTimestamp = new Date(value);  
+                     return unixTimestamp.toLocaleString();  
+                 }  
+			},
+			{field:'ttxt',title:'话题内容',width:100,align:'center',editor:{type:'text',option:{requires:true}},
+				formatter:function(value,rowData,index){
+					return "<a href='javascript:showinfo("+$(rowData).attr("tid")+")'>微博内容</a>";
+				}	
+			},
 			{field:'tdeliver',title:'话题发表次数',width:100,align:'center'},
 			{field:'tview',title:'话题访问次数',width:100,align:'center'}
 		]],
@@ -174,5 +195,57 @@
 				editRow=undefined;	
 			}
 		}]
+	});
+	
+	function showinfo(num){
+		/* $.ajax({
+			url:'weibo/findWeiboByTid',
+			data:{'tid':num},
+			type:'POST',
+			dataType:'JSON',
+			success:function(data){
+				console.info(data);
+				//打开dialog
+				$("#dialog-d1").window("open");
+				
+				//TODO:操作table1  中间的行，用for循环，
+			}
+		}); */ //之前是在这里访问 findWeibo，，然后现在用easy提供的datagrid的话，就在datagrid里面访问，
+		$("#dialog-d1").window("open");
+		$('#table1').datagrid({
+	        url:'weibo/findWeiboByTid?tid='+num,
+	        fitColumns:true,
+			striped:true,
+			loadMsg:"数据加载中...",
+			pagination:true,
+			fit:true,
+			pageNumber:1,
+			pageSize:10,
+			pageList:[10,20,30,40,50],
+			sortName:'tid',
+			remoteSort:false,
+	        columns:[[
+	    		{field:'tid',title:'话题编号',width:100,sortable:true,align:'center'},
+	    		{field:'wbid',title:'微博编号',width:100,sortable:true,align:'center'},
+	    		{field:'wbdate',title:'微博发表日期',width:100,align:'center',
+	    			formatter:function(value,row,index){  
+	                     var Weibodate = new Date(value);  
+	                     return Weibodate.toLocaleString();  
+	                 } 	
+	    		},
+	    		{field:'wbtxt',title:'微博内容',width:100,align:'center'},
+	    		{field:'wbvideo',title:'视频',width:100,align:'center'},
+	    		{field:'wbmusic',title:'音乐',width:100,align:'center'},
+	    		{field:'wbpic',title:'图片',width:100,align:'center'}
+	        ]]
+	    });
+	}
+	
+	$('#dialog-d1').dialog({
+	    title: '该话题下的微博',
+	    width: 1000,
+	    height: 420,
+	    closed: true,
+	    modal: false
 	});
 </script>

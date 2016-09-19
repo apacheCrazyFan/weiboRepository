@@ -748,6 +748,7 @@ textarea {
 .comment_div{
 	border-top:#CCC 1px solid;
 	background:#FAFAFA;}
+
 /* #comment_img{
 	margin-left:15px;
 	position:relative;
@@ -769,6 +770,7 @@ textarea {
 #comment_check_word{
 	position:relative;
 	left:60px;
+	font-size:14px;
 	}	
 #comment_btn{
 	float:right;
@@ -836,6 +838,33 @@ textarea {
 	bottom:5px;
 }
 
+.comment_div_four_click{
+	width:510px;
+	height:100px;
+	margin-top:15px;
+	margin-left:60px;
+	background:#fff;
+}
+.comment_div_four_input{
+	margin-top:15px;
+	position:relative;
+	right:10px;
+}
+.comment_div_four_pace{
+	position:relative;
+	right:50px;
+}
+.comment_div_four_check{
+	position:relative;
+	left:10px;
+	
+}
+#comment_four_btn{
+	float:right;
+	position:relative;
+	top:8px;
+	right:10px;
+}
 
 	
 #right-part {

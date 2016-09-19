@@ -48,7 +48,10 @@
 		#{tview,jdbcType=DECIMAL}, #{ttxt,jdbcType=CLOB})
 	</insert>
 	<insert id="insertSelective" parameterType="com.yc.weibo.entity.Theme">
-		insert into THEME
+		<selectKey keyColumn="currval" keyProperty="tid" resultType="DECIMAL" order="BEFORE" >
+			select seq_Theme_Tid.nextval currval from dual
+		</selectKey>
+		insert into THEME 
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 				TID,
 			<if test="tname != null">
@@ -74,7 +77,7 @@
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			seq_Theme_Tid.nextval,
+				#{tid,jdbcType=DECIMAL},
 			<if test="tname != null">
 				#{tname,jdbcType=VARCHAR},
 			</if>
@@ -188,4 +191,5 @@
 		from (select a.* ,rownum rn from (select * from theme)a) where rn in
 		(${str})
 	</select>
+	<select id=""></select>
 </mapper>

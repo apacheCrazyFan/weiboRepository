@@ -433,7 +433,8 @@ ul li:hover {
 #comment_check_word{
 	position:relative;
 	left:60px;
-	top:5px;}	
+	top:5px;
+	font-size:13px;}	
 #comment_btn{
 	float:right;
 	margin-right:36px;

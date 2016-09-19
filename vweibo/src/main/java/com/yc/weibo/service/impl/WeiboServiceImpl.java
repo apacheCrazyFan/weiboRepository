@@ -127,6 +127,17 @@ public class WeiboServiceImpl implements WeiboService{
 		return weiboMapper.myCollections(WBUid);
 	}
 	@Override
+	public List<Weibo> findWeiBoByTid(int tid) {
+		return weiboMapper.findWeiBoByTid(tid);
+	}
+	@Override
+	public int WBTfindCount(Map<String,Object> map) {
+		return weiboMapper.WBTfindCount(map);
+	}
+	@Override
+	public List<Weibo> findWeiboByPage(Map<String, Object> params) {
+		return weiboMapper.findWeiboByPage(params);
+	}
 	public List<Weibo> findMyZan(int WBUid) {
 		return weiboMapper.findMyZan(WBUid);
 	}

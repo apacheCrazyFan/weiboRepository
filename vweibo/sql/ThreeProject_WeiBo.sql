@@ -341,6 +341,7 @@ create table WBandThe(
 --微博
 create table WeiBo(
        WBid int primary key,          --微博id
+       Tid int						  --话题id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
        WBUid int
@@ -356,6 +357,7 @@ create table WeiBo(
        WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
        --预留字段      
 );
+alter table WeiBo add Tid int;
 
 create sequence seq_wb_wbid start with 10001 increment by 1;
 
@@ -395,6 +397,7 @@ update WeiBo set wbtag='大学,搞笑' where wbid=10021;
 update WeiBo set wbtag='大学,搞笑,时尚' where wbid=10022;
 
 select * from WeiBo where wbtag like '%大学%'
+>>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select * from weibo order by 
 --微博附加表
