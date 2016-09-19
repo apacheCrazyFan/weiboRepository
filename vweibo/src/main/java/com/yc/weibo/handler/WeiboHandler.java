@@ -6,10 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -454,24 +455,26 @@ public class WeiboHandler {
 		public Map<String,Object> commentDiv(@RequestParam(name="wbid")Integer wbid){
 			Map<String,Object> jsonMap = new HashMap<String,Object>();
 			Map<String,Object> params = new HashMap<String,Object>();
-			/*
-			System.out.println("  =============  "+wbid);
-			params.put("uid", uid);
-			params.put("wbid", wbid);
-			params.put("Ostate","收藏");
 			
-			if(operateService.selectoperateId(params) > 0){
-				if(weiboService.updateViewOnly(wbid)){
+			// 根据微博的id查出他的所有评论+回复
+			List<Map<String,Object>> commentMsgs = commentService.selectCommentAndWeiboUser(wbid);
+			if(commentMsgs != null){
+				List<Map<String,Object>> finalCommentMsgs = new ArrayList<Map<String,Object>>();
+				Map<String,Object> map = null;
+				for(Map<String,Object> commentMsg : commentMsgs){
+					map = commentMsg;
+					int cid = Integer.parseInt(String.valueOf( commentMsg.get("CSONODE")));
 					
-					//System.out.println( operateService.selectoperateId(params));
-					jsonMap.put("ishave", true);
+					String Ucommented = commentService.selectUnameByCid(cid);
+					map.put("UCOMMENTED",Ucommented);
+					
+					finalCommentMsgs.add(map);
 				}
-			}else{
-				if(weiboService.updateViewOnly(wbid)){
-					//System.out.println( operateService.selectoperateId(params));
-					jsonMap.put("ishave", false);
-				}
-			}*/
+				
+				System.out.println(finalCommentMsgs );
+				jsonMap.put("success", true);
+				jsonMap.put("finalCommentMsgs", finalCommentMsgs);
+			}
 			
 			return jsonMap;
 		}
@@ -904,10 +907,11 @@ public class WeiboHandler {
 				if(weiboService.selectTransmityon(wbid).indexOf("N") > -1){ //是否本事就是源微博  是
 					System.out.println( "ping lun de ping lun --");
 					if(weiboService.updateCommentAccount(wbid)){  //跟新浏览次数及评论次数
+							int wbuid = weiboService.selectWBUidByWbid(wbid);
 							//更新用户积分
 							params.clear();
 							params.put("account", DataDic.COMMENT);
-							params.put("wbuid", wbid);
+							params.put("wbuid", wbuid);
 					
 							if(userService.updateUserAccount(params)){ //跟新用户积分
 								int CommentAccount = weiboService.selectAfterComment(wbid);

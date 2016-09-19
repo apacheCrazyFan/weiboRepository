@@ -191,15 +191,13 @@
 		from (select a.* ,rownum rn from (select * from theme)a) where rn in
 		(${str})
 	</select>
-<<<<<<< HEAD
 	
 	<select id="selectTidByTname" parameterType="string" resultType="int">
 		select Tid from Theme where Tname = #{tname}
 	</select>
 	<select id=""></select>
-=======
+	
 	<select id="findThemeByTname" parameterType="Theme" resultType="Theme">
 		select * from theme where tname=#{tname}
 	</select>
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 </mapper>

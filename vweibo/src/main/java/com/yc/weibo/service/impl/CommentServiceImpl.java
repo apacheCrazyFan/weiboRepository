@@ -1,5 +1,6 @@
 package com.yc.weibo.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class CommentServiceImpl implements CommentService {
 	public String selectUnameByCid(int cid) {
 		return commentMapper.selectUnameByCid(cid);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectCommentAndWeiboUser(int wbid) {
+		return commentMapper.selectCommentAndWeiboUser(wbid);
+	}
+
 
 }

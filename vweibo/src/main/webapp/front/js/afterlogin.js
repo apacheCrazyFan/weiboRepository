@@ -2050,7 +2050,7 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 	                str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
 	                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
 	                str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five" style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
-	                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
+	                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;'+commentdiv+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
 	                str += '</div>';
 					$("#"+commentdiv).append(str);
 					 
@@ -2282,7 +2282,7 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 						newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img1.png" id="comment_pace_png"/></a>';
 						newWeiBoStr += '<a href="javascript:void(0)" id="comment_pace"><img src="front/image/write_img2.png" id="comment_pace_png"/></a>';
 						newWeiBoStr += '<input type="checkbox" id="comment_check_'+commentdivnum+'" class="comment_check"><span id="comment_check_word">同时转发到我的微博</span>';
-						newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_'+commentdivnum+'&quot;,&quot;comment_input'+commentdivnum+'&quot;,&quot;comment_check'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
+						newWeiBoStr += '<img src="front/image/comment_btn.png" id="comment_btn" onClick="commentsWeibo(&quot;center_footnum3_'+commentdivnum+'&quot;'+',&quot;comment_div_'+commentdivnum+'&quot;'+',&quot;comment_input'+commentdivnum+'&quot;'+',&quot;comment_check'+commentdivnum+'&quot;,'+userid+','+wbid+')"/>';
 						newWeiBoStr += '</div>';
 						
 						newWeiBoDiv.innerHTML = newWeiBoStr;
@@ -2357,7 +2357,7 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 		                str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
 		                str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
 		                str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five"  style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
-		                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
+		                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_'+commentdivnum+'&quot;&quot;comment_div_five'+commentdivnum+'&quot;&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
 		                str += '</div>';
 		                
 						$("#"+commentdiv).append(str);
@@ -2379,7 +2379,7 @@ function commentsWeibo(commentnav,commentdiv,textid,checkid,userid,wbid){
 }
 
 //评论 评论的评论（不转发，无图片，被我删掉了）												//当前用户id  微博id  评论的id
-function commentsWeiboAndcommentOthers(commentnav,commentAndCommentId,inputTextId,uid,wbid,cid){
+function commentsWeiboAndcommentOthers(commentnav,commentdiv,commentAndCommentId,inputTextId,uid,wbid,cid){
 	var txt = $("#"+inputTextId).val();
 	
 	$.ajax({
@@ -2410,7 +2410,7 @@ function commentsWeiboAndcommentOthers(commentnav,commentAndCommentId,inputTextI
 				//表情处理
 				var wb_newContent ='';
 				var wb_newContent1 = '';
-				var faceArr = text.split("[");
+				var faceArr = txt.split("[");
 				for(var k = 0; k < faceArr.length; k ++){
 					if(faceArr[k].split("]]").length > 1){  //主题
 						wb_newContent = '[['+faceArr[k]+wb_newContent;
@@ -2438,7 +2438,7 @@ function commentsWeiboAndcommentOthers(commentnav,commentAndCommentId,inputTextI
                 str += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
                 str += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
                 str += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five"  style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
-                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
+                str += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;'+commentdiv+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+userid+','+wbid+','+currCid+')"/>';
                 str += '</div>';
                 
 				$("#"+commentdiv).append(str);
@@ -2674,18 +2674,7 @@ function addcollectiondiv(id,uid,weiboid){
 		success: function(data,textStatus){
 			if(data.ishave){
 				alert("您已收藏该微博.");
-				// 消息将显示在顶部中间
-				/*$.messager.show({
-					title:'收藏提示',
-					msg:'您已收藏该微博。',
-					showType:'show',
-					style:{
-						right:'',
-						top:document.body.scrollTop+document.documentElement.scrollTop,
-						bottom:''
-					}
-				});
-*/
+	
 			}else if(tips2){
 				if(tips2.style.display=='block'){
 					tips2.style.display='none';
@@ -2787,7 +2776,6 @@ function addtransmitdiv(id){
 }
 	
 function commentOthers(commentsWeiboAndOtherDivid,commentsWeiboAndOthertext){
-	alert("wo lai le ");
 	var commentsWeiboAndOtherDiv = document.getElementById(commentsWeiboAndOtherDivid);
 
 	if(commentsWeiboAndOtherDiv){
@@ -2804,37 +2792,88 @@ function commentOthers(commentsWeiboAndOtherDivid,commentsWeiboAndOthertext){
 	function addcommentdiv(commentdivid,wbid){
 		var tips3=document.getElementById(commentdivid);
 		
-		/*$.ajax({
+		$.ajax({
 			url : 'weibo/commentDiv',
 			cache: false,
 			data:{"wbid":wbid},
 			dataType:"json",
 			Type:"GET",
 			success: function(data,textStatus){
-				if(data.ishave){
-					alert("您已收藏该微博.");
-					// 消息将显示在顶部中间
-					/*$.messager.show({
-						title:'收藏提示',
-						msg:'您已收藏该微博。',
-						showType:'show',
-						style:{
-							right:'',
-							top:document.body.scrollTop+document.documentElement.scrollTop,
-							bottom:''
+				if(data.success){
+					
+					var finalCommentMsgs = data.finalCommentMsgs;
+					var finalStr = '';
+					for(var ii = 0; ii < finalCommentMsgs.length; ii++){
+						var finalCommentMsg = finalCommentMsgs[ii];
+						var cdate = finalCommentMsg.CDATE;  //时间
+						var cgreateAccount = finalCommentMsg.CGREATEACCOUNT; //点赞数
+						var contentTxt = finalCommentMsg.CONTENTTXT; //回复的内容
+						var Ucomment = finalCommentMsg.UCOMMENT; //回复人名
+						var UimgPath = finalCommentMsg.UIMGPATH; //回复人的图像
+						var Ucommented = finalCommentMsg.UCOMMENTED; //被回复者的人名
+						var cid = finalCommentMsg.CID; //comment id
+						var wbid = finalCommentMsg.WBID; //微博id
+						var wbuid = finalCommentMsg.WBUID; //微博所属用户的id
+						
+						finalStr += '<div id="comment_div_three" class="comment_div_three">';
+						finalStr += '<a href="javascript:void(0)" class="comment_div_three_a1"><img style="width:30px;height:30px;margin-left:30px;position:relative;" src="/weibouserimages/'+UimgPath+'" id="comment_img"></a>';
+						finalStr += '<a href="javascript:void(0)" class="comment_div_three_a">'+Ucomment+'  :  </a>';
+						
+						//表情处理
+						var wb_newContent ='';
+						var wb_newContent1 = '';
+						var faceArr = contentTxt.split("[");
+						for(var k = 0; k < faceArr.length; k ++){
+							if(faceArr[k].split("]]").length > 1){  //主题
+								wb_newContent = '[['+faceArr[k]+wb_newContent;
+							}else if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
+								faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+								wb_newContent += faceArr[k];
+							}else{
+								wb_newContent += faceArr[k];
+							}
 						}
-					}); */
-
-				if(tips3){
-					if(tips3.style.display=='block'){
-						tips3.style.display='none';
-					}else{
-						tips3.style.display='block';
-					}
-				}				
+						var faceRegx1 = new RegExp('\\n','gi');
+						var faceArr1 = wb_newContent.split(faceRegx1);
+						for(var j = 0; j < faceArr1.length; j ++){
+							wb_newContent1 += faceArr1[j]+'<br />';
+						}
+						
+						if(Ucommented == null){
+							finalStr += '<span class="comment_div_three_a">  : '+wb_newContent1+'</span>';
+						}else{
+							finalStr += '<span class="comment_div_three_a">回复@'+Ucommented+'  : '+wb_newContent1+'</span>';
+						}	
+							finalStr += '</div>';
+							finalStr += '<div id="comment_div_four" class="comment_div_four">';
+							finalStr += '<span class="comment_div_four_a1">'+cdate+'</span>';
+							finalStr += '<a href="javascript:void(0)" class="comment_div_four_a"><img src="front/image/center-part_foot04.png"/><font class="comment_div_four_font">'+cgreateAccount+'</font></a>';
+							finalStr += '<a href="javascript:void(0)" class="comment_div_four_a" onclick="commentDelete()">删除</a>';
+							finalStr += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentOthers(&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_d_'+commentdivnum+'&quot;)">回复</a>';
+							finalStr += '<a href="javascript:void(0)" class="comment_div_four_a" onClick="commentTip()">举报</a>';
+							finalStr += '</div>';
+							finalStr += '<div id="comment_div_five'+commentdivnum+'" class="comment_div_five" style="display:none;">';
+							finalStr += '<img src="/weibouserimages/'+$("#uimgPath").val()+'" id="comment_img'+commentdivnum+'" style="width:30px;height:30px;margin-left:90px;margin-top:10px;position:relative;">';
+							finalStr += '<input type="text" id="comment_input_five'+commentdivnum+'" class="comment_input_five"  style="border: 1px solid red;height: 30px;margin-left: 10px;width: 350px"/>';
+							finalStr += '<img src="front/image/comment_btn.png" id="comment_btn_five'+commentdivnum+'" style="float: right;margin-right: 40px;margin-top:20px;" onClick="commentsWeiboAndcommentOthers(&quot;center_footnum3_'+commentdivnum+'&quot;,&quot;'+commentdivid+'&quot;,&quot;comment_div_five'+commentdivnum+'&quot;,&quot;comment_input_five'+commentdivnum+'&quot;,'+$("#user").val()+','+wbid+','+cid+')"/>';
+							finalStr += '</div>';
+	                
+							$("#"+commentdivid).append(finalStr);
+							
+							commentdivnum ++;
+						}
+						if(tips3){
+							if(tips3.style.display=='block'){
+								tips3.style.display='none';
+							}else{
+								tips3.style.display='block';
+							}
+					}	
+				}
+			}
+		});
 	}
-
-
+	
 /*function addcommentdiv1(id){
 	var tips4=document.getElementById(id);
 	if(tips4){

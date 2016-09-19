@@ -398,7 +398,6 @@ update WeiBo set wbtag='大学,搞笑' where wbid=10021;
 update WeiBo set wbtag='大学,搞笑,时尚' where wbid=10022;
 
 select * from WeiBo where wbtag like '%大学%'
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select * from weibo order by 
 --微博附加表
@@ -573,7 +572,46 @@ create table Comments(
 );
 create sequence seq_comments_cid start with 100001 increment by 1;
 
+
+select Cid,ContentTxt,Cdate,CgreateAccount,s1.UimgPath,Ucomment,u1.Uname as Ucommented from
+(select s.*,c1.WBUid as commentid from
+(select c.*,UimgPath,Uname as Ucomment from
+(select WBUid,UimgPath,Uname from WeiBoUser) u,
+(select Cid,WBUid,Csonode,ContentTxt,to_char(Cdate,'mm/dd hh24:mi') Cdate,CgreateAccount from Comments where WBid = 10900 order by Cdate desc) c 
+where u.WBUid = c.WBUid) s,Comments c1 where c1.Csonode = s.Cid) s1,WeiBoUser u1 where s1.commentid = u1.WBUid;
+
+
+
+select c.*,UimgPath,Uname as Ucomment from
+(select WBUid,UimgPath,Uname from WeiBoUser) u,
+(select Cid,WBUid,Csonode,ContentTxt,to_char(Cdate,'mm/dd hh24:mi') Cdate,CgreateAccount from Comments where WBid = 10900 order by Cdate desc) c 
+where u.WBUid = c.WBUid
+
+select Uname from WeiBoUser where WBUid in (select WBUid from Comments where Csonode = 100113);
+
+
 select Uname from WeiBoUser where WBUid in ( select WBUid from Comments where Cid = #{cid} )
+select * from Comments;
+
+select s.* from
+(select c.*,UimgPath,Uname as Ucomment from
+(select WBUid,UimgPath,Uname from WeiBoUser) u,
+(select Cid,WBUid,Csonode,ContentTxt,to_char(Cdate,'mm/dd hh24:mi') Cdate,CgreateAccount from Comments where WBid = 10900 order by Cdate desc) c 
+where u.WBUid = c.WBUid) s,Comments c1 where c1.Cid = s.Cid;
+
+select Uname from WeiBoUser where WBUid in (select WBUid from Comments where Csonode = 100113);
+
+
+select * from
+(select WBUid,UimgPath,Uname from WeiBoUser) u,
+(select WBUid,ContentTxt,to_char(Cdate,'mm-dd hh24:mi:ss') Cdate,CgreateAccount from Comments where WBid = 10894 and Csonode = -1 order by Cdate desc) c 
+where u.WBUid = c.WBUid;
+
+
+select * from
+(select WBUid,UimgPath,Uname from WeiBoUser) u,
+(select WBUid,ContentTxt,to_char(Cdate,'mm-dd hh24:mi:ss') Cdate,CgreateAccount from Comments where WBid = 10894 and Csonode != -1 order by Cdate desc) c 
+where u.WBUid = c.WBUid;
 
 drop table Comments; 
 --私信

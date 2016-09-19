@@ -19,27 +19,27 @@
 		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
 			select seq_op_oid.nextval currval from dual
 		</selectKey>
-		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'点赞',null)
+		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'点赞',null,sysdate)
 	</insert>
 	
 	<insert id="insertCollectWeibo" parameterType="map">
 		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
 			select seq_op_oid.nextval currval from dual
 		</selectKey>
-		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'收藏',#{tag,jdbcType=VARCHAR})
+		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'收藏',#{tag,jdbcType=VARCHAR},sysdate)
 	</insert>
 	
 	<insert id="insertTransmitWeibo" parameterType="map">
 		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
 			select seq_op_oid.nextval currval from dual
 		</selectKey>
-		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'转发',#{txt,jdbcType=VARCHAR})
+		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'转发',#{txt,jdbcType=VARCHAR},sysdate)
 	</insert>
 	
 	<insert id="insertCommentWeibo" parameterType="map">
 		<selectKey keyColumn="currval" keyProperty="oid" resultType="int" order="BEFORE">
 			select seq_op_oid.nextval currval from dual
 		</selectKey>
-		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'评论',#{txt,jdbcType=VARCHAR})
+		insert into Operate values(#{oid},#{uid,jdbcType=INTEGER},#{wbid,jdbcType=INTEGER},'评论',#{txt,jdbcType=VARCHAR},sysdate)
 	</insert>
 </mapper>
