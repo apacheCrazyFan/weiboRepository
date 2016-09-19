@@ -395,7 +395,7 @@ public class WeiboHandler {
 		public Map<String,Object> commentDiv(@RequestParam(name="wbid")Integer wbid){
 			Map<String,Object> jsonMap = new HashMap<String,Object>();
 			Map<String,Object> params = new HashMap<String,Object>();
-			
+			/*
 			System.out.println("  =============  "+wbid);
 			params.put("uid", uid);
 			params.put("wbid", wbid);
@@ -412,7 +412,7 @@ public class WeiboHandler {
 					//System.out.println( operateService.selectoperateId(params));
 					jsonMap.put("ishave", false);
 				}
-			}
+			}*/
 			
 			return jsonMap;
 		}
