@@ -252,12 +252,9 @@ alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 
-<<<<<<< HEAD
 delete from  FanAndFaned where FUid=1006 and FUedid=1021;
-=======
 drop table FanAndFaned;
 select fuedid from fanandfaned where fuid=1001 and fstatus='∫√”—»¶'
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='∫√”—»¶';
 select count(*),distinct(fstatus) from FanAndFaned where Fuid = 1001; 
@@ -576,7 +573,7 @@ create table WeiboAndWeibo(
 	TWBid int
 );
 select * from WeiboAndWeibo;
-
+select * from Comments;
 --∆¿¬€£®ªÿ∏¥£©Œ¢≤©±Ì  --’“∞÷∞÷
 create table Comments(
        Cid int primary key,          	--∆¿¬€£®ªÿ∏¥£©id
