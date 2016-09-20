@@ -3281,6 +3281,7 @@ function findGroupWeiBo(WBUid){
         	<a href="front/page/messagebox.jsp?WBUid=${sessionScope.user.WBUid}" class="message_pic"></a>
             <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" class="setting_pic"></a>
             <a href="javascript:void(0)" class="sendMess_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp?wbuid=${sessionScope.user.WBUid}" class="help_pic"></a>
         </div>
 
 	</div>
