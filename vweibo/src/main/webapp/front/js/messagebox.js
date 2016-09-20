@@ -1,5 +1,6 @@
 var hisid=0;
 var myid=0;
+var i ;
 $(function(){
 	var url=window.location.href;
 	myid=url.substring(61);
@@ -68,10 +69,11 @@ function linkListClick(messId){
 
 
 function startChat(nameId){
+	clearInterval(i);
 	var length=0;
 	$('.center0').hide();
 	$('.center2').show();	
-	var i = setInterval(function() { 
+	i= setInterval(function() { 
 		var str="";
 		$.ajax({
 			url:"../../../../vweibo/message/getMessageByPMUser",
@@ -127,6 +129,7 @@ function sendMessage(){
 function returnChatList(){
 	$('.center0').show();
 	$('.center2').hide();	
+	clearInterval(i);
 }
 function showLittleWin(winId){
 	$(winId).show();

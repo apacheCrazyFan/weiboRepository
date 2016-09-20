@@ -21,16 +21,16 @@
         </div>
         <ul>
         	<li><a href="#" class="homePage">首页</a></li>
-            <li><a href="#" class="videoPage">视频</a></li>
+            
             <li><a href="#" class="foundPage">发现</a></li>
-            <li><a href="#" class="gamePage">游戏</a></li>
+            
             <li><a href="#" class="personPage">爱敲代码的妖未初</a></li>
         </ul>
         <div class="settingArea">
-        	<a href="http://localhost:8080/vweibo/front/page/messagebox.jsp" class="message_pic"></a>
-            <a href="http://localhost:8080/vweibo/front/page/UserSet.jsp" class="setting_pic"></a>
+        	<a href="http://localhost:8080/vweibo/front/page/messagebox.jsp?wbuid=${sessionScope.user.WBUid}" class="message_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/UserSet.jsp?wbuid=${sessionScope.user.WBUid}" class="setting_pic"></a>
             <a href="#" class="sendMess_pic"></a>
-            <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp" class="help_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp?wbuid=${sessionScope.user.WBUid}" class="help_pic"></a>
         </div>
     </div>
     

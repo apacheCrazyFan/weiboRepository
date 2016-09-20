@@ -185,6 +185,8 @@ insert into WeiBoUser values(1002,'啊大大','sa','15675471111','15675471111@163.c
 insert into WeiBoUser values(1005,'admin','sa','15675470000','15675470000@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,日本',10000,'0x1f1ef0x1f1f5.png');
 
+update weibouser set uimgpath ='../../vweibo/weibouserimages/userimg.jpg' where wbuid=1001
+update weibouser set uimgpath ='../../vweibo/weibouserimages/userphoto3.png' where wbuid=1002
 
 delete from WeiBoUser where WBUid in (1001,1002);
 
