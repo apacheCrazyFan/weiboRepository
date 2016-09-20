@@ -72,7 +72,10 @@ public class WeiboServiceImpl implements WeiboService{
 	public List<Map<String, Object>> selectWeiboOrderByWBdateAndIsPicture(Map<String, Integer> map) {
 		return weiboMapper.selectWeiboOrderByWBdateAndIsPicture(map);
 	}
-	
+	@Override
+	public List<Map<String,Object>> selectWeiboByLike(Map<String,Object> map){
+		return weiboMapper.selectWeiboByLike(map);
+	}
 	//点赞
 	@Override
 	public boolean updateaddWeiboLike(int wbid) {

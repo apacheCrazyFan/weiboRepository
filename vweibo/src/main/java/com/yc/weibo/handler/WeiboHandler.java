@@ -567,6 +567,77 @@ public class WeiboHandler {
 		return jsonMap;
 	}
 	
+	
+	/***
+	 * 模糊查询
+	 * @param request
+	 * @param pageSize
+	 * @param pageNum
+	 * @param userid
+	 * @param character 模糊查询字段
+	 * @return
+	 */
+	@Transactional(propagation=Propagation.REQUIRED)  //事务的隔离级别
+	@RequestMapping(value="/selectWeiboByLike",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> selectWeiboByLike(HttpServletRequest request,@RequestParam(name="pageSize")Integer pageSize,@RequestParam(name="pageNum")Integer pageNum,@RequestParam(name="userid")Integer userid,@RequestParam(name="character")String character){
+		Map<String,Object> jsonMap = new HashMap<String,Object>();
+		Map<String,Object> params = new HashMap<String,Object>();
+		
+		System.out.println(character);
+		HttpSession session=request.getSession();
+		PageUtil pages=(PageUtil) session.getAttribute("pageUtil");
+		if(pages==null){
+			pages=new PageUtil();  
+		} 
+		params.put("pageSize", pages.getPageSize());
+		params.put("pageNum", pages.getPageNo());
+		params.put("uid",userid);
+		params.put("character", character);
+		List<Map<String,Object>> weiboList = weiboService.selectWeiboByLike(params);   //根据日期降序查询微博 
+		List<Integer> wbids = operateService.selectIfavoriteWeiboId(userid);  //获得所有我收藏的所有微博id
+		int weiboid = weiboService.selectCurrMaxWBid();  //插入微博后的微博id
+		
+		//根据按日期降序分页查询后的 找出其中是转发微博的 源微博
+		Map<Integer,Object> tweiboMap = new HashMap<Integer,Object>();
+		
+		for(Map<String,Object> weibo : weiboList){
+			if( ((String)weibo.get("YON")).indexOf("Y") > -1){  //如果是转发微博
+
+				int wbid = Integer.parseInt(String.valueOf(weibo.get("WBID"))); //得到是转发微博的微博id
+				
+				int tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(wbid);
+				int rootwbid = 0;
+				if( tempwbid == 0){
+					rootwbid = wbid;
+				}else{
+					while(tempwbid != 0){
+						rootwbid = tempwbid;
+						tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(tempwbid);
+					}
+				}
+				
+				Map<String,Object> tweibo = weiboService.selectWeiboandweiboHelpById(rootwbid).get(0); //找到要转发的微博所有信息
+				tweiboMap.put(wbid, tweibo);
+				
+			}
+		}
+		jsonMap.put("tweiboMap", tweiboMap);
+		
+		jsonMap.put("weiboid", weiboid);
+ 		jsonMap.put("wbids", wbids);
+		jsonMap.put("weiboList", weiboList);
+		jsonMap.put("total", weiboList.size());
+		
+		int count =weiboService.WBTfindCount(new HashMap<String,Object>());
+		pages.setTotalSize(count);
+		
+		session.setAttribute("pageUtil", pages);
+		
+		return jsonMap;
+	}
+	
+	
 	//点赞
 	@Transactional(propagation=Propagation.REQUIRED)
 	@RequestMapping(value="/addclicklike",method=RequestMethod.GET)

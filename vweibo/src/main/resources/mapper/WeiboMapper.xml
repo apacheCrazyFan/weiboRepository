@@ -134,7 +134,24 @@
 	</select>
 	
 	
-	
+	<!-- 模糊查询微博 -->
+	<select id="selectWeiboByLike" resultType="map" parameterType="map">
+		select k.*,wbu.Uname,wbu.UimgPath from
+		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
+		(select * from 
+			(select n.*,rownum rn from 
+			(select * from WeiBo where (WBstatue = 0 and (WBpic like '%'||#{character,jdbcType=VARCHAR}||'%' 
+														or WBvideo like '%'||#{character,jdbcType=VARCHAR}||'%'
+														or WBmusic like '%'||#{character,jdbcType=VARCHAR}||'%'
+														or WBtxt like '%'||#{character,jdbcType=VARCHAR}||'%' )) 
+							or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid}) 
+														and (WBpic like '%'||#{character,jdbcType=VARCHAR}||'%' 
+														or WBvideo like '%'||#{character,jdbcType=VARCHAR}||'%'
+														or WBmusic like '%'||#{character,jdbcType=VARCHAR}||'%'
+														or WBtxt like '%'||#{character,jdbcType=VARCHAR}||'%' )) order by WBdate desc) n where #{pageSize} * #{pageNum} >= rownum)
+ 			where rn > #{pageSize} * (#{pageNum}-1)) b
+ 			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
+	</select>
 	
 	
 	

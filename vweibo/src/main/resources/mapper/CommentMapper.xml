@@ -30,8 +30,8 @@
 	
 	<select id="selectCommentAndWeiboUser" parameterType="int" resultType="map">
 		select c.*,UimgPath,Uname as Ucomment from
-			(select WBUid,WBid,UimgPath,Uname from WeiBoUser) u,
-				(select Cid,WBUid,Csonode,ContentTxt,to_char(Cdate,'mm/dd hh24:mi') Cdate,CgreateAccount from Comments where WBid = #{wbid,jdbcType=INTEGER} order by Cdate desc) c 
+			(select WBUid,UimgPath,Uname from WeiBoUser) u,
+				(select Cid,WBid,WBUid,Csonode,ContentTxt,to_char(Cdate,'mm/dd hh24:mi') Cdate,CgreateAccount from Comments where WBid = #{wbid,jdbcType=INTEGER} order by Cdate desc) c 
 					where u.WBUid = c.WBUid
 	</select>
 </mapper>
