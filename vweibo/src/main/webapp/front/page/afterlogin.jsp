@@ -3278,7 +3278,7 @@ function findGroupWeiBo(WBUid){
             <li><a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>
         <div class="settingArea">
-        	<a href="javascript:void(0)" class="message_pic"></a>
+        	<a href="front/page/messagebox.jsp?WBUid=${sessionScope.user.WBUid}" class="message_pic"></a>
             <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" class="setting_pic"></a>
             <a href="javascript:void(0)" class="sendMess_pic"></a>
         </div>
@@ -3577,7 +3577,7 @@ function findGroupWeiBo(WBUid){
            			 </div>
               </div>
               
-              <!-- 评论 -->
+              <!-- 评论 
 				<div id="comment_div" class="comment_div" style="display: none;">
 					<img src="front/image/comment_header_img.png" id="comment_img">
 					<input type="text" id="comment_input" /><br> <a
@@ -3942,7 +3942,7 @@ function findGroupWeiBo(WBUid){
 						id="comment_check_word">同时转发到我的微博</span> <img
 						src="front/image/comment_btn.png" id="comment_btn" />
 				</div>
-			</div>
+			</div> -->
 			
 		</div>
 		<!-- 目前三篇微博的根  id="xixi" -->

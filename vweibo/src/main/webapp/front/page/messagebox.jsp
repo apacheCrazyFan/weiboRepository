@@ -24,7 +24,7 @@
             <li><a href="#" class="videoPage">视频</a></li>
             <li><a href="#" class="foundPage">发现</a></li>
             <li><a href="#" class="gamePage">游戏</a></li>
-            <li><a href="#" class="personPage">爱敲代码的妖未初</a></li>
+            <li><a href="#" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>
         <div class="settingArea">
         	<a href="http://localhost:8080/vweibo/front/page/messagebox.jsp" class="message_pic"></a>
