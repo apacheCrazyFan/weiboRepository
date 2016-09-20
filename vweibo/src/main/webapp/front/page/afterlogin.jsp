@@ -130,7 +130,7 @@ var count=4;
 					
 					var newWeiBoStr = '';
 					newWeiBoStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img id="img_'+clicklikenum+'" title="${sessionScope.user.uname}" style="width:65px;height:65px;border-radius:10px;padding-left:10px" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>';
-					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+					newWeiBoStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 					newWeiBoStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose_'+clicklikenum+'" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 					newWeiBoStr += '<ul>';
 					newWeiBoStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -388,7 +388,7 @@ function findGroupWeiBo(WBUid){
 						var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 					
 						var newStr = '';
-						newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+						newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 						newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 						newStr += '<ul>';
 						newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -620,7 +620,7 @@ function findGroupWeiBo(WBUid){
 						var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 					
 						var newStr = '';
-						newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+						newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 						newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 						newStr += '<ul>';
 						newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -862,7 +862,7 @@ function findGroupWeiBo(WBUid){
 							}
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -1063,7 +1063,7 @@ function findGroupWeiBo(WBUid){
 							var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -1345,7 +1345,7 @@ function findGroupWeiBo(WBUid){
 							}
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -1546,7 +1546,7 @@ function findGroupWeiBo(WBUid){
 							var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -1828,7 +1828,7 @@ function findGroupWeiBo(WBUid){
 							}
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -2029,7 +2029,7 @@ function findGroupWeiBo(WBUid){
 							var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -2313,7 +2313,7 @@ function findGroupWeiBo(WBUid){
 							}
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -2514,7 +2514,7 @@ function findGroupWeiBo(WBUid){
 							var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -2801,7 +2801,7 @@ function findGroupWeiBo(WBUid){
 							}
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -3002,7 +3002,7 @@ function findGroupWeiBo(WBUid){
 							var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 						
 							var newStr = '';
-							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+							newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 							newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 							newStr += '<ul>';
 							newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -3449,7 +3449,7 @@ function findGroupWeiBo(WBUid){
 			<div id="supersearch"
 				style="display: none; background: #FFF; position: relative; top: 10px">
 				<p
-					style="font-size: 14px; font-weight: bold; margin-left: 20px; position: relative; top: 10px;">高级搜索</p>
+					style="font-size: 14px; font-weight: bold; margin-left: 20px;margin-bottom:10px; position: relative; top: 10px;">高级搜索</p>
 				<a href="javascript:void(0)" id="superdivclose"
 					class="superdivclose"
 					onMouseOut="superdivcloseimg('superdivclose')"
@@ -3578,7 +3578,7 @@ function findGroupWeiBo(WBUid){
               </div>
               
               <!-- 评论 -->
-				<div id="comment_div" class="comment_div" style="display: none;">
+				<!-- <div id="comment_div" class="comment_div" style="display: none;">
 					<img src="front/image/comment_header_img.png" id="comment_img">
 					<input type="text" id="comment_input" /><br> <a
 						href="javascript:void(0)" id="comment_pace"><img
@@ -3944,13 +3944,11 @@ function findGroupWeiBo(WBUid){
 				</div>
 			</div>
 			
-		</div>
+		</div> -->
 		<!-- 目前三篇微博的根  id="xixi" -->
-
-		<div id="changePage"
-			style="float: left; background: #fff; margin-top: 3px; margin-left: 50px;">
-			<div
-				style="float: left; background: #fff; width: 240px; border-right: 1px gray solid;">
+	</div>
+	<div id="changePage" class="changepage">
+			<div class="prepage">
 				<a href="javascript:void(0)" onclick="prePage()">上一页</a>
 			</div>
 			<select id="select1" onChange="selectPageNo(this)">
@@ -3963,14 +3961,13 @@ function findGroupWeiBo(WBUid){
         			}
         		%>
 			</select>
-			<div style="float: left; background: #fff; width: 240px;">
+			<div class="nextpage">
 				<a href="javascript:void(0)" onclick="nextPage()">下一页</a>
 			</div>
 		</div>
-	</div>
     
-    <div id="right-part">
-    	<div id="right-part-content">
+    <div id="right-part" class="right-part">
+    	<div id="right-part-content" class="right-part-content">
         	<a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
             <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
             <a href="javascript:void(0)" id="vip_img"><img src="front/image/vip_logo.jpg"/></a>
@@ -3988,42 +3985,11 @@ function findGroupWeiBo(WBUid){
             <span class="hot_topic_head">热门话题<a href="javascript:void(0)" onClick="letRandom()" id="huanyihuan" class="hot_topic_change">换一换</a></span>
             <div  id="hot_topic_content" class="hot_topic_content">
             	<c:forEach items="${Themes}" var="theme">
-            		<li style="margin-bottom:0px;"><a href="javascript:void(0)" class="hot_topic_detail">${theme.tname}</a><span class="hot_topic_detail_click">${theme.tview}</span></li>
+            		<li style="margin-bottom:0px;"><a href="javascript:void(0)" class="hot_topic_detail">${theme.tname}</a>
+            		<span class="hot_topic_detail_click">${theme.tview}</span></li>
             	</c:forEach>
 
 	</div>
-
-	<div id="right-part">
-		<div id="right-part-content">
-			<a href="javascript:void(0)" id="user_img"><img
-				style="width: 65px; height: 65px; border-radius: 10px;"
-				src="/weibouserimages/${sessionScope.user.uimgPath}" /></a> <a
-				href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
-			<a href="javascript:void(0)" id="vip_img"><img
-				src="front/image/vip_logo.jpg" /></a>
-			<div id="levelimg">
-				<a href="javascript:void(0)" id="level">Lv.10</a>
-			</div>
-			<div id="usernum">
-				<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>
-				<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>
-				<a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.WEIBONUM }</font>微博</a>
-			</div>
-		</div>
-
-		<div class="hot_topic">
-			<span class="hot_topic_head">热门话题<a href="javascript:void(0)"
-				onClick="letRandom()" id="huanyihuan" class="hot_topic_change">换一换</a></span>
-			<div id="hot_topic_content" class="hot_topic_content">
-				<c:forEach items="${Themes}" var="theme">
-					<li style="margin-bottom: 0px;"><a href="javascript:void(0)"
-						class="hot_topic_detail">${theme.tname}</a><span
-						class="hot_topic_detail_click">${theme.tview}</span></li>
-				</c:forEach>
-
-			</div>
-		</div>
-
 
 		<!-- <div class="goodfriend_trends">
 			<div id="goodfriend_trends_head">
@@ -4097,7 +4063,7 @@ function findGroupWeiBo(WBUid){
 								}
 							
 								var newStr = '';
-								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 								newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 								newStr += '<ul>';
 								newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -4298,7 +4264,7 @@ function findGroupWeiBo(WBUid){
 								var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 							
 								var newStr = '';
-								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 								newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 								newStr += '<ul>';
 								newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -4568,7 +4534,7 @@ function findGroupWeiBo(WBUid){
 								}
 							
 								var newStr = '';
-								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 								newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 								newStr += '<ul>';
 								newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -4769,7 +4735,7 @@ function findGroupWeiBo(WBUid){
 								var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 							
 								var newStr = '';
-								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 								newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 								newStr += '<ul>';
 								newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -5035,7 +5001,7 @@ function findGroupWeiBo(WBUid){
 								}
 							
 								var newStr = '';
-								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 								newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 								newStr += '<ul>';
 								newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
@@ -5236,7 +5202,7 @@ function findGroupWeiBo(WBUid){
 								var date = newDate.toLocaleString().substring(newDate.toLocaleString().indexOf(" "));
 							
 								var newStr = '';
-								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors("&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
+								newStr += '<a href="javascript:void(0)" class="center-part_way" id="center-part_way" onClick="showcenterhidediv(&quot;center-partchoose&quot;)" onMouseOver="changecentercolor(&quot;center-part_way&quot;)" onMouseOut="changecentercolors(&quot;center-part_way&quot;)"><img src="front/image/conter-part_wayimg01.png"/></a>';
 								newStr += '<div style="display:none;" class="center-partchoose"  id="center-partchoose" onMouseUp="hidecenterdiv(&quot;center-partchoose&quot;)">';
 								newStr += '<ul>';
 								newStr += '<li class="center-partc1" id="center-partchoose1" style="height:20px;width:130px;"><a href="javascript:void(0)" id="center-parta1">帮上头条</a></li><br>';
