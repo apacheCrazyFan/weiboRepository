@@ -2790,6 +2790,7 @@ function commentOthers(commentsWeiboAndOtherDivid,commentsWeiboAndOthertext){
 }
 	//控制评论标签栏的可见   
 	function addcommentdiv(commentdivid,wbid){
+		$("#"+commentdivid).empty();
 		var tips3=document.getElementById(commentdivid);
 		
 		$.ajax({

@@ -1295,7 +1295,7 @@ function findGroupWeiBo(WBUid){
 		if(uid != ""){
 			userid = parseInt(uid);
 		}
-		var pageSize = 15;
+		var pageSize = 120;
 		var pageNum = 1;
 		
 		$.ajax({
@@ -1778,7 +1778,7 @@ function findGroupWeiBo(WBUid){
 		if(uid != ""){
 			userid = parseInt(uid);
 		}
-		var pageSize = 15;
+		var pageSize = 120;
 		var pageNum = 1;
 		
 		$.ajax({
@@ -2263,7 +2263,7 @@ function findGroupWeiBo(WBUid){
 		if(uid != ""){
 			userid = parseInt(uid);
 		}
-		var pageSize = 15;
+		var pageSize = 120;
 		var pageNum = 1;
 		
 		$.ajax({
@@ -2750,7 +2750,7 @@ function findGroupWeiBo(WBUid){
 		if(uid != ""){
 			userid = parseInt(uid);
 		}
-		var pageSize = 15;
+		var pageSize = 120;
 		var pageNum = 1;
 		
 		$.ajax({

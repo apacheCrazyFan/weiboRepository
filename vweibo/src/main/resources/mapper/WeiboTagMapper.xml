@@ -19,10 +19,10 @@
 	</select>
 	
 	<update id="update" parameterType="Map">
-		update WeiboTag set WTname = #{wtname} where WTid = #{wtid}
+		update WeiboTag set WTname = #{wtname,jdbcType=VARCHAR} where WTid = #{wtid,jdbcType=INTEGER}
 	</update>
 	
 	<insert id="insert" parameterType="string">
-		insert into WeiboTag values (seq_wbt_wtid.nextval,#{wtname})
+		insert into WeiboTag values (seq_wbt_wtid.nextval,#{wtname,jdbcType=VARCHAR})
 	</insert>
 </mapper>

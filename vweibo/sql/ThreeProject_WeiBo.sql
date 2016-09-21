@@ -185,6 +185,14 @@ insert into WeiBoUser values(1002,'啊大大','sa','15675471111','15675471111@163.c
 insert into WeiBoUser values(1005,'admin','sa','15675470000','15675470000@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,日本',10000,'0x1f1ef0x1f1f5.png');
 
+insert into WeiBoUser values(1001,'挂机','sa','15675470001','15675470001@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1003,'嘿嘿','sa','15675470002','15675470002@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1004,'试试','sa','15675470003','15675470003@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1008,'解决','sa','15675470004','15675470004@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1009,'哈就好','sa','15675470005','15675470005@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+insert into WeiBoUser values(1010,'时候交互','sa','15675470006','15675470006@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
+
+
 update weibouser set uimgpath ='../../vweibo/weibouserimages/userimg.jpg' where wbuid=1001
 update weibouser set uimgpath ='../../vweibo/weibouserimages/userphoto3.png' where wbuid=1002
 
@@ -244,7 +252,10 @@ create table FanAndFaned(
 	FUedid int,							--被粉者
 	Fstatus varchar2(16)				--粉与被粉之间的py状态(好友圈,同学,同事,未分组,名人明星,悄悄关注,特别关注,其他自己添加的。。)
 );
-select * from FanAndFaned
+
+select * from FanAndFaned;
+
+
 insert into FanAndFaned values (1006,1021,'名人明星',sysdate);
 select  Uname from WeiBoUser where WBUid in (select distinct FUid from FanAndFaned where FUid=1006);
 
@@ -295,6 +306,36 @@ insert into FanAndFaned values(1001,1003,'同学');
 insert into FanAndFaned values(1001,1004,'同学');
 insert into FanAndFaned values(1001,1005,'同学');
 insert into FanAndFaned values(1001,1006,'同学');
+
+
+insert into FanAndFaned values(1003,1002,'同学');
+insert into FanAndFaned values(1003,1001,'同学');
+insert into FanAndFaned values(1003,1004,'同学');
+insert into FanAndFaned values(1003,1005,'同学');
+insert into FanAndFaned values(1003,1006,'同学');
+insert into FanAndFaned values(1003,1007,'同学');
+insert into FanAndFaned values(1003,1008,'好友圈');
+insert into FanAndFaned values(1003,1009,'好友圈');
+
+insert into FanAndFaned values(1005,1002,'同学');
+insert into FanAndFaned values(1005,1001,'同学');
+insert into FanAndFaned values(1005,1004,'同学');
+insert into FanAndFaned values(1005,1005,'同学');
+insert into FanAndFaned values(1005,1006,'同学');
+insert into FanAndFaned values(1005,1007,'同学');
+insert into FanAndFaned values(1005,1008,'好友圈');
+insert into FanAndFaned values(1005,1009,'好友圈');
+
+insert into FanAndFaned values(1007,1002,'同学');
+insert into FanAndFaned values(1007,1001,'同学');
+insert into FanAndFaned values(1007,1004,'好友圈');
+insert into FanAndFaned values(1007,1005,'好友圈');
+insert into FanAndFaned values(1007,1006,'好友圈');
+insert into FanAndFaned values(1007,1003,'同学');
+insert into FanAndFaned values(1007,1008,'好友圈');
+insert into FanAndFaned values(1007,1009,'好友圈');
+
+insert into FanAndFaned values(1007,1010,'大学');
 
 
 insert into FanAndFaned values(1001,1007,'未分组');
@@ -640,6 +681,8 @@ create table PrivateMessage(
        
        --预留字段
 );
+
+create sequence seq_pmid start with 10001
 
 select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=1008
 --微博访问权限设置

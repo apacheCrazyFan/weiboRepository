@@ -61,6 +61,6 @@
 	
 	<!-- 关注 -->
 	<insert id="guanzhu" parameterType="map">
-		insert into FanAndFaned values (#{FUid},#{FUedid},'名人明星',sysdate)	
+		insert into FanAndFaned values (#{FUid},#{FUedid},'名人明星')	
 	</insert>
 </mapper>
