@@ -1,5 +1,6 @@
 package com.yc.weibo.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,8 +98,25 @@ public class UserServiceImpl implements UserService {
 		userMapper.guanzhu(params);
 	}
 
+	@Override
+	public List<WeiBoUser> findAllUser(WeiBoUser param) {
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("start", param.getStart());
+		map.put("end", param.getEnd());
+		return userMapper.findAllUser(map);
+	}
 
-	
+	@Override
+	public int delUser(String wbuids) {
+		Map<String,Object> map=new HashMap<String,Object>();	
+		map.put("wbuids", wbuids);
+		return userMapper.delUser(map);
+	}
 
+	@Override
+	public int countAllUser(WeiBoUser param) {
+		
+		return userMapper.countAlluser(param);
+	}
 
 }

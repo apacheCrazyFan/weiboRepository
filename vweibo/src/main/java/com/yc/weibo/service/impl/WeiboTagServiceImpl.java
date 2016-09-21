@@ -38,7 +38,7 @@ public class WeiboTagServiceImpl implements WeiboTagService {
 	 * 插入微博标签
 	 */
 	@Override
-	public boolean insertWeiboTag(String wTname) {
+	public boolean addWeiboTag(String wTname) {
 		return weiboTagMapper.insert(wTname) > 0 ? true : false;
 	}
 

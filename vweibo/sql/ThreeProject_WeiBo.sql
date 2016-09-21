@@ -33,6 +33,8 @@ create table WeiBoTag(
 );
 select * from WeiboTag;
 select seq_wbt_wtid.nextval from dual;
+drop sequence seq_wbt_wtid from WeiboTag;
+create sequence seq_wbt_wtid start with 29;
 select wt.*
 from
 select wt.*,rownum rn from WeiboTag wt
@@ -43,8 +45,8 @@ from
 select wt.*,rownum rn from WeiboTag wt
 where rn > 10*(1-1) and rn <= 10*1;
 
-delete sequence seq_wbt_wtid from dual;
-create sequence seq_wbt_wtid start with 50;
+
+
 delete from WeiboTag where WTid in (1,2);
 
 insert into WeiBoTag values(1,'视频');
@@ -96,7 +98,8 @@ insert into WeiBoTag values(46,'三农');
 insert into WeiBoTag values(47,'设计');
 delete from WeiBoTag where WTname in ('国际','科技');
 
-
+drop table UserTagFather;
+select * from UserTagFather;
 create table UserTagFather(
 	UTFid int primary key,    --用户标签父类表
 	UTFname varchar2(20)
@@ -109,26 +112,29 @@ insert into UserTagFather values(3,'其他');
 create table UserTag(
        UTid int primary key,          --用户标签id
        UTname varchar2(20),          --用户标签名 
-       UTFid int references UserTagFather(UTFid)              
+       UTFid int              
        					   --   名人:明星 商界 作家 政府官员..
                            --   专家:医疗 育儿 IT互联网 电台 财经 教育.. 
                            --   其他：..
 );
+drop table UserTag;
+drop sequence seq_ut_utid
 create sequence seq_ut_utid start with 1 increment by 1;
 
-insert into UserTag values(1,'明星',1);
-insert into UserTag values(2,'作家',1);
-insert into UserTag values(3,'政府官员',1);
-insert into UserTag values(4,'商界',1);
+insert into UserTag values(seq_ut_utid.nextval,'明星',1);
+insert into UserTag values(seq_ut_utid.nextval,'作家',1);
+insert into UserTag values(seq_ut_utid.nextval,'政府官员',2);
+insert into UserTag values(seq_ut_utid.nextval,'商界',2);
 
-insert into UserTag values(5,'医疗',2);
-insert into UserTag values(6,'育儿',2);
-insert into UserTag values(7,'IT互联网',2);
-insert into UserTag values(8,'电台',2);
-insert into UserTag values(9,'财经',2);
-insert into UserTag values(10,'教育',2);
+insert into UserTag values(seq_ut_utid.nextval,'医疗',2);
+insert into UserTag values(seq_ut_utid.nextval,'育儿',2);
+insert into UserTag values(seq_ut_utid.nextval,'IT互联网',2);
+insert into UserTag values(seq_ut_utid.nextval,'电台',3);
+insert into UserTag values(seq_ut_utid.nextval,'财经',3);
+insert into UserTag values(seq_ut_utid.nextval,'教育',3);
 
-insert into UserTag values(11,'保姆',3);
+insert into UserTag values(seq_ut_utid.nextval,'保姆',1);
+insert into UserTag values(seq_ut_utid.nextval,'科学家',1);
 
 --insert into UserTag values(seq_ut_utid.nextval,'明星');
 --insert into UserTag values(seq_ut_utid.nextval,'作家');
@@ -392,7 +398,6 @@ create table WBandThe(
 --微博
 create table WeiBo(
        WBid int primary key,          --微博id
-       Tid int						  --话题id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
        WBUid int
@@ -408,6 +413,7 @@ create table WeiBo(
        WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
        --预留字段      
 );
+alter table WeiBo add Tid int;   --话题id
 select k.*,wbu.Uname,wbu.UimgPath from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
@@ -416,7 +422,7 @@ select k.*,wbu.Uname,wbu.UimgPath from
  			where rn > 15 * (1-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid;
  			
-alter table WeiBo add Tid int;
+
 
 create sequence seq_wb_wbid start with 10001 increment by 1;
 

@@ -63,4 +63,27 @@
 	<insert id="guanzhu" parameterType="map">
 		insert into FanAndFaned values (#{FUid},#{FUedid},'名人明星')	
 	</insert>
+	<delete id="delUser" parameterType="Map">
+		delete from weibouser where wbuid in ${wbuids}
+	</delete>
+	
+	<!-- 分页查找所有的用户 -->
+	<select id="findAllUser" parameterType="Map" resultType="WeiBoUser">
+		select * from
+		(select n.*,rownum rn from (select * from weibouser) n
+		where
+		#{end} >= rownum)
+		where rn >=#{start} 
+	</select>
+	
+	<!-- 通用的查找用户总数的方法 -->
+	<select id="countAlluser" parameterType="WeiBoUser" resultType="int">
+		select count(*) from weibouser 
+		<where>
+			1=1
+			<if test="Uname!=null"><!-- 这里只是第一个比方，可能你们没有这个需求，你之后可以自己改， -->
+				and uname=#{Uname}
+			</if>
+		</where>
+	</select>
 </mapper>

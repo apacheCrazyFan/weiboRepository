@@ -8,8 +8,7 @@
 	var flag;
 	
 	obj=$('#userTags_data').datagrid({
-		url:'user/tags',
-		queryParams:{op:'findAllUserTags'},
+		url:'usertag/findAllUserTagByPage',
 		fitColumns:true,
 		striped:true,
 		loadMsg:"数据加载中...",
@@ -18,31 +17,31 @@
 		pageNumber:1,
 		pageSize:10,
 		pageList:[10,15,20,25,30],
-		sortName:'UTid',
+		sortName:'utid',
 		remoteSort:false,
 		columns:[[
-			{field:'tid',title:'',width:100,align:'center',checkbox:true},
-			{field:'UTid',title:'用户标签编号',width:100,align:'center',sortable:true},
-			{field:'UTname',title:'用户标签名称',width:100,align:'center',editor:{type:'text',option:{requires:true}}}
+			{field:'utids',title:'',width:100,align:'center',checkbox:true},
+			{field:'utid',title:'用户标签编号',width:100,align:'center',sortable:true},
+			{field:'utname',title:'用户标签名称',width:100,align:'center',editor:{type:'text',option:{requires:true}}},
+			{field:'utfid',title:'用户标签类别',width:100,align:'center',editor:{type:'text',option:{requires:true}}}
 		]],
 		toolbar:[{
 			text:"添加",
 			iconCls:"icon-add",
 			handler:function(){
-				currentOp="addUserTag";
 				flag="添加";
-				if(editRow!=undefined){//说明有行正在被编辑
-					obj.datagrid("rejectChanges");//回滚所有数据
-					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
-					editRow=undefined;
-				}else{
-					var data = obj.datagrid("getData");
-					var total = data.total;
-					var Jstring = JSON.stringify(data);
-					obj.datagrid('insertRow',{index:total,row:{}});
-					obj.datagrid("beginEdit",total);
-					editRow=total;//记录当前被编辑的行的索引
-				}
+				currentOp="addUserTag";
+				if (editRow != undefined) {
+                    $("#userTags_data").datagrid('endEdit', editRow);
+                }
+                if (editRow == undefined) {
+                    $("#userTags_data").datagrid('insertRow', {
+                        index: 0,
+                        row: {}
+                    });
+                    $("#userTags_data").datagrid('beginEdit', 0);
+                    editRow = 0;
+                }
 			}
 		},{
 			text:'修改',
@@ -74,24 +73,25 @@
 			onClick:function(){
 			//获取选中的行
 				var rows=obj.datagrid("getChecked");
-				
 				if(rows[0]!=undefined){
 					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有新闻）?', function(rs){
 						if (rs){
-							var tids="";
+							var utids="";
 							for(var i=0;i<rows.length-1;i++){
-								tids += rows[i].UTid+",";
+								utids += rows[i].utid+",";
 							}
-							tids += rows[i].UTid;
+							utids += rows[i].utid;
 							
 							//发请求到数据库
-							$.post("user/tags",{op:"delUserTag",tids:tids},function(data){
+							$.post("usertag/delUserTag",{"utids":utids},function(data){
+								flag="删除";
+								data=JSON.parse(data);
 								if(data>0){
-									$.messager.show({title:'成功提示',msg:'新闻类型删除成功....',timeout:2000,showType:'slide'});
+									$.messager.show({title:'成功提示',msg:'人物标签删除成功....',timeout:2000,showType:'slide'});
 									rows=null;
 									obj.datagrid("reload");//刷新表格
 								}else{
-									$.messager.alert('失败提示','新闻类型删除失败,请确认该类别下无新闻....','error');
+									$.messager.alert('失败提示','人物标签删除失败,请确认该类别下无新闻....','error');
 								}
 							});
 						}else{
@@ -115,16 +115,17 @@
 					obj.datagrid("rejectChanges");//回滚所有数据
 					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
 					editRow=undefined;
-				}else if(rows.UTname==""){
+				}else if(rows.utname==""){
 					editRow=undefined;
 					obj.datagrid("rejectChanges");
 				}else{
 					//保存到数据库
 					//rows["op"]=currentOp;
-					var tid=$(rows).attr("UTid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
+					var utid=$(rows).attr("utid");//这里用$()将一个js对象包裹起来，将js对象转换成一个jquery对象
 					//jquery对象--》js对象    ===》1、$("#div").eq(0);  2、$("#div")[0]    
 					//alert(rows);
-					var tname=$(rows).attr("UTname");
+					var utname=$(rows).attr("utname");
+					var utfid=$(rows).attr("utfid");
 					//   $.post("url","data",function(data));//jquery中封装的post的方法
 						//url：请求的地址，不需要拼接参数，因为是用post提交的
 						//data：可以传一个js对象，但实际上是一个json的数据格式的字符串即可
@@ -132,12 +133,13 @@
 						//function（data)    :  回调的函数
 					//alert(rows);
 					//rows=$(rows);
-					$.post("user/tags",{"op":currentOp,"tid":tid,"tname":tname},function(data){
-						alert(data);
-						if(data>0){
+					$.post("usertag/"+currentOp,{"utid":utid,"utname":utname,"utfid":utfid},function(data){
+						//alert(data);
+						data=JSON.parse(data);
+						if(data.code>0){
 							$.messager.show({
 								title:'成功提示',
-								msg:'新闻类型'+flag+'成功....',
+								msg:'人物标签'+flag+'成功....',
 								timeout:2000,
 								showType:'slide'
 							});
@@ -148,7 +150,7 @@
 							obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
 							obj.datagrid("reload");//刷新表格
 						}else{
-							$.messager.alert('失败提示','新闻类型'+flag+'失败....','error');
+							$.messager.alert('失败提示','人物标签'+flag+'失败....','error');
 						}
 					});
 				}

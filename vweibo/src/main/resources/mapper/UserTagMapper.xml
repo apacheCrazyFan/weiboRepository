@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.weibo.mapper.UserTagMapper">
+	<delete id="del" parameterType="map">
+		delete from UserTag where utid in (${ids})
+	</delete>
+
+	<select id="findAll" resultType="UserTag">
+		select * from UserTag
+	</select>
+	
+	<select id="findByPage" parameterType="Map" resultType="UserTag">
+		select * from 
+		(select n.*,rownum rn from (select * from UserTag) n 
+		where #{pageSize} * #{pageNum} >= rownum)
+		where rn > #{pageSize} * (#{pageNum} - 1)
+	</select>
+	<update id="update" parameterType="Map"><!-- 你这里要和你传进来的参数保持一致，如果传进来的是map，就是 按照map里面的键的名字， 如果是实体类，就是按照实体类里面 的名字，   大小写也要区分 -->
+		update UserTag set UTname = #{utname},utfid=#{utfid} where UTid = #{utid}
+	</update>
+	
+	<insert id="insert" parameterType="UserTag">
+		insert into UserTag values (seq_ut_utid.nextval,#{UTname},#{UTFid})
+	</insert>
+</mapper>
