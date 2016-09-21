@@ -24,4 +24,14 @@ public class PMServiceImpl implements PMService {
 		return pmMapper.talkToPmUser(pm1user, pm2user, pmcontent);
 	}
 
+	@Override
+	public List<PrivateMessage> checkPMIfRead(int pm2user) {
+		return pmMapper.checkPMIfRead(pm2user);
+	}
+
+	@Override
+	public int PMIsRead(int pm1user, int pm2user) {
+		return pmMapper.PMIsRead(pm1user, pm2user);
+	}
+
 }

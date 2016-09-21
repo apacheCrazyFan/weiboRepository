@@ -590,7 +590,7 @@ $(window).scroll(function(){
 		
 		var newStr = '';
 		
-		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'"/></a>';
+		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" style="width:65px;height:65px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
 		newStr += '<ul id="center-part_ul">';
 		newStr += '<li id="center-part_li">'+username+'</li>';
         newStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
