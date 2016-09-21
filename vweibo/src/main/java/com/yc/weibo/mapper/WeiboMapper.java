@@ -70,6 +70,12 @@ public interface WeiboMapper {
 	 * @return
 	 */
 	List<Weibo> findWeiboByPage(Map<String,Object> map);
+	/**
+	 * 删除微博
+	 * @param wBUid
+	 * @return
+	 */
+	int delWeibo(Map<String,Object> map);
 
 	List<Weibo> findMyZan(int wBUid);
 	
@@ -83,4 +89,5 @@ public interface WeiboMapper {
 	
 	List<Weibo> findMyPhoto(Integer WBUid);
 	List<WeiBoUser> findMyFans(Integer WBUid);
+	
 }

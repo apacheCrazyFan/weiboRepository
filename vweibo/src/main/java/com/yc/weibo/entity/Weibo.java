@@ -3,7 +3,7 @@ package com.yc.weibo.entity;
 
 import java.util.Date;
 
-public class Weibo {
+public class Weibo extends BaseEntity{
 	 private int tid;            //话题id
 	 private int WBid;          //--微博id
      private String WBtag;      //--微博标签（）

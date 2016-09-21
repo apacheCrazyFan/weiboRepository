@@ -1,0 +1,93 @@
+
+<table id="weibo_data" style="position:relative;z-index:2"></table>
+
+<script type="text/javascript">
+	var obj;
+	var editRow=undefined;//记录当前正在被编辑的行
+	var currentOp;
+	var flag;
+	
+	obj=$('#weibo_data').datagrid({
+		url:'weibo/findAllWeibo',
+		fitColumns:true,
+		striped:true,
+		loadMsg:"数据加载中...",
+		pagination:true,
+		fit:true,
+		pageNumber:1,
+		pageSize:10,
+		pageList:[10,20,30,40,50],
+		sortName:'wbid',
+		remoteSort:false,
+		columns:[[
+			{field:'wbids',title:'',width:100,align:'center',checkbox:true},
+			{field:'wbid',title:'微博编号',width:100,align:'center',sortable:true},
+			{field:'tid',title:'话题编号',width:100,align:'center'},
+			{field:'wbtag',title:'微博标签',width:100,align:'center'},
+			{field:'wbtitle',title:'微博标题',width:100,align:'center'},
+			{field:'wbuid',title:'用户编号',width:100,align:'center'},
+			{field:'wbpic',title:'微博图片',width:100,align:'center'},
+			{field:'wbvideo',title:'微博视频',width:100,align:'center'},
+			{field:'wbmusic',title:'微博音乐',width:100,align:'center'},
+			{field:'yesorno',title:'是否产生话题',width:100,align:'center'},
+			{field:'yon',title:'是否转发微博',width:100,align:'center'},
+			{field:'wblocation',title:'发表地址',width:100,align:'center'},
+			{field:'wbstatus',title:'微博状态',width:100,align:'center'},
+			{field:'wbdate',title:'微博日期',width:100,align:'center',
+				 formatter:function(value,row,index){  
+                     var unixTimestamp = new Date(value);  
+                     return unixTimestamp.toLocaleString();  
+                 }  
+			},
+			{field:'wbtxt',title:'微博文字内容',width:100,align:'center',editor:{type:'text',option:{requires:true}}},
+		]],
+		toolbar:[{
+			text:'删除',
+			iconCls:"icon-remove",
+			onClick:function(){
+			//获取选中的行
+				var rows=obj.datagrid("getChecked");
+				//alert(typeof rows[0].tid);
+				if(rows[0]!=undefined){
+					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有微博）?', function(rs){
+						if (rs){
+							var wbids = "";
+							for(var i=0;i<rows.length-1;i++){
+								wbids += rows[i].wbid+",";//到这里 是对的，
+							}
+							wbids += rows[i].wbid;
+							
+							//发请求到数据库
+							$.post("weibo/delWeibo",{"wbids":wbids},function(data){
+								flag="删除";
+								data=JSON.parse(data);
+								//alert(data.code);
+								if(data.code>0){
+									$.messager.show({title:'成功提示',msg:data.desc,timeout:2000,showType:'slide'});
+									rows=null;
+									obj.datagrid("reload");//刷新表格
+								}else{
+									$.messager.alert('失败提示',data.desc,'error');
+								}
+							});
+						}else{
+							return;	
+						}
+					});
+				}else{
+					$.messager.show({title:'温馨提示',msg:'请选中您要删除的数据.....',timeout:2000,showType:'slide'});
+				}
+			}
+		},{
+			text:'撤销',
+			iconCls:"icon-redo",
+			handler:function(){
+				obj.datagrid("rejectChanges");//回滚所有数据
+				obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+				editRow=undefined;	
+			}
+		}]
+	});
+	
+	
+</script>

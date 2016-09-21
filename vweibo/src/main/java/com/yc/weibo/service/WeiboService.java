@@ -67,6 +67,12 @@ public interface WeiboService {
 	 * @return
 	 */
 	List<Weibo> findWeiboByPage(Map<String, Object> params);
+	/**
+	 * 删除微博
+	 * @param wBUid
+	 * @return
+	 */
+	int delWeibo(String wbids);
 
 	List<Weibo> findMyZan(int wBUid);
 	List<Map<String, Object>> findWeiBoByWBtag(Map<String, Object> params);

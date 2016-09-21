@@ -126,11 +126,11 @@
 								data=JSON.parse(data);
 								//alert(data.code);
 								if(data.code>0){
-									$.messager.show({title:'成功提示',msg:'微博标签删除成功....',timeout:2000,showType:'slide'});
+									$.messager.show({title:'成功提示',msg:'话题删除成功....',timeout:2000,showType:'slide'});
 									rows=null;
 									obj.datagrid("reload");//刷新表格
 								}else{
-									$.messager.alert('失败提示','微博标签删除失败,请确认该类别下无微博....','error');
+									$.messager.alert('失败提示','话题删除失败,请确认该类别下无微博....','error');
 								}
 							});
 						}else{
@@ -170,7 +170,7 @@
 						if(data.code>0){
 							$.messager.show({
 								title:'成功提示',
-								msg:'新闻类型'+flag+'成功....',
+								msg:'话题'+flag+'成功....',
 								timeout:2000,
 								showType:'slide'
 							});
@@ -181,7 +181,7 @@
 							obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
 							obj.datagrid("reload");//刷新表格
 						}else{
-							$.messager.alert('失败提示','微博标签'+flag+'失败....','error');
+							$.messager.alert('失败提示','话题'+flag+'失败....','error');
 						}
 					});
 				}

@@ -243,6 +243,7 @@
 		select * from (select a.* ,rownum rn from (select * from weibo)a) where rn>#{start} and #{end}>=rn
 	</select>
 	
+	<!-- 通用的     计算总数的方法，  不传东西就是全部的 -->
 	<select id="WBTfindCount" resultType="int" parameterType="Map">
 		select count(*) from weibo
 		<where>
@@ -254,4 +255,7 @@
 			</if>
 		</where>
 	</select>
+	<delete id="delWeibo" parameterType="Map"><!-- 你传进来的是String，就写String -->
+		delete from weibo where wbid in ${wbids}
+	</delete>
 </mapper>
