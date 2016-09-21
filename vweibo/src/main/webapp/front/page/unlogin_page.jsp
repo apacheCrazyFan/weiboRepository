@@ -51,7 +51,7 @@
             <a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="啦啦啦" src="front/image/userphoto003.png"/></a>
                 <ul id="center-part_ul">
                 	<li id="center-part_li">APP菌</li>
-                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
+                    <li style="height:0px;width:250px;"><a href="javascript:void(0)">8</a>分钟前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p">【The Clocks】跟Fliqlo类似，都是拍照时候的背景神器[
                 doge]！而且相比之下TheClocks有数字和指针两种形式，还可以设定闹铃中区也有，而且free帮APP菌卖安利#</p>
@@ -126,7 +126,7 @@
    
                 <ul id="center-part_ul">
                 	<li id="center-part_li">百科酱</li>
-                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">3</a>小时前 来自 weibo.com</li>
+                    <li style="height:0px;width:250px;"><a href="javascript:void(0)">3</a>小时前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p">阿里巴巴集团董事局主席马云成功的十大法则！不要抱怨，寻找机会，时刻拥有梦想，尊重文化，取一个好听的名字</p>
                <div id="content_img01" style="width:"><img src="front/image/weiboimg002.png"/>
@@ -200,7 +200,7 @@
    
                 <ul id="center-part_ul">
                 	<li id="center-part_li">网易云音乐</li>
-                    <li style="height:0px;width:150px;"><a href="javascript:void(0)">20</a>分钟前 来自 weibo.com</li>
+                    <li style="height:0px;width:250px;"><a href="javascript:void(0)">20</a>分钟前 来自 weibo.com</li>
                 </ul>
                 <p id="center-part_p">音乐一响起，好似曾经的追剧时光回来了！用一首歌的时间去感受中国电视剧20年！一起来看！</p>
                <div id="content_img01">
@@ -593,7 +593,7 @@ $(window).scroll(function(){
 		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" style="width:65px;height:65px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
 		newStr += '<ul id="center-part_ul">';
 		newStr += '<li id="center-part_li">'+username+'</li>';
-        newStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+        newStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         newStr += '</ul>';
         
 		//表情处理

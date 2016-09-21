@@ -54,8 +54,12 @@ $.ajax({
 				newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
 				newStr += '<ul id="center-part_ul">';
 				newStr += '<li id="center-part_li">'+username+'</li>';
+
             	newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
             	newStr += '</ul>';
+            	newStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+                newStr += '</ul>';
+
                 
 				//表情处理
 				var newContent ='';
@@ -273,7 +277,7 @@ $(window).scroll(function(){
 		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" style="width:65px;height:65px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
 		newStr += '<ul id="center-part_ul">';
 		newStr += '<li id="center-part_li">'+username+'</li>';
-        newStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+        newStr += '<li style="height:0px;width:250px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
         newStr += '</ul>';
         
 		//表情处理

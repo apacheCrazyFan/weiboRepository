@@ -11,4 +11,7 @@ public interface PMService {
 	
 	int talkToPmUser(int pm1user,int pm2user,String pmcontent);
 	
+	List<PrivateMessage> checkPMIfRead(int pm2user);
+	
+	int PMIsRead(int pm1user,int pm2user);
 }

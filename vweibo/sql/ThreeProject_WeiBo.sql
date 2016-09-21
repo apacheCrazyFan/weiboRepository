@@ -185,6 +185,8 @@ insert into WeiBoUser values(1002,'啊大大','sa','15675471111','15675471111@163.c
 insert into WeiBoUser values(1005,'admin','sa','15675470000','15675470000@163.com','f',22,null,sysdate,null,null,'女汉子','java工程师,学生,美容',10000,'CN');
 insert into WeiBoUser values(seq_WeiBoUser_Wbuid.nextval,'巴拉拉','sa','15675471040','1373930633@qq.com',default,22,null,sysdate,null,null,'爱国的大好青年','java工程师,日本',10000,'0x1f1ef0x1f1f5.png');
 
+update weibouser set uimgpath ='../../vweibo/weibouserimages/userimg.jpg' where wbuid=1001
+update weibouser set uimgpath ='../../vweibo/weibouserimages/userphoto3.png' where wbuid=1002
 
 delete from WeiBoUser where WBUid in (1001,1002);
 
@@ -212,6 +214,7 @@ create table Relationship(
        
        --预留字段 
 );
+
 select * from Relationship;
 select * from Groups;
 drop table Groups;
@@ -250,12 +253,9 @@ alter table FanAndFaned add Fdate Date;
 alter table FanAndFaned drop constraint pk_faf_fff;
 alter table FanAndFaned add constraint pk_faf_fff primary key(FUid,FUedid,Fstatus);
 
-<<<<<<< HEAD
 delete from  FanAndFaned where FUid=1006 and FUedid=1021;
-=======
 drop table FanAndFaned;
 select fuedid from fanandfaned where fuid=1001 and fstatus='好友圈'
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 
 select FUid,FUedid,Fstatus from FanAndFaned where Fuid=1001 and Fstatus='好友圈';
 select count(*),distinct(fstatus) from FanAndFaned where Fuid = 1001; 
@@ -574,7 +574,7 @@ create table WeiboAndWeibo(
 	TWBid int
 );
 select * from WeiboAndWeibo;
-
+select * from Comments;
 --评论（回复）微博表  --找爸爸
 create table Comments(
        Cid int primary key,          	--评论（回复）id
@@ -637,11 +637,13 @@ create table PrivateMessage(
        PM1user int,                   --发信人
        PM2user int,                   --收信人
        PMcontent varchar2(500),       --信息内容(  [文字，图片，视屏，url，文件，语音]  到时候再想吧)
-       PMdate Date                   --信息日期
-       
-       --预留字段
+       PMdate Date  ,                 --信息日期
+       PMRead varchar2(4)           --已读或未读（Y N）
+      
 );
-
+select * from PrivateMessage
+select * from PrivateMessage where PMRead='N' and pm2user=1001
+drop table PrivateMessage
 select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=1008
 --微博访问权限设置
 create table PersonalPermission(
