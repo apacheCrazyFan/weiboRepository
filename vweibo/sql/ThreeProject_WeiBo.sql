@@ -32,7 +32,10 @@ create table WeiBoTag(
                           --政务 游戏 旅游 育儿 教育 美食 房产 家居 星座 读书 三农 设计
 );
 select * from WeiboTag;
+
 select seq_wbt_wtid.nextval from dual;
+
+
 select wt.*
 from
 select wt.*,rownum rn from WeiboTag wt
@@ -44,8 +47,12 @@ select wt.*,rownum rn from WeiboTag wt
 where rn > 10*(1-1) and rn <= 10*1;
 
 delete sequence seq_wbt_wtid from dual;
-create sequence seq_wbt_wtid start with 50;
 delete from WeiboTag where WTid in (1,2);
+
+
+create sequence seq_wbt_wtid start with 50;
+
+
 
 insert into WeiBoTag values(1,'视频');
 insert into WeiBoTag values(2,'衡阳');
@@ -207,6 +214,11 @@ update WeiBoUser set Uemail = '15675470000@163.com' where WBUid = 1005;
 update WeiBoUser set UimgPath='zanwu.jpg' where WBUid=1002;
 update WeiBoUser set UimgPath='userimg.jpg' where WBUid=1005;
 update WeiBoUser set UimgPath='userphoto003.png' where WBUid=1006;
+update WeiBoUser set UimgPath='IMG_0369.JPG' where WBUid=1007;
+update WeiBoUser set UimgPath='IMG_0442.JPG' where WBUid=1001;
+update WeiBoUser set UimgPath='IMG_0443.JPG' where WBUid=1003;
+update WeiBoUser set UimgPath='IMG_0448.JPG' where WBUid=1004;
+update WeiBoUser set UimgPath='IMG_0449.JPG' where WBUid=1008;
 
 
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
