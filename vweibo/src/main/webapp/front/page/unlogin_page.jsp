@@ -5,7 +5,8 @@
 <head>
 <meta charset="utf-8">
 <base href="/vweibo/">
-<title>登录前的页面</title>
+<title>享悦-未登录</title>
+<link rel="shortcut icon" href="front/image/title_logo.png">
 <link type="text/css" rel="stylesheet" href="front/css/unlogin_page.css"/>
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="front/js/unlogin_page.js"></script>

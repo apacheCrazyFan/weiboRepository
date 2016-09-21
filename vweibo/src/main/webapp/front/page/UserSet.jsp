@@ -5,7 +5,8 @@
 <head>
 <base href="/vweibo/">
 <meta charset="utf-8">
-<title>无标题文档</title>
+<title>享悦-个人设置</title>
+<link rel="shortcut icon" href="front/image/title_logo.png">
 <link rel="stylesheet" href="front/css/UserSet.css">
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script src="front/js/UserSet.js"></script>
@@ -13,6 +14,7 @@
 
 </head>
 <body>
+
 	<input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 	<input type="hidden" value="${sessionScope.user.uphone}"
 		id="hiddenphone">

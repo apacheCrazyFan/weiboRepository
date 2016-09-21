@@ -5,7 +5,8 @@
 <head>
 <meta charset="utf-8">
 <base href="/vweibo/"/>
-<title>无标题文档</title>
+<title>享悦-个人设置</title>
+<link rel="shortcut icon" href="front/image/title_logo.png">
 <link rel="stylesheet" href="front/css/UserSet_message.css">
 <script src="front/js/jquery-1.11.1.min.js"></script>
 <script src="front/js/UserSet_message.js"></script>

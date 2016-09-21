@@ -5,8 +5,8 @@
 <head>
 <base href="/vweibo/"/>
 <meta content="text/html; charset=utf-8 pageEncoding=utf-8"/>
-<title>我的首页 微博-随时随地发现新鲜事</title>
-
+<title>我的首页-享悦</title>
+<link rel="shortcut icon" href="front/image/title_logo.png">
 <link type="text/css" rel="stylesheet" href="front/css/Personal.css"/>
 
 </head>
@@ -19,36 +19,22 @@
 <body>
 <input type="hidden" value="${sessionScope.user.WBUid}" id="hiddenid">
 <input type="hidden" id="operation" value="<%=operation %>">
-	<div class="head" id="head">
-    	<div id="logo" class="headSon"><img src="front/image/helpArea_image/logoArea_logo.png"/></div>
-  
-        <div id="search" class="headSon">
-        	<ul>
-            	<li><input type="text" id="search-text" placeholder="大家正在搜：像贵妃一样怀个孕"/></li>
-                <li><a href="#"><img src="front/image/icon_search.png" id="search-icon"/></a></li>
-            </ul>
-
+	<div id="header">
+    	<img class="head_logo" src="front/image/found_image/head_logo_sh_mini.png"/>
+        <div class="searchTextBorder">
+        	<input type="text" class="searchText" placeholder="微微一笑很倾城" onClick="searchClick()" onBlur="searchBlur()"/>
+            <a href="#" class="search_pic"></a>
         </div>
-        
-        <div id="something" class="headSon">
-       		<ul class="headDetails" id="headDetails">      
-          		<li class="a"><a href="#?PersonalIndex="><img src="front/image/index.png"/></a></li>
-            	<li class="a"><a href="#?Find="><img src="front/image/found.png"/></a></li>
-            	<li class="a"><a href="#?Game="><img src="front/image/game.png"/></a></li>
-            	<li id="weiboname"><a href="front/page/afterlogin.jsp">
-           			<img src="front/image/people.png"/>${sessionScope.user.uname}
-                	</a></li>
+        <ul>
+        	<li><a href="http://localhost:8080/vweibo/front/page/afterlogin.jsp" class="homePage">首页</a></li>
+            <li><a href="http://localhost:8080/vweibo/front/page/found_hotWeibo.jsp?WBUid=${sessionScope.user.WBUid}" class="foundPage">发现</a></li>
+            <li><a href="http://localhost:8080/vweibo/front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>
+        <div class="settingArea">
+        	<a href="http://localhost:8080/vweibo/front/page/messagebox.jsp?wbuid=${sessionScope.user.WBUid}" class="message_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/UserSet.jsp?wbuid=${sessionScope.user.WBUid}" target="_blank" class="setting_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp?wbuid=${sessionScope.user.WBUid}" class="help_pic"></a>
         </div>
-  
-        
-        <div id="MsgAndSetting" class="headSon">
-        	<ul class="headDetails" id="headDetails">
-            	<li><a href="MSG"><img src="front/image/chat.png"/></a></li>
-            	<li><a href="SETTING"><img src="front/image/set.png"/></a></li>
-                <li><a href="WRITE"><img src="front/image/write.png"/></a></li>
-        	</ul>
-        </div>   
     </div>
     
     <div id="content">

@@ -11,72 +11,157 @@ body{
 	text-align:center;
 	/* background:url(../image/IMG_0110.JPG) repeat; */
 	}
-
-#head{
-	position:fixed;
-	z-index:99;
+li{
+	list-style:none;
+}
+#header{
 	width:100%;
-	height:50px;
+	height:53px;
+	border-top:2px solid red;
 	background:#FFF;
-	}
-#head .headSon{
-	float:left;
+	opacity:0.95;
 	position:fixed;
+	z-index:999;}
+.head_logo{
+	margin-left:-930px;
+	margin-top:5px;}
+.searchTextBorder{
+	width:240px;
+	height:30px;
+	border:1px solid #999;
+	margin-left:280px;
+	margin-top:-40px;
+	background:#F2F2F2;}
+.searchText{
+	width:200px;
+	border:none;
+	background:#f2f2f2;
+	margin-left:10px;
+	margin-top:8px;}
+.search_pic{
+	display:inline-block;
+	width:18px;
+	height:18px;
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	background:url(../image/found_image/icon_head_0.png) no-repeat;
 	}
-#head #logo{
-	margin-left:120px;
+.search_pic:hover{
+	background:url(../image/found_image/icon_head_0_1.png) no-repeat;
+}
+#header ul li{
+	float:left;
+	margin-left:20px;
+}
+#header ul{
+	position:absolute;
+	left:530px;
+	top:15px;
+	width:530px;
+	height:25px;
+	border-right:1px solid #CCC;}
+
+#header ul li a{
+	font:500 16px "幼圆";
+	color:#666;
 	}
-#head #search{
-	height:50px;
-	margin-left:260px;
+.homePage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_1.jpg) no-repeat;
+	padding-left:26px;
+	padding-top:3px;}
+#header ul li .homePage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_1_1.jpg) no-repeat;}
+.videoPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_2.jpg) no-repeat;
+	padding-left:31px;
+	padding-top:3px;}
+#header ul li .videoPage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_2_1.jpg) no-repeat;}
+.foundPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_3.jpg) no-repeat;
+	padding-left:27px;
+	padding-top:3px;
 	}
-#head #something{
+#header ul li .foundPage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_3_1.jpg) no-repeat;}
+.gamePage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_4.jpg) no-repeat;
+	padding-left:29px;
+	padding-top:3px;}
+#header ul li .gamePage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_4_1.jpg) no-repeat;}	
+.personPage{
+	display:inline-block;
+	height:24px;
+	background:url(../image/found_image/icon_head_5.jpg) no-repeat;
+	padding-left:24px;
+	padding-top:3px;}	
+#header ul li .personPage:hover{
+	color:#F63;
+	background:url(../image/found_image/icon_head_5_1.jpg) no-repeat;}
+	
+.settingArea{
+	width:260px;
+	height:35px;
+	float:right;}
+.message_pic{
+	display:inline-block;
+	width:21px;
+	height:17px;
+	background:url(../image/found_image/icon_head_6.jpg) no-repeat;
+	position:relative;
+	top:-30px;
+}
+.message_pic:hover{
+	width:21px;
+	height:17px;
+	background:url(../image/found_image/icon_head_6_1.jpg) no-repeat;}
+.setting_pic{
+	display:inline-block;
+	width:23px;
 	height:20px;
-	margin-left:750px;
-	margin-top:15px;
-	border-right:solid #999 1px;
-	padding-right:10px;
-	}
-#head #MsgAndSetting{
-	margin-top:15px;
-	margin-left:1170px;
-	}
-#head #search li{
-	float:left;
-	list-style:none;
-	}
-#head #search img{
-	margin-top:15px;
-	height:25px;
-	}
-#head #search input{
-	margin-top:15px;
-	height:25px;
-	width:400px;
-	}
-#head #something #headDetails .a{
-	float:left;
-	width:60px;
-	list-style:none;
+	background:url(../image/found_image/icon_head_7.jpg) no-repeat;
 	margin-left:20px;
-	font-size:12px;
-	}
-#head #MsgAndSetting #headDetails li{
-	float:left;
-	width:30px;
-	list-style:none;
+	position:relative;
+	top:-30px;}
+.setting_pic:hover{
+	width:23px;
+	height:20px;
+	background:url(../image/found_image/icon_head_7_1.jpg) no-repeat 2px 0px;}
+.sendMess_pic{
+	display:inline-block;
+	width:28px;
+	height:27px;
+	background:url(../image/found_image/icon_head_8.jpg) repeat;
 	margin-left:20px;
-	font-size:12px;
+	position:relative;
+	top:-30px;
 	}
-#weiboname{
-	float:left;
-	list-style:none;
+.help_pic{
+	display:inline-block;
+	width:17px;
+	height:28px;
+	background:url(../image/found_image/icon_head9.jpg) no-repeat;
 	margin-left:20px;
-	font-size:12px;
-	width:140px;
-	}
-	
-	
+	position:relative;
+	top:-30px;
+}
+.help_pic:hover{
+	background:url(../image/found_image/icon_head9_1.jpg) no-repeat;
+}
 	
 #content{
 	padding-top:80px;
