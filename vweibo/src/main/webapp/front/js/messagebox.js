@@ -1,6 +1,7 @@
 var hisid=0;
 var myid=0;
 var i ;
+var read;
 $(function(){
 	var url=window.location.href;
 	myid=url.substring(61);
@@ -37,6 +38,22 @@ $(function(){
 		}
 		
 	});
+	
+	read= setInterval(function() { 
+			var str="";
+			$.ajax({
+				url:"../../../../vweibo/message/checkPMIfRead",
+				type:"POST",
+				data:{"pm2user":myid},
+				dataType:"JSON",
+				success: function(data){
+					if(data!=null){
+						for(var i=0;i<data.length;i++)
+						$('.detailremind'+data[i].pm1user).show();
+					}
+				}
+			});
+		},1000);
 });
 function messListClick(messId){
 	for(var i=1;i<=4;i++){
@@ -111,20 +128,35 @@ function startChat(nameId){
 		});
 	}, 1000); 
 	hisid=nameId;
+	
+	$.ajax({
+		url:"../../../../vweibo/message/PMIsRead",
+		type:"POST",
+		data:{"pm1user":hisid,"pm2user":myid},
+		dataType:"JSON",
+		success: function(data){
+			if(data==1){
+				$('.detailremind'+hisid).hide();
+			}
+		}
+	});
 }
 function sendMessage(){
 	var content=$('.chatText').val();
-	console.info(content);
-	$.ajax({
-		url:"../../../../vweibo/message/talkToPmUser",
-		type:"POST",
-		data:{"pm1user":myid,"pm2user":hisid,"pmcontent":content},
-		dataType:"JSON",
-		success: function(data){
-			
-		}
-	});
-	$('.chatText').val("");
+	if(content==""||content==null){
+		alert("输入的内容不能为空！！！");
+	}else{
+		$.ajax({
+			url:"../../../../vweibo/message/talkToPmUser",
+			type:"POST",
+			data:{"pm1user":myid,"pm2user":hisid,"pmcontent":content},
+			dataType:"JSON",
+			success: function(data){
+				
+			}
+		});
+		$('.chatText').val("");
+	}
 }
 function returnChatList(){
 	$('.center0').show();

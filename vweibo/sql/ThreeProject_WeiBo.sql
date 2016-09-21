@@ -214,6 +214,7 @@ create table Relationship(
        
        --预留字段 
 );
+
 select * from Relationship;
 select * from Groups;
 drop table Groups;
@@ -636,11 +637,13 @@ create table PrivateMessage(
        PM1user int,                   --发信人
        PM2user int,                   --收信人
        PMcontent varchar2(500),       --信息内容(  [文字，图片，视屏，url，文件，语音]  到时候再想吧)
-       PMdate Date                   --信息日期
-       
-       --预留字段
+       PMdate Date  ,                 --信息日期
+       PMRead varchar2(4)           --已读或未读（Y N）
+      
 );
-
+select * from PrivateMessage
+select * from PrivateMessage where PMRead='N' and pm2user=1001
+drop table PrivateMessage
 select distinct(weibouser.uname) uname from fanandfaned,weibouser where fanandfaned.fuedid=weibouser.wbuid and fuedid=1008
 --微博访问权限设置
 create table PersonalPermission(
