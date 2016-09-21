@@ -12,14 +12,21 @@ drop table Groups;
 drop table UserTagFather;
 drop table FanAndFaned;
 drop table Theme;
-drop table WBandThe;
 drop table WeiBo;
+drop table WBandThe;
 drop table WeiBoHelp;
 drop table Operate;
 drop table WeiboAndWeibo;
 
+select * from WeiBo;
+select * from  WBandThe;
+select * from  WeiBoHelp;
+select * from  Operate;
+select * from  WeiboAndWeibo;
 
+select * from Theme;
 select * from Admin;
+
 insert into Admin values('admin','sa');
 
 --微博标签表
@@ -219,7 +226,8 @@ update WeiBoUser set UimgPath='IMG_0442.JPG' where WBUid=1001;
 update WeiBoUser set UimgPath='IMG_0443.JPG' where WBUid=1003;
 update WeiBoUser set UimgPath='IMG_0448.JPG' where WBUid=1004;
 update WeiBoUser set UimgPath='IMG_0449.JPG' where WBUid=1008;
-
+update WeiBoUser set UimgPath='IMG_0450.JPG' where WBUid=1009;
+update WeiBoUser set UimgPath='IMG_0451.JPG' where WBUid=1010;
 
 update WeiBoUser set Uemail='15675470000@qq.com' where WBUid=1002;
 update WeiBoUser set Uemail='15675471111@qq.com' where WBUid=1005;
@@ -251,6 +259,9 @@ insert into Groups values (2002,'学习',1006,to_date('2016-05-12','yyyy-mm-dd'));
 insert into Groups values (2001,'学习',1006,to_date('2016-05-12','yyyy-mm-dd'));
 insert into Groups values (2001,'学习',1002,to_date('2016-09-18','yyyy-mm-dd'));
 insert into Groups values (2001,'学习',1005,to_date('2016-08-05','yyyy-mm-dd'));
+
+
+select * from Groups;
 
 select distinct WBUid from Groups where Gid in(select Gid from Groups where WBUid=1006);
 --黑名单
@@ -404,7 +415,6 @@ create table WBandThe(
 --微博
 create table WeiBo(
        WBid int primary key,          --微博id
-       Tid int						  --话题id
        WBtag varchar2(50),            --微博标签（）
        WBtitle varchar2(100),         --微博标题（可以写，也可以不写，但必须有）
        WBUid int
@@ -417,9 +427,17 @@ create table WeiBo(
        yesOrno char(2),				  --是否是话题产生的weibo	
        yon char(2),					  --是否是转发微博  --这个有点重要吧
        WBlocation varchar2(120),	  --发表微博的地址
-       WBstatue int					  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
+       WBstatue int				  --微博的状态 是否公开，群可见，好友圈可见，尽自己可见
+       --Tid int						  --话题id
        --预留字段      
 );
+
+alter table WeiBo add Tid int;
+drop table WeiBo;
+
+select * from WeiBo;
+
+
 select k.*,wbu.Uname,wbu.UimgPath from
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
@@ -614,9 +632,7 @@ select * from Operate;
 select * from WeiboAndWeibo;
 
 
-drop table WeiBo;
-drop table WeiBoHelp;
-drop table Operate;
+
 insert into Operate values(seq_op_oid.nextval,1006,10001,'收藏',null);
 
 select w.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from (select * from WeiBo where WBid = 10582) w,WeiBoHelp h where w.WBid = h.WBid
@@ -642,6 +658,11 @@ create table Comments(
 );
 create sequence seq_comments_cid start with 100001 increment by 1;
 
+select * from Comments;
+
+select * from WeiBoUser;
+
+select * from WeiBo;
 
 select Cid,ContentTxt,Cdate,CgreateAccount,s1.UimgPath,Ucomment,u1.Uname as Ucommented from
 (select s.*,c1.WBUid as commentid from
@@ -694,7 +715,7 @@ create table PrivateMessage(
        PMRead varchar2(4)           --已读或未读（Y N）
       
 );
-
+select * from PrivateMessage;
 
 create sequence seq_pmid start with 10001
 

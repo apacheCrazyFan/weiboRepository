@@ -62,10 +62,8 @@ public class WeiboHandler {
 	private WeiboService weiboService;
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private ThemeService themeService;
-
 	@Autowired
 	private WeiboAndWeiboService weiboAndWeiboService;
 	@Autowired
@@ -253,6 +251,7 @@ public class WeiboHandler {
 		String statue = request.getParameter("statue");
 		String userlocation = AddressUtil.getLocation();
 
+		System.out.println( userlocation+"--------------------------------------------------");
 		System.out.println(txtContent + " <----->  " + statue);
 		WeiBoUser user = (WeiBoUser) request.getSession().getAttribute("user");
 
@@ -264,6 +263,8 @@ public class WeiboHandler {
 		map.put("publishDate", date);
 		map.put("userId", user.getWBUid());
 		map.put("weiboTag", null);
+		txtContent.replace("<", "&lt;");
+		txtContent.replace(">", "&gt;");
 		map.put("txtContent", txtContent);
 		map.put("isForwarded", 'N');
 		map.put("tid", param.getTid());
@@ -787,6 +788,8 @@ public class WeiboHandler {
 		System.out.println(uid + "  =============  " + wbid + " +++++++ " + txt);
 		params.put("uid", uid);
 		params.put("wbid", wbid);
+		txt.replace("<", "&lt;");
+		txt.replace(">", "&gt;");
 		params.put("tag", txt);
 
 		if (operateService.insertCollectWeibo(params)) { // 插入operate
@@ -848,7 +851,8 @@ public class WeiboHandler {
 			} else {
 				params.put("isThemeWeibo", 'N');
 			}
-
+			txt.replace("<", "&lt;");
+			txt.replace(">", "&gt;");
 			params.put("userLocation", userLocation);
 			params.put("transmitDate", date);
 			params.put("userId", user.getWBUid());
@@ -924,7 +928,8 @@ public class WeiboHandler {
 			} else {
 				params.put("isThemeWeibo", 'N');
 			}
-
+			txt.replace("<", "&lt;");
+			txt.replace(">", "&gt;");
 			params.put("userLocation", userLocation);
 			params.put("transmitDate", date);
 			params.put("userId", user.getWBUid());
@@ -998,7 +1003,6 @@ public class WeiboHandler {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		Map<String, Object> params = new HashMap<String, Object>();
 
-		System.out.println(uid + "  =============  " + wbid + " +++++++ " + txt + "  ++++++++ " + ischeck);
 		SimpleDateFormat sdf = new SimpleDateFormat("MM月dd HH:mm:ss");
 		Date date = new Date();
 		String commentdate = sdf.format(date);
@@ -1007,6 +1011,8 @@ public class WeiboHandler {
 			params.clear();
 			params.put("uid", uid);
 			params.put("wbid", wbid);
+			txt.replace("<", "&lt;");
+			txt.replace(">", "&gt;");
 			params.put("txt", txt);
 			if (commentService.insertCommentDirect(params) && operateService.insertCommentWeibo(params)) { // 插入评论表
 																											// he
@@ -1071,6 +1077,14 @@ public class WeiboHandler {
 			System.out.println("评论转发");
 			String userLocation = AddressUtil.getLocation();
 
+			params.clear();
+			params.put("uid", uid);
+			params.put("wbid", wbid);
+			txt.replace("<", "&lt;");
+			txt.replace(">", "&gt;");
+			params.put("txt", txt);
+			if (commentService.insertCommentDirect(params) && operateService.insertCommentWeibo(params)) { // 插入评论表
+			
 			// 首先查找是否是转发微博
 			if (weiboService.selectTransmityon(wbid).indexOf("N") > -1) { // 不是，直接转发
 				params.put("userLocation", userLocation);
@@ -1085,6 +1099,8 @@ public class WeiboHandler {
 						params.clear();
 						params.put("uid", uid);
 						params.put("wbid", wbid);
+						txt.replace("<", "&lt;");
+						txt.replace(">", "&gt;");
 						params.put("txt", txt);
 						if (weiboAndWeiboService.insertWeiboAndWeibo(new int[] { currWBid, wbid })
 								&& operateService.insertTransmitWeibo(params)
@@ -1145,6 +1161,8 @@ public class WeiboHandler {
 				params.put("userLocation", userLocation);
 				params.put("transmitDate", date);
 				params.put("userId", uid);
+				txt.replace("<", "&lt;");
+				txt.replace(">", "&gt;");
 				params.put("txtContent", txt);
 				if (weiboService.insertWeiboByTransmit(params)) { // 如果插入了weibo表
 					// 已知用户id <> uid 微博id <> wbid 转发的理由 <> txt
@@ -1155,6 +1173,8 @@ public class WeiboHandler {
 						params.clear();
 						params.put("uid", uid);
 						params.put("wbid", wbid);
+						txt.replace("<", "&lt;");
+						txt.replace(">", "&gt;");
 						params.put("txt", txt);
 
 						if (weiboAndWeiboService.insertWeiboAndWeibo(new int[] { currWBid, wbid })
@@ -1207,9 +1227,9 @@ public class WeiboHandler {
 				}
 			}
 		}
-
-		return jsonMap;
 	}
+		return jsonMap;
+}
 
 	// 评论评论的评论
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -1229,14 +1249,15 @@ public class WeiboHandler {
 		params.clear();
 		params.put("uid", uid);
 		params.put("wbid", wbid);
+		txt.replace("<", "&lt;");
+		txt.replace(">", "&gt;");
 		params.put("txt", txt);
 		if (operateService.insertCommentWeibo(params)) { // 插入操作表 成功
-			params.put("cid", cid);
+			params.put("cidF", cid);
 			if (commentService.insertCommentByComment(params)) { // 插入评论表成功
 
 				if (weiboService.selectTransmityon(wbid).indexOf("N") > -1) { // 是否本事就是源微博
 																				// 是
-					System.out.println("ping lun de ping lun --");
 					if (weiboService.updateCommentAccount(wbid)) { // 跟新浏览次数及评论次数
 						int wbuid = weiboService.selectWBUidByWbid(wbid);
 						// 更新用户积分
@@ -1257,7 +1278,6 @@ public class WeiboHandler {
 					}
 				} else { // 不是源微博
 					// 找到原微博
-					System.out.println("bushi yuan weibo + ping lun de ping lun --");
 					int tempwbid = weiboAndWeiboService.selectWeiboAndWeibo(wbid);
 					int rootwbid = 0;
 					if (tempwbid == 0) {

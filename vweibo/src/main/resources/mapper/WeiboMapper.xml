@@ -13,7 +13,7 @@
 			#{publishDate,jdbcType=DATE},#{txtContent,jdbcType=CLOB},
 			#{picsMap,jdbcType=VARCHAR},#{videoesMap,jdbcType=VARCHAR},
 			#{musicMap,jdbcType=VARCHAR},#{isThemeWeibo,jdbcType=CHAR},
-			#{isForwarded,jdbcType=CHAR},#{userlocation,jdbcType=VARCHAR},
+			#{isForwarded,jdbcType=CHAR},#{userLocation,jdbcType=VARCHAR},
 			#{statue,jdbcType=INTEGER},#{tid,jdbcType=INTEGER})
 	</insert>
 	<select id="selectCurrMaxWBid" resultType="int">
