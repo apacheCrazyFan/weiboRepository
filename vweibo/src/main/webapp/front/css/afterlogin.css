@@ -338,8 +338,8 @@ textarea {
 	height: 125px;
 	font-size: 10px;
 	position: relative;
-	left: 115px;
-	bottom: -2px;
+	left: 85px;
+	bottom: 6px;
 	z-index: 99;
 	border: 1px solid #CCC;
 	background: #FFF;
@@ -356,6 +356,17 @@ textarea {
 	position:relative;
 	top:4px;
 	right:5px;
+	padding: 8px;
+	margin-left: 4px;
+	margin-top: 2px;
+}
+.choosea1 {
+	display:inline-block;
+	width:90px;
+	height:2px;
+	position:relative;
+	top:4px;
+	right:-5px;
 	padding: 8px;
 	margin-left: 4px;
 	margin-top: 2px;
@@ -379,7 +390,13 @@ textarea {
 }
 
 #publish {
-	
+	border:none;
+	width:64px;
+	height:28px;
+	background:rgb(255,97,31);
+	color:white;
+	position:relative;
+	left:60px;
 }
 
 #navigation {

@@ -1,5 +1,6 @@
 package com.yc.weibo.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -187,6 +188,13 @@ public class WeiboServiceImpl implements WeiboService{
 	@Override
 	public List<WeiBoUser> findMyFans(Integer WBUid) {
 		return weiboMapper.findMyFans(WBUid);
+	}
+
+	@Override
+	public int delWeibo(String wbids) {
+		Map<String,Object> map=new HashMap<String,Object>();	
+		map.put("wbids", wbids);
+		return weiboMapper.delWeibo(map);
 	}
 
 	

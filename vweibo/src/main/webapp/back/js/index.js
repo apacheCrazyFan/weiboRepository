@@ -41,17 +41,17 @@ $(function(){
 						closable:true
 					});
 				}
-			}/*else if(text=="新闻类型管理"){
-				if(tabs.tabs('exists','新闻类型管理')){//如果存在，则选中
-					tabs.tabs('select','新闻类型管理');
+			}else if(text=="微博管理"){
+				if(tabs.tabs('exists','微博管理')){//如果存在，则选中
+					tabs.tabs('select','微博管理');
 				}else{
 					tabs.tabs('add',{
-						title:"新闻类型管理",
-						href:"types.html",
+						title:"微博管理",
+						href:base+"weibo.html",
 						closable:true
 					});
 				}
-			}else if(text=="个人信息"){
+			}/*else if(text=="个人信息"){
 				if(tabs.tabs('exists','个人信息')){//如果存在，则选中
 					tabs.tabs('select','个人信息');
 				}else{
