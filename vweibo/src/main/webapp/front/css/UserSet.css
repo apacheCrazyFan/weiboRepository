@@ -21,7 +21,7 @@ body {
 	float: left
 }
 .idSet {
-	font: 800 12px "ËÎÌå";
+	font: 800 12px "ï¿½ï¿½ï¿½ï¿½";
 	color: #AEAEAE;
 	position: absolute;
 	top: 25px;
@@ -47,7 +47,7 @@ body {
 }
 #wrap #left ul li a {
 	color: #012129;
-	font: 16px "ËÎÌå";
+	font: 16px "ï¿½ï¿½ï¿½ï¿½";
 	margin-left: 25px;
 }
 .line1, .line2, .line3 {
@@ -95,7 +95,7 @@ body {
 	border-bottom: 2px solid red;
 	line-height: 50px;
 	margin-top: 10px;
-	font-family: "ËÎÌå";
+	font-family: "ï¿½ï¿½ï¿½ï¿½";
 	font-weight: bold;
 }
 #right ul .head_label a {
@@ -114,14 +114,14 @@ body {
 	background: #F4F4F4;
 	margin-top: 10px;
 	border: 1px solid #E6E6E6;
-	font: 14px "ºÚÌå";
+	font: 14px "ï¿½ï¿½ï¿½ï¿½";
 	line-height: 40px;
 	padding-left: 20px
 }
 #right ul li .span1 {
 	color: #999;
 	margin-left: 100px;
-	font-family: "ËÎÌå"
+	font-family: "ï¿½ï¿½ï¿½ï¿½"
 }
 #right ul li a {
 	font-size: 12px;
@@ -129,13 +129,13 @@ body {
 	float: right;
 	font-weight: 100;
 	margin-right: 20px;
-	font-family: "ËÎÌå"
+	font-family: "ï¿½ï¿½ï¿½ï¿½"
 }
 #perInfo_panel1 div{
 	margin-left:20px;
 	position:relative;}
 #perInfo_panel1 div span{
-	font:12px "ËÎÌå";
+	font:12px "ï¿½ï¿½ï¿½ï¿½";
 }
 .saveChangePwd{
 	position:absolute;
@@ -147,7 +147,7 @@ body {
 #perInfo_panel3 div {
 	margin-left: 15px;
 	margin-top: 10px;
-	font: 13px "ËÎÌå";
+	font: 13px "ï¿½ï¿½ï¿½ï¿½";
 	color: #222
 }
 .oldUserName, .newUserName {
@@ -163,7 +163,7 @@ body {
 #perInfo_panel4 div ul li {
 	border: none;
 	background: #fff;
-	font: 13px "ËÎÌå";
+	font: 13px "ï¿½ï¿½ï¿½ï¿½";
 	color: #222;
 	height: 30px;
 	margin-top: 10px;
@@ -196,7 +196,7 @@ body {
 	margin-left: 15px;
 	width: 200px;
 	height: 55px;
-	font: 13px "ËÎÌå"
+	font: 13px "ï¿½ï¿½ï¿½ï¿½"
 }
 .userEmail {
 	width: 200px;
@@ -208,7 +208,7 @@ body {
 }
 #perInfo_panel5 div {
 	margin-top: 10px;
-	font: 13px "ËÎÌå";
+	font: 13px "ï¿½ï¿½ï¿½ï¿½";
 	color: #222;
 	position: relative;
 }

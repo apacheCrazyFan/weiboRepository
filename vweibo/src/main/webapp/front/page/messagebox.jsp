@@ -26,7 +26,7 @@
         </ul>
         <div class="settingArea">
         	<a href="http://localhost:8080/vweibo/front/page/messagebox.jsp?wbuid=${sessionScope.user.WBUid}" class="message_pic"></a>
-            <a href="http://localhost:8080/vweibo/front/page/UserSet.jsp?wbuid=${sessionScope.user.WBUid}" class="setting_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/UserSet.jsp?wbuid=${sessionScope.user.WBUid}" target="_blank" class="setting_pic"></a>
             <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp?wbuid=${sessionScope.user.WBUid}" class="help_pic"></a>
         </div>
     </div>
