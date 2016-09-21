@@ -238,11 +238,9 @@
 					
 					//图片处理 
 					
-					if (data[i].WBpic != "" || data[i].WBpic !=null) {
-						alert(data[i].WBpic)
+					if (data[i].WBpic != "" && data[i].WBpic !=null) {
 						str2="";
 						var pics = data[i].WBpic.split(",");
-						//console.info(pics);
 						if(pics.length == 1){
 							str2 += '<img width="100px;" height="80px;" src="/weibopics/'+pics[0]+'"/>';
 						}else if(pics.length == 2){
@@ -373,7 +371,7 @@
 			
 			
 			var newDate = new Date(data[i].WBdate);
-			str+=newDate.toLocaleString()+'&nbsp;&nbsp;&nbsp;'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo()">'+str2+'</a></li>'+'<br/>';
+			str+='<span style="font-size:12px;">'+newDate.toLocaleString()+'</span>&nbsp;&nbsp;&nbsp;'+'<li>&nbsp;&nbsp;<a href="javascript:findWeiBo()">'+str2+'</a></li>'+'<br/>';
 			}
 			$("#myCollections").append(str);
 		},"json")

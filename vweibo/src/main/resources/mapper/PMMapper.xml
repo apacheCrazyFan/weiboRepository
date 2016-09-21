@@ -6,6 +6,14 @@
 	</select>
 	
 	<insert id="talkToPmUser" parameterType="PrivateMessage">
-		insert into PrivateMessage values(seq_pmid.nextval,#{pm1user},#{pm2user},#{pmcontent},sysdate)
+		insert into PrivateMessage values(seq_pmid.nextval,#{pm1user},#{pm2user},#{pmcontent},sysdate,'N')
 	</insert>
+	
+	<select id="checkPMIfRead" parameterType="int" resultType="PrivateMessage">
+		select * from PrivateMessage where PMRead='N' and pm2user=#{pm2user}
+	</select>
+	
+	<update id="PMIsRead" parameterType="PrivateMessage">
+		update PrivateMessage set PMRead='Y' where pm1user=#{pm1user} and pm2user=#{pm2user}
+	</update>
 </mapper>

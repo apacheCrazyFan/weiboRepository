@@ -3281,6 +3281,7 @@ function findGroupWeiBo(WBUid){
         	<a href="front/page/messagebox.jsp?WBUid=${sessionScope.user.WBUid}" class="message_pic"></a>
             <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" class="setting_pic"></a>
             <a href="javascript:void(0)" class="sendMess_pic"></a>
+            <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp?wbuid=${sessionScope.user.WBUid}" class="help_pic"></a>
         </div>
 
 	</div>
@@ -3633,7 +3634,7 @@ function findGroupWeiBo(WBUid){
 
 			</div>
 
-			<div id="center-part-content_01">
+			<!-- <div id="center-part-content_01">
 				<a href="javascript:void(0)" id="center-part_img"><img
 					src="front/image/userphoto001.png" /></a> <a href="javascript:void(0)"
 					class="center-part_way" id="center-part_way1"
@@ -3816,9 +3817,9 @@ function findGroupWeiBo(WBUid){
 							style="height: 20px; width: 130px;"><a
 							href="javascript:void(0)" id="center-parta1">举报</a></li>
 					</ul>
-				</div>
+				</div> -->
 
-				<ul id="center-part_ul">
+				<!-- <ul id="center-part_ul">
 					<li id="center-part_li">网易云音乐</li>
 					<li
 						style="height: 0px; width: 150pxwidth:250px; position: relative; left: 18px;"><a

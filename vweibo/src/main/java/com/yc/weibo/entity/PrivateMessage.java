@@ -8,22 +8,7 @@ public class PrivateMessage {
 	private String pmdate;
 	private String UimgPath1;
 	private String UimgPath2;
-
-	public PrivateMessage(int pmid, int pm1user, int pm2user, String pmcontent, String pmdate, String uimgPath1,
-			String uimgPath2) {
-		super();
-		this.pmid = pmid;
-		this.pm1user = pm1user;
-		this.pm2user = pm2user;
-		this.pmcontent = pmcontent;
-		this.pmdate = pmdate;
-		UimgPath1 = uimgPath1;
-		UimgPath2 = uimgPath2;
-	}
-
-	public PrivateMessage() {
-		super();
-	}
+	private String pmread;
 
 	public int getPmid() {
 		return pmid;
@@ -81,10 +66,36 @@ public class PrivateMessage {
 		UimgPath2 = uimgPath2;
 	}
 
+	public String getPmread() {
+		return pmread;
+	}
+
+	public void setPmread(String pmread) {
+		this.pmread = pmread;
+	}
+
+	public PrivateMessage(int pmid, int pm1user, int pm2user, String pmcontent, String pmdate, String uimgPath1,
+			String uimgPath2, String pmread) {
+		super();
+		this.pmid = pmid;
+		this.pm1user = pm1user;
+		this.pm2user = pm2user;
+		this.pmcontent = pmcontent;
+		this.pmdate = pmdate;
+		UimgPath1 = uimgPath1;
+		UimgPath2 = uimgPath2;
+		this.pmread = pmread;
+	}
+
+	public PrivateMessage() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "PrivateMessage [pmid=" + pmid + ", pm1user=" + pm1user + ", pm2user=" + pm2user + ", pmcontent="
-				+ pmcontent + ", pmdate=" + pmdate + ", UimgPath1=" + UimgPath1 + ", UimgPath2=" + UimgPath2 + "]";
+				+ pmcontent + ", pmdate=" + pmdate + ", UimgPath1=" + UimgPath1 + ", UimgPath2=" + UimgPath2
+				+ ", pmread=" + pmread + "]";
 	}
 
 }
