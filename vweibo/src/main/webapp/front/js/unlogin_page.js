@@ -6,11 +6,8 @@ var num = 1;
 var totalheight = 0; 
 
 var dataStrArr = '';
-window.onload=function(){
-	alert("11");
-}
+
 $(document).ready(function(){  
-	alert("22");
 var pageSize = 15;
 var pageNum = 1;
 $.ajax({
@@ -54,11 +51,11 @@ $.ajax({
 				
 				var newStr = '';
 				
-				newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'"/></a>';
+				newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"  style="padding-right:10px;"><img title="'+username+'" style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
 				newStr += '<ul id="center-part_ul">';
 				newStr += '<li id="center-part_li">'+username+'</li>';
-                newStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
-                newStr += '</ul>';
+            	newStr += '<li style="height:0px;width:250px;margin-left:16px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
+            	newStr += '</ul>';
                 
 				//表情处理
 				var newContent ='';
@@ -66,7 +63,7 @@ $.ajax({
 				faceArr = content.split("[");
 				for(var k = 0; k < faceArr.length; k ++){
 					if(faceArr[k] != "" && faceArr[k].split("]]").length == 1 && faceArr[k].split("]").length > 1){ //说明是表情 
-						faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" />'+faceArr[k].split("]")[1];
+						faceArr[k] = '<img src="front/image/face_image/'+faceArr[k].split("]")[0]+'.png" style="margin-left:16px" />'+faceArr[k].split("]")[1];
 						newContent += faceArr[k];
 					}
 					if(faceArr[k].split("]]").length > 1){
@@ -74,9 +71,9 @@ $.ajax({
 					}
 				}
 				
-				 console.info(content);
+				/* console.info(content);
 				console.info(faceArr);
-				console.info(newContent); 
+				console.info(newContent); */
 				var faceRegx1 = new RegExp('\\n','gi');
 				faceArr1 = newContent.split(faceRegx1);
 				for(var j = 0; j < faceArr1.length; j ++){
@@ -273,7 +270,7 @@ $(window).scroll(function(){
 		
 		var newStr = '';
 		
-		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" src="/weibouserimages/'+userImgPaht+'"/></a>';
+		newStr += '<a href="javascript:void(0)" id="center-part_img" class="center-part_img"><img title="'+username+'" style="width:65px;height:65px;" src="/weibouserimages/'+userImgPaht+'"/></a>';
 		newStr += '<ul id="center-part_ul">';
 		newStr += '<li id="center-part_li">'+username+'</li>';
         newStr += '<li style="height:0px;width:150px;"><a href="javascript:void(0)">'+date+'</a> 来自 '+location+'</li>';
