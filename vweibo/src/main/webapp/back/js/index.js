@@ -51,17 +51,17 @@ $(function(){
 						closable:true
 					});
 				}
-			}/*else if(text=="个人信息"){
-				if(tabs.tabs('exists','个人信息')){//如果存在，则选中
-					tabs.tabs('select','个人信息');
+			}else if(text=="用户管理"){
+				if(tabs.tabs('exists','用户管理')){//如果存在，则选中
+					tabs.tabs('select','用户管理');
 				}else{
 					tabs.tabs('add',{
-						title:"个人信息",
-						href:"person.html",
+						title:"用户管理",
+						href:base+"weiboUser.html",
 						closable:true
 					});
 				}
-			}else if(text=="会员管理"){
+			}/*else if(text=="会员管理"){
 				if(tabs.tabs('exists','会员管理')){//如果存在，则选中
 					tabs.tabs('select','会员管理');
 				}else{

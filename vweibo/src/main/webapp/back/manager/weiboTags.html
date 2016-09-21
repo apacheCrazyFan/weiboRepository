@@ -28,21 +28,19 @@
 			text:"添加",
 			iconCls:"icon-add",
 			handler:function(){
-				currentOp="addWeiboTag";
 				flag="添加";
-				if(editRow!=undefined){//说明有行正在被编辑
-					obj.datagrid("rejectChanges");//回滚所有数据
-					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
-					editRow=undefined;
-				}else{
-					var data = obj.datagrid("getData");
-					console.info(data);
-					var total = data.total;
-					var Jstring = JSON.stringify(data);
-					obj.datagrid('insertRow',{index:total,row:{}});
-					obj.datagrid("beginEdit",total);
-					editRow=total;//记录当前被编辑的行的索引
-				}
+				currentOp="addWeiboTag";
+				if (editRow != undefined) {
+                    $("#weiboTags_data").datagrid('endEdit', editRow);
+                }
+                if (editRow == undefined) {
+                    $("#weiboTags_data").datagrid('insertRow', {
+                        index: 0,
+                        row: {}
+                    });
+                    $("#weiboTags_data").datagrid('beginEdit', 0);
+                    editRow = 0;
+                }
 			}
 		},{
 			text:'修改',
@@ -74,9 +72,9 @@
 			onClick:function(){
 			//获取选中的行
 				var rows=obj.datagrid("getChecked");
-				alert(typeof rows[0].wtid);
+				//alert(typeof rows[0].wtid);
 				if(rows[0]!=undefined){
-					$.messager.confirm('信息确认', '您真的要删除选中的数据吗（提示：该类别下不能有微博）?', function(rs){
+					$.messager.confirm('信息确认', '您真的要删除选中的数据吗?', function(rs){
 						if (rs){
 							var wtids = "";
 							for(var i=0;i<rows.length-1;i++){
@@ -86,7 +84,9 @@
 							
 							//发请求到数据库
 							$.post("weibotag/delWeiboTag",{"wtids":wtids},function(data){
-								alert(data);
+								//alert(data);
+								flag="删除";
+								data=JSON.parse(data);
 								if(data>0){
 									$.messager.show({title:'成功提示',msg:'微博标签删除成功....',timeout:2000,showType:'slide'});
 									rows=null;
@@ -134,11 +134,12 @@
 					//alert(rows);
 					//rows=$(rows);
 					$.post("weibotag/"+currentOp,{"wtid":wtid,"wtname":wtname},function(data){
-						alert(data);
+						//alert(data);
+						data=JSON.parse(data);
 						if(data>0){
 							$.messager.show({
 								title:'成功提示',
-								msg:'新闻类型'+flag+'成功....',
+								msg:'微博标签'+flag+'成功....',
 								timeout:2000,
 								showType:'slide'
 							});

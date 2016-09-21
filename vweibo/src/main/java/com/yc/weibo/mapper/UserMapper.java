@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yc.weibo.entity.WeiBoUser;
+import com.yc.weibo.entity.Weibo;
 
 public interface UserMapper {
 	public WeiBoUser login(WeiBoUser user);
@@ -36,4 +37,21 @@ public interface UserMapper {
 
 	public void guanzhu(Map<String, Object> params);
 
+	/**
+	 * 查询用户
+	 * @param map
+	 * @return
+	 */
+	List<WeiBoUser> findAllUser(Map<String,Object> map);
+	/**
+	 * 删除用户
+	 * @param wBUid
+	 * @return
+	 */
+	int delUser(Map<String,Object> map);
+	
+	/**
+	 * 通用的，查找用户的总数
+	 */
+	int countAlluser(WeiBoUser param);
 }

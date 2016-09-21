@@ -12,7 +12,8 @@
 <base href="/vweibo/">
 <style type="text/css">
 </style>
-<title>登录后的页面</title>
+<title>享悦</title>
+<link rel="shortcut icon" href="front/image/title_logo.png">
 <link type="text/css" rel="stylesheet" href="front/css/afterlogin.css" />
 <link rel="stylesheet" href="front/css/blueimp-gallery.css">
 <link rel="stylesheet" href="front/css/blueimp-gallery-indicator.css">
@@ -3272,15 +3273,12 @@ function findGroupWeiBo(WBUid){
         </div>
         <ul>
         	<li><a href="javascript:void(0)" class="homePage">首页</a></li>
-            <li><a href="javascript:void(0)" class="videoPage">视频</a></li>
             <li><a href="front/page/found_hotWeibo.jsp?WBUid=${sessionScope.user.WBUid}" class="foundPage">发现</a></li>
-            <li><a href="javascript:void(0)" class="gamePage">游戏</a></li>
             <li><a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" class="personPage">${sessionScope.user.uname}</a></li>
         </ul>
         <div class="settingArea">
         	<a href="front/page/messagebox.jsp?WBUid=${sessionScope.user.WBUid}" class="message_pic"></a>
-            <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" class="setting_pic"></a>
-            <a href="javascript:void(0)" class="sendMess_pic"></a>
+            <a href="front/page/UserSet.jsp?WBUid=${sessionScope.user.WBUid}" target="_blank" class="setting_pic"></a>
             <a href="http://localhost:8080/vweibo/front/page/helpArea.jsp?wbuid=${sessionScope.user.WBUid}" class="help_pic"></a>
         </div>
 
@@ -3976,9 +3974,9 @@ function findGroupWeiBo(WBUid){
             	<a href="javascript:void(0)" id="level">Lv.10</a>
             </div>
             <div id="usernum">
-                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>
-                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>
-                <a href="javascript:void(0)" id="usernumone"><font id="num">${ sessionScope.groupnumber.WEIBONUM }</font>微博</a>
+                <a href="http://localhost:8080/vweibo/front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="usernumone"><font id="num">${ sessionScope.groupnumber.FOCUSNUM }</font>关注</a>
+                <a href="http://localhost:8080/vweibo/front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="usernumone"><font id="num">${ sessionScope.groupnumber.FANSNUM }</font>粉丝</a>
+                <a href="http://localhost:8080/vweibo/front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="usernumone"><font id="num">${ sessionScope.groupnumber.WEIBONUM }</font>微博</a>
             </div>
         </div>
         

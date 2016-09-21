@@ -78,7 +78,7 @@ public class WeiboTagHandler {
 	@RequestMapping("/addWeiboTag")  //更新微博标签
 	@ResponseBody
 	public int addWeiboTag(String wtname){
-		if(weiboTagService.insertWeiboTag(wtname)){
+		if(weiboTagService.addWeiboTag(wtname)){
 			return 1;
 		}else{
 			return -1;

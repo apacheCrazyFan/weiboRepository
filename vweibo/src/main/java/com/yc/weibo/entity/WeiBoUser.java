@@ -3,7 +3,7 @@ package com.yc.weibo.entity;
 import java.util.Date;
 import java.util.List;
 
-public class WeiBoUser {
+public class WeiBoUser extends BaseEntity{
 	private Integer WBUid;
 	private String Uname;
 	private String Upassword;

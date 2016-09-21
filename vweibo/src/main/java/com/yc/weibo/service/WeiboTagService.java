@@ -10,7 +10,7 @@ public interface WeiboTagService {
 	
 	boolean updateWeiboTag(Map<String,String> idAndName);
 	
-	boolean insertWeiboTag(String wTname);
+	boolean addWeiboTag(String wTname);
 	
 	List<WeiboTag> findAllWeiboTag();
 	

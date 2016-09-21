@@ -1,0 +1,91 @@
+
+<table id="user_data" style="position:relative;z-index:2"></table>
+
+<script type="text/javascript">
+	var obj;
+	var editRow=undefined;//记录当前正在被编辑的行
+	var currentOp;
+	var flag;
+	
+	obj=$('#user_data').datagrid({
+		url:'user/findAllUser',
+		fitColumns:true,
+		striped:true,
+		loadMsg:"数据加载中...",
+		pagination:true,
+		fit:true,
+		pageNumber:1,
+		pageSize:10,
+		pageList:[10,20,30,40,50],
+		sortName:'wbuid',
+		remoteSort:false,
+		columns:[[
+			{field:'wbuids',title:'',width:100,align:'center',checkbox:true},
+			{field:'wbuid',title:'用户编号',width:100,align:'center',sortable:true},
+			{field:'uname',title:'用户名',width:100,align:'center'},
+			{field:'upassword',title:'用户密码',width:100,align:'center'},
+			{field:'uphone',title:'电话',width:100,align:'center'},
+			{field:'uemail',title:'邮箱',width:100,align:'center'},
+			{field:'usex',title:'性别',width:100,align:'center'},
+			{field:'uage',title:'年龄',width:100,align:'center'},
+			{field:'uimgpath',title:'用户头像',width:100,align:'center'},
+			{field:'uintroduce',title:'简介',width:100,align:'center'},
+			{field:'utag',title:'用户标签',width:100,align:'center'},
+			{field:'uscore',title:'积分',width:100,align:'center'},
+			{field:'uspecialTag',title:'特权标签',width:100,align:'center'},
+			{field:'uregisterDate',title:'注册日期',width:100,align:'center',
+				 formatter:function(value,row,index){  
+                     var unixTimestamp = new Date(value);  
+                     return unixTimestamp.toLocaleString();  
+                 }  
+			},
+		]],
+		toolbar:[{
+			text:'删除',
+			iconCls:"icon-remove",
+			onClick:function(){
+			//获取选中的行
+				var rows=obj.datagrid("getChecked");
+				if(rows[0]!=undefined){
+					$.messager.confirm('信息确认', '您真的要删除选中的数据吗?', function(rs){
+						if (rs){
+							var wbuids = "";
+							for(var i=0;i<rows.length-1;i++){
+								wbuids += rows[i].wbuid+",";//到这里 是对的，
+							}
+							wbuids += rows[i].wbuid;
+							
+							//发请求到数据库
+							$.post("weiboUser/delUser",{"wbuids":wbuids},function(data){
+								flag="删除";
+								data=JSON.parse(data);
+								//alert(data.code);
+								if(data.code>0){
+									$.messager.show({title:'成功提示',msg:data.desc,timeout:2000,showType:'slide'});
+									rows=null;
+									obj.datagrid("reload");//刷新表格
+								}else{
+									$.messager.alert('失败提示',data.desc,'error');
+								}
+							});
+						}else{
+							return;	
+						}
+					});
+				}else{
+					$.messager.show({title:'温馨提示',msg:'请选中您要删除的数据.....',timeout:2000,showType:'slide'});
+				}
+			}
+		},{
+			text:'撤销',
+			iconCls:"icon-redo",
+			handler:function(){
+				obj.datagrid("rejectChanges");//回滚所有数据
+				obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+				editRow=undefined;	
+			}
+		}]
+	});
+	
+	
+</script>

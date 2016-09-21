@@ -19,6 +19,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -33,6 +35,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.yc.weibo.DataDic.DataDic;
+import com.yc.weibo.entity.MessageResp;
 import com.yc.weibo.entity.Theme;
 import com.yc.weibo.entity.WeiBoUser;
 import com.yc.weibo.service.ThemeService;
@@ -438,6 +441,40 @@ public class UserHandler {
 				break;
 			}
 		}
-		
+	}
+	
+	@RequestMapping("delUser")
+	@ResponseBody
+	public MessageResp delUser(String wbuids) {
+		int result =0;
+		MessageResp mes = new MessageResp();
+		try {
+			result= userService.delUser(wbuids);
+		} catch (Exception e) {
+			mes.setCode(0);
+			mes.setDesc("有关联，不能删除 ");
+			return mes;
+		}//会一直把错误抛到这里，
+		if (result > 0) {
+			mes.setCode(1);
+			mes.setDesc("删除成功");
+			return mes;
+		} else {
+			mes.setCode(0);
+			mes.setDesc("删除失败");
+			return mes;
+		}
+	}
+	
+	@ResponseBody//这个可以直接返回一个对象作为json，我们返回一个map就可以了，这就是和easyui的交互规定，你想用就要照着他的规定来
+	@RequestMapping("findAllUser")//自动注入的参数，这里的param就已经包含了easyui封装过来的分页的参数了
+	public Map<String,Object> findAllUser(WeiBoUser param,HttpServletRequest request,HttpServletResponse response){
+		//需要准备好 ，   theme的总数，，，和list的内容，  一个给easy的数据信息，一个是用来计算分页的，
+		List<WeiBoUser> list=userService.findAllUser(param);
+		int total=userService.countAllUser(param);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("rows", list);
+		map.put("total", total);
+		return map;
 	}
 }
