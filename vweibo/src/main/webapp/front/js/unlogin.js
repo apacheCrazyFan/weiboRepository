@@ -1,5 +1,5 @@
 // JavaScript Document
-$(document).ready(function(){  
+/*$(document).ready(function(){  
 var range = 50;             //距下边界长度/单位px  
 var elemt = 500;           //插入元素高度/单位px  
 var maxnum = 50;            //设置加载最多次数  
@@ -45,7 +45,7 @@ $(window).scroll(function(){
  		num++;  
 	}  
 });  
-});  
+});  */
  
 function changecentercolor(id){
 	document.getElementById(id).innerHTML='<img src="front/image/conter-part_wayimg02.png" id="conter-part_wayimg01"/>';

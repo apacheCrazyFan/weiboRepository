@@ -20,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -57,47 +58,52 @@ public class UserHandler {
 	@Autowired
 	private ThemeService themeService;
 
+
 	StringBuffer randomCode = new StringBuffer();
 
 	//登录
 	@ModelAttribute
-	public void getModel(ModelMap map){ //使用map/modelMap进行数据传参，作用范围是？还是会话
+	public void getModel(ModelMap map,HttpSession session){ //使用map/modelMap进行数据传参，作用范围是？还是会话
 		map.put("user", new WeiBoUser());
 		map.put("Themes", new ArrayList<Theme>()); //话题信息
 		map.put("groupnumber", new HashMap<String,Integer>()); //关注，粉丝。微博，未分组，好友圈等
 	}
 
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String login(String UphoneOrUemail,String Upassword,ModelMap map){
+	public String login(String UphoneOrUemail,String Upassword,ModelMap map,HttpServletRequest request,HttpSession session){
 		WeiBoUser user = null;
 		String format = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
 
 		if(UphoneOrUemail.matches(format)){ //说明是邮箱
-			//System.out.println( "我进了邮箱");
 			user = new WeiBoUser(Upassword,UphoneOrUemail,0);
+			//user.setuSessionid(request.getSession().getId());
 		}else{
-			//System.out.println( "我进了手机");
 			user = new WeiBoUser(Upassword,UphoneOrUemail);
+			//user.setuSessionid(request.getSession().getId());
 		}
 
 
 		user=userService.login(user);
-		if(user==null){
+		if(user == null){
 			map.put("errorMsg","用户名或密码错误");
 			return "/front/page/login.jsp";
+		}else{
+			//到这里说明登录成功了。那么我们作为服务器一端     应该要给它准备一些数据 ，还是它自己再做请求去申请数据？？
+			Theme params=new Theme();
+			params.setPage(1);
+			params.setRows(10);
+			List<Theme> Themes = themeService.findThemeByPage(params);
+
+			List<Map<String, Integer>> groupnumber = themeService.findeGroupNumber(user.getWBUid());
+			map.put("user", user);		//用户信息
+			map.put("Themes", Themes); //话题信息
+			map.put("groupnumber", groupnumber.get(0)); //关注，粉丝。微博，未分组，好友圈等
+			session.setAttribute(user.getUname(), session.getId());
+			
+			System.out.println("登录后的  "+user.getUname()+" jsessionid：	"+ session.getAttribute(user.getUname()));
+
+			return "forward:/front/page/afterlogin.jsp";	
 		}
-		//到这里说明登录成功了。那么我们作为服务器一端     应该要给它准备一些数据 ，还是它自己再做请求去申请数据？？
-		Theme params=new Theme();
-		params.setPage(1);
-		params.setRows(10);
-		List<Theme> Themes = themeService.findThemeByPage(params);
-
-		List<Map<String, Integer>> groupnumber = themeService.findeGroupNumber(user.getWBUid());
-		map.put("user", user);		//用户信息
-		map.put("Themes", Themes); //话题信息
-		map.put("groupnumber", groupnumber.get(0)); //关注，粉丝。微博，未分组，好友圈等
-
-		return "forward:/front/page/afterlogin.jsp";	
 	}
 
 
@@ -181,12 +187,12 @@ public class UserHandler {
 			String rootDir = DataDic.IMAGES;
 			String uploadPicPath = servletContext.getRealPath(rootDir).
 					substring(0, servletContext.getRealPath(rootDir).lastIndexOf(DataDic.PROJECTNAME)-1)+rootDir; 
-			
+
 			FileOutputStream photopath = new FileOutputStream(uploadPicPath+filename);
 			photopath.write(bytes); 
 			photopath.flush();
 			photopath.close();
-			
+
 			Map<String,String> paramMap=new HashMap<>();
 			paramMap.put("UimgPath", filename);
 			paramMap.put("WBUid", WBUid);
@@ -327,50 +333,50 @@ public class UserHandler {
 				System.out.println("------------转换成功");
 			}
 			out.println("设置成功");
-			
+
 		}
 		out.flush();
 		out.close();
 	}
-	
+
 	//获取网络IP
 	@ResponseBody
 	@RequestMapping(value="/getIpAddress")
 	public String getIpAddress() throws SocketException{
 		String localip = null;// 本地IP，如果没有配置外网IP则返回它
-        String netip = null;// 外网IP
- 
-        Enumeration<NetworkInterface> netInterfaces =
-            NetworkInterface.getNetworkInterfaces();
-        InetAddress ip = null;
-        boolean finded = false;// 是否找到外网IP
-        while (netInterfaces.hasMoreElements() && !finded) {
-            NetworkInterface ni = netInterfaces.nextElement();
-            Enumeration<InetAddress> address = ni.getInetAddresses();
-            while (address.hasMoreElements()) {
-                ip = address.nextElement();
-                if (!ip.isSiteLocalAddress()
-                        && !ip.isLoopbackAddress()
-                        && ip.getHostAddress().indexOf(":") == -1) {// 外网IP
-                    netip = ip.getHostAddress();
-                    finded = true;
-                    break;
-                } else if (ip.isSiteLocalAddress()
-                        && !ip.isLoopbackAddress()
-                        && ip.getHostAddress().indexOf(":") == -1) {// 内网IP
-                    localip = ip.getHostAddress();
-                }
-            }
-        }
-     
-        if (netip != null && !"".equals(netip)) {
-            return netip;
-        } else {
-            return localip;
-        }
+		String netip = null;// 外网IP
+
+		Enumeration<NetworkInterface> netInterfaces =
+				NetworkInterface.getNetworkInterfaces();
+		InetAddress ip = null;
+		boolean finded = false;// 是否找到外网IP
+		while (netInterfaces.hasMoreElements() && !finded) {
+			NetworkInterface ni = netInterfaces.nextElement();
+			Enumeration<InetAddress> address = ni.getInetAddresses();
+			while (address.hasMoreElements()) {
+				ip = address.nextElement();
+				if (!ip.isSiteLocalAddress()
+						&& !ip.isLoopbackAddress()
+						&& ip.getHostAddress().indexOf(":") == -1) {// 外网IP
+					netip = ip.getHostAddress();
+					finded = true;
+					break;
+				} else if (ip.isSiteLocalAddress()
+						&& !ip.isLoopbackAddress()
+						&& ip.getHostAddress().indexOf(":") == -1) {// 内网IP
+					localip = ip.getHostAddress();
+				}
+			}
+		}
+
+		if (netip != null && !"".equals(netip)) {
+			return netip;
+		} else {
+			return localip;
+		}
 	}
-	
-	
+
+
 	//电脑端点击确认登录
 	boolean flag=false;
 	@RequestMapping(value="/quickLogin",method=RequestMethod.POST)
@@ -392,7 +398,7 @@ public class UserHandler {
 		map.put("errorMsgg","请在手机确认登录");
 		return "/front/page/quickLogin.jsp";
 	}
-	
+
 	//手机端登录
 	@ResponseBody
 	@RequestMapping("/quickLoginYes")
@@ -431,7 +437,7 @@ public class UserHandler {
 		params.put("FUid",WBUid);
 		params.put("FUedid",MWBUid);
 		List<WeiBoUser> mingRens=userService.findMingRen();
-		for(int i=0;i<mingRens.size();i++){
+		for(int i = 0; i < mingRens.size();){
 			if(MWBUid.equals(mingRens.get(i).getWBUid()+"")){
 				out.print("您已经关注过此人");
 				break;
@@ -442,7 +448,7 @@ public class UserHandler {
 			}
 		}
 	}
-	
+
 	@RequestMapping("delUser")
 	@ResponseBody
 	public MessageResp delUser(String wbuids) {
@@ -465,7 +471,7 @@ public class UserHandler {
 			return mes;
 		}
 	}
-	
+
 	@ResponseBody//这个可以直接返回一个对象作为json，我们返回一个map就可以了，这就是和easyui的交互规定，你想用就要照着他的规定来
 	@RequestMapping("findAllUser")//自动注入的参数，这里的param就已经包含了easyui封装过来的分页的参数了
 	public Map<String,Object> findAllUser(WeiBoUser param,HttpServletRequest request,HttpServletResponse response){
@@ -476,5 +482,12 @@ public class UserHandler {
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
+	}
+
+	public String sessionidKey(){
+		StringBuffer sb = new StringBuffer();
+		Random rd = new Random();
+		sb.append(rd.nextInt(9)+1);
+		return sb.toString();
 	}
 }

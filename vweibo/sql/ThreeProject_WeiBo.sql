@@ -18,6 +18,8 @@ drop table WeiBoHelp;
 drop table Operate;
 drop table WeiboAndWeibo;
 
+
+select * from WeiBoUser;
 select * from WeiBo;
 select * from  WBandThe;
 select * from  WeiBoHelp;
@@ -54,12 +56,8 @@ from
 select wt.*,rownum rn from WeiboTag wt
 where rn > 10*(1-1) and rn <= 10*1;
 
-<<<<<<< HEAD
 
-
-=======
 delete sequence seq_wbt_wtid from dual;
->>>>>>> branch 'master' of ssh://git@github.com/apacheCrazyFan/weiboRepository.git
 delete from WeiboTag where WTid in (1,2);
 
 

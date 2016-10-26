@@ -17,6 +17,16 @@ public class WeiBoUser extends BaseEntity{
 	private String YZcodeInput;
 	private String UserName;
 	
+	private String uSessionid;
+	
+	public String getuSessionid() {
+		return uSessionid;
+	}
+
+	public void setuSessionid(String uSessionid) {
+		this.uSessionid = uSessionid;
+	}
+
 	public String getUserName() {
 		return UserName;
 	}
@@ -182,17 +192,14 @@ public class WeiBoUser extends BaseEntity{
 		YZcodeInput = yZcodeInput;
 	}
 
-
 	@Override
 	public String toString() {
 		return "WeiBoUser [WBUid=" + WBUid + ", Uname=" + Uname + ", Upassword=" + Upassword + ", Uphone=" + Uphone
 				+ ", Uemail=" + Uemail + ", Usex=" + Usex + ", Uage=" + Uage + ", UimgPath=" + UimgPath
 				+ ", UregisterDate=" + UregisterDate + ", YZcode=" + YZcode + ", YZcodeInput=" + YZcodeInput
-				+ ", waterContent=" + waterContent + ", waterLocation=" + waterLocation + ", Wcount=" + Wcount
-				+ ", Tcount=" + Tcount + ", myWeibos=" + myWeibos + "]";
+				+ ", UserName=" + UserName + ", uSessionid=" + uSessionid + ", waterContent=" + waterContent
+				+ ", waterLocation=" + waterLocation + ", Wcount=" + Wcount + ", Tcount=" + Tcount + ", myWeibos="
+				+ myWeibos + "]";
 	}
-	
-
-	
 
 }

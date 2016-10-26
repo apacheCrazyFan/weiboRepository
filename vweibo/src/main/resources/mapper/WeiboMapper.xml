@@ -95,7 +95,7 @@
 		(select b.*,WHviewAccount,WHreprintAccount,WHfavoriteAccount,WHcommentAccount,WHgreateAccount from WeiBoHelp w,
 		(select * from 
 			(select n.*,rownum rn from 
-			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid})) order by WBdate desc) n where #{pageSize} * #{pageNum} >= rownum)
+			(select * from WeiBo where (WBstatue = 0) or (WBUid in (select distinct(FUedid) from FanAndFaned where Fuid = #{uid})) order by WBdate asc) n where #{pageSize} * #{pageNum} >= rownum)
  			where rn > #{pageSize} * (#{pageNum}-1)) b
  			where w.wbid = b.wbid) k,WeiBoUser wbu where k.WBUid = wbu.WBUid
 	</select>

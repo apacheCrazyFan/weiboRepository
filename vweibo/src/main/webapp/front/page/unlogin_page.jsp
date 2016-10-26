@@ -331,7 +331,7 @@ var totalheight = 0;
 
 var dataStrArr = '';
 
-$(document).ready(function(){  
+/* $(document).ready(function(){  
 var pageSize = 15;
 var pageNum = 1;
 $.ajax({
@@ -522,27 +522,12 @@ $.ajax({
 		  alert("数据加载有误:"+error);
 	  }
 	
-});
+}); */
 
 
-$(window).scroll(function(){  
-	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
-	  
-	//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());  
-	//console.log("页面的文档高度 ："+$(document).height());  
-	//console.log('浏览器的高度：'+$(window).height());  
-	  
-	totalheight = parseFloat($(window).height()) + parseFloat(srollPos);  
-	
-	if(($(document).height()-range) <= totalheight  && num<=maxnum) { 
-		
-		$("#center-part").append('<div id="center-part-content"></div>');  
- 		num++;  
-	}  
-});
-});  
+ 
 
-$(window).scroll(function(){  
+/* $(window).scroll(function(){  
 	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
 	  
 	//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());  
@@ -737,7 +722,7 @@ $(window).scroll(function(){
  		num++;  
 	}  
 });
-
+ */
 
 //取消键关闭收藏标签
 function closecollectiondiv(id){

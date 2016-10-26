@@ -20,28 +20,23 @@
 <link rel="stylesheet" href="front/css/blueimp-gallery-video.css">
 <link rel="stylesheet" href="front/css/demo.css">
 
-<link rel="stylesheet"
-	href="jquery-easyui-1.3.5/themes/default/easyui.css">
+<link rel="stylesheet" href="jquery-easyui-1.3.5/themes/default/easyui.css">
 <link rel="stylesheet" href="jquery-easyui-1.3.5/themes/icon.css">
 <link rel="stylesheet" href="jquery-easyui-1.3.5/demo/demo.css">
 
 <script type="text/javascript" src="front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery-1.9.1.js"></script>
 
-<script type="text/javascript"
-	src="jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jquery-easyui-1.3.5/easyloader.js"></script>
-<script type="text/javascript"
-	src="jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
 
 <!-- js操作session的包 -->
 <script type="text/javascript" src="front/js/afterlogin.js"></script>
 <script type="text/javascript" src="front/js/blueimp-helper.js"></script>
 <script type="text/javascript" src="front/js/blueimp-gallery.js"></script>
-<script type="text/javascript"
-	src="front/js/blueimp-gallery-fullscreen.js"></script>
-<script type="text/javascript"
-	src="front/js/blueimp-gallery-indicator.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery-fullscreen.js"></script>
+<script type="text/javascript" src="front/js/blueimp-gallery-indicator.js"></script>
 <script type="text/javascript" src="front/js/blueimp-gallery-video.js"></script>
 <script type="text/javascript" src="front/js/blueimp-gallery-vimeo.js"></script>
 <script type="text/javascript" src="front/js/blueimp-gallery-youtube.js"></script>
@@ -51,6 +46,8 @@
 <script type="text/javascript" src="front/js/demo.js"></script>
 <script type="text/javascript" src="front/js/session.js"></script>
 
+
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script> 
 
 <script type="text/javascript">
 
@@ -82,6 +79,72 @@ var weibocount;  //当前用户的微博数
 	
 var count=4;
 
+
+var ws = null;  
+var url = null;  
+var transports = [];  
+
+
+$(function(){
+	
+	if ('WebSocket' in window) {
+		 if (window.location.protocol == 'http:') { 
+    		url = "ws://localhost:8080/vweibo/webSocket";
+		 }else{
+			url = "wss://localhost:8080/vweibo/webSocket";
+		 }
+	} else if ('MozWebSocket' in window) {
+		if (window.location.protocol == 'http:') { 
+    		url = "ws://localhost:8080/vweibo/webSocket";
+		 }else{
+			url = "wss://localhost:8080/vweibo/webSocket";
+		 }
+	} else {
+    	url = "http://localhost:8080/vweibo/sockjs/webSocket";
+	}
+
+    ws = (url.indexOf('sockjs') != -1) ?   
+        new SockJS(url, undefined, {protocols_whitelist: transports}) : new WebSocket(url);  
+
+    ws.onopen = function () {  
+       // log('Info: connection opened.');  
+    };  
+    ws.onmessage = function (event) { 
+    	console.info(event.data);
+    	ws.send($("#username").val()); 
+    	log_welcome(event.data);
+    };  
+    ws.onclose = function (event) {  
+        //log('Info-: connection closed.');  
+    };  
+
+});
+
+function log_welcome(message){
+	 var console = document.getElementById('websocket_zan_aite_pinglun_'); 
+	 console.style.display = 'block';
+	 if(message != undefined){
+		console.innerHTML = console.innerHTML+'<p style="color:white;">'+message+'</p>';
+	 } 
+	 
+}
+
+function log_aite(message) {  
+	//userName+"__"+(txtContent.length() > 10 ? (txtContent.substring(0,10)+"...") : txtContent)
+	
+    var console = document.getElementById('websocket_zan_aite_pinglun_'); 
+    console.style.display = 'block';
+    if(message != undefined){
+    	var _message = message.split('__');
+    	var _aiteName = _message[0];
+    	var _textContent10 = _message[1];
+    	var p = '<a href="#" style="color:green;">'+_aiteName+'</a>&nbsp;&nbsp;在&nbsp;&nbsp;<a href="#">'+_textContent10+'</a>&nbsp;&nbsp;@了你';
+    	console.innerHTML = p;
+    }
+    
+}
+
+
 	function publishWeibo() {
 		count = 4;
 		var obj = $("#txt");
@@ -93,7 +156,7 @@ var count=4;
 		}
 
 		weibocount = Number($("#weibocount").val());
-		var statue = $("#form_push_op").val();
+		var statue = $("#form_push_op").val().trim();
 		var content = $("#txt").val().trim();
 		var uid = parseInt($("#user").val().trim());  //用户id;
 
@@ -104,7 +167,8 @@ var count=4;
 			data : {
 				'statue' : statue,
 				'content' : content,
-				'uid' : uid
+				'uid' : uid,
+				'pUserName' : $("#username").val()
 			},
 			fileElementId : media,
 			dataType : 'json',
@@ -329,8 +393,12 @@ var count=4;
 					commentdivnum ++;
 					transmitdivnum ++;
 					collectiondivnum ++;
+					
+					ws.onmessage = function (event) { 
+				    	console.info(event.data);
+				    	log_aite(event.data);
+				    };
 		            
-					alert("剧终!");
 				}
 			},
 			error : function(data, status, e) {
@@ -3289,35 +3357,38 @@ function findGroupWeiBo(WBUid){
 		<div id="left-part">
 
 			<ul id="left-part-content">
-				<li style="height: 25px;"><a href="javascript:void(0)" id="one">首页</a></li>
-				<li style="height: 25px;"><a
+				<li style="height: 5px;"><a href="javascript:void(0)" id="one">首页</a></li>
+				<li style="height: 5px;"><a id="websocket_aite">@我的</a></li>
+				<li style="height: 5px;"><a id="websocket_pinglun">评论</a></li>
+				<li style="height: 5px;"><a id="websocket_zan">赞</a></li>
+				<li style="height: 5px;"><a
 					href="front/page/Personal.jsp?operation=findcollection&WBUid=${sessionScope.user.WBUid}"
 					id="two">我的收藏</a></li>
-				<li style="height: 25px;"><a
+				<li style="height: px;"><a
 					href="front/page/Personal.jsp?operation=findmyzan&WBUid=${sessionScope.user.WBUid}"
 					id="two">我的赞</a></li>
-				<li style="height: 25px;"><img
+				<li style="height: 5px;"><img
 					src="front/image/afterlogin_logo1.jpg" class="img" /><a
 					href="javascript:findHotWeiBo()" id="two">热门微博</a></li>
-				<li style="height: 25px;"><img
+				<li style="height: 5px;"><img
 					src="front/image/afterlogin_logo2.jpg" class="img1" /><a
 					href="javascript:findFriendWeiBo(${sessionScope.user.WBUid})"
 					id="two">好友圈</a></li>
-				<li style="height: 25px;"><img
+				<li style="height: 5px;"><img
 					src="front/image/afterlogin_logo3.jpg" class="img1" /><a
 					href="javascript:findGroupWeiBo(${sessionScope.user.WBUid})"
 					id="two">群微博</a></li>
-				<li style="height: 25px;"><img
+				<li style="height: 5px;"><img
 					src="front/image/afterlogin_logo4.jpg" class="img" /><a
 					href="javascript:findMoreAttentionWeiBo(${sessionScope.user.WBUid})"
 					id="two">特别关注</a></li>
-				<li style="height: 25px;"><img
+				<li style="height: 5px;"><img
 					src="front/image/afterlogin_logo5.jpg" class="img2" /><a
 					onclick="javascript:findWeiBoByWBtag(this)" id="two">大学</a></li>
-				<li style="height: 25px;"><img
+				<li style="height: 5px;"><img
 					src="front/image/afterlogin_logo5.jpg" class="img2" /><a
 					onclick="javascript:findWeiBoByWBtag(this)" id="two">搞笑</a></li>
-				<li style="height: 25px;"><img
+				<li style="height: 5px;"><img
 					src="front/image/afterlogin_logo5.jpg" class="img2" /><a
 					onclick="javascript:findWeiBoByWBtag(this)" id="two">时尚</a></li>
 			</ul>
@@ -3952,12 +4023,18 @@ function findGroupWeiBo(WBUid){
 			</div>
 			<select id="select1" onChange="selectPageNo(this)">
 				<%
+					if(session != null){
+						
         			PageUtil pages=(PageUtil)session.getAttribute("pageUtil");
-        			for(int i=1;i<=pages.getTotalPages();i++){
+        			if(null != pages){
+        				
+        			for(int i=1;i<=pages.getTotalPages();i++){ 
         		%>
-				<option><%=i %></option>
+				 <option><%=i %></option> 
 				<%
-        			}
+        			 		} 
+        				}
+					}
         		%>
 			</select>
 			<div class="nextpage">
@@ -3965,7 +4042,7 @@ function findGroupWeiBo(WBUid){
 			</div>
 		</div>
     
-    <div id="right-part" class="right-part">
+    <div id="right-part" class="right-part" >
     	<div id="right-part-content" class="right-part-content">
         	<a href="front/page/Personal.jsp?operation=findpersonal&WBUid=${sessionScope.user.WBUid}" id="user_img"><img style="width:65px;height:65px;border-radius:10px;" src="/weibouserimages/${sessionScope.user.uimgPath}"/></a>
             <a href="javascript:void(0)" id="user_name">${sessionScope.user.uname}</a>
@@ -3987,31 +4064,15 @@ function findGroupWeiBo(WBUid){
             		<li style="margin-bottom:0px;"><a href="javascript:void(0)" class="hot_topic_detail">${theme.tname}</a>
             		<span class="hot_topic_detail_click">${theme.tview}</span></li>
             	</c:forEach>
-
+			</div>
+		</div>
+		
+		<div id="websocket_zan_aite_pinglun_" class="websocket_zan_aite_pinglun_" style="width:300px;height:200px;position: fixed;padding-left:150px;background-color:pink;z-index: 99;display:none;">
+		
+		</div>
 	</div>
-
-		<!-- <div class="goodfriend_trends">
-			<div id="goodfriend_trends_head">
-            	<span class="goodfriend_trends_head">好友关注动态</span>
-            </div>
-            <span class="goodfriend_trends_detail">@shuishuishui等关注了</span><br/>
-            <div class="goodfriend_trends_content">
-              	 <img src="front/image/goodfriend_trens.png" id="goodfriend_img"/>
-              	 <a href="javascript:void(0)"><span id="goodfriend_word1">文神原</span></a><br>
-              	 <a href="javascript:void(0)"><span id="goodfriend_word2">新兰本《初》编...</span></a>
-              	 <input type="image" src="front/image/attention_friend.png" id="goodfriend_attention"/>
-            </div>
-         </div> -->
-
-		<!-- <div id="foot-part">
-	    	<img alt="呼呼" src="front/image/weibofoot.png"/>
-	    </div>
-	        -->
-		<!-- <div id="buoys">
-	    	<img src="front/image/letterchat.png" id="buoysimg1"/><span id="buoyschat">私信聊天</span><img src="front/image/chatmes.png" id="buoysimg2"/>
-	    </div> -->
-	</div>
-
+	
+		
 	<script>
 		function selectPageNo(obj){//这里就是点击页数的情况，
 			//TODO:用ajax传选择的pageno，到后台，设置到session中取出来的pageUtil里面，然后查询，返回参数，然后进行填充

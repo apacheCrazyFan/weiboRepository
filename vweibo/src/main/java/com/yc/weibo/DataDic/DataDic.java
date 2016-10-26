@@ -57,4 +57,17 @@ public class DataDic {				//声音文件  电影    影像 					vivo浏览器加
 	public static String FACES = "front/image/face_image/";
 	
 	//<!--隐藏域 ：op  用来传   0：公开    1：朋友圈       2：仅自己可见  3：群.... -->
+	
+	public static String JSMHREF = "vm://localhost";
+	
+	public static String SESSION_ID = null;
+	
+	public static final String S_AITE = "AITE";
+	public static final String S_ZAN = "ZAN";
+	public static final String S_PINGLUN = "PINGLUN";
+	
+	
+	public static final Integer S_INTEGER_AITE = 1;
+	public static final Integer S_INTEGER_ZAN = 2;
+	public static final Integer S_INTEGER_PINGLUN = 3;
 }

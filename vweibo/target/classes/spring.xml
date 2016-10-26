@@ -7,6 +7,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util 
@@ -18,12 +19,19 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/websocket 
+        http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
 	<!-- 注解方式，指定bean可能出现的位置 即扫描bean包 -->
 	<context:component-scan base-package="com.yc.weibo" />
+
+	<context:component-scan base-package="com.yc.weibo.websocket.SocketConfig" />
+	<context:component-scan base-package="com.yc.weibo.websocket.WebsocketEndPoint" ></context:component-scan>
+	<context:component-scan base-package="com.yc.weibo.websocket.HandshakeInterceptor" ></context:component-scan>
 	
-	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
 	<!-- 引入外部属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
@@ -44,6 +52,21 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
 		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.weibo.mapper" />
 
+
+	<!-- JSM -->
+    <!-- 使用activemq中的连接工厂,提供一个brokerUrl,这里表示本地 -->   
+    <!-- <bean id = "connectionFactory" class = "org.apache.activemq.ActiveMQConnectionFactory">   
+        <property name="brokerURL" value="vm://localhost" />   
+    </bean> -->
+	<!-- 这里我们用构造方法注入 connectionFactory-->   
+    <!-- <bean id = "jmsTemplate" class = "org.springframework.jms.core.JmsTemplate">   
+        <constructor-arg ref="connectionFactory"></constructor-arg>   
+    </bean>  -->  
+    <!-- 使用activemq中的点对点消息模型,随意指定一个地址 -->   
+    <!-- <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">   
+            <constructor-arg value="test/queue"/>   
+    </bean> --> 
+	
 	<!--邮件发送处理bean -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.smtp.host}"></property>
@@ -109,12 +132,31 @@
 	<!-- <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"> 
 		<property name="converters"> <set> <ref bean="employeeHandler"/> 这个是自定义的数据到对象或者其他的数据转换Handler类 
 		</set> </property> </bean> -->
-		
+
 	<!-- 1.配制事务管理器 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource" />
 
 	<!-- 2.配制事务关联 --><!-- 事务支持的注解 -->
-	 <tx:annotation-driven transaction-manager="transactionManager" 
-		/>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- websocket -->
+	<bean id="websocket" class="com.yc.weibo.websocket.SystemWebSocketHandler" />
+
+	<!-- sockjs（当浏览器版本过低不支持时模拟浏览器websocket）的注册？实力化？ -->
+	<websocket:handlers>
+		<websocket:mapping path="/sockjs/webSocket" handler="websocket" />
+ 		<websocket:handshake-interceptors>
+ 			<bean class="com.yc.weibo.websocket.HandshakeInterceptor" />
+ 		</websocket:handshake-interceptors>
+ 		<websocket:sockjs />
+ 	</websocket:handlers>
+ 	<!-- websocket -->
+ 	<websocket:handlers>
+		<websocket:mapping path="/webSocket" handler="websocket" />
+ 		<websocket:handshake-interceptors>
+ 			<bean class="com.yc.weibo.websocket.HandshakeInterceptor" />
+ 		</websocket:handshake-interceptors>
+ 	</websocket:handlers>
 </beans>

@@ -1,9 +1,12 @@
 package com.yc.weibo.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Theme extends BaseEntity{
+public class Theme extends BaseEntity implements Serializable{
+	private static final long serialVersionUID = 7654174351835218411L;
+
 	private WeiBoUser weiBoUser;
 	
     private BigDecimal tid;

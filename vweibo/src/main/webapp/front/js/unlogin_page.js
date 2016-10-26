@@ -7,7 +7,7 @@ var totalheight = 0;
 
 var dataStrArr = '';
 
-$(document).ready(function(){  
+/*$(document).ready(function(){  
 var pageSize = 15;
 var pageNum = 1;
 $.ajax({
@@ -75,9 +75,9 @@ $.ajax({
 					}
 				}
 				
-				/* console.info(content);
+				 console.info(content);
 				console.info(faceArr);
-				console.info(newContent); */
+				console.info(newContent); 
 				var faceRegx1 = new RegExp('\\n','gi');
 				faceArr1 = newContent.split(faceRegx1);
 				for(var j = 0; j < faceArr1.length; j ++){
@@ -223,9 +223,9 @@ $(window).scroll(function(){
  		num++;  
 	}  
 });
-});  
+});  */
 
-$(window).scroll(function(){  
+/*$(window).scroll(function(){  
 	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
 	  
 	//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());  
@@ -419,7 +419,7 @@ $(window).scroll(function(){
 	
  		num++;  
 	}  
-});
+});*/
 
 
 //取消键关闭收藏标签

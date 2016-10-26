@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yc.weibo.entity.Admin;
-import com.yc.weibo.service.AdminService;
+import com.yc.weibo.service.impl.AdminServiceImpl;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminHandler {
 	
 	@Autowired
-	private AdminService adminService;
+	private AdminServiceImpl adminService;
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(Admin admin){

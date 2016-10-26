@@ -3,6 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
+	
 	<context-param><!-- spring框架的 -->
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring.xml</param-value>
@@ -54,25 +55,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-
-<!--  <servlet>
-    <description></description>
-    <servlet-name>AdminServlet</servlet-name>
-    <servlet-class>com.yc.weibo.servlet.AdminServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AdminServlet</servlet-name>
-    <url-pattern>/admin/login</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <servlet-name>UserServlet</servlet-name>
-    <servlet-class>com.yc.weibo.servlet.UserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserServlet</servlet-name>
-    <url-pattern>/user/tags</url-pattern>
-  </servlet-mapping> -->
   
   <!-- 欢迎页面 -->
 	<welcome-file-list>
